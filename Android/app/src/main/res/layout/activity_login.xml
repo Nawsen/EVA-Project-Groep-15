@@ -11,10 +11,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true">
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/facebookButton" android:layout_centerHorizontal="true" />
-        <TextView android:layout_height="wrap_content" android:layout_below="@id/facebookButton" android:layout_centerHorizontal="true" style="@style/hyperlink" android:layout_width="wrap_content" android:text="@string/login_alternative_login" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="Email" android:id="@+id/txtEmail"
+            android:layout_marginBottom="30dp" android:inputType="textEmailAddress" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="Password"
+            android:id="@+id/txtPassword" android:layout_below="@id/txtEmail" android:layout_marginBottom="20dp" android:inputType="textPassword"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_below="@id/txtPassword" android:text="Log In" />
+
     </RelativeLayout>
 
 </RelativeLayout>
