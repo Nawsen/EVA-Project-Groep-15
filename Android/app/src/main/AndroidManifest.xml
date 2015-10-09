@@ -10,6 +10,8 @@
         android:theme="@style/AppTheme" >
         <activity android:name=".LoginActivity" >
         </activity>
+        <activity android:name=".LoginChoiceActivity" >
+        </activity>
     </application>
 
 </manifest>

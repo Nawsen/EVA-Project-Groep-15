@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">AndroidApp</string>
+    <string name="app_name">Eva VZW</string>
+    <string name="login_alternative_login"><u>Alternative Login</u></string>
+    <string name="login_facebook_login">Log in with Facebook</string>
 </resources>
