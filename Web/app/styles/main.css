@@ -1,0 +1,13 @@
+* {
+    border-radius: 0 !important;
+}
+
+
+.login-page form{
+
+    margin: 20px 0 20px 0;
+}
+.logintitle{
+    margin-top: 50px;
+
+}

@@ -1,0 +1,36 @@
+<div class="login-page">
+    <div class="col-lg-2 col-md-4 col-md-offset-3 col-lg-offset-5">
+        <div class="text-center">
+            <img src="images/eva-logo.png" alt="eva logo"/>
+
+            <h2 class="logintitle">Log in</h2>
+        </div>
+        <form ng-submit="login()">
+
+            <div class="form-content">
+                <div class="form-group">
+                    <div class="alert-danger" ng-model="emailwarn"></div>
+                    <input type="text" class="form-control input-underline input-lg" ng-model="email" placeholder="Email">
+                </div>
+
+                <div class="form-group">
+                    <div class="alert-danger" ng-model="passwordwarn"></div>
+                    <input type="password" class="form-control input-underline input-lg" ng-model="password" placeholder="Password">
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-success btn-outline btn-lg btn-block">Login</button>
+
+            <h4 class="text-center dl-horizontal" > OR </h4>
+            <a id="fblogin" href="" ng-click="facebooklogin()" class="btn btn-block btn-social btn-lg btn-facebook">
+                <i class="fa fa-facebook">
+
+                </i>
+                Sign in with Facebook
+            </a>
+        </form>
+            <a href="#">Register for an account?</a>
+
+    </div>
+
+</div>
