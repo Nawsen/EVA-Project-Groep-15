@@ -6,14 +6,12 @@ angular.module('eva').controller('LoginCtrl', ['$scope', '$location', function (
         //TODO check login info with backend
         //for now basic login checker
         if ($scope.email === "demo" && $scope.password === "demo") {
-            $scope.emailwarn = "";
-            $scope.passwordwarn = "";
+            angular.element(document.querySelector('#emailwarn')).text("");
+            angular.element(document.querySelector('#passwordwarn')).text("");
             $location.path('/dashboard');
         } else {
-            $scope.messages = [
-                {'emailerror': 'Wrong email!'},
-                {'passworderror': 'Wrong password!'}
-            ];
+            angular.element(document.querySelector('#emailwarn')).text("Wrong email!");
+            angular.element(document.querySelector('#passwordwarn')).text("Wrong password!");
         }
         $scope.email = "";
         $scope.password = "";
@@ -24,6 +22,10 @@ angular.module('eva').controller('LoginCtrl', ['$scope', '$location', function (
         //TODO implement facebook api
         $location.path('/dashboard');
         return false;
-    }
+    };
+    $scope.register = function(){
+        $location.path('/register');
+        return false;
+    };
 
 }]);

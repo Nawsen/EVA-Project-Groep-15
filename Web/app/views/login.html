@@ -9,12 +9,12 @@
 
             <div class="form-content">
                 <div class="form-group">
-                    <div class="alert-danger" ng-model="emailwarn"></div>
+                    <div class="alert-danger loginerror" id="emailwarn"></div>
                     <input type="text" class="form-control input-underline input-lg" ng-model="email" placeholder="Email">
                 </div>
 
                 <div class="form-group">
-                    <div class="alert-danger" ng-model="passwordwarn"></div>
+                    <div class="alert-danger loginerror" id="passwordwarn"></div>
                     <input type="password" class="form-control input-underline input-lg" ng-model="password" placeholder="Password">
                 </div>
             </div>
@@ -29,7 +29,7 @@
                 Sign in with Facebook
             </a>
         </form>
-            <a href="#">Register for an account?</a>
+            <a id="register" href="" ng-click="register()">Register for an account?</a>
 
     </div>
 
