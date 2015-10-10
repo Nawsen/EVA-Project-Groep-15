@@ -1,8 +1,12 @@
 * {
     border-radius: 0 !important;
 }
-
-
+.login-page{
+    padding: 20px;
+}
+.eva-dash-logo{
+    padding: 20px;
+}
 .login-page form{
 
     margin: 20px 0 20px 0;
@@ -14,4 +18,37 @@
 .loginerror{
     padding-left: 15px;
     font-size: 120%;
+}
+.sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #449d44;
+    border-right: 1px solid #eee;
+    color: white;
+}
+
+.sidebar small{
+    color: whitesmoke;
+}
+.nav>li>a {
+    color: #fff;
+    padding-left: 40px;
+    font-size: 120%;
+    cursor: hand;
+}
+.nav>li>a:hover{
+    background-color: #3B903B;
+}
+.nav>li>a:active{
+    background-color: #3B903B;
+}
+.user-avatar{
+    margin-top: 25px;
 }
