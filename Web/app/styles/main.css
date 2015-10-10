@@ -9,5 +9,13 @@
 }
 .logintitle{
     margin-top: 50px;
-
+}
+.disable-padding-right {
+    padding-right: 0 !important;
+}
+.disable-padding-left {
+    padding-left: 0 !important;
+}
+.center-text {
+    text-align:center; !important;
 }
