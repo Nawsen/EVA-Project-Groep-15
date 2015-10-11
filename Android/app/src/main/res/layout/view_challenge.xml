@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="@dimen/challenge_item_height"
+    android:background="@drawable/challenge_background">
+
+    <ImageView
+        android:layout_centerVertical="true" android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true" android:id="@+id/challenge_image"
+        android:layout_width="wrap_content" android:adjustViewBounds="true"
+        android:layout_height="fill_parent" android:src="@drawable/question_mark"
+        android:layout_margin="5dp" android:scaleType="fitStart"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_toRightOf="@+id/challenge_image"
+        android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
+        android:textSize="@dimen/h1_font_size" android:text="Title"/>
+
+    <TextView
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/challenge_image" android:layout_below="@id/challenge_title"
+        android:layout_marginTop="5dp" android:id="@+id/challenge_description"
+        android:text="Short description of the challenge"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true" android:text="@string/challenge_score_notification"
+        android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
+        android:id="@+id/challenge_score"/>
+</RelativeLayout>

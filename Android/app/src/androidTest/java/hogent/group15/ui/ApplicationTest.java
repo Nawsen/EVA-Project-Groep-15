@@ -1,4 +1,4 @@
-package hogent.group15.androidapp;
+package hogent.group15.ui;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
