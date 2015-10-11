@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,6 +8,9 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="hogent.group15.androidapp.RegisterActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
     <LinearLayout
@@ -39,14 +42,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
-                android:hint="@string/register_first_name" />
+                android:hint="@string/register_first_name" android:inputType="textPersonName" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignRight="@id/register_firstName"
                 android:layout_weight="0.5"
-                android:hint="@string/register_name" />
+                android:hint="@string/register_name" android:inputType="textPersonName" />
 
         </LinearLayout>
     </LinearLayout>
@@ -56,7 +59,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/register_nameGroup"
-        android:hint="@string/register_email" />
+        android:hint="@string/register_email"
+        android:inputType="textEmailAddress"/>
 
     <LinearLayout
         android:id="@+id/register_addressGroup"
@@ -83,7 +87,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/register_street" />
+            android:hint="@string/register_street"
+            android:inputType="textPostalAddress" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,15 +98,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.6"
-                android:hint="@string/register_postal_code" />
+                android:hint="@string/register_postal_code"
+                android:inputType="textPostalAddress" />
 
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.3"
-                android:hint="@string/register_city" />
+                android:hint="@string/register_city"
+                android:inputType="textPostalAddress"/>
         </LinearLayout>
 
     </LinearLayout>
+    </RelativeLayout>
+</ScrollView>
 
-</RelativeLayout>
