@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="register_street">Rue</string>
+    <string name="register_postal_code">Code Postale</string>
+    <string name="register_personal_info_label">Données personelles</string>
+    <string name="register_name">Nom</string>
+    <string name="register_first_name">Prénom</string>
+    <string name="register_email">Adresse Email</string>
+    <string name="register_city">Place</string>
+    <string name="register_address_label">Adresse</string>
+</resources>
