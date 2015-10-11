@@ -2,12 +2,13 @@ package hogent.group15;
 
 import android.media.Image;
 
+import java.io.Serializable;
 import java.net.URI;
 
 /**
  * Created by Frederik on 10/11/2015.
  */
-public class Challenge {
+public class Challenge implements Serializable {
 
     private URI imageUri;
     private String title;
