@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="register_personal_info_label">Persoonlijke gegevens</string>
+    <string name="register_postal_code">Postcode</string>
+    <string name="register_street">Straat</string>
+    <string name="register_address_label">Adres</string>
+    <string name="register_city">Plaats</string>
+    <string name="register_email">Email</string>
+    <string name="register_first_name">Voornaam</string>
+    <string name="register_name">Achternaam</string>
+</resources>

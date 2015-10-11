@@ -1,6 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AndroidApp</string>
-    <string name="register_email">Email</string>
-    <string name="register_name">Last Name</string>
+
+    <string name="register_personal_info_label">Personal Info</string>
     <string name="register_first_name">First Name</string>
+    <string name="register_name">Last Name</string>
+    <string name="register_email">Email</string>
+    <string name="register_address_label">Address</string>
+    <string name="register_street">Street</string>
+    <string name="register_postal_code">Postal Code</string>
+    <string name="register_city">City</string>
+    <string name="app_name" translatable="false">AndroidApp</string>
 </resources>
