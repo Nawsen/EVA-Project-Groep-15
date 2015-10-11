@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">AndroidApp</string>
+    <string name="register_email">Email</string>
+    <string name="register_name">Last Name</string>
+    <string name="register_first_name">First Name</string>
 </resources>
