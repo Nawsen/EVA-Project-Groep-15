@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <string name="app_name">EVA</string>
     <string name="accept_challenge">Accepteer uitdaging</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
@@ -7,4 +8,13 @@
     <string name="welcome_notification">Welkom {{username}}</string>
     <string name="get_challenge">Bekijk uitdaging</string>
     <string name="get_progress">Bekijk vooruitgang</string>
+=======
+    <string name="login_alternative_login"><u>Alternatieve login</u></string>
+    <string name="login_button">Aanmelden</string>
+    <string name="login_email">Email</string>
+    <string name="login_facebook_login">Aanmelden met Facebook</string>
+    <string name="login_lost_password"><u>Wachtwoord vergeten?</u></string>
+    <string name="login_password">Wachtwoord</string>
+    <string name="login_or">Of</string>
+>>>>>>> android/feature/login
 </resources>

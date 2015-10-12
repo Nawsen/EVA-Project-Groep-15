@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+<<<<<<< HEAD
     <color name="colorPrimary">#ffffff</color>
     <color name="colorPrimaryDark">#AAB74B</color>
     <color name="colorAccent">#AAB74B</color>
     <color name="colorOrange">#DB5522</color>
+=======
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <!-- Hyperlink color -->
+    <color name="hyperlinkColor">#1C4FAD</color>
+>>>>>>> android/feature/login
 </resources>
