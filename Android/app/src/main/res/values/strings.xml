@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">EVA</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
-    <string name="accept_challenge">Accepteer uitdaging</string>
+    <string name="accept_challenge">Accept challenge</string>
 </resources>
