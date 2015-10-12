@@ -4,4 +4,7 @@
     <string name="challenge_score_notification">Score: {{score}}</string>
     <string name="accept_challenge">Accepte défi</string>
     <string name="choose_challenge">Choisi un défi:</string>
+    <string name="welcome_notification">Bienvenu {{username}}</string>
+    <string name="get_challenge">Regarde au défi</string>
+    <string name="get_progress">Regarde à l\'amélioration</string>
 </resources>
