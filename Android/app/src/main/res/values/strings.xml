@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EVA</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
@@ -13,4 +14,18 @@
     <string name="login_lost_password"><u>Lost password?</u></string>
     <string name="login_button">Log in</string>
     <string name="login_or">Or</string>
+    <string name="register_personal_info_label">Personal Info</string>
+    <string name="register_first_name">First Name</string>
+    <string name="register_name">Last Name</string>
+    <string name="register_email">Email</string>
+    <string name="register_address_label">Address</string>
+    <string name="register_street">Street</string>
+    <string name="register_postal_code">Postal Code</string>
+    <string name="register_city">City</string>
+    <string name="register_account_label">Account</string>
+    <string name="register_email_confirm">You will log in with <b>{Email}</b>.</string>
+    <string name="register_password_hint" >Password</string>
+    <string name="register_register_button">Register</string>
+    <string name="register_sex_male">Male</string>
+    <string name="register_sex_female">Female</string>
 </resources>
