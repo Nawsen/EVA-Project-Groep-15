@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_alternative_login"><u>Connexion alternative</u></string>
+    <string name="login_button">Se connecter</string>
+    <string name="login_email">Adresse e-mail</string>
+    <string name="login_facebook_login">Se connecter avec Facebook</string>
+    <string name="login_lost_password"><u>Mot de passe oublié?</u></string>
+    <string name="login_password">Mot de passe</string>
+</resources>

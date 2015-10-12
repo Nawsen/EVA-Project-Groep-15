@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">Eva VZW</string>
+    <string name="app_name" translatable="false">Eva VZW</string>
     <string name="login_alternative_login"><u>Alternative Login</u></string>
     <string name="login_facebook_login">Log in with Facebook</string>
+    <string name="login_email">Email</string>
+    <string name="login_password">Password</string>
+    <string name="login_lost_password"><u>Lost password?</u></string>
+    <string name="login_button">Log in</string>
 </resources>

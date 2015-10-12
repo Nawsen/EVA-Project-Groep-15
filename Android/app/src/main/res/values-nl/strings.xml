@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login_alternative_login"><u>Alternatieve login</u></string>
+    <string name="login_button">Aanmelden</string>
+    <string name="login_email">Email</string>
+    <string name="login_facebook_login">Aanmelden met Facebook</string>
+    <string name="login_lost_password"><u>Wachtwoord vergeten?</u></string>
+    <string name="login_password">Wachtwoord</string>
+</resources>
