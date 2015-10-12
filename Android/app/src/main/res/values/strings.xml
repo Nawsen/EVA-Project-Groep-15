@@ -3,4 +3,7 @@
     <string name="challenge_score_notification">Score: {{score}}</string>
     <string name="accept_challenge">Accept challenge</string>
     <string name="choose_challenge">Choose a challenge:</string>
+    <string name="welcome_notification">Welcome {{username}}</string>
+    <string name="get_challenge">Look at challenge</string>
+    <string name="get_progress">Look at progress</string>
 </resources>
