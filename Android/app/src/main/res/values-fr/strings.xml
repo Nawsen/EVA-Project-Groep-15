@@ -12,4 +12,6 @@
     <string name="register_email_confirm">Vous vous connecterez avec <b>{Email}</b>.</string>
     <string name="register_password_hint" >Mot de passe</string>
     <string name="register_register_button">Se faire inscrire</string>
+    <string name="register_sex_male">Masculin</string>
+    <string name="register_sex_female">Feminin</string>
 </resources>

@@ -14,4 +14,7 @@
     <string name="register_email_confirm">You will log in with <b>{Email}</b>.</string>
     <string name="register_password_hint" >Password</string>
     <string name="register_register_button">Register</string>
+    <string name="register_sex_male">Male</string>
+    <string name="register_sex_female">Female</string>
+
 </resources>

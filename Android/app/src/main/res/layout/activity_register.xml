@@ -65,11 +65,17 @@
             android:hint="@string/register_email"
             android:inputType="textEmailAddress" />
 
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/register_sex"
+            android:layout_below="@id/register_email" />
+
         <LinearLayout
             android:id="@+id/register_addressGroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/register_email"
+            android:layout_below="@id/register_sex"
             android:layout_marginBottom="60dp"
             android:layout_marginTop="60dp"
             android:orientation="vertical">
