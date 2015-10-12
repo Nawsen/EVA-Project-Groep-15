@@ -8,4 +8,8 @@
     <string name="register_email">Adresse Email</string>
     <string name="register_city">Place</string>
     <string name="register_address_label">Adresse</string>
+    <string name="register_account_label">Compte</string>
+    <string name="register_email_confirm">Vous vous connecterez avec <b>{Email}</b>.</string>
+    <string name="register_password_hint" >Mot de passe</string>
+    <string name="register_register_button">Se faire inscrire</string>
 </resources>
