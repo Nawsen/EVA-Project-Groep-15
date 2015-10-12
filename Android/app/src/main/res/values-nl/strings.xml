@@ -6,4 +6,5 @@
     <string name="login_facebook_login">Aanmelden met Facebook</string>
     <string name="login_lost_password"><u>Wachtwoord vergeten?</u></string>
     <string name="login_password">Wachtwoord</string>
+    <string name="login_or">Of</string>
 </resources>

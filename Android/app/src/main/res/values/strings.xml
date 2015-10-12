@@ -6,4 +6,5 @@
     <string name="login_password">Password</string>
     <string name="login_lost_password"><u>Lost password?</u></string>
     <string name="login_button">Log in</string>
+    <string name="login_or">Or</string>
 </resources>

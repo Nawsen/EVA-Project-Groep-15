@@ -6,4 +6,5 @@
     <string name="login_facebook_login">Se connecter avec Facebook</string>
     <string name="login_lost_password"><u>Mot de passe oublié?</u></string>
     <string name="login_password">Mot de passe</string>
+    <string name="login_or">Ou</string>
 </resources>
