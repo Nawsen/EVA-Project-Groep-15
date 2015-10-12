@@ -3,4 +3,5 @@
     <string name="app_name">EVA</string>
     <string name="accept_challenge">Accepteer uitdaging</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
+    <string name="choose_challenge">Kies een uitdaging:</string>
 </resources>
