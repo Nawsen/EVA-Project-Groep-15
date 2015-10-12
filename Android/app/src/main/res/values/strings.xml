@@ -1,5 +1,4 @@
 <resources>
-<<<<<<< HEAD
     <string name="app_name">EVA</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
     <string name="accept_challenge">Accept challenge</string>
@@ -7,8 +6,6 @@
     <string name="welcome_notification">Welcome {{username}}</string>
     <string name="get_challenge">Look at challenge</string>
     <string name="get_progress">Look at progress</string>
-=======
-    <string name="app_name" translatable="false">Eva VZW</string>
     <string name="login_alternative_login"><u>Alternative Login</u></string>
     <string name="login_facebook_login">Log in with Facebook</string>
     <string name="login_email">Email</string>
@@ -16,5 +13,4 @@
     <string name="login_lost_password"><u>Lost password?</u></string>
     <string name="login_button">Log in</string>
     <string name="login_or">Or</string>
->>>>>>> android/feature/login
 </resources>

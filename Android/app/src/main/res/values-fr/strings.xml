@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
     <string name="app_name">EVA</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
     <string name="accept_challenge">Accepte défi</string>
@@ -8,7 +7,6 @@
     <string name="welcome_notification">Bienvenu {{username}}</string>
     <string name="get_challenge">Regarde au défi</string>
     <string name="get_progress">Regarde à l\'amélioration</string>
-=======
     <string name="login_alternative_login"><u>Connexion alternative</u></string>
     <string name="login_button">Se connecter</string>
     <string name="login_email">Adresse e-mail</string>
@@ -16,5 +14,4 @@
     <string name="login_lost_password"><u>Mot de passe oublié?</u></string>
     <string name="login_password">Mot de passe</string>
     <string name="login_or">Ou</string>
->>>>>>> android/feature/login
 </resources>
