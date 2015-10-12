@@ -1,18 +1,23 @@
 * {
     border-radius: 0 !important;
 }
-.login-page{
-    padding: 20px;
-}
-.eva-dash-logo{
-    padding: 20px;
-}
+
+
 .login-page form{
 
     margin: 20px 0 20px 0;
 }
 .logintitle{
     margin-top: 50px;
+}
+.disable-padding-right {
+    padding-right: 0 !important;
+}
+.disable-padding-left {
+    padding-left: 0 !important;
+}
+.center-text {
+    text-align:center; !important;
 
 }
 .loginerror{

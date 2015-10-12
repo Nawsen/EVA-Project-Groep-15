@@ -17,6 +17,11 @@ var app = angular.module('eva', ['ui.router']);
                 url: '/dashboard',
                 templateUrl: 'views/dashboard.html',
                 controller: 'DashboardCtrl'
+            })
+            .state('register', {
+                url: '/register',
+                templateUrl: 'views/register.html',
+                controller: 'RegisterCtrl'
             });
         $urlRouterProvider.otherwise('/login');
 
