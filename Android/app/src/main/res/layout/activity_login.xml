@@ -34,39 +34,41 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login_password"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="20dp"
+            android:hint="@string/login_password" />
 
         <TextView
             style="@style/hyperlink"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="3dp"
             android:text="@string/login_lost_password"
             android:textSize="18dp"
-            android:textStyle="normal" android:layout_gravity="left"
-            android:layout_marginLeft="3dp"/>
+            android:textStyle="normal" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login_button"
             android:layout_marginTop="20dp"
-            android:onClick="onLogin"/>
+            android:hint="@string/login_button"
+            android:onClick="onLogin" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
             android:text="@string/login_or"
-            android:textSize="24dp" android:layout_marginTop="20dp"/>
+            android:textSize="24dp" />
 
         <Button
             style="@style/facebookButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:background="@drawable/facebook_button"
-            android:text="@string/login_facebook_login"
-            android:layout_marginTop="20dp"/>
+            android:text="@string/login_facebook_login" />
     </LinearLayout>
 
 

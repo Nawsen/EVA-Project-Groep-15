@@ -4,7 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 
+import hogent.group15.FontManager;
 import hogent.group15.ui.R;
 
 public class RegisterActivity extends AppCompatActivity {
