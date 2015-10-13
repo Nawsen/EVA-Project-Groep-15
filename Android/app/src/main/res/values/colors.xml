@@ -7,4 +7,16 @@
 
     <!-- Hyperlink color -->
     <color name="hyperlinkColor">#1C4FAD</color>
+
+    <!-- BEGIN EVA STYLING -->
+    <!-- primary colors -->
+    <color name="evaPrimaryGreen">#4c8c2b</color>
+    <color name="evaPrimaryDarkGreen">#183028</color>
+    <color name="evaPrimaryOrange">#e03c31</color>
+
+    <!-- secondary colors -->
+    <color name="evaSecondaryBlue">#005a70</color>
+    <color name="evaSecondaryGray">#978c87</color>
+    <color name="evaSecondaryYellow">#e1cd00</color>
+    <color name="evaSecondaryTeal">#009ca6</color>
 </resources>
