@@ -16,7 +16,7 @@ public class FontManager {
         ARTISTAMP_MEDIUM = Typeface.createFromAsset(con.getAssets(), "ArtistampMedium.ttf");
         GEORGIA = Typeface.createFromAsset(con.getAssets(), "Georgia.ttf");
         MATHLETE = Typeface.createFromAsset(con.getAssets(), "Mathlete-Skinny.otf");
-        MUSEO = Typeface.createFromAsset(con.getAssets(), "Museo100-Regular.otf");
+        MUSEO = Typeface.createFromAsset(con.getAssets(), "Museo300-Regular.otf");
         MYRIAD_PRO = Typeface.createFromAsset(con.getAssets(), "MyriadPro-Regular.otf");
     }
 

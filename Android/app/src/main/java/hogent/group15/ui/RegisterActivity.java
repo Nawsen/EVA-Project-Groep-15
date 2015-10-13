@@ -1,4 +1,4 @@
-package hogent.group15.androidapp;
+package hogent.group15.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

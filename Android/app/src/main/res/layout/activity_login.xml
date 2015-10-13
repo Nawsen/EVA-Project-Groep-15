@@ -47,12 +47,13 @@
             android:textSize="18dp"
             android:textStyle="normal" />
 
-        <Button
+        <hogent.group15.ui.EvaButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="@string/login_button"
-            android:onClick="onLogin" />
+            android:text="@string/login_button"
+            android:onClick="onLogin"
+            style="@style/evaButtonBlack" />
 
         <TextView
             android:layout_width="wrap_content"

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".LoginChoiceActivity" ></activity>
-        <activity android:name="hogent.group15.androidapp.RegisterActivity" >
+        <activity android:name=".RegisterActivity" >
         </activity>
     </application>
 
