@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ffffff</color>
-    <color name="colorPrimaryDark">#AAB74B</color>
-    <color name="colorAccent">#AAB74B</color>
-    <color name="colorOrange">#DB5522</color>
+    <color name="colorPrimary">@color/evaPrimaryGreen</color>
+    <color name="colorPrimaryDark">@color/evaPrimaryDarkGreen</color>
+    <color name="colorAccent">@color/evaPrimaryOrange</color>
 
     <!-- Hyperlink color -->
     <color name="hyperlinkColor">#1C4FAD</color>
@@ -14,9 +13,11 @@
     <color name="evaPrimaryDarkGreen">#183028</color>
     <color name="evaPrimaryOrange">#e03c31</color>
 
-    <!-- secondary colors -->
+    <!-- Secondary colors -->
     <color name="evaSecondaryBlue">#005a70</color>
     <color name="evaSecondaryGray">#978c87</color>
     <color name="evaSecondaryYellow">#e1cd00</color>
     <color name="evaSecondaryTeal">#009ca6</color>
+
+    <color name="evaFocusAccent">#A4B239</color>
 </resources>

@@ -26,16 +26,19 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <EditText
+        <hogent.group15.ui.EvaEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/login_email" />
+            android:hint="@string/login_email"
+            style="@style/evaEditText"/>
 
-        <EditText
+        <hogent.group15.ui.EvaEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:hint="@string/login_password" />
+            android:hint="@string/login_password"
+            android:inputType="textPassword"
+            style="@style/evaEditText"/>
 
         <TextView
             style="@style/hyperlink"
