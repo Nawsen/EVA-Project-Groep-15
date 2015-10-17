@@ -34,7 +34,7 @@ public class UserJsonReader implements MessageBodyReader<User> {
     public User readFrom(Class<User> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, String> httpHeaders, InputStream entityStream) throws IOException, WebApplicationException {
 	try (JsonReader reader = Json.createReader(entityStream)) {
 	    JsonObject jsonUser = reader.readObject();
-	    
+
 	    String firstName = jsonUser.getString("firstName", "");
 	    String lastName = jsonUser.getString("lastName", "");
 	    String email = jsonUser.getString("email", "");
@@ -42,14 +42,23 @@ public class UserJsonReader implements MessageBodyReader<User> {
 	    int tempGender = jsonUser.getInt("gender", -1);
 	    Gender gender = tempGender < 0 || tempGender > 1 ? null : Gender.values()[tempGender];
 	    Address address = new Address(jsonUser.getString("country", ""), jsonUser.getString("street", ""), jsonUser.getString("city", ""));
-	    User.VegetarianGrade grade = jsonUser.getString("grade", "").equals("") ? null : User.VegetarianGrade.valueOf(jsonUser.getString("grade"));
-	    LocalDate birthdate = null;
+	    User.VegetarianGrade grade = null;
+
+	    if (!jsonUser.getString("grade", "").equals("")) {
+		try {
+		    grade = User.VegetarianGrade.valueOf(jsonUser.getString("grade"));
+		} catch (IllegalArgumentException ex) {
+		    grade = User.VegetarianGrade.UNKOWN;
+		}
+	    }
 	    
+	    LocalDate birthdate = null;
+
 	    try {
 		birthdate = LocalDate.parse(jsonUser.getString("birthdate", ""));
 	    } catch (DateTimeParseException ex) {
 	    }
-	    
+
 	    return new User(firstName, lastName, email, password, gender, address, grade, birthdate);
 	}
     }

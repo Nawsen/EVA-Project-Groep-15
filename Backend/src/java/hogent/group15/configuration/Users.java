@@ -33,12 +33,6 @@ public class Users {
     @Context
     private Validator validator;
     
-    @GET
-    @Path("hello")
-    public String hello() {
-	return "hello";
-    }
-    
     @Path("register")
     @Transactional
     @POST
@@ -46,7 +40,7 @@ public class Users {
     public Response register(User user) {
 	User dbUser = em.find(User.class, user.getEmail());
 	if (dbUser != null) {
-	    return Response.status(Response.Status.BAD_REQUEST).entity("The given e-mail is already in use.").build();
+	    return Response.status(Response.Status.BAD_REQUEST).entity("used").build();
 	} else {
 	    Set<ConstraintViolation<User>> violations = validator.validate(user);
 	    if (!violations.isEmpty()) {

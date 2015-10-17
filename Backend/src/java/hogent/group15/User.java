@@ -1,5 +1,6 @@
 package hogent.group15;
 
+import hogent.group15.configuration.KnownVegetarianGrade;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -36,7 +38,7 @@ public class User implements Serializable {
     public enum VegetarianGrade {
 	
 	VEGAN, LACTO_VEGETARIAN, OVO_VEGETARIAN, LACTO_OVO_VEGETARIAN,
-	POLLOTARIAN, PESCATARIAN, FLEXITARIAN
+	POLLOTARIAN, PESCATARIAN, FLEXITARIAN, UNKOWN
     }
     
     @Id
@@ -46,12 +48,15 @@ public class User implements Serializable {
     private int facebookId;
     
     @NotNull(message = "firstName")
+    @Size(min = 1, message = "firstName")
     private String firstName;
     
     @NotNull(message = "lastName")
+    @Size(min = 1, message = "lastName")
     private String lastName;
     
     @NotNull(message = "password")
+    @Size(min = 7, message = "password")
     private String password;
     
     @Enumerated(EnumType.ORDINAL)
@@ -62,6 +67,7 @@ public class User implements Serializable {
     private Address address;
     
     @Enumerated(EnumType.ORDINAL)
+    @KnownVegetarianGrade
     private VegetarianGrade grade;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -76,7 +82,7 @@ public class User implements Serializable {
     @Pattern(regexp = "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)", message = "imageUrl")
     private String imageUrl;
     
-    @NotNull(message = "birthDate")
+    @NotNull(message = "birthdate")
     private LocalDate birthDate;
 
     public User() {
