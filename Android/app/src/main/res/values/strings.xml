@@ -28,5 +28,6 @@
     <string name="register_register_button">Register</string>
     <string name="register_sex_male">Male</string>
     <string name="register_sex_female">Female</string>
-    <string name="facebook_app_id">1506320029692649</string>
+    <string name="facebook_app_id" translatable="false">1506320029692649</string>
+    <string name="create_account"><u>Create account</u></string>
 </resources>
