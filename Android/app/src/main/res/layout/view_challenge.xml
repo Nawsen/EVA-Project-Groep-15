@@ -16,7 +16,8 @@
         android:layout_width="wrap_content" android:layout_below="@+id/challenge_score"
         android:layout_height="wrap_content" android:layout_toRightOf="@+id/challenge_image"
         android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
-        android:textSize="@dimen/h2_font_size" android:text="Title" android:layout_centerVertical="true"/>
+        android:textSize="@dimen/h2_font_size" android:text="Title" android:layout_centerVertical="true"
+        android:textColor="@color/evaCustomOrange"/>
 
     <hogent.group15.ui.controls.EvaMuseo300TextView
         android:layout_width="wrap_content" android:layout_toRightOf="@+id/challenge_image"

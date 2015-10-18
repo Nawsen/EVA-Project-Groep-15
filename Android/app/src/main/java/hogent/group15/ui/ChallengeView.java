@@ -2,33 +2,16 @@ package hogent.group15.ui;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.os.AsyncTask;
-import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.io.BufferedInputStream;
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.URI;
 
 import hogent.group15.AsyncUtil;
 import hogent.group15.Challenge;
 import hogent.group15.Consumer;
-import hogent.group15.Logging;
 import hogent.group15.StringInterpolator;
 
 /**
@@ -84,7 +67,7 @@ public class ChallengeView extends LinearLayout {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
             score.setText(StringInterpolator.interpolate(scoreExpression, challenge.getScore()));
-            AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getImageUri(), getResources()), new Consumer<Bitmap>() {
+            AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getThumbnailImageUri(), getResources()), new Consumer<Bitmap>() {
                 @Override
                 public void consume(Bitmap bitmap) {
                     image.setImageBitmap(bitmap);

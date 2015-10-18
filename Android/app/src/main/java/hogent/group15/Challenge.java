@@ -1,7 +1,5 @@
 package hogent.group15;
 
-import android.media.Image;
-
 import java.io.Serializable;
 import java.net.URI;
 
@@ -10,7 +8,8 @@ import java.net.URI;
  */
 public class Challenge implements Serializable {
 
-    private URI imageUri;
+    private URI thumbnailImageUri;
+    private URI headerImageUri;
     private String title;
     private String shortDescription;
     private String detailedDescription;
@@ -19,8 +18,9 @@ public class Challenge implements Serializable {
     public Challenge() {
     }
 
-    public Challenge(URI imageUri, String title, String shortDescription, String detailedDescription, int score) {
-        this.imageUri = imageUri;
+    public Challenge(URI thumbnailImageUri, URI headerImageUri, String title, String shortDescription, String detailedDescription, int score) {
+        this.thumbnailImageUri = thumbnailImageUri;
+        this.headerImageUri = headerImageUri;
         this.title = title;
         this.shortDescription = shortDescription;
         this.detailedDescription = detailedDescription;
@@ -51,12 +51,12 @@ public class Challenge implements Serializable {
         this.title = title;
     }
 
-    public URI getImageUri() {
-        return imageUri;
+    public URI getThumbnailImageUri() {
+        return thumbnailImageUri;
     }
 
-    public void setImageUri(URI imageUri) {
-        this.imageUri = imageUri;
+    public void setThumbnailImageUri(URI thumbnailImageUri) {
+        this.thumbnailImageUri = thumbnailImageUri;
     }
 
     public int getScore() {
@@ -65,5 +65,13 @@ public class Challenge implements Serializable {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public URI getHeaderImageUri() {
+        return headerImageUri;
+    }
+
+    public void setHeaderImageUri(URI headerImageUri) {
+        this.headerImageUri = headerImageUri;
     }
 }

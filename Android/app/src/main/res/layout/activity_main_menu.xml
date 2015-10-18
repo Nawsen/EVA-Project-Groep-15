@@ -24,12 +24,12 @@
             android:layout_width="match_parent" android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" android:text="@string/get_challenge"
             android:layout_marginTop="10dp" android:paddingTop="20dp" android:paddingBottom="20dp"
-            android:onClick="onGetChallenge" style="@style/evaButtonWhite" android:textSize="@dimen/button_medium"/>
+            android:onClick="onGetChallenge" style="@style/evaButtonWhite" android:textSize="@dimen/text_medium"/>
 
         <hogent.group15.ui.controls.EvaButton
             android:layout_width="match_parent" android:layout_gravity="center_horizontal"
             android:layout_height="wrap_content" android:text="@string/get_progress"
             android:layout_marginTop="10dp" android:paddingTop="20dp" android:paddingBottom="20dp"
-            android:onClick="onGetProgress" style="@style/evaButtonWhite" android:textSize="@dimen/button_medium"/>
+            android:onClick="onGetProgress" style="@style/evaButtonWhite" android:textSize="@dimen/text_medium"/>
     </LinearLayout>
 </LinearLayout>

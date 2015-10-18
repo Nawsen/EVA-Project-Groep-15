@@ -16,6 +16,5 @@ public class EvaMuseo500TextView extends TextView {
     public EvaMuseo500TextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setTypeface(FontManager.getInstance(context).MUSEO_500);
-        setTextColor(ContextCompat.getColor(getContext(), R.color.evaFocusAccent));
     }
 }

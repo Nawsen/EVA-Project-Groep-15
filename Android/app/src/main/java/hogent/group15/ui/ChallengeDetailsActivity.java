@@ -10,7 +10,6 @@ import android.widget.TextView;
 import hogent.group15.AsyncUtil;
 import hogent.group15.Challenge;
 import hogent.group15.Consumer;
-import hogent.group15.ui.R;
 
 public class ChallengeDetailsActivity extends AppCompatActivity {
 
@@ -32,7 +31,7 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
     public void updateContents(Challenge challenge) {
         title.setText(challenge.getTitle());
         longDescription.setText(challenge.getDetailedDescription());
-        AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getImageUri(), getResources()), new Consumer<Bitmap>() {
+        AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
             @Override
             public void consume(Bitmap bitmap) {
                 image.setImageBitmap(bitmap);
