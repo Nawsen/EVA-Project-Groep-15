@@ -7,7 +7,7 @@
 
     <FrameLayout
         android:layout_width="match_parent" android:orientation="horizontal"
-        android:layout_height="wrap_content" android:layout_marginBottom="5dp">
+        android:layout_height="wrap_content" android:layout_marginBottom="15dp">
 
         <ImageView
             android:layout_width="match_parent" android:id="@+id/challenge_image" android:padding="-1dp"
@@ -16,12 +16,12 @@
         <hogent.group15.ui.controls.EvaMuseo500TextView
             android:layout_width="wrap_content" android:textSize="@dimen/h2_font_size"
             android:layout_height="wrap_content" android:id="@+id/challenge_title"
-            android:layout_gravity="center" style="@style/textViewWithBlackShadow"/>
-
+            android:layout_gravity="center" style="@style/textViewWithBlackShadow"
+            android:gravity="center"/>
     </FrameLayout>
 
     <ScrollView
-        android:layout_width="fill_parent" android:layout_weight="1"
+        android:layout_width="fill_parent" android:layout_weight="1" android:layout_marginBottom="15dp"
         android:layout_height="wrap_content"  android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin">
         <hogent.group15.ui.controls.EvaMuseo300TextView

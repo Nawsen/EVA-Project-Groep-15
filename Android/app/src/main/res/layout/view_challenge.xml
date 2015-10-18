@@ -19,9 +19,9 @@
         android:gravity="center"/>
 
     <hogent.group15.ui.controls.EvaMuseo300TextView
-        android:layout_width="wrap_content" android:layout_toRightOf="@+id/challenge_image"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:text="@string/challenge_score_notification"
-        android:layout_marginRight="10dp" android:layout_alignTop="@+id/challenge_image"
+        android:layout_marginRight="10dp"
         android:id="@+id/challenge_score" style="@style/textViewWithBlackShadow"
         android:layout_gravity="top|right" android:textSize="18sp" android:layout_marginTop="10dp"/>
 </FrameLayout>

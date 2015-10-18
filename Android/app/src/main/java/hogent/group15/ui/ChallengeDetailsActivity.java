@@ -25,6 +25,8 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         title = (TextView) findViewById(R.id.challenge_title);
         image = (ImageView) findViewById(R.id.challenge_image);
         longDescription = (TextView) findViewById(R.id.challenge_long_description);
+
+
         updateContents((Challenge) getIntent().getSerializableExtra("challenge"));
     }
 
