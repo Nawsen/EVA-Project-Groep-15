@@ -28,4 +28,5 @@
     <string name="register_register_button">Registreren</string>
     <string name="register_sex_male">Man</string>
     <string name="register_sex_female">Vrouw</string>
+    <string name="create_account"><u>Maak een account</u></string>
 </resources>

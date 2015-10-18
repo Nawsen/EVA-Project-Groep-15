@@ -13,94 +13,105 @@
         android:id="@+id/login_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="centerInside"
-        android:adjustViewBounds="true"
         android:layout_above="@+id/controls"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside"
         android:src="@drawable/eva" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:id="@+id/controls"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_centerInParent="true"
-        android:id="@+id/controls">
+        android:minWidth="550dp"
+        android:orientation="vertical">
+
+
+        <hogent.group15.ui.EvaEditText
+            android:id="@+id/login_email"
+            style="@style/evaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/login_email" />
+
+        <hogent.group15.ui.EvaEditText
+            style="@style/evaEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:hint="@string/login_password"
+            android:inputType="textPassword" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="top"
-            android:orientation="vertical">
-
-            <hogent.group15.ui.EvaEditText
-                android:id="@+id/login_email"
-                style="@style/evaEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/login_email" />
-
-            <hogent.group15.ui.EvaEditText
-                style="@style/evaEditText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:hint="@string/login_password"
-                android:inputType="textPassword" />
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp">
 
             <TextView
                 style="@style/hyperlink"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="left"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="20dp"
+                android:layout_weight="1"
                 android:text="@string/login_lost_password"
-                android:textSize="18dp"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                style="@style/hyperlink"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_marginLeft="3dp"
+                android:gravity="right"
+                android:text="@string/create_account"
+                android:textSize="18sp"
+                android:textStyle="normal" />
+        </LinearLayout>
 
-                <com.facebook.login.widget.LoginButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|start" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp"
-                    android:text="@string/login_or"
-                    android:textSize="24dp" />
+            <com.facebook.login.widget.LoginButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start" />
 
-                <hogent.group15.ui.EvaButton
-                    style="@style/evaButtonGray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:layout_weight="1"
-                    android:onClick="onLogin"
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
-                    android:text="@string/login_button" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:text="@string/login_or"
+                android:textSize="24dp" />
 
+            <hogent.group15.ui.EvaButton
+                style="@style/evaButtonGray"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:layout_weight="1"
+                android:onClick="onLogin"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:text="@string/login_button" />
 
-            </LinearLayout>
-
-
-            <!-- <Button
-                 style="@style/facebookButton"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_marginTop="20dp"
-                 android:background="@drawable/facebook_button"
-                 android:text="@string/login_facebook_login" /> -->
 
         </LinearLayout>
+
+
+        <!-- <Button
+             style="@style/facebookButton"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="20dp"
+             android:background="@drawable/facebook_button"
+             android:text="@string/login_facebook_login" /> -->
+
     </LinearLayout>
 </RelativeLayout>
