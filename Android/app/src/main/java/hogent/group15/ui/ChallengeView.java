@@ -38,7 +38,6 @@ public class ChallengeView extends LinearLayout {
 
     private View root;
     private TextView title;
-    private TextView description;
     private TextView score;
     private ImageView image;
     private String scoreExpression;
@@ -75,7 +74,6 @@ public class ChallengeView extends LinearLayout {
 
     private void initComponents() {
         title = (TextView) findViewById(R.id.challenge_title);
-        description = (TextView) findViewById(R.id.challenge_description);
         score = (TextView) findViewById(R.id.challenge_score);
         image = (ImageView) findViewById(R.id.challenge_image);
         scoreExpression = score.getText().toString();
@@ -85,7 +83,6 @@ public class ChallengeView extends LinearLayout {
         if (challenge != null) {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
-            description.setText(challenge.getShortDescription());
             score.setText(StringInterpolator.interpolate(scoreExpression, challenge.getScore()));
             AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getImageUri(), getResources()), new Consumer<Bitmap>() {
                 @Override

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:paddingTop="4dp" android:paddingBottom="4dp"
-    android:background="@drawable/dashed_line" android:paddingRight="4dp">
+    android:layout_height="wrap_content" android:padding="5dp" android:background="@drawable/dashed_line">
 
     <ImageView
         android:layout_centerVertical="true" android:padding="5dp"
@@ -13,22 +12,16 @@
         android:maxHeight="@dimen/challenge_item_height"
         android:layout_marginRight="10dp"/>
 
-    <hogent.group15.ui.controls.EvaArtistampTextView
-        android:layout_width="wrap_content"
+    <hogent.group15.ui.controls.EvaMuseo500TextView
+        android:layout_width="wrap_content" android:layout_below="@+id/challenge_score"
         android:layout_height="wrap_content" android:layout_toRightOf="@+id/challenge_image"
         android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
-        android:textSize="@dimen/h2_font_size" android:text="Title"/>
+        android:textSize="@dimen/h2_font_size" android:text="Title" android:layout_centerVertical="true"/>
 
     <hogent.group15.ui.controls.EvaMuseo300TextView
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/challenge_image" android:layout_below="@id/challenge_title"
-        android:layout_marginTop="5dp" android:id="@+id/challenge_description" android:textSize="18sp"
-        android:text="Short description of the challenge"/>
-
-    <hogent.group15.ui.controls.EvaMuseo300TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true" android:text="@string/challenge_score_notification"
+        android:layout_width="wrap_content" android:layout_toRightOf="@+id/challenge_image"
+        android:layout_height="wrap_content" android:text="@string/challenge_score_notification"
         android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
+        android:layout_alignTop="@+id/challenge_image" android:layout_marginTop="5dp"
         android:id="@+id/challenge_score"/>
 </RelativeLayout>
