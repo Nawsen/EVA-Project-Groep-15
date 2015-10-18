@@ -20,4 +20,5 @@
     <color name="evaSecondaryTeal">#009ca6</color>
 
     <color name="evaFocusAccent">#A4B239</color>
+    <color name="evaCustomOrange">#FF6327</color>
 </resources>

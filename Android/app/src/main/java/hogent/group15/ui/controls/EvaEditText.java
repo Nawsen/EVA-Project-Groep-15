@@ -1,4 +1,4 @@
-package hogent.group15.ui;
+package hogent.group15.ui.controls;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -10,11 +10,13 @@ import android.os.AsyncTask;
 import android.support.v4.app.ActivityCompat;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -32,8 +34,9 @@ import hogent.group15.StringInterpolator;
 /**
  * Created by Frederik on 10/11/2015.
  */
-public class ChallengeView extends FrameLayout {
+public class ChallengeView extends LinearLayout {
 
+    private View root;
     private TextView title;
     private TextView description;
     private TextView score;
@@ -60,7 +63,8 @@ public class ChallengeView extends FrameLayout {
                 getContext().startActivity(intent);
             }
         });
-        addView(inflate(getContext(), R.layout.view_challenge, null));
+
+        root = inflate(getContext(), R.layout.view_challenge, this);
     }
 
     @Override

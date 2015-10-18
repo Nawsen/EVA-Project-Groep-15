@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="@dimen/challenge_item_height" android:padding="4dp"
-    android:background="@drawable/challenge_background">
+    android:layout_height="wrap_content" android:paddingTop="4dp" android:paddingBottom="4dp"
+    android:background="@drawable/dashed_line" android:paddingRight="4dp">
 
     <ImageView
-        android:layout_centerVertical="true" android:layout_alignParentBottom="true"
+        android:layout_centerVertical="true" android:padding="5dp"
         android:layout_alignParentLeft="true" android:id="@+id/challenge_image"
         android:layout_width="wrap_content" android:adjustViewBounds="true"
-        android:layout_height="fill_parent" android:src="@drawable/question_mark"
-        android:scaleType="fitStart" android:layout_marginRight="10dp"/>
+        android:layout_height="wrap_content" android:src="@drawable/question_mark"
+        android:scaleType="fitStart" android:layout_marginEnd="10dp"
+        android:maxHeight="@dimen/challenge_item_height"
+        android:layout_marginRight="10dp"/>
 
-    <TextView
+    <hogent.group15.ui.controls.EvaArtistampTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_toRightOf="@+id/challenge_image"
         android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
         android:textSize="@dimen/h1_font_size" android:text="Title"/>
 
-    <TextView
+    <hogent.group15.ui.controls.EvaMuseo300TextView
         android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:layout_toRightOf="@id/challenge_image" android:layout_below="@id/challenge_title"
-        android:layout_marginTop="5dp" android:id="@+id/challenge_description"
+        android:layout_marginTop="5dp" android:id="@+id/challenge_description" android:textSize="18sp"
         android:text="Short description of the challenge"/>
 
-    <TextView
+    <hogent.group15.ui.controls.EvaMuseo300TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
         android:layout_alignParentRight="true" android:text="@string/challenge_score_notification"
         android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
         android:id="@+id/challenge_score"/>
