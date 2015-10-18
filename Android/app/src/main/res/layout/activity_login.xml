@@ -27,14 +27,14 @@
         android:orientation="vertical">
 
 
-        <hogent.group15.ui.EvaEditText
+        <hogent.group15.ui.controls.EvaEditText
             android:id="@+id/login_email"
             style="@style/evaEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/login_email" />
 
-        <hogent.group15.ui.EvaEditText
+        <hogent.group15.ui.controls.EvaEditText
             style="@style/evaEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
                 android:text="@string/login_or"
                 android:textSize="24dp" />
 
-            <hogent.group15.ui.EvaButton
+            <hogent.group15.ui.controls.EvaButton
                 style="@style/evaButtonGray"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

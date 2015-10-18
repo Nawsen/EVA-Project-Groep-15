@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" android:layout_toRightOf="@+id/challenge_image"
         android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
-        android:textSize="@dimen/h1_font_size" android:text="Title"/>
+        android:textSize="@dimen/h2_font_size" android:text="Title"/>
 
     <hogent.group15.ui.controls.EvaMuseo300TextView
         android:layout_width="wrap_content" android:layout_height="wrap_content"

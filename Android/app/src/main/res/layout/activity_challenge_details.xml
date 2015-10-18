@@ -15,7 +15,7 @@
             android:layout_width="wrap_content" android:id="@+id/challenge_image"
             android:layout_height="@dimen/challenge_item_height" android:adjustViewBounds="true" />
 
-        <TextView
+        <hogent.group15.ui.controls.EvaArtistampTextView
             android:layout_marginLeft="5dp"
             android:layout_width="wrap_content" android:textSize="@dimen/h1_font_size"
             android:layout_height="wrap_content" android:id="@+id/challenge_title"/>
@@ -25,13 +25,13 @@
     <ScrollView
         android:layout_width="fill_parent" android:layout_weight="1"
         android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="fill_parent"
+        <hogent.group15.ui.controls.EvaMuseo300TextView
+            android:layout_width="fill_parent" android:textSize="25sp"
             android:layout_height="wrap_content" android:id="@+id/challenge_long_description" />
     </ScrollView>
 
-    <Button
-        android:layout_width="wrap_content" android:text="@string/accept_challenge"
+    <hogent.group15.ui.controls.EvaButton
+        android:layout_width="wrap_content" android:text="@string/accept_challenge" android:textSize="@dimen/button_big"
         android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
-        android:onClick="onAcceptChallenge"/>
+        android:onClick="onAcceptChallenge" style="@style/evaButtonGray" android:paddingBottom="16dp"/>
 </LinearLayout>
