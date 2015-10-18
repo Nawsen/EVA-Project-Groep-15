@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:padding="5dp" android:background="@drawable/dashed_line">
+    android:layout_height="wrap_content" android:background="@drawable/photo_bg"
+    android:paddingLeft="8dp" android:paddingRight="8dp" android:paddingTop="5dp" android:paddingBottom="5dp">
 
     <ImageView
-        android:layout_centerVertical="true" android:padding="5dp"
-        android:layout_alignParentLeft="true" android:id="@+id/challenge_image"
-        android:layout_width="wrap_content" android:adjustViewBounds="true"
+        android:padding="5dp" android:id="@+id/challenge_image"
+        android:layout_width="match_parent" android:adjustViewBounds="true"
         android:layout_height="wrap_content" android:src="@drawable/question_mark"
-        android:scaleType="fitStart" android:layout_marginEnd="10dp"
-        android:maxHeight="@dimen/challenge_item_height"
-        android:layout_marginRight="10dp"/>
+        android:scaleType="fitCenter"/>
+    <!-- android:maxHeight="@dimen/challenge_item_height" -->
 
     <hogent.group15.ui.controls.EvaMuseo500TextView
-        android:layout_width="wrap_content" android:layout_below="@+id/challenge_score"
-        android:layout_height="wrap_content" android:layout_toRightOf="@+id/challenge_image"
+        android:layout_width="wrap_content" android:layout_height="wrap_content"
         android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
         android:textSize="@dimen/h2_font_size" android:text="Title" android:layout_centerVertical="true"
-        android:textColor="@color/evaCustomOrange"/>
+        style="@style/textViewWithBlackShadow" android:layout_gravity="center"
+        android:gravity="center"/>
 
     <hogent.group15.ui.controls.EvaMuseo300TextView
         android:layout_width="wrap_content" android:layout_toRightOf="@+id/challenge_image"
         android:layout_height="wrap_content" android:text="@string/challenge_score_notification"
-        android:layout_marginRight="10dp" android:layout_marginBottom="10dp"
-        android:layout_alignTop="@+id/challenge_image" android:layout_marginTop="5dp"
-        android:id="@+id/challenge_score"/>
-</RelativeLayout>
+        android:layout_marginRight="10dp" android:layout_alignTop="@+id/challenge_image"
+        android:id="@+id/challenge_score" style="@style/textViewWithBlackShadow"
+        android:layout_gravity="top|right" android:textSize="18sp" android:layout_marginTop="10dp"/>
+</FrameLayout>

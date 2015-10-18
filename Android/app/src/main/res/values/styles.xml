@@ -60,4 +60,10 @@
         <item name="android:textColor">#000</item>
         <item name="android:padding">14sp</item>
     </style>
+
+    <style name="textViewWithBlackShadow">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:shadowColor">@android:color/black</item>
+        <item name="android:shadowRadius">5</item>
+    </style>
 </resources>

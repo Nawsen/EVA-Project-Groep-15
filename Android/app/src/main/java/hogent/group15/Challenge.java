@@ -8,7 +8,6 @@ import java.net.URI;
  */
 public class Challenge implements Serializable {
 
-    private URI thumbnailImageUri;
     private URI headerImageUri;
     private String title;
     private String shortDescription;
@@ -18,8 +17,7 @@ public class Challenge implements Serializable {
     public Challenge() {
     }
 
-    public Challenge(URI thumbnailImageUri, URI headerImageUri, String title, String shortDescription, String detailedDescription, int score) {
-        this.thumbnailImageUri = thumbnailImageUri;
+    public Challenge(URI headerImageUri, String title, String shortDescription, String detailedDescription, int score) {
         this.headerImageUri = headerImageUri;
         this.title = title;
         this.shortDescription = shortDescription;
@@ -49,14 +47,6 @@ public class Challenge implements Serializable {
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public URI getThumbnailImageUri() {
-        return thumbnailImageUri;
-    }
-
-    public void setThumbnailImageUri(URI thumbnailImageUri) {
-        this.thumbnailImageUri = thumbnailImageUri;
     }
 
     public int getScore() {

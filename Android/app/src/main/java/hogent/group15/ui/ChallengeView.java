@@ -67,7 +67,7 @@ public class ChallengeView extends LinearLayout {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
             score.setText(StringInterpolator.interpolate(scoreExpression, challenge.getScore()));
-            AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getThumbnailImageUri(), getResources()), new Consumer<Bitmap>() {
+            AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
                 @Override
                 public void consume(Bitmap bitmap) {
                     image.setImageBitmap(bitmap);
