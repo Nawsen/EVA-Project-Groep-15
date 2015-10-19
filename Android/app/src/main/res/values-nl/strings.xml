@@ -29,4 +29,9 @@
     <string name="register_sex_male">Man</string>
     <string name="register_sex_female">Vrouw</string>
     <string name="create_account"><u>Maak een account</u></string>
+    <string name="action_bar_search">Zoeken</string>
+    <string name="action_bar_share">Delen</string>
+    <string name="challenge">Uitdaging</string>
+    <string name="current_challenge">Huidige uitdaging</string>
+    <string name="logout">Afmelden</string>
 </resources>

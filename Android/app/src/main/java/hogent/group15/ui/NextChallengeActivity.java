@@ -6,11 +6,13 @@ import android.os.Bundle;
 import android.transition.Fade;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.view.Menu;
 import android.view.animation.AnimationUtils;
 
 import java.net.URI;
 
 import hogent.group15.Challenge;
+import hogent.group15.ui.util.ActionBarConfig;
 
 public class NextChallengeActivity extends AppCompatActivity {
 
@@ -31,6 +33,11 @@ public class NextChallengeActivity extends AppCompatActivity {
         thirdChallenge.setAlpha(0f);
 
         addTestData();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return ActionBarConfig.onCreateOptionsMenu(menu, this);
     }
 
     private void addTestData() {

@@ -30,4 +30,9 @@
     <string name="register_sex_female">Female</string>
     <string name="facebook_app_id" translatable="false">1506320029692649</string>
     <string name="create_account"><u>Create account</u></string>
+    <string name="action_bar_search">Search</string>
+    <string name="action_bar_share">Share</string>
+    <string name="challenge">Challenge</string>
+    <string name="current_challenge">Current challenge</string>
+    <string name="logout">Logout</string>
 </resources>

@@ -3,6 +3,7 @@ package hogent.group15.ui;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import hogent.group15.AsyncUtil;
 import hogent.group15.Challenge;
 import hogent.group15.Consumer;
+import hogent.group15.ui.util.ActionBarConfig;
 
 public class ChallengeDetailsActivity extends AppCompatActivity {
 
@@ -39,6 +41,11 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
                 image.setImageBitmap(bitmap);
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return ActionBarConfig.onCreateOptionsMenu(menu, this);
     }
 
     public void onAcceptChallenge(View v) {
