@@ -28,4 +28,10 @@
     <string name="register_register_button">Se faire inscrire</string>
     <string name="register_sex_male">Masculin</string>
     <string name="register_sex_female">Feminin</string>
+    <string name="create_account"><u>Créer un compte</u></string>
+    <string name="action_bar_search">Chercher</string>
+    <string name="action_bar_share">Partager</string>
+    <string name="challenge">Défi</string>
+    <string name="current_challenge">Défi actuel</string>
+    <string name="logout">Se déconnecter</string>
 </resources>

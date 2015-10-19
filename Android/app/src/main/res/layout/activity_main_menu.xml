@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin" android:orientation="vertical"
+    android:layout_height="match_parent" android:orientation="vertical"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="hogent.group15.ui.MainMenuActivity">
 
     <ImageView
@@ -17,15 +15,21 @@
         android:gravity="center" android:layout_height="0dp"
         android:text="@string/welcome_notification" android:layout_weight="1"/>
 
-    <Button
-        android:layout_width="match_parent" android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content" android:text="@string/get_challenge"
-        android:layout_marginTop="10dp" android:paddingTop="20dp" android:paddingBottom="20dp"
-        android:onClick="onGetChallenge"/>
+    <LinearLayout
+        android:layout_width="match_parent" android:orientation="vertical" android:gravity="bottom"
+        android:layout_height="200dp" android:background="@drawable/blackboard"
+        android:paddingBottom="@dimen/activity_vertical_margin" android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin">
+        <hogent.group15.ui.controls.EvaButton
+            android:layout_width="match_parent" android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" android:text="@string/get_challenge"
+            android:layout_marginTop="10dp" android:paddingTop="20dp" android:paddingBottom="20dp"
+            android:onClick="onGetChallenge" style="@style/evaButtonWhite" android:textSize="@dimen/text_medium"/>
 
-    <Button
-        android:layout_width="match_parent" android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content" android:text="@string/get_progress"
-        android:layout_marginTop="10dp" android:paddingTop="20dp" android:paddingBottom="20dp"
-        android:onClick="onGetProgress"/>
+        <hogent.group15.ui.controls.EvaButton
+            android:layout_width="match_parent" android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content" android:text="@string/get_progress"
+            android:layout_marginTop="10dp" android:paddingTop="20dp" android:paddingBottom="20dp"
+            android:onClick="onGetProgress" style="@style/evaButtonWhite" android:textSize="@dimen/text_medium"/>
+    </LinearLayout>
 </LinearLayout>

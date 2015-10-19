@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="hogent.group15.androidapp.RegisterActivity">
+    tools:context="hogent.group15.ui.RegisterActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,8 +29,8 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dip"
-                android:layout_marginBottom="15dip"
+                android:layout_height="1dp"
+                android:layout_marginBottom="15dp"
                 android:background="#AAAAAA" />
 
             <LinearLayout
@@ -66,9 +66,9 @@
             android:inputType="textEmailAddress" />
 
         <Spinner
+            android:id="@+id/register_sex"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/register_sex"
             android:layout_below="@id/register_email" />
 
         <LinearLayout
@@ -125,6 +125,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/register_addressGroup"
             android:orientation="vertical">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -137,23 +138,26 @@
                 android:layout_height="1dip"
                 android:layout_marginBottom="15dip"
                 android:background="#AAAAAA" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/register_email_confirm"/>
+                android:text="@string/register_email_confirm" />
+
             <EditText
+                android:id="@+id/register_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
                 android:hint="@string/register_password_hint"
-                android:id="@+id/register_password"/>
+                android:inputType="textPassword" />
 
         </LinearLayout>
+
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:hint="@string/register_register_button"/>
+            android:hint="@string/register_register_button" />
     </RelativeLayout>
 </RelativeLayout>
 
