@@ -7,8 +7,7 @@
     <ImageView
         android:padding="5dp" android:id="@+id/challenge_image"
         android:layout_width="match_parent" android:adjustViewBounds="true"
-        android:layout_height="wrap_content" android:src="@drawable/question_mark"
-        android:scaleType="fitCenter"/>
+        android:layout_height="wrap_content" android:scaleType="fitCenter"/>
     <!-- android:maxHeight="@dimen/challenge_item_height" -->
 
     <hogent.group15.ui.controls.EvaMuseo500TextView

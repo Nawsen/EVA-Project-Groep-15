@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -63,6 +64,10 @@ public class ChallengeView extends LinearLayout {
     }
 
     public void updateContents(Challenge challenge) {
+        updateContents(challenge, null);
+    }
+
+    public void updateContents(Challenge challenge, final Runnable onComplete) {
         if (challenge != null) {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
@@ -71,6 +76,9 @@ public class ChallengeView extends LinearLayout {
                 @Override
                 public void consume(Bitmap bitmap) {
                     image.setImageBitmap(bitmap);
+                    if (onComplete != null) {
+                        onComplete.run();
+                    }
                 }
             });
         }
