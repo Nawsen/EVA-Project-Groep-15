@@ -10,6 +10,12 @@
     font-weight: 700;
     src: url("../fonts/Museo700-Regular.ttf");
 }
+@font-face {
+    font-family: "artistamp";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/Museo700-Regular.ttf");
+}
 * {
     border-radius: 0 !important;
 }
@@ -87,9 +93,7 @@
     color: #2f3030;
     border: solid 2px #2f3030;
     transition: border-color 0.15s linear, color 0.15s linear;
-}
-span div input.eva-input:nth-child(even)  {
-    background-color:red;
+    transition: background-color 0.15s linear, color 0.15s linear;
 }
 .eva-input:focus {
     border: 2px solid #A4B239;
@@ -97,6 +101,14 @@ span div input.eva-input:nth-child(even)  {
 }
 .no-left-border {
     border-left:0px;
+}
+.radio-active {
+    background: #a4b239;
+    color:white;
+}
+label.eva-input:hover {
+    background: #a4b239;
+    color:white;
 }
 .eva-submit {
     height:43px;
@@ -114,4 +126,18 @@ span div input.eva-input:nth-child(even)  {
     background: #555757 none repeat scroll 0% 0%;
     border-color: #2F3030;
     color:#fff;
+}
+.eva-submit[disabled] {
+    opacity: 0.5;
+    border: solid 2px #808b2d;
+    background: #a4b239;
+}
+.eva-submit[disabled]:hover {
+    opacity: 0.5;
+    border: solid 2px #808b2d;
+    background: #a4b239;
+}
+.artistamp {
+    font-family: artistamp;
+    padding-bottom: 1em;
 }
