@@ -8,14 +8,36 @@
             </div>
             <form class="form-group" name="registerForm">
                 <div class="form-group">
-                    <input type="email" class="form-control eva-input" placeholder="E-mailadres" name="email" required ng-model="user.email"/>
-                    <tt>registerForm.input.$valid = {{registerForm.email.$valid}}</tt><br/>
+                    <input type="email" class="form-control eva-input has-error" placeholder="E-mailadres"
+                           name="email" ng-focus="showHelpMail = true" ng-blur="showHelpMail = false"
+                           required ng-class="{'has-error': registerForm.email.$valid}"
+                           ng-model="user.email"/>
+                    <div class="alert alert-info" ng-hide="(!showHelpMail || registerForm.email.$valid)">
+                        Een e-mailadres ziet er zo uit: voorbeeld@mail.be
+                    </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control eva-input" placeholder="Wachtwoord" name="password" ng-model="user.password"/>
+                    <input type="password" class="form-control eva-input" placeholder="Wachtwoord" name="password" ng-focus="showHelpPassword = true" ng-blur="showHelpPassword = false" required
+                           ng-model="user.password" ng-minlength="5" ng-maxlength="128"/>
+                    <div class="alert alert-info" ng-hide="(!showHelpPassword || registerForm.password.$valid)">
+                        Een wachtwoord is minstens 5 karakters en maximum 128.
+                    </div>
+                    <!--<div ng-repeat="error in registerForm.password.$error" class="alert alert-danger">
+                            Too short
+                    </div>
+                    <pre class="alert alert-danger">registerForm.password.$error = {{ registerForm.password.$error | json }}</pre>
+                    <div ng-messages="registerForm.password.$error" style="color:maroon" role="alert">
+                        <div ng-message="required">You did not enter a field</div>
+                        <div ng-message="minlength">Your field is too short</div>
+                        <div ng-message="maxlength">Your field is too long</div>
+                    </div>-->
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control eva-input" placeholder="Herhaal wachtwoord" name="repeatpassword" ng-model="user.repeatPassword"/>
+                    <input type="password" class="form-control eva-input" placeholder="Herhaal wachtwoord"
+                           name="repeatpassword" ng-model="user.repeatPassword" ng-focus="showHelpRepeatPassword = true" ng-blur="showHelpRepeatPassword = false"/>
+                    <div class="alert alert-info" ng-hide="(!showHelpRepeatPassword || validPassword())">
+                        Herhaal uw wachtwoord.
+                    </div>
                 </div>
                 <div class="form-group">
                     <input type="text" class="form-control eva-input" placeholder="Voornaam"/>
@@ -46,7 +68,9 @@
                 </div>
 
                 <div class="form-group">
-                    <button class="btn btn-default form-control eva-submit" type="submit" ng-disabled="(!registerForm.email.$valid && validatePassword())" >Registreer</button>
+                    <button class="btn btn-default form-control eva-submit" type="submit"
+                            ng-disabled="!(registerForm.email.$valid && validPassword())">Registreer
+                    </button>
                 </div>
             </form>
         </div>

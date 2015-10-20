@@ -2,24 +2,24 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', function ($scope, $location) {
-    $scope.form = {
+    $scope.showHelpMail = false;
+    $scope.showHelpPassword = false;
+    $scope.showHelpRepeatPassword = false;
 
-    }
     $scope.user = {
         email: "",
-        password:"sssss",
-        repeatPassword:"ssss",
+        password:"",
+        repeatPassword:"",
         firstName: "",
         lastName: ""
     };
-    $scope.validatePassword = function () {
-        console.log(registerForm.email.$valid);
-        if (($scope.user.password === $scope.user.repeatPassword) && $scope.user.password.length >= 5 && $scope.form.email.$valid) {
-            console.log('test');
-            return false;
-        } else {
-            console.log('test2');
+    $scope.validPassword = function () {
+        if (($scope.user.password === $scope.user.repeatPassword) && $scope.user.password.length > 0) {
+            console.log('true');
             return true;
+        } else {
+            console.log('false');
+            return false;
         }
     }
 
