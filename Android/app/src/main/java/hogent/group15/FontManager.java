@@ -8,7 +8,7 @@ import android.graphics.Typeface;
  */
 public class FontManager {
 
-    public Typeface ARTISTAMP_MEDIUM, GEORGIA, MATHLETE, MUSEO, MYRIAD_PRO, MUSEO_500;
+    public Typeface ARTISTAMP_MEDIUM, GEORGIA, MATHLETE, MUSEO, MYRIAD_PRO, MUSEO_500, MUSEO_900;
 
     private static FontManager instance;
 
@@ -19,6 +19,7 @@ public class FontManager {
         MUSEO = Typeface.createFromAsset(con.getAssets(), "Museo300-Regular.otf");
         MYRIAD_PRO = Typeface.createFromAsset(con.getAssets(), "MyriadPro-Regular.otf");
         MUSEO_500 = Typeface.createFromAsset(con.getAssets(), "Museo500-Regular.otf");
+        MUSEO_900 = Typeface.createFromAsset(con.getAssets(), "Museo900-Regular.otf");
     }
 
     public static FontManager getInstance(Context context) {

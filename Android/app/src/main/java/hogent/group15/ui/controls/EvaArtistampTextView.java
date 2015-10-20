@@ -16,6 +16,5 @@ public class EvaArtistampTextView extends TextView {
     public EvaArtistampTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setTypeface(FontManager.getInstance(context).ARTISTAMP_MEDIUM);
-
     }
 }

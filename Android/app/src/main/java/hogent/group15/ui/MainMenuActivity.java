@@ -28,6 +28,6 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     public void onGetProgress(View v) {
-
+        startActivity(new Intent(this, ProgressActivity.class));
     }
 }
