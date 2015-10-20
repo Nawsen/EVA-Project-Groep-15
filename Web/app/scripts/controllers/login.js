@@ -22,14 +22,9 @@ angular.module('eva').controller('LoginCtrl', ['$scope', '$location', function (
         //TODO implement facebook api
         $location.path('/dashboard');
         return false;
-    }
+    };
     $scope.register = function () {
         //TODO implement facebook api
-        $location.path('/register');
-        return false;
-    }
-    };
-    $scope.register = function(){
         $location.path('/register');
         return false;
     };
