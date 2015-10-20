@@ -35,4 +35,10 @@
     <string name="challenge">Challenge</string>
     <string name="current_challenge">Current challenge</string>
     <string name="logout">Logout</string>
+    <string name="register_repeat_password_hint">Repeat password</string>
+    <string name="grade_omnivore">Omnivore</string>
+    <string name="grade_pescetariar">Pescetariar (no meat, fish ok)</string>
+    <string name="grade_parttime_vegetarian">Parttime vegetarian (at least 3 times per week vegetarian)</string>
+    <string name="grade_vegatarian">Vegetarian (no meat or fish)</string>
+    <string name="grade_vegan">Vegan (no animal products)</string>
 </resources>

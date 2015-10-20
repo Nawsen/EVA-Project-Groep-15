@@ -48,7 +48,7 @@ public class UserJsonReader implements MessageBodyReader<User> {
 		try {
 		    grade = User.VegetarianGrade.valueOf(jsonUser.getString("grade"));
 		} catch (IllegalArgumentException ex) {
-		    grade = User.VegetarianGrade.UNKOWN;
+		    grade = User.VegetarianGrade.UNKNOWN;
 		}
 	    }
 	    

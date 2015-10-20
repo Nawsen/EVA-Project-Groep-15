@@ -34,4 +34,10 @@
     <string name="challenge">Uitdaging</string>
     <string name="current_challenge">Huidige uitdaging</string>
     <string name="logout">Afmelden</string>
+    <string name="register_repeat_password_hint">Wachtwoord herhalen</string>
+    <string name="grade_omnivore">Omnivoor</string>
+    <string name="grade_pescetariar">Pescotariër (geen vlees, wel vis)</string>
+    <string name="grade_parttime_vegetarian">Parttime-vegetariër (minstens 3 keer per week vegetarisch)</string>
+    <string name="grade_vegatarian">Vegetariër (geen vlees of vis)</string>
+    <string name="grade_vegan">Veganist (geen dierlijke producten)</string>
 </resources>

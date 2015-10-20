@@ -15,6 +15,4 @@ public class EvaButton extends Button {
         super(context, attrs);
         setTypeface(FontManager.getInstance(context).MUSEO);
     }
-
-
 }

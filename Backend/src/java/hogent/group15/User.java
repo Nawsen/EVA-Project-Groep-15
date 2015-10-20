@@ -37,8 +37,7 @@ public class User implements Serializable {
     
     public enum VegetarianGrade {
 	
-	VEGAN, LACTO_VEGETARIAN, OVO_VEGETARIAN, LACTO_OVO_VEGETARIAN,
-	POLLOTARIAN, PESCATARIAN, FLEXITARIAN, UNKOWN
+	OMNIVORE, PESCETARIAR, PARTTIME_VEGETARIAN, VEGETARIAN, VEGAN, UNKNOWN
     }
     
     @Id
@@ -82,7 +81,6 @@ public class User implements Serializable {
     @Pattern(regexp = "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)", message = "imageUrl")
     private String imageUrl;
     
-    @NotNull(message = "birthdate")
     private LocalDate birthDate;
 
     public User() {

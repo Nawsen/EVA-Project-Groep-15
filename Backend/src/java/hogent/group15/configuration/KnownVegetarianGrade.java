@@ -31,7 +31,7 @@ public @interface KnownVegetarianGrade {
 
 	@Override
 	public boolean isValid(User.VegetarianGrade value, ConstraintValidatorContext context) {
-	    return value != User.VegetarianGrade.UNKOWN;
+	    return value != User.VegetarianGrade.UNKNOWN;
 	}
 	
     }
