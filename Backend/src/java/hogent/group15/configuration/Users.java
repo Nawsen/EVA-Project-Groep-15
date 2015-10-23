@@ -52,6 +52,5 @@ public class Users {
 		return Response.created(URI.create("/users/me")).build();
 	    }
 	}
-
     }
 }
