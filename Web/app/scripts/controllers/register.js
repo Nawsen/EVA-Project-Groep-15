@@ -5,7 +5,7 @@ angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', functio
     $scope.showHelpMail = false;
     $scope.showHelpPassword = false;
     $scope.showHelpRepeatPassword = false;
-
+    $scope.selectedTab = 'male';
     $scope.user = {
         email: "",
         password:"",
@@ -19,6 +19,13 @@ angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', functio
             return true;
         } else {
             console.log('false');
+            return false;
+        }
+    }
+    $scope.validForm = function () {
+        if ($scope.user.firstName != "" && $scope.user.lastName != "") {
+            return true
+        } else {
             return false;
         }
     }

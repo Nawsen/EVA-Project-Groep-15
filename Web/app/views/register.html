@@ -40,17 +40,18 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control eva-input" placeholder="Voornaam"/>
+                    <input type="text" class="form-control eva-input" placeholder="Voornaam" ng-model="user.firstName" />
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control eva-input" placeholder="Achternaam"/>
+                    <input type="text" class="form-control eva-input" placeholder="Achternaam" ng-model="user.lastName" />
                 </div>
 
                 <div class="form-group">
                     <div class="btn-group btn-group-justified" data-toggle="buttons">
+
                         <label class="btn col-md-6 form-control eva-input"
                                ng-class="{'radio-active':selectedTab === 'male'}" ng-click="selectedTab = 'male'">
-                            <input type="radio" name="gender" id="male" value="male"/> Man
+                            <input type="radio" name="gender" id="male" value="male" required/> Man
                         </label>
                         <label class="btn col-md-6 form-control eva-input no-left-border"
                                ng-class="{'radio-active':selectedTab === 'female'}" ng-click="selectedTab = 'female'">
@@ -59,17 +60,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control eva-input">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
+                    <select class="form-control eva-input" name="select" required>
+                        <option>Omnivoor</option>
+                        <option>Pescotariër (geen vlees, wel vis)</option>
+                        <option>Parttime-vegetariër (Minstens 3 keer per week vegetarisch)</option>
+                        <option>Vegetariër (geen vlees of vis)</option>
+                        <option>Veganist (geen dierlijke producten)</option>
                     </select>
                 </div>
 
                 <div class="form-group">
+
+                    <!--
                     <button class="btn btn-default form-control eva-submit" type="submit"
                             ng-disabled="!(registerForm.email.$valid && validPassword())">Registreer
+                    </button>-->
+                    <button class="btn btn-default form-control eva-submit" type="submit"
+                            ng-disabled="!(registerForm.email.$valid && validPassword() && validForm())">
+                        Registreer
                     </button>
                 </div>
             </form>
