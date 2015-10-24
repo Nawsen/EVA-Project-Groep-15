@@ -151,8 +151,14 @@ public class Users {
     @Path("{email}/{challengeID}/complete")
     @POST
     public Response completeDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
-        //TODO write accept code
-        
-        return Response.ok().build();
+        //if the challenge is user.currentchallenge then remove it & add to completedchallenge 
+        User user = em.find(User.class, email);
+        if (user.getCurrentChallenge().getId() == id){
+            user.getCompletedChallenges().add(user.getCurrentChallenge());
+            user.setCurrentChallenge(null);
+            return Response.ok().build();
+        }
+                
+        return Response.notAcceptable(null).build();
     }
 }
