@@ -1,9 +1,16 @@
 package hogent.group15.configuration;
 
+import hogent.group15.Challenge;
+import hogent.group15.ChallengeCache;
+import hogent.group15.DailyChallenges;
 import hogent.group15.User;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -12,6 +19,8 @@ import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -20,9 +29,9 @@ import javax.ws.rs.core.Response.Status;
 
 /**
  *
- * @author Frederik
+ * @author Frederik & Wannes
  */
-@Path("users")
+@Path("user")
 @Dependent
 public class Users {
 
@@ -31,25 +40,89 @@ public class Users {
 
     @Context
     private Validator validator;
-    
+
+    @Inject
+    private ChallengeCache cache;
+
     @Path("register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Transactional
     public Response register(User user) {
-	User dbUser = em.find(User.class, user.getEmail());
-	if (dbUser != null) {
-	    return Response.status(Response.Status.BAD_REQUEST).entity("used").build();
-	} else {
-	    Set<ConstraintViolation<User>> violations = validator.validate(user);
-	    if (!violations.isEmpty()) {
-		StringBuilder builder = new StringBuilder();
-		violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
-		throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
-	    } else {
-		em.persist(user);
-		return Response.created(URI.create("/users/me")).build();
-	    }
-	}
+        User dbUser = em.find(User.class, user.getEmail());
+        if (dbUser != null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("used").build();
+        } else {
+            Set<ConstraintViolation<User>> violations = validator.validate(user);
+            if (!violations.isEmpty()) {
+                StringBuilder builder = new StringBuilder();
+                violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
+                throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
+            } else {
+                em.persist(user);
+                return Response.created(URI.create("/users/me")).build();
+            }
+        }
+    }
+
+    @Path("login")
+    @Transactional
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response login(User user) {
+        User dbUser = em.find(User.class, user.getEmail());
+        if (dbUser != null && dbUser.getPassword() == user.getPassword()) {
+            //TODO implement jsonwebtoken
+            return Response.accepted().build();
+        } else {
+            return Response.notAcceptable(null).build();
+        }
+
+    }
+
+    @Path("{email}/completed")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Challenge> getCompletedChallenges(@PathParam("email") String email) {
+        User user = em.find(User.class, email);
+
+        return user.getCompletedChallenges();
+
+    }
+
+    @Path("{email}/daily")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Challenge> getDailyChallenges(@PathParam("email") String email) {
+        User user = em.find(User.class, email);
+        DailyChallenges ch = cache.createDailyChallenges(user);
+        return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
+    }
+    
+    @Path("{email}/{challengeID}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Challenge getChallengeDetails(@PathParam("email") String email, @PathParam("challengeID") int id){
+        //TODO write check code if user can view the details for that challenge
+        
+        //TODO write return code
+        return null;
+    }
+    
+    
+    @Path("{email}/{challengeID}/accept")
+    @POST
+    public Response acceptDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
+        //TODO write accept code
+        
+        return Response.ok().build();
+    }
+    @Path("{email}/{challengeID}/complete")
+    @POST
+    public Response completeDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
+        //TODO write accept code
+        
+        return Response.ok().build();
     }
 }

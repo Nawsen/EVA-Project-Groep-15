@@ -10,12 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQuery;
 
 /**
  *
  * @author Frederik
  */
 @Entity
+@NamedQuery(name = "Challenge.findAll", query = "SELECT c FROM Challenge c")
 public class Challenge implements Serializable {
 
     public enum Difficulty {

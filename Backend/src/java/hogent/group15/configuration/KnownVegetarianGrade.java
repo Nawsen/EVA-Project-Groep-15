@@ -8,7 +8,6 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import javax.validation.Payload;
 
 /**
  *
@@ -20,8 +19,6 @@ import javax.validation.Payload;
 public @interface KnownVegetarianGrade {
     
     String message() default "grade";
-    Class<?>[] groups() default {};
-   Class<? extends Payload>[] payload() default {};
 
     public static class KnownVegetarianGradeValidator implements ConstraintValidator<KnownVegetarianGrade, User.VegetarianGrade> {
 
