@@ -1,11 +1,16 @@
 package hogent.group15.configuration;
 
 import hogent.group15.Challenge;
+import hogent.group15.ChallengeCache;
+import hogent.group15.DailyChallenges;
 import hogent.group15.User;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -36,51 +41,63 @@ public class Users {
 
     @Context
     private Validator validator;
-    
+
+    @Inject
+    private ChallengeCache cache;
+
     @Path("register")
     @Transactional
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(User user) {
-	User dbUser = em.find(User.class, user.getEmail());
-	if (dbUser != null) {
-	    return Response.status(Response.Status.BAD_REQUEST).entity("used").build();
-	} else {
-	    Set<ConstraintViolation<User>> violations = validator.validate(user);
-	    if (!violations.isEmpty()) {
-		StringBuilder builder = new StringBuilder();
-		violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
-		throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
-	    } else {
-		em.persist(user);
-		return Response.created(URI.create("/users/me")).build();
-	    }
-	}
+        User dbUser = em.find(User.class, user.getEmail());
+        if (dbUser != null) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("used").build();
+        } else {
+            Set<ConstraintViolation<User>> violations = validator.validate(user);
+            if (!violations.isEmpty()) {
+                StringBuilder builder = new StringBuilder();
+                violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
+                throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
+            } else {
+                em.persist(user);
+                return Response.created(URI.create("/users/me")).build();
+            }
+        }
     }
+
     @Path("login")
     @Transactional
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(User user) {
-	User dbUser = em.find(User.class, user.getEmail());
-	if (dbUser != null && dbUser.getPassword()==user.getPassword()) {
+        User dbUser = em.find(User.class, user.getEmail());
+        if (dbUser != null && dbUser.getPassword() == user.getPassword()) {
             //TODO implement jsonwebtoken
             return Response.accepted().build();
-	} else {
+        } else {
             return Response.notAcceptable(null).build();
-	}
-	
+        }
+
     }
+
     @Path("{email}/completed")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Challenge> getCompletedChallenges(@PathParam("id") int id){
-        User user = em.find(User.class, id);
-        
-        
-        
+    public List<Challenge> getCompletedChallenges(@PathParam("email") String email) {
+        User user = em.find(User.class, email);
+
         return user.getCompletedChallenges();
-        
+
+    }
+
+    @Path("{email}/daily")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Challenge> getDailyChallenges(@PathParam("email") String email) {
+        User user = em.find(User.class, email);
+        DailyChallenges ch = cache.createDailyChallenges(user);
+        return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
     }
 }
