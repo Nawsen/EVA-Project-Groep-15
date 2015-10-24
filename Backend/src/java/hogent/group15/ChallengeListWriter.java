@@ -61,7 +61,6 @@ public class ChallengeListWriter implements MessageBodyWriter<List<Challenge>>{
             
             jsonCha.add("id", c.getId());
             jsonCha.add("title", c.getTitle());
-            jsonCha.add("description", c.getDescription());
             jsonCha.add("difficulty", c.getDifficulty().name());
             
             jsonChallenges.add(jsonCha);
