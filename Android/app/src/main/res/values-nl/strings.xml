@@ -40,4 +40,6 @@
     <string name="grade_parttime_vegetarian">Parttime-vegetariër (minstens 3 keer per week vegetarisch)</string>
     <string name="grade_vegatarian">Vegetariër (geen vlees of vis)</string>
     <string name="grade_vegan">Veganist (geen dierlijke producten)</string>
+    <string name="next">Volgende</string>
+    <string name="register_choose_password">Kies een wachtwoord</string>
 </resources>

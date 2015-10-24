@@ -1,11 +1,16 @@
 package hogent.group15.ui;
 
+import android.os.PersistableBundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,60 +20,43 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hogent.group15.Consumer;
 import hogent.group15.StringInterpolator;
 import hogent.group15.domain.Backend;
 import hogent.group15.domain.Sex;
 import hogent.group15.domain.VegetarianGrade;
+import hogent.group15.ui.fragments.RegisterMainFragment;
+import hogent.group15.ui.fragments.RegisterPasswordFragment;
 import hogent.group15.ui.util.ActionBarConfig;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    @Bind(R.id.register_firstName)
-    public TextView firstName;
+    private RegisterMainFragment mainFragment;
+    private RegisterPasswordFragment passwordFragment;
 
-    @Bind(R.id.register_lastName)
-    public TextView lastName;
-
-    @Bind(R.id.register_email)
-    public TextView email;
-
-    @Bind(R.id.register_sex)
-    public Spinner sex;
-
-    @Bind(R.id.register_password)
-    public TextView password;
-
-    @Bind(R.id.register_grade)
-    public Spinner grade;
-
-    private Map<String, Sex> sexMap = new HashMap<>();
-    private Map<String, VegetarianGrade> vegetarianGradeMap = new HashMap<>();
+    private static final String MAIN_FRAGMENT = "mainFragment";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        Spinner sex = (Spinner) findViewById(R.id.register_sex);
-        Spinner grade = (Spinner) findViewById(R.id.register_grade);
-
-        for (Sex s : Sex.values()) {
-            sexMap.put(getString(s.getAndroidId()), s);
+        if (savedInstanceState == null) {
+            mainFragment = new RegisterMainFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mainFragment).commit();
+        } else {
+            mainFragment = (RegisterMainFragment) getSupportFragmentManager().getFragment(savedInstanceState, MAIN_FRAGMENT);
         }
 
-        for (VegetarianGrade g : VegetarianGrade.values()) {
-            vegetarianGradeMap.put(getString(g.getAndroidId()), g);
-        }
+        ButterKnife.bind(this);
+    }
 
-        ArrayAdapter<String> sexAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<>(sexMap.keySet()));
-        sexAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        sex.setAdapter(sexAdapter);
-
-        ArrayAdapter<String> gradeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, new ArrayList<>(vegetarianGradeMap.keySet()));
-        gradeAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-        grade.setAdapter(gradeAdapter);
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+        getSupportFragmentManager().putFragment(outState, MAIN_FRAGMENT, mainFragment);
     }
 
     @Override
@@ -76,15 +64,31 @@ public class RegisterActivity extends AppCompatActivity {
         return ActionBarConfig.onCreateOptionsMenu(menu, this);
     }
 
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if (fragment instanceof RegisterMainFragment) {
+            mainFragment = (RegisterMainFragment) fragment;
+        }
+    }
+
+    @Bind(R.id.register_submit)
+    public Button registerButton;
+
     @OnClick(R.id.register_submit)
     public void onRegister(Button registerButton) {
-        Toast.makeText(this, "Clicked", Toast.LENGTH_SHORT);
-        Backend.getBackend().registerUser(firstName.getText(), lastName.getText(), email.getText(), sexMap.get(sex.getSelectedItem()), password.getText(),vegetarianGradeMap.get(grade.getSelectedItem()), new Consumer<String>() {
+        if (passwordFragment == null) {
+            passwordFragment = new RegisterPasswordFragment();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, passwordFragment)
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).commit();
+            registerButton.setText(R.string.register_register_button);
+        }
+
+        /*Backend.getBackend().registerUser(mainFragment.firstName.getText(), mainFragment.lastName.getText(), mainFragment.email.getText(), mainFragment.getSelectedSex(), mainFragment.password.getText(),mainFragment.getSelectedGrade(), new Consumer<String>() {
 
             @Override
             public void consume(String s) {
                 Log.i("REGISTRATION", "Result: " + s);
             }
-        });
+        });*/
     }
 }

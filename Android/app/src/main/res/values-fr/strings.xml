@@ -40,4 +40,6 @@
     <string name="grade_parttime_vegetarian">Végétarien à temps partiel (au moins 3 fois par semaine un repas végétarien)</string>
     <string name="grade_vegatarian">Végétarien (pas de viande ou poisson)</string>
     <string name="grade_vegan">Végan (pas de produits animals)</string>
+    <string name="next">Suivant</string>
+    <string name="register_choose_password">Donner un mot de passe</string>
 </resources>
