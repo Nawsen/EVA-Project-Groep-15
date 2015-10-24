@@ -106,12 +106,12 @@ public class Users {
     @Produces(MediaType.APPLICATION_JSON)
     public Challenge getChallengeDetails(@PathParam("email") String email, @PathParam("challengeID") int id){
         User user = em.find(User.class, email);
-        Challenge challenge = cache.checkIfUserHasChallenge(user, id);
+        Challenge challenge = cache.doesUserHasChallenge(user, id);
         
         if (challenge !=null){
             return challenge;
         } else {
-            //challenge info mag niet gevraagd worden door user
+            //challenge info mag niet gevraagd worden door user (beter errorcode hier??)
             return null;
         }
     }
@@ -127,9 +127,26 @@ public class Users {
     @Path("{email}/{challengeID}/accept")
     @POST
     public Response acceptDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
-        //TODO write accept code
+        User user = em.find(User.class, email);
         
-        return Response.ok().build();
+        //check if user has active challenge
+        if (user.getCurrentChallenge().getId()==id){
+            return Response.notAcceptable(null).build();
+        }
+        if (user.getDailyChallenges().getFirst().getId() == id) {
+            user.setCurrentChallenge(user.getDailyChallenges().getFirst());
+            return Response.ok().build();
+        }
+        if (user.getDailyChallenges().getSecond().getId() == id) {
+            user.setCurrentChallenge(user.getDailyChallenges().getSecond());
+            return Response.ok().build();
+        }
+        if (user.getDailyChallenges().getThird().getId() == id) {
+            user.setCurrentChallenge(user.getDailyChallenges().getThird());
+            return Response.ok().build();
+        }
+        
+        return Response.notAcceptable(null).build();
     }
     @Path("{email}/{challengeID}/complete")
     @POST

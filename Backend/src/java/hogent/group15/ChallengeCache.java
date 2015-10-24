@@ -25,6 +25,14 @@ public class ChallengeCache {
 
     public ChallengeCache() {
         allChallenges = em.createNamedQuery("Challenge.findAll", Challenge.class).getResultList();
+        //Some demo challenges
+        String besch = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. "
+                + "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+                + "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. "
+                + "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+        allChallenges.add(new Challenge("Maak eens een volledig groen gerechtje", besch , "/demourl.jpg", Challenge.Difficulty.EASY));
+        allChallenges.add(new Challenge("Ga eens naar een restaurant", besch , "/demourl.jpg", Challenge.Difficulty.HARD));
+        allChallenges.add(new Challenge("kom eens naar een kookevent", besch , "/demourl.jpg", Challenge.Difficulty.MEDIUM));
     }
 
     public DailyChallenges createDailyChallenges(User user) {
@@ -43,7 +51,7 @@ public class ChallengeCache {
         return user.getDailyChallenges();
     }
 
-    public Challenge checkIfUserHasChallenge(User user, int id) {
+    public Challenge doesUserHasChallenge(User user, int id) {
         //Check first for dailychallenges as this will be the most commonly used
         if (user.getDailyChallenges().getFirst().getId() == id) {
             return user.getDailyChallenges().getFirst();
