@@ -105,10 +105,22 @@ public class Users {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Challenge getChallengeDetails(@PathParam("email") String email, @PathParam("challengeID") int id){
-        //TODO write check code if user can view the details for that challenge
+        User user = em.find(User.class, email);
+        Challenge challenge = cache.checkIfUserHasChallenge(user, id);
         
-        //TODO write return code
-        return null;
+        if (challenge !=null){
+            return challenge;
+        } else {
+            //challenge info mag niet gevraagd worden door user
+            return null;
+        }
+    }
+    @Path("{email}/accepted")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Challenge getAcceptedChallenge(@PathParam("email") String email){
+        User user = em.find(User.class, email);
+        return user.getCurrentChallenge();
     }
     
     
