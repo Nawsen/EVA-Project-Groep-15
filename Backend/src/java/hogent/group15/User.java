@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
+import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -70,7 +71,7 @@ public class User implements Serializable {
     @KnownVegetarianGrade
     private VegetarianGrade grade;
     
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Challenge currentChallenge;
     
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
@@ -84,7 +85,7 @@ public class User implements Serializable {
     
     private LocalDate birthDate;
     
-    @OneToOne
+    @OneToOne(cascade = { CascadeType.PERSIST, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;
 
     public User() {

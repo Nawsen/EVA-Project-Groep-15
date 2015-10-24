@@ -10,27 +10,22 @@
             <minimum-ant-version>1.6.5</minimum-ant-version>
             <web-module-libraries>
                 <library dirs="200">
-<<<<<<< HEAD
-                    <file>${file.reference.jjwt-0.6.0.jar}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${libs.javaee-api-7.0.classpath}</file>
-=======
                     <file>${libs.javaee-api-7.0.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${file.reference.jjwt-0.6.0.jar}</file>
->>>>>>> f014ed0cd5ee167e2e2967205bb02fc66b1f47ca
+                    <path-in-war>WEB-INF/lib</path-in-war>
+                </library>
+                <library dirs="200">
+                    <file>${&gt;&gt;&gt;&gt;&gt;&gt;&gt; f014ed0cd5ee167e2e2967205bb02fc66b1f47ca}</file>
+                </library>
+                <library dirs="200">
+                    <file>${libs.eclipselink.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
                 <library dirs="200">
                     <file>${libs.MySQLDriver.classpath}</file>
-                    <path-in-war>WEB-INF/lib</path-in-war>
-                </library>
-                <library dirs="200">
-                    <file>${libs.eclipselink.classpath}</file>
                     <path-in-war>WEB-INF/lib</path-in-war>
                 </library>
             </web-module-libraries>
@@ -38,13 +33,9 @@
             <source-roots>
                 <root id="src.dir" name="Source Packages"/>
             </source-roots>
-<<<<<<< HEAD
-            <test-roots/>
-=======
             <test-roots>
                 <root id="test.src.dir" name="Test Packages"/>
             </test-roots>
->>>>>>> f014ed0cd5ee167e2e2967205bb02fc66b1f47ca
         </data>
     </configuration>
 </project>

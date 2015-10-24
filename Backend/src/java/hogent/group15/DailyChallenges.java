@@ -6,11 +6,12 @@
 package hogent.group15;
 
 import java.time.LocalDate;
-import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -25,9 +26,13 @@ public class DailyChallenges {
     @GeneratedValue(strategy =GenerationType.AUTO)
     private int id;
     
-    
+    @ManyToOne
     private Challenge first;
+    
+    @ManyToOne
     private Challenge second;
+    
+    @ManyToOne
     private Challenge third;
     
     private LocalDate date;

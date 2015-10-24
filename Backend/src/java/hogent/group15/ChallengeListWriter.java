@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.json.Json;
 import javax.json.JsonArray;
@@ -53,15 +54,15 @@ public class ChallengeListWriter implements MessageBodyWriter<List<Challenge>>{
 
     @Override
     public void writeTo(List<Challenge> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-        
         JsonArrayBuilder jsonChallenges = Json.createArrayBuilder();
         
-        for (Challenge c :t){
+        for (Challenge c : t){
             JsonObjectBuilder jsonCha = Json.createObjectBuilder();
             
             jsonCha.add("id", c.getId());
             jsonCha.add("title", c.getTitle());
             jsonCha.add("difficulty", c.getDifficulty().name());
+	    jsonCha.add("imageUrl", c.getImageUrl());
             
             jsonChallenges.add(jsonCha);
         }
