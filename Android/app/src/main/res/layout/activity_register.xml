@@ -23,7 +23,7 @@
             style="@style/evaButtonGreen" android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/register_register_button"
+            android:hint="@string/next"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
     </RelativeLayout>

@@ -16,12 +16,12 @@ public class LocalDateConverter implements AttributeConverter<LocalDate, Date> {
 
     @Override
     public Date convertToDatabaseColumn(LocalDate attribute) {
-	return Date.from(attribute.atStartOfDay().toInstant(ZoneOffset.UTC));
+	return attribute == null ? null : Date.from(attribute.atStartOfDay().toInstant(ZoneOffset.UTC));
     }
 
     @Override
     public LocalDate convertToEntityAttribute(Date dbData) {
-	return LocalDate.from(dbData.toInstant());
+	return dbData == null ? null : LocalDate.from(dbData.toInstant());
     }
 
 }

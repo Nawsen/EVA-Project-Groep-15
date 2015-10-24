@@ -1,5 +1,6 @@
 package hogent.group15.ui;
 
+import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -33,10 +34,16 @@ import hogent.group15.ui.util.ActionBarConfig;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    private enum Mode {
+        MAIN, PASSWORD
+    }
+
     private RegisterMainFragment mainFragment;
     private RegisterPasswordFragment passwordFragment;
 
     private static final String MAIN_FRAGMENT = "mainFragment";
+
+    private Mode currentMode = Mode.MAIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,24 +78,40 @@ public class RegisterActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        if (currentMode == Mode.PASSWORD) {
+            registerButton.setText(R.string.next);
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mainFragment)
+                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).commit();
+            currentMode = Mode.MAIN;
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     @Bind(R.id.register_submit)
     public Button registerButton;
 
     @OnClick(R.id.register_submit)
     public void onRegister(Button registerButton) {
-        if (passwordFragment == null) {
-            passwordFragment = new RegisterPasswordFragment();
+        if (currentMode == Mode.MAIN && mainFragment.validate()) {
+            if (passwordFragment == null) {
+                passwordFragment = new RegisterPasswordFragment();
+            }
+
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, passwordFragment)
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).commit();
             registerButton.setText(R.string.register_register_button);
+            currentMode = Mode.PASSWORD;
+        } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
+            Backend.getBackend().registerUser(mainFragment.firstName.getText(), mainFragment.lastName.getText(), mainFragment.email.getText(), mainFragment.getSelectedSex(), passwordFragment.getPassword(), mainFragment.getSelectedGrade(), new Consumer<String>() {
+
+                @Override
+                public void consume(String s) {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
+                }
+            });
         }
-
-        /*Backend.getBackend().registerUser(mainFragment.firstName.getText(), mainFragment.lastName.getText(), mainFragment.email.getText(), mainFragment.getSelectedSex(), mainFragment.password.getText(),mainFragment.getSelectedGrade(), new Consumer<String>() {
-
-            @Override
-            public void consume(String s) {
-                Log.i("REGISTRATION", "Result: " + s);
-            }
-        });*/
     }
 }

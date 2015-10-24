@@ -61,7 +61,7 @@
                 android:textStyle="normal" />
 
             <TextView
-                style="@style/hyperlink"
+                style="@style/hyperlink" android:id="@+id/login_register"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="3dp"
@@ -75,21 +75,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:orientation="horizontal">
-
-            <com.facebook.login.widget.LoginButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical|start" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:text="@string/login_or"
-                android:textSize="24dp" />
+            android:orientation="vertical">
 
             <hogent.group15.ui.controls.EvaButton
                 style="@style/evaButtonGray"
@@ -102,7 +88,10 @@
                 android:paddingRight="20dp"
                 android:text="@string/login_button" />
 
-
+            <com.facebook.login.widget.LoginButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|start" />
         </LinearLayout>
 
 

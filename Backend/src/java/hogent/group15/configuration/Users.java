@@ -10,7 +10,6 @@ import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.WebApplicationException;
@@ -34,9 +33,9 @@ public class Users {
     private Validator validator;
     
     @Path("register")
-    @Transactional
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
+    @Transactional
     public Response register(User user) {
 	User dbUser = em.find(User.class, user.getEmail());
 	if (dbUser != null) {

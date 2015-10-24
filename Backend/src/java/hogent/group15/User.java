@@ -78,7 +78,7 @@ public class User implements Serializable {
     @Lob
     private byte[] salt = new byte[32];
     
-    @Pattern(regexp = "[(http(s)?):\\/\\/(www\\.)?a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&//=]*)", message = "imageUrl")
+    @Pattern(regexp = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$", message = "imageUrl")
     private String imageUrl;
     
     private LocalDate birthDate;

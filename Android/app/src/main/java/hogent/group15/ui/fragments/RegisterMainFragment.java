@@ -3,6 +3,7 @@ package hogent.group15.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
+import hogent.group15.Validator;
 import hogent.group15.domain.Sex;
 import hogent.group15.domain.VegetarianGrade;
 import hogent.group15.ui.R;
@@ -22,7 +25,7 @@ import hogent.group15.ui.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegisterMainFragment extends Fragment {
+public class RegisterMainFragment extends Fragment implements Validator {
 
     @Bind(R.id.register_firstName)
     public TextView firstName;
@@ -35,9 +38,6 @@ public class RegisterMainFragment extends Fragment {
 
     @Bind(R.id.register_sex)
     public Spinner sex;
-
-    @Bind(R.id.register_password)
-    public TextView password;
 
     @Bind(R.id.register_grade)
     public Spinner grade;
@@ -83,5 +83,23 @@ public class RegisterMainFragment extends Fragment {
         ArrayAdapter<String> gradeAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, new ArrayList<>(vegetarianGradeMap.keySet()));
         gradeAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         grade.setAdapter(gradeAdapter);
+        ButterKnife.bind(this, getView());
+    }
+
+    @Override
+    public boolean validate() {
+        boolean valid = true;
+        if (firstName.getText().toString().trim().isEmpty()) {
+            firstName.setError(getString(R.string.validation_submit_name));
+            valid = false;
+        } if (lastName.getText().toString().trim().isEmpty()) {
+            lastName.setError(getString(R.string.validation_submit_name));
+            valid = false;
+        } if (!Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()) {
+            email.setError(getString(R.string.validation_submit_email));
+            valid = false;
+        }
+
+        return valid;
     }
 }

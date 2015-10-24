@@ -42,4 +42,8 @@
     <string name="grade_vegan">Veganist (geen dierlijke producten)</string>
     <string name="next">Volgende</string>
     <string name="register_choose_password">Kies een wachtwoord</string>
+    <string name="validation_submit_name">Gelieve uw naam in te vullen</string>
+    <string name="validation_submit_email">Gelieve uw e-mail in te vullen</string>
+    <string name="validation_password_size">Het wachtwoord moet minstens 7 tekens zijn</string>
+    <string name="validation_password_repeat">De wachtwoorden komen niet overeen</string>
 </resources>

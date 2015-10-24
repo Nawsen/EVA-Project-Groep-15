@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -23,16 +24,12 @@ import hogent.group15.Consumer;
  */
 public class Backend {
 
-    private URL backendServerUri;
+    private URI backendServerUri;
     private static Backend backend;
     private final static String TAG = "BACKEND";
 
     private Backend() {
-        try {
-            backendServerUri = URI.create("http://localhost:8080/Backend/api").toURL();
-        } catch (MalformedURLException e) {
-            Log.e(TAG, "Server URI is malformed");
-        }
+        backendServerUri = URI.create("http://192.168.0.252:8080/backend/api/");
     }
 
     public static Backend getBackend() {
@@ -48,14 +45,19 @@ public class Backend {
             @Override
             protected String doInBackground(Void... params) {
                 try {
-                    URLConnection connection = backendServerUri.openConnection();
+                    HttpURLConnection connection = (HttpURLConnection) backendServerUri.resolve("users/register").toURL().openConnection();
+                    connection.addRequestProperty("Content-Type", "application/json");
+                    connection.setRequestMethod("POST");
+                    connection.setDoInput(true);
+                    connection.setDoOutput(true);
+
                     PrintWriter out = new PrintWriter(connection.getOutputStream());
 
                     JSONObject user = new JSONObject();
                     user.put("firstName", firstName);
                     user.put("lastName", lastName);
                     user.put("email", email);
-                    user.put("sex", sex.asInt());
+                    user.put("gender", sex.asInt());
                     user.put("password", password);
                     user.put("grade", grade.toString());
                     out.println(user.toString());
@@ -73,7 +75,7 @@ public class Backend {
                     Log.e(TAG, "Couldn't create JSON: " + e.getMessage());
                     return "json";
                 } catch (IOException ioex) {
-                    return "unknown";
+                    return "io{" + ioex.getMessage() + "}";
                 }
             }
 

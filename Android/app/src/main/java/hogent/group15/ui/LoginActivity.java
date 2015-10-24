@@ -13,18 +13,27 @@ import android.widget.EditText;
 import com.facebook.FacebookSdk;
 
 import butterknife.Bind;
+import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hogent.group15.ui.controls.EvaButton;
 import hogent.group15.ui.util.ActionBarConfig;
 
 public class LoginActivity extends AppCompatActivity {
 
+    @Bind(R.id.login_email)
+    public EditText email;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
-        startActivity(new Intent(this, RegisterActivity.class));
+        ButterKnife.bind(this);
+
+        if (getIntent() != null) {
+            String username = getIntent().getStringExtra("username");
+            email.setText(username);
+        }
     }
 
     public void onLogin(View v) {
@@ -34,5 +43,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return ActionBarConfig.onCreateOptionsMenu(menu, this, R.id.item_logout);
+    }
+
+    @OnClick(R.id.login_register)
+    public void onRegister(View v) {
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 }

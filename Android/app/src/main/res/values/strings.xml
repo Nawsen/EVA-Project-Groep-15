@@ -44,4 +44,8 @@
 
     <string name="next">Next</string>
     <string name="register_choose_password">Choose a password</string>
+    <string name="validation_submit_name">Please enter your name</string>
+    <string name="validation_submit_email">Please enter your email</string>
+    <string name="validation_password_size">Password must be at least 7 characters</string>
+    <string name="validation_password_repeat">Passwords are not the same</string>
 </resources>
