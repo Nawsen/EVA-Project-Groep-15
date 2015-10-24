@@ -25,6 +25,7 @@ public class DailyChallenges {
     @GeneratedValue(strategy =GenerationType.AUTO)
     private int id;
     
+    
     private Challenge first;
     private Challenge second;
     private Challenge third;

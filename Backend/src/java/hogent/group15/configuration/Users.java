@@ -100,4 +100,30 @@ public class Users {
         DailyChallenges ch = cache.createDailyChallenges(user);
         return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
     }
+    
+    @Path("{email}/{challengeID}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Challenge getChallengeDetails(@PathParam("email") String email, @PathParam("challengeID") int id){
+        //TODO write check code if user can view the details for that challenge
+        
+        //TODO write return code
+        return null;
+    }
+    
+    
+    @Path("{email}/{challengeID}/accept")
+    @POST
+    public Response acceptDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
+        //TODO write accept code
+        
+        return Response.ok().build();
+    }
+    @Path("{email}/{challengeID}/complete")
+    @POST
+    public Response completeDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
+        //TODO write accept code
+        
+        return Response.ok().build();
+    }
 }
