@@ -104,25 +104,60 @@ public class Users {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Challenge getChallengeDetails(@PathParam("email") String email, @PathParam("challengeID") int id){
-        //TODO write check code if user can view the details for that challenge
+        User user = em.find(User.class, email);
+        Challenge challenge = cache.doesUserHasChallenge(user, id);
         
-        //TODO write return code
-        return null;
+        if (challenge !=null){
+            return challenge;
+        } else {
+            //challenge info mag niet gevraagd worden door user (beter errorcode hier??)
+            return null;
+        }
+    }
+    @Path("{email}/accepted")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Challenge getAcceptedChallenge(@PathParam("email") String email){
+        User user = em.find(User.class, email);
+        return user.getCurrentChallenge();
     }
     
     
     @Path("{email}/{challengeID}/accept")
     @POST
     public Response acceptDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
-        //TODO write accept code
+        User user = em.find(User.class, email);
         
-        return Response.ok().build();
+        //check if user has active challenge
+        if (user.getCurrentChallenge().getId()==id){
+            return Response.notAcceptable(null).build();
+        }
+        if (user.getDailyChallenges().getFirst().getId() == id) {
+            user.setCurrentChallenge(user.getDailyChallenges().getFirst());
+            return Response.ok().build();
+        }
+        if (user.getDailyChallenges().getSecond().getId() == id) {
+            user.setCurrentChallenge(user.getDailyChallenges().getSecond());
+            return Response.ok().build();
+        }
+        if (user.getDailyChallenges().getThird().getId() == id) {
+            user.setCurrentChallenge(user.getDailyChallenges().getThird());
+            return Response.ok().build();
+        }
+        
+        return Response.notAcceptable(null).build();
     }
     @Path("{email}/{challengeID}/complete")
     @POST
     public Response completeDailyChallenge(@PathParam("email") String email, @PathParam("challengeID") int id){
-        //TODO write accept code
-        
-        return Response.ok().build();
+        //if the challenge is user.currentchallenge then remove it & add to completedchallenge 
+        User user = em.find(User.class, email);
+        if (user.getCurrentChallenge().getId() == id){
+            user.getCompletedChallenges().add(user.getCurrentChallenge());
+            user.setCurrentChallenge(null);
+            return Response.ok().build();
+        }
+                
+        return Response.notAcceptable(null).build();
     }
 }
