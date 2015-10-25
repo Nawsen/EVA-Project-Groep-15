@@ -50,4 +50,7 @@
     <string name="ongoing_challenges">Lopende uitdagingen</string>
     <string name="completed_challenges">Voltooide uitdagingen</string>
     <string name="achievements">Prestaties</string>
+    <string name="network_error">Kan niet verbinden met het internet!</string>
+    <string name="wrong_credentials">Verkeerd wachtwoord of email!</string>
+    <string name="validation_password">Gelieve uw wachtwoord in te vullen</string>
 </resources>

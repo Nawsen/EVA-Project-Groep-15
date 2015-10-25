@@ -53,4 +53,7 @@
     <string name="ongoing_challenges">Ongoing challenges</string>
     <string name="completed_challenges">Completed challenges</string>
     <string name="achievements">Achievements</string>
+    <string name="network_error">Unable to connect to the internet!</string>
+    <string name="wrong_credentials">Incorrect email or password!</string>
+    <string name="validation_password">Fill in your password</string>
 </resources>

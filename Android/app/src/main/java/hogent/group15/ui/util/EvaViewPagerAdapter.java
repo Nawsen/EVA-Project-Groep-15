@@ -6,9 +6,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import hogent.group15.ui.R;
-import hogent.group15.ui.pages.AchievementsFragment;
-import hogent.group15.ui.pages.CompletedChallengesFragment;
-import hogent.group15.ui.pages.OngoingChallengesFragment;
+import hogent.group15.ui.fragments.AchievementsFragment;
+import hogent.group15.ui.fragments.CompletedChallengesFragment;
+import hogent.group15.ui.fragments.OngoingChallengesFragment;
 
 /**
  * Created by Brent on 10/24/2015.

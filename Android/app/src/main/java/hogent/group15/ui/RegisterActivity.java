@@ -16,6 +16,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +27,7 @@ import butterknife.OnClick;
 import hogent.group15.Consumer;
 import hogent.group15.StringInterpolator;
 import hogent.group15.domain.Backend;
+import hogent.group15.domain.OnNetworkResponseListener;
 import hogent.group15.domain.Sex;
 import hogent.group15.domain.VegetarianGrade;
 import hogent.group15.ui.fragments.RegisterMainFragment;
@@ -105,12 +107,24 @@ public class RegisterActivity extends AppCompatActivity {
             registerButton.setText(R.string.register_register_button);
             currentMode = Mode.PASSWORD;
         } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
-            Backend.getBackend().registerUser(mainFragment.firstName.getText(), mainFragment.lastName.getText(), mainFragment.email.getText(), mainFragment.getSelectedSex(), passwordFragment.getPassword(), mainFragment.getSelectedGrade(), new Consumer<String>() {
+            Backend.getBackend().registerUser(mainFragment.firstName.getText(), mainFragment.lastName.getText(), mainFragment.email.getText(), mainFragment.getSelectedSex(),
+                    passwordFragment.getPassword(), mainFragment.getSelectedGrade(), new OnNetworkResponseListener<String, IOException>() {
 
-                @Override
-                public void consume(String s) {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
-                }
+                        @Override
+                        public void onResponse(String data) {
+                            startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
+                        }
+
+                        @Override
+                        public void onError(IOException ex) {
+                            runOnUiThread(new Runnable() {
+
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
             });
         }
     }

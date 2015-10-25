@@ -1,4 +1,4 @@
-package hogent.group15.ui.pages;
+package hogent.group15.ui.fragments;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import hogent.group15.ui.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompletedChallengesFragment extends Fragment {
+public class AchievementsFragment extends Fragment {
 
 
-    public CompletedChallengesFragment() {
+    public AchievementsFragment() {
         // Required empty public constructor
     }
 
@@ -24,7 +24,7 @@ public class CompletedChallengesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_completed_challenges, container, false);
+        return inflater.inflate(R.layout.fragment_achievements, container, false);
     }
 
 
