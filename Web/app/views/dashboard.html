@@ -1,4 +1,5 @@
-<div class="dashboard-page">
+<div id="wrapper">
+    <!--
     <div class="col-lg-2 col-sm-3 sidebar">
         <div class="text-center eva-dash-logo">
             <img src="images/eva-logo.png"/>
@@ -12,93 +13,122 @@
             <li><a>Admin tools</a></li>
         </ul>
     </div>
+    -->
+    <div id="nav">
+        <div class="user-info">
+            <h1>Eva</h1>
+            <img src="{{user.avatar}}" class="user-avatar">
+            <h2>Welcome <small>{{user.firstname}}</small></h2>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Overview</a></li>
+                <li><a href="#" class="active">Challenges</a></li>
+                <li><a href="#">Admin tools</a></li>
+            </ul>
+        </nav>
+    </div>
+
     <!-- CONTENT STARTS HERE -->
-    <div class="col-lg-8 col-lg-offset-3">
+    <div id="main">
         <!-- PROGRESSBAR -->
-        <div>
-            <h3>Progress</h3>
-            <div> <!-- Outer Progressbar-->
-                <div><!-- Inner Progressbar-->
+        <div id="progressbar">
+            <div>
+                <h3>Progress</h3>
+                <div> <!-- Outer Progressbar-->
+                    <div><!-- Inner Progressbar-->
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- CHALLENGES -->
-        <div>
-            <article>
-                <h4>Title</h4>
-                <p>description</p>
-            </article>
-            <article>
-                <h4>Title</h4>
-                <p>description</p>
-            </article>
-            <article>
-                <h4>Title</h4>
-                <p>description</p>
-            </article>
+        <div class="banner">
+            <h3 class="challenge-title">Kies een uitdaging:</h3>
+            <div id="challenges">
+                <article class="challenge">
+                    <div class="pompoensoep">
+                        <p>Maak een soepje klaar met een veel te lange titel om te kijken wat er juist gebeurt.</p>
+                    </div>
+                </article>
+                <article class="challenge">
+                    <div class="knolselder">
+                        <p>Maak nog een ander soepje klaar</p>
+                    </div>
+                </article>
+                <article class="challenge">
+                    <div class="pompoenstoof">
+                        <p>Ga eens op restaurant</p>
+                    </div>
+                </article>
+            </div>
         </div>
 
-        <!-- STATS -->
-        <div>
-            <div>
-                <div>Chart</div>
-                <div>
-                    <ul>
-                        <li>Hard challenge</li>
-                        <li>Medium challenge</li>
-                        <li>Easy challenge</li>
-                    </ul>
-                </div>
-            </div>
 
-            <div>
-                <h4>Latest achievements</h4>
+        <!-- STATS -->
+        <div class="banner-wrap">
+            <div id="stats">
                 <div>
-                    <img src="#" alt="badge" />
-                    <div>
-                        <h5>Achievement title</h5>
+                    <div class="graph"></div>
+                    <div class="legend">
+                        <ul>
+                            <li class="hard">Hard challenge</li>
+                            <li class="medium">Medium challenge</li>
+                            <li class="easy">Easy challenge</li>
+                        </ul>
                     </div>
                 </div>
-            </div>
 
-            <div>
-                <h4>Latest achievements</h4>
-                <div>
-                    <img src="#" alt="badge" />
-                    <div>
-                        <h5>Achievement title</h5>
+                <div id="latest-achievements">
+                    <h4>Latest achievements</h4>
+
+                    <div class="latest-achievement-badge">
+                        <div class="badge badge-easy"></div>
+                        <div>
+                            <h5>Achievement title</h5>
+                        </div>
+                    </div>
+
+                    <div class="latest-achievement-badge">
+                        <div class="badge badge-medium"></div>
+                        <div>
+                            <h5>Achievement title</h5>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- ALL ACHIEVEMENTS -->
-        <div>
-            <!-- ACHIEVEMENT 1 -->
-            <div>
-                <img src="#" alt="Badge" />
-                <div>
-                    <h5>Achievement title</h5>
-                    <p>Achievement description</p>
-                </div>
-            </div>
+        <div id="achievements">
+            <h4>All Achievements</h4>
+            <div id="achievement-box">
 
-            <!-- ACHIEVEMENT 2 -->
-            <div>
-                <img src="#" alt="Badge" />
-                <div>
-                    <h5>Achievement title</h5>
-                    <p>Achievement description</p>
+                <!-- ACHIEVEMENT 1 -->
+                <div class="achievement">
+                    <div class="badge badge-easy"></div>
+                    <div class="achievement-image temp-pompoensoep">
+                        <h5>Achievement title</h5>
+                        <p>Achievement description that is waay to long to see what happens on big descriptions</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- ACHIEVEMENT 3 -->
-            <div>
-                <img src="#" alt="Badge" />
-                <div>
-                    <h5>Achievement title</h5>
-                    <p>Achievement description</p>
+                <!-- ACHIEVEMENT 2 -->
+                <div class="achievement">
+                    <div class="badge badge-medium"></div>
+                    <div class="achievement-image temp-seldersoep">
+                        <h5>This achievement title is long enough to reach the edge</h5>
+                        <p>Achievement description</p>
+                    </div>
+                </div>
+
+                <!-- ACHIEVEMENT 3 -->
+                <div class="achievement">
+                    <div class="badge badge-hard"></div>
+                    <div class="achievement-image temp-resto">
+                        <h5>Do 3 backflips in succession</h5>
+                        <p>Do 3x a backflip and to show of do a 360° noscope headshot at the end</p>
+                    </div>
                 </div>
             </div>
         </div>

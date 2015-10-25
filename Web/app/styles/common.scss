@@ -1,0 +1,507 @@
+@import "colors";
+@import "fonts";
+
+// Bootstrap Overrides
+.override {
+  padding: 0;
+  border: none;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  body: 0;
+}
+
+/*** WRAPPER ***/
+
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+
+  height: 100%;
+
+  #nav {
+    background: url("../images/resources/blackboard_menu.jpg"), no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 250px;
+    position: fixed;
+
+    .user-info {
+      img {
+        display: block;
+        margin: 15px auto;
+      }
+      h2 {
+        color: $white;
+        font-family: Artistamp, sans-serif;
+        small {
+          font-family: Museo300, sans-serif;
+          color: $lightGreen;
+        }
+      }
+    }
+
+    nav {
+      ul {
+        list-style: none;
+        padding: 0;
+        li {
+          margin: 0 0 10px 0;
+          a {
+            display: block;
+            color: $white;
+            font-family: Museo300, sans-serif;
+            font-size: 16px;
+            text-decoration: none;
+
+            border: 1px solid rgba($black, 0);
+            padding: 15px 0 15px 30px;
+
+
+            &:hover {
+              background: rgba($white, 0.1);
+
+              color: $lightGreen;
+              border-top: 1px solid rgba($white, 0.1);
+              border-bottom: 1px solid rgba($white, 0.1);
+            }
+
+            &.active {
+              background: rgba($white, 0.1);
+
+              color: $lightGreen;
+              border-top: 1px solid rgba($white, 0.1);
+              border-bottom: 1px solid rgba($white, 0.1);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  #main {
+    position: absolute;
+    left: 250px;
+  }
+}
+
+/*** Image replacing ***/
+h1 {
+  display: block;
+  background: url("../images/eva-logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 82px;
+  width: 132px;
+  text-indent: -100%;
+  margin: 10px auto 0 auto;
+}
+
+/*** PROGRESSBAR ***/
+
+#progressbar {
+  display: block;
+  width: 100%;
+  background: url("../images/resources/bg_pattern_chalkboard_green.jpg");
+  background-size: cover;
+  padding: 10px 0 20px;
+
+  div {
+    width: 95%;
+    margin: 0 auto;
+    h3 {
+      font-family: Museo300, sans-serif;
+      font-size: 18px;
+      margin: 0;
+      color: $white;
+    }
+
+    div {
+      display: block;
+      background: $mediumGreen;
+      height: 10px;
+      width: 100%;
+      div {
+        background: $orange;
+        margin: 0;
+        //Temp style
+        width: 40%;
+      }
+    }
+  }
+}
+
+/*** CHALLENGES ***/
+
+.challenge-title {
+  font-family: Artistamp, sans-serif;
+  font-size: 32px;
+  text-align: center;
+  padding: 20px 0 0 0;
+}
+
+
+// FLEX CONFIG FOR CHALLENGES
+.banner {
+  margin: 3% 0;
+}
+
+#challenges {
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  width: 95%;
+  margin: 0 auto;
+  padding: 30px 0 70px;
+
+  article {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: flex-start;
+    box-sizing: border-box;
+    margin-left: 1%;
+    max-width: 32%;
+
+    &:first-of-type {
+      margin-left: 0;
+    }
+  }
+
+  // LOOK & FEEL
+  .challenge {
+    background: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
+    background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 10%;
+
+    div {
+      margin: 1.3% 2% 1.3%;
+      height: 150px;
+
+      p {
+        font-family: Museo300, sans-serif;
+        font-size: 18px;
+        text-align: center;
+        color: $white;
+        padding: 15% 5%;
+        line-height: 20px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        overflow: hidden;
+      }
+    }
+    &:hover {
+      transform: scale(1.055);
+      -o-transform: scale(1.055);
+      -webkit-transform: scale(1.055);
+    }
+  }
+
+  .pompoensoep {
+    background: url("../images/challenges/pompoensoep_kokoscrème_basilicum.jpg"), no-repeat;
+    background-size: cover;
+  }
+
+  .knolselder {
+    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
+    background-size: cover;
+  }
+
+  .pompoenstoof {
+    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
+    background-size: cover;
+  }
+}
+
+/*** STATS ***/
+
+.banner-wrap {
+  width: 100%;
+  background: url("../images/resources/bg_pattern_cloth_orange.jpg"), no-repeat;
+}
+
+#stats {
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  width: 95%;
+  padding: 40px 0;
+  margin: 0 auto;
+
+
+  div {
+    flex-grow: 1;
+    align-self: flex-start;
+    box-sizing: border-box;
+
+    .legend {
+      display: block;
+      max-width: 150px;
+      background-size: 30%;
+      overflow: visible;
+      background: rgba($black, 0.7);
+      border: 3px solid $black;
+      border-radius: 5px;
+      float: left;
+
+      //TEMP LINe
+      margin: 10% 0 0 10%;
+
+      .easy {
+        background: url("../images/resources/lieasy.jpg");
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+      }
+
+      .medium {
+        background: url("../images/resources/limedium.jpg");
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+      }
+
+      .hard {
+        background: url("../images/resources/lihard.jpg");
+        background-repeat: no-repeat;
+        background-position: 0% 50%;
+      }
+
+      ul {
+        list-style: none;
+        padding: 5px 0 0 10px;
+        li {
+          padding: 0 0 0 15px;
+          color: $white;
+        }
+      }
+    }
+
+    .graph {
+      background: url("../images/resources/graph.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: block;
+      min-width: 200px;
+      min-height: 200px;
+      width: 20%;
+      text-indent: -100%;
+      overflow: hidden;
+      float: left;
+    }
+  }
+
+
+
+  #latest-achievements {
+    h4 {
+      font-family: Artistamp, sans-serif;
+      color: $white;
+      font-size: 20px;
+    }
+
+    .latest-achievement-badge {
+      float: left;
+      clear: both;
+      min-width: 420px;
+      width: 80%;
+
+
+      background: rgba($black, 0.7);
+      border: 2px solid $darkGreen;
+      margin-bottom: 20px;
+
+      .badge {
+        display: block;
+        max-width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        min-height: 80px;
+        float: left;
+        //margin: 10px 0 10px 20px;
+      }
+
+      .badge-easy {
+        background: url("../images/resources/badges/easy.png");
+        background-color: rgba($darkGreen, 0.4);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%;
+      }
+
+      .badge-medium {
+        background: url("../images/resources/badges/medium.png");
+        background-color: rgba($darkGreen, 0.4);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%;
+      }
+
+      .badge-hard {
+        background: url("../images/resources/badges/hard.png");
+        background-color: rgba($darkGreen, 0.4);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%;
+      }
+
+      div {
+        display: block;
+        float: left;
+        width: 70%;
+        min-width: 300px;
+        h5 {
+          font-family: Museo300, sans-serif;
+          font-size: 16px;
+          color: $lightGreen;
+          text-align: center;
+          line-height: 60px;
+        }
+      }
+    }
+  }
+
+}
+
+
+/*** ACHIEVEMENTS ***/
+
+#achievements {
+  width: 95%;
+  margin: 60px auto 0 auto;
+
+  h4 {
+    font-family: Artistamp, sans-serif;
+    font-size: 24px;
+  }
+
+  #achievement-box {
+    display: flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    -webkit-align-content: flex-start;
+
+    .achievement {
+      display: block;
+      width: 45%;
+      margin-bottom: 20px;
+      padding: 5px 8px 5px 9px;
+
+      background-image: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
+      background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
+      background-repeat: no-repeat;
+      background-size: 10%;
+
+      .achievement-image {
+        height: 110px;
+        width: 100%;
+        margin-top: -10px;
+
+        h5 {
+          font-family: Museo500, sans-serif;
+          color: $white;
+          font-size: 18px;
+          text-align: center;
+          text-shadow: 0 3px 4px rgba(0, 0, 0, 1);
+          line-height: 18px;
+          padding: 10px 10px 5px 10px;
+        }
+
+        p {
+          font-family: Museo300, sans-serif;
+          color: $white;
+          font-size: 14px;
+          text-align: center;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+          word-break: keep-all;
+        }
+
+        &.temp-pompoensoep {
+          background: url("../images/challenges/pompoensoep_kokoscrème_basilicum.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0% 50%;
+        }
+
+        &.temp-seldersoep {
+          background: url("../images/challenges/knolseldersoep.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0% 50%;
+        }
+
+        &.temp-resto {
+          background: url("../images/challenges/Pompoenstoofpotje.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0% 50%;
+        }
+
+      }
+
+      &:nth-of-type(2n + 1) {
+        margin-right: 2%;
+      }
+
+      .badge {
+        display: block;
+        max-width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        min-height: 110px;
+        float: left;
+      }
+
+      .badge-easy {
+        background: url("../images/resources/badges/easy.png");
+        background-color: rgba($white, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%;
+      }
+
+      .badge-medium {
+        background: url("../images/resources/badges/medium.png");
+        background-color: rgba($white, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%;
+      }
+
+      .badge-hard {
+        background: url("../images/resources/badges/hard.png");
+        background-color: rgba($white, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%;
+      }
+    }
+  }
+}
