@@ -46,4 +46,8 @@
     <string name="validation_submit_email">Vueillez inserter votre email</string>
     <string name="validation_password_size">Le mot de passe doit être 7 caractères au minimum</string>
     <string name="validation_password_repeat">Les mots de passe ne sont pas le mêmes</string>
+    <string name="your_progress">Votre progrès</string>
+    <string name="ongoing_challenges">Défis en cours</string>
+    <string name="completed_challenges">Défis finis</string>
+    <string name="achievements">Acquis</string>
 </resources>

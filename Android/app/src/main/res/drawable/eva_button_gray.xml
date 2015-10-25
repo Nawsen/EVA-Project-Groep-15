@@ -15,6 +15,7 @@
     <item>
         <shape>
             <stroke android:width="2dp" android:color="@android:color/black" />
+            <solid android:color="@android:color/transparent" />
         </shape>
     </item>
 </selector>

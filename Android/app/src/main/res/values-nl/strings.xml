@@ -46,4 +46,8 @@
     <string name="validation_submit_email">Gelieve uw e-mail in te vullen</string>
     <string name="validation_password_size">Het wachtwoord moet minstens 7 tekens zijn</string>
     <string name="validation_password_repeat">De wachtwoorden komen niet overeen</string>
+    <string name="your_progress">Uw vooruitgang</string>
+    <string name="ongoing_challenges">Lopende uitdagingen</string>
+    <string name="completed_challenges">Voltooide uitdagingen</string>
+    <string name="achievements">Prestaties</string>
 </resources>

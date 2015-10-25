@@ -48,4 +48,9 @@
     <string name="validation_submit_email">Please enter your email</string>
     <string name="validation_password_size">Password must be at least 7 characters</string>
     <string name="validation_password_repeat">Passwords are not the same</string>
+
+    <string name="your_progress">Your progress</string>
+    <string name="ongoing_challenges">Ongoing challenges</string>
+    <string name="completed_challenges">Completed challenges</string>
+    <string name="achievements">Achievements</string>
 </resources>
