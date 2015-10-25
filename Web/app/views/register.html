@@ -10,7 +10,7 @@
                 <div class="form-group">
                     <input type="email" class="form-control eva-input has-error" placeholder="E-mailadres"
                            name="email" ng-focus="showHelpMail = true" ng-blur="showHelpMail = false"
-                           required ng-class="{'has-error': registerForm.email.$valid}"
+                           required
                            ng-model="user.email"/>
                     <div class="alert alert-info" ng-hide="(!showHelpMail || registerForm.email.$valid)">
                         Een e-mailadres ziet er zo uit: voorbeeld@mail.be
@@ -18,9 +18,9 @@
                 </div>
                 <div class="form-group">
                     <input type="password" class="form-control eva-input" placeholder="Wachtwoord" name="password" ng-focus="showHelpPassword = true" ng-blur="showHelpPassword = false" required
-                           ng-model="user.password" ng-minlength="5" ng-maxlength="128"/>
+                           ng-model="user.password" ng-minlength="7" ng-maxlength="128"/>
                     <div class="alert alert-info" ng-hide="(!showHelpPassword || registerForm.password.$valid)">
-                        Een wachtwoord is minstens 5 karakters en maximum 128.
+                        Een wachtwoord is minstens 7 karakters en maximum 128.
                     </div>
                     <!--<div ng-repeat="error in registerForm.password.$error" class="alert alert-danger">
                             Too short
@@ -51,7 +51,7 @@
 
                         <label class="btn col-md-6 form-control eva-input"
                                ng-class="{'radio-active':selectedTab === 'male'}" ng-click="selectedTab = 'male'">
-                            <input type="radio" name="gender" id="male" value="male" required/> Man
+                            <input type="radio" name="gender" id="male" value="male"/> Man
                         </label>
                         <label class="btn col-md-6 form-control eva-input no-left-border"
                                ng-class="{'radio-active':selectedTab === 'female'}" ng-click="selectedTab = 'female'">
@@ -60,12 +60,8 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <select class="form-control eva-input" name="select" required>
-                        <option>Omnivoor</option>
-                        <option>Pescotariër (geen vlees, wel vis)</option>
-                        <option>Parttime-vegetariër (Minstens 3 keer per week vegetarisch)</option>
-                        <option>Vegetariër (geen vlees of vis)</option>
-                        <option>Veganist (geen dierlijke producten)</option>
+                    <select class="form-control eva-input" name="select" required ng-model="user.grade" ng-options="obj.text for obj in values track by obj.val">
+
                     </select>
                 </div>
 
@@ -76,7 +72,7 @@
                             ng-disabled="!(registerForm.email.$valid && validPassword())">Registreer
                     </button>-->
                     <button class="btn btn-default form-control eva-submit" type="submit"
-                            ng-disabled="!(registerForm.email.$valid && validPassword() && validForm())">
+                            ng-disabled="!(registerForm.email.$valid && validPassword() && validForm())" ng-click="register()">
                         Registreer
                     </button>
                 </div>
