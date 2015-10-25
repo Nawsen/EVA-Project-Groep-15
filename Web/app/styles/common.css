@@ -1,3 +1,451 @@
-@import "_colors.scss";
+@charset "UTF-8";
+/* ALL EVA RELATED COLORS */
+/*
+$darkGreen: #0e2218;
+$mediumGreen: #006059;
+$lightGreen: #a9b539;
+$orange: #dd5633;
+$blue: #00607c;
+$brown: #aa9e95;
+$yellow: #f0da38;
+$white: #fff;
+$black: #222;
+*/
+/* EVA FONTS */
+@font-face {
+  font-family: 'Artistamp';
+  src: url("../fonts/artistampmedium-webfont.eot");
+  src: url("../fonts/artistampmedium-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/artistampmedium-webfont.woff2") format("woff2"), url("../fonts/artistampmedium-webfont.woff") format("woff"), url("../fonts/artistampmedium-webfont.ttf") format("truetype"), url("../fonts/artistampmedium-webfont.svg#artistamp_mediumregular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Mathleteskinny';
+  src: url("../fonts/mathlete-skinny-webfont.eot");
+  src: url("../fonts/mathlete-skinny-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/mathlete-skinny-webfont.woff2") format("woff2"), url("../fonts/mathlete-skinny-webfont.woff") format("woff"), url("../fonts/mathlete-skinny-webfont.ttf") format("truetype"), url("../fonts/mathlete-skinny-webfont.svg#mathleteskinny") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Museo100_italic';
+  src: url("../fonts/museo100-italic-webfont.eot");
+  src: url("../fonts/museo100-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museo100-italic-webfont.woff2") format("woff2"), url("../fonts/museo100-italic-webfont.woff") format("woff"), url("../fonts/museo100-italic-webfont.ttf") format("truetype"), url("../fonts/museo100-italic-webfont.svg#museo100_italic") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Museo100';
+  src: url("../fonts/museo100-regular-webfont.eot");
+  src: url("../fonts/museo100-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museo100-regular-webfont.woff2") format("woff2"), url("../fonts/museo100-regular-webfont.woff") format("woff"), url("../fonts/museo100-regular-webfont.ttf") format("truetype"), url("../fonts/museo100-regular-webfont.svg#museo100") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Museo300';
+  src: url("../fonts/museo300-regular-webfont.eot");
+  src: url("../fonts/museo300-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museo300-regular-webfont.woff2") format("woff2"), url("../fonts/museo300-regular-webfont.woff") format("woff"), url("../fonts/museo300-regular-webfont.ttf") format("truetype"), url("../fonts/museo300-regular-webfont.svg#museo300") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Museo500_italic';
+  src: url("../fonts/museo500-italic-webfont.eot");
+  src: url("../fonts/museo500-italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museo500-italic-webfont.woff2") format("woff2"), url("../fonts/museo500-italic-webfont.woff") format("woff"), url("../fonts/museo500-italic-webfont.ttf") format("truetype"), url("../fonts/museo500-italic-webfont.svg#museo500_italic") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Museo500';
+  src: url("../fonts/museo500-regular-webfont.eot");
+  src: url("../fonts/museo500-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museo500-regular-webfont.woff2") format("woff2"), url("../fonts/museo500-regular-webfont.woff") format("woff"), url("../fonts/museo500-regular-webfont.ttf") format("truetype"), url("../fonts/museo500-regular-webfont.svg#museo500") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Museo900';
+  src: url("../fonts/museo900-regular-webfont.eot");
+  src: url("../fonts/museo900-regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/museo900-regular-webfont.woff2") format("woff2"), url("../fonts/museo900-regular-webfont.woff") format("woff"), url("../fonts/museo900-regular-webfont.ttf") format("truetype"), url("../fonts/museo900-regular-webfont.svg#museo900") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+/* GEORGIA */
+@font-face {
+  font-family: 'Georgia';
+  src: url("../fonts/Georgia.ttf"); }
+@font-face {
+  font-family: 'Georgia_bold';
+  src: url("../fonts/Georgia_bold.ttf"); }
+@font-face {
+  font-family: 'Georgia_italic';
+  src: url("../fonts/Georgia_italic.ttf");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Georgia_bold_italic';
+  src: url("../fonts/Georgia_bold_italic.ttf");
+  font-weight: normal;
+  font-style: normal; }
+/* MYRIADPRO */
+@font-face {
+  font-family: 'Myriadpro';
+  src: url("../fonts/MyriadPro-Regular.otf"); }
+@font-face {
+  font-family: 'Myriadpro_bold';
+  src: url("../fonts/MyriadPro-BoldSemiExt.otf"); }
+.override {
+  padding: 0;
+  border: none; }
+
+html, body {
+  height: 100%;
+  margin: 0;
+  body: 0; }
+
+/*** WRAPPER ***/
+#wrapper {
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: flex-start;
+  -webkit-justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  height: 100%; }
+  #wrapper #nav {
+    background: url("../images/resources/blackboard_menu.jpg"), no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 250px;
+    position: fixed; }
+    #wrapper #nav .user-info img {
+      display: block;
+      margin: 15px auto; }
+    #wrapper #nav .user-info h2 {
+      color: #fff;
+      font-family: Artistamp, sans-serif; }
+      #wrapper #nav .user-info h2 small {
+        font-family: Museo300, sans-serif;
+        color: #a9b539; }
+    #wrapper #nav nav ul {
+      list-style: none;
+      padding: 0; }
+      #wrapper #nav nav ul li {
+        margin: 0 0 10px 0; }
+        #wrapper #nav nav ul li a {
+          display: block;
+          color: #fff;
+          font-family: Museo300, sans-serif;
+          font-size: 16px;
+          text-decoration: none;
+          border: 1px solid rgba(34, 34, 34, 0);
+          padding: 15px 0 15px 30px; }
+          #wrapper #nav nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #a9b539;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+          #wrapper #nav nav ul li a.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #a9b539;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
+  #wrapper #main {
+    position: absolute;
+    left: 250px; }
+
+/*** Image replacing ***/
+h1 {
+  display: block;
+  background: url("../images/eva-logo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 82px;
+  width: 132px;
+  text-indent: -100%;
+  margin: 10px auto 0 auto; }
+
+/*** PROGRESSBAR ***/
+#progressbar {
+  display: block;
+  width: 100%;
+  background: url("../images/resources/bg_pattern_chalkboard_green.jpg");
+  background-size: cover;
+  padding: 10px 0 20px; }
+  #progressbar div {
+    width: 95%;
+    margin: 0 auto; }
+    #progressbar div h3 {
+      font-family: Museo300, sans-serif;
+      font-size: 18px;
+      margin: 0;
+      color: #fff; }
+    #progressbar div div {
+      display: block;
+      background: #006059;
+      height: 10px;
+      width: 100%; }
+      #progressbar div div div {
+        background: #dd5633;
+        margin: 0;
+        width: 40%; }
+
+/*** CHALLENGES ***/
+.challenge-title {
+  font-family: Artistamp, sans-serif;
+  font-size: 32px;
+  text-align: center;
+  padding: 20px 0 0 0; }
+
+.banner {
+  margin: 3% 0; }
+
+#challenges {
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  width: 95%;
+  margin: 0 auto;
+  padding: 30px 0 70px; }
+  #challenges article {
+    flex-grow: 1;
+    flex-shrink: 1;
+    align-self: flex-start;
+    box-sizing: border-box;
+    margin-left: 1%;
+    max-width: 32%; }
+    #challenges article:first-of-type {
+      margin-left: 0; }
+  #challenges .challenge {
+    background: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
+    background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
+    background-repeat: no-repeat;
+    background-size: 10%; }
+    #challenges .challenge div {
+      margin: 1.3% 2% 1.3%;
+      height: 150px; }
+      #challenges .challenge div p {
+        font-family: Museo300, sans-serif;
+        font-size: 18px;
+        text-align: center;
+        color: #fff;
+        padding: 15% 5%;
+        line-height: 20px;
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+        overflow: hidden; }
+    #challenges .challenge:hover {
+      transform: scale(1.055);
+      -o-transform: scale(1.055);
+      -webkit-transform: scale(1.055); }
+  #challenges .pompoensoep {
+    background: url("../images/challenges/pompoensoep_kokoscrème_basilicum.jpg"), no-repeat;
+    background-size: cover; }
+  #challenges .knolselder {
+    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
+    background-size: cover; }
+  #challenges .pompoenstoof {
+    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
+    background-size: cover; }
+
+/*** STATS ***/
+.banner-wrap {
+  width: 100%;
+  background: url("../images/resources/bg_pattern_cloth_orange.jpg"), no-repeat; }
+
+#stats {
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-direction: row;
+  flex-wrap: nowrap;
+  -webkit-flex-wrap: nowrap;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  align-content: flex-start;
+  -webkit-align-content: flex-start;
+  width: 95%;
+  padding: 40px 0;
+  margin: 0 auto; }
+  #stats div {
+    flex-grow: 1;
+    align-self: flex-start;
+    box-sizing: border-box; }
+    #stats div .legend {
+      display: block;
+      max-width: 150px;
+      background-size: 30%;
+      overflow: visible;
+      background: rgba(34, 34, 34, 0.7);
+      border: 3px solid #222;
+      border-radius: 5px;
+      float: left;
+      margin: 10% 0 0 10%; }
+      #stats div .legend .easy {
+        background: url("../images/resources/lieasy.jpg");
+        background-repeat: no-repeat;
+        background-position: 0% 50%; }
+      #stats div .legend .medium {
+        background: url("../images/resources/limedium.jpg");
+        background-repeat: no-repeat;
+        background-position: 0% 50%; }
+      #stats div .legend .hard {
+        background: url("../images/resources/lihard.jpg");
+        background-repeat: no-repeat;
+        background-position: 0% 50%; }
+      #stats div .legend ul {
+        list-style: none;
+        padding: 5px 0 0 10px; }
+        #stats div .legend ul li {
+          padding: 0 0 0 15px;
+          color: #fff; }
+    #stats div .graph {
+      background: url("../images/resources/graph.png");
+      background-repeat: no-repeat;
+      background-size: contain;
+      display: block;
+      min-width: 200px;
+      min-height: 200px;
+      width: 20%;
+      text-indent: -100%;
+      overflow: hidden;
+      float: left; }
+  #stats #latest-achievements h4 {
+    font-family: Artistamp, sans-serif;
+    color: #fff;
+    font-size: 20px; }
+  #stats #latest-achievements .latest-achievement-badge {
+    float: left;
+    clear: both;
+    min-width: 420px;
+    width: 80%;
+    background: rgba(34, 34, 34, 0.7);
+    border: 2px solid #0e2218;
+    margin-bottom: 20px; }
+    #stats #latest-achievements .latest-achievement-badge .badge {
+      display: block;
+      max-width: 100px;
+      max-width: 100px;
+      min-width: 100px;
+      min-height: 80px;
+      float: left; }
+    #stats #latest-achievements .latest-achievement-badge .badge-easy {
+      background: url("../images/resources/badges/easy.png");
+      background-color: rgba(14, 34, 24, 0.4);
+      background-repeat: no-repeat;
+      background-size: 90%;
+      background-position: 50% 50%; }
+    #stats #latest-achievements .latest-achievement-badge .badge-medium {
+      background: url("../images/resources/badges/medium.png");
+      background-color: rgba(14, 34, 24, 0.4);
+      background-repeat: no-repeat;
+      background-size: 90%;
+      background-position: 50% 50%; }
+    #stats #latest-achievements .latest-achievement-badge .badge-hard {
+      background: url("../images/resources/badges/hard.png");
+      background-color: rgba(14, 34, 24, 0.4);
+      background-repeat: no-repeat;
+      background-size: 90%;
+      background-position: 50% 50%; }
+    #stats #latest-achievements .latest-achievement-badge div {
+      display: block;
+      float: left;
+      width: 70%;
+      min-width: 300px; }
+      #stats #latest-achievements .latest-achievement-badge div h5 {
+        font-family: Museo300, sans-serif;
+        font-size: 16px;
+        color: #a9b539;
+        text-align: center;
+        line-height: 60px; }
+
+/*** ACHIEVEMENTS ***/
+#achievements {
+  width: 95%;
+  margin: 60px auto 0 auto; }
+  #achievements h4 {
+    font-family: Artistamp, sans-serif;
+    font-size: 24px; }
+  #achievements #achievement-box {
+    display: flex;
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-items: center;
+    align-content: flex-start;
+    -webkit-align-content: flex-start; }
+    #achievements #achievement-box .achievement {
+      display: block;
+      width: 45%;
+      margin-bottom: 20px;
+      padding: 5px 8px 5px 9px;
+      background-image: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
+      background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
+      background-repeat: no-repeat;
+      background-size: 10%; }
+      #achievements #achievement-box .achievement .achievement-image {
+        height: 110px;
+        width: 100%;
+        margin-top: -10px; }
+        #achievements #achievement-box .achievement .achievement-image h5 {
+          font-family: Museo500, sans-serif;
+          color: #fff;
+          font-size: 18px;
+          text-align: center;
+          text-shadow: 0 3px 4px black;
+          line-height: 18px;
+          padding: 10px 10px 5px 10px; }
+        #achievements #achievement-box .achievement .achievement-image p {
+          font-family: Museo300, sans-serif;
+          color: #fff;
+          font-size: 14px;
+          text-align: center;
+          text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+          word-break: keep-all; }
+        #achievements #achievement-box .achievement .achievement-image.temp-pompoensoep {
+          background: url("../images/challenges/pompoensoep_kokoscrème_basilicum.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0% 50%; }
+        #achievements #achievement-box .achievement .achievement-image.temp-seldersoep {
+          background: url("../images/challenges/knolseldersoep.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0% 50%; }
+        #achievements #achievement-box .achievement .achievement-image.temp-resto {
+          background: url("../images/challenges/Pompoenstoofpotje.jpg");
+          background-repeat: no-repeat;
+          background-size: cover;
+          background-position: 0% 50%; }
+      #achievements #achievement-box .achievement:nth-of-type(2n + 1) {
+        margin-right: 2%; }
+      #achievements #achievement-box .achievement .badge {
+        display: block;
+        max-width: 100px;
+        max-width: 100px;
+        min-width: 100px;
+        min-height: 110px;
+        float: left; }
+      #achievements #achievement-box .achievement .badge-easy {
+        background: url("../images/resources/badges/easy.png");
+        background-color: rgba(255, 255, 255, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%; }
+      #achievements #achievement-box .achievement .badge-medium {
+        background: url("../images/resources/badges/medium.png");
+        background-color: rgba(255, 255, 255, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%; }
+      #achievements #achievement-box .achievement .badge-hard {
+        background: url("../images/resources/badges/hard.png");
+        background-color: rgba(255, 255, 255, 0.3);
+        background-repeat: no-repeat;
+        background-size: 90%;
+        background-position: 50% 50%; }
 
 /*# sourceMappingURL=common.css.map */
