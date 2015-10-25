@@ -1,30 +1,52 @@
+@font-face {
+    font-family: "museo";
+    font-style: normal;
+    font-weight: 300;
+    src: url("../fonts/Museo300-Regular.otf");
+}
+@font-face {
+    font-family: "museo";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/Museo700-Regular.ttf");
+}
+@font-face {
+    font-family: "artistamp";
+    font-style: normal;
+    font-weight: 700;
+    src: url("../fonts/Museo700-Regular.ttf");
+}
 * {
     border-radius: 0 !important;
 }
 
-
-.login-page form{
+.login-page form {
 
     margin: 20px 0 20px 0;
 }
-.logintitle{
+
+.logintitle {
     margin-top: 50px;
 }
-.disable-padding-right {
-    padding-right: 0 !important;
-}
-.disable-padding-left {
-    padding-left: 0 !important;
-}
-.center-text {
-    text-align:center; !important;
 
+.disable-padding-right {
+    padding-right: 0;
 }
-.loginerror{
+
+.disable-padding-left {
+    padding-left: 0;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.loginerror {
     padding-left: 15px;
     font-size: 120%;
 }
-.sidebar{
+
+.sidebar {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -39,21 +61,83 @@
     color: white;
 }
 
-.sidebar small{
+.sidebar small {
     color: whitesmoke;
 }
-.nav>li>a {
+
+.nav > li > a {
     color: #fff;
     padding-left: 40px;
     font-size: 120%;
     cursor: hand;
 }
-.nav>li>a:hover{
+
+.nav > li > a:hover {
     background-color: #3B903B;
 }
-.nav>li>a:active{
+
+.nav > li > a:active {
     background-color: #3B903B;
 }
-.user-avatar{
+
+.user-avatar {
     margin-top: 25px;
+}
+
+.eva-input {
+    height: 43px;
+    font-family: "museo", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    box-shadow: none;
+    color: #2f3030;
+    border: solid 2px #2f3030;
+    transition: border-color 0.15s linear, color 0.15s linear;
+    transition: background-color 0.15s linear, color 0.15s linear;
+}
+.eva-input:focus {
+    border: 2px solid #A4B239;
+    outline: medium none;
+}
+.no-left-border {
+    border-left:0px;
+}
+.radio-active {
+    background: #a4b239;
+    color:white;
+}
+label.eva-input:hover {
+    background: #a4b239;
+    color:white;
+}
+.eva-submit {
+    height:43px;
+    padding: 10px;
+    display: inline-block;
+    font-family: "museo", sans-serif;
+    font-weight: 300;
+    font-size: 16px;
+    color: #fff;
+    border: solid 2px #808b2d;
+    background: #a4b239;
+    transition: background-color 0.15s linear, border-color 0.15s linear;
+}
+.eva-submit:hover {
+    background: #555757 none repeat scroll 0% 0%;
+    border-color: #2F3030;
+    color:#fff;
+}
+.eva-submit[disabled] {
+    opacity: 0.5;
+    border: solid 2px #808b2d;
+    background: #a4b239;
+}
+.eva-submit[disabled]:hover {
+    opacity: 0.5;
+    border: solid 2px #808b2d;
+    background: #a4b239;
+}
+.artistamp {
+    font-family: artistamp;
+    padding-bottom: 1em;
 }
