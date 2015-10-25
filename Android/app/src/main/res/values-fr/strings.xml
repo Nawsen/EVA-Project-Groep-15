@@ -34,4 +34,8 @@
     <string name="challenge">Défi</string>
     <string name="current_challenge">Défi actuel</string>
     <string name="logout">Se déconnecter</string>
+    <string name="your_progress">Votre progrès</string>
+    <string name="ongoing_challenges">Défis en cours</string>
+    <string name="completed_challenges">Défis finis</string>
+    <string name="achievements">Acquis</string>
 </resources>

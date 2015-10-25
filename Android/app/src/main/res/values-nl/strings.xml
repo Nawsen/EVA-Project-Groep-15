@@ -34,4 +34,8 @@
     <string name="challenge">Uitdaging</string>
     <string name="current_challenge">Huidige uitdaging</string>
     <string name="logout">Afmelden</string>
+    <string name="your_progress">Uw vooruitgang</string>
+    <string name="ongoing_challenges">Lopende uitdagingen</string>
+    <string name="completed_challenges">Voltooide uitdagingen</string>
+    <string name="achievements">Prestaties</string>
 </resources>

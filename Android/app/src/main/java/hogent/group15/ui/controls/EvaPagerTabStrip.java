@@ -28,7 +28,6 @@ public class EvaPagerTabStrip extends PagerTabStripV22 {
 
     private void init(Context context) {
         for (int i = 0; i < getChildCount(); ++i) {
-            //Log.i("PAGER STRIP", "Child " + i);
             View nextChild = getChildAt(i);
             if (nextChild instanceof TextView) {
                 TextView textViewToConvert = (TextView) nextChild;
