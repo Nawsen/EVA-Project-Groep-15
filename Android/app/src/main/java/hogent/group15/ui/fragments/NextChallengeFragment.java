@@ -42,6 +42,28 @@ public class NextChallengeFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         ButterKnife.bind(this, getView());
         refreshChallenges();
+
+        if(savedInstanceState != null) {
+            if (savedInstanceState.containsKey("first")) {
+                firstChallenge.updateContents((Challenge) savedInstanceState.getSerializable("first"));
+            }
+
+            if (savedInstanceState.containsKey("second")) {
+                firstChallenge.updateContents((Challenge) savedInstanceState.getSerializable("second"));
+            }
+
+            if (savedInstanceState.containsKey("third")) {
+                firstChallenge.updateContents((Challenge) savedInstanceState.getSerializable("third"));
+            }
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("first", firstChallenge.getChallenge());
+        outState.putSerializable("second", secondChallenge.getChallenge());
+        outState.putSerializable("third", thirdChallenge.getChallenge());
     }
 
     public void refreshChallenges() {

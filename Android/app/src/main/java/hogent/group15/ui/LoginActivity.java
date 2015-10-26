@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         Backend.getBackend().loginUser(email.getText().toString(), password.getText().toString(), new OnNetworkResponseListener<String, Backend.LoginResult>() {
             @Override
             public void onResponse(String data) {
-                startActivity(new Intent(getApplicationContext(), MainMenuActivityOld.class));
+                startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
             }
 
             @Override

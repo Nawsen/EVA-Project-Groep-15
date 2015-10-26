@@ -36,6 +36,10 @@ public class ChallengeView extends LinearLayout {
         initialize();
     }
 
+    public Challenge getChallenge() {
+        return currentChallenge;
+    }
+
     private void initialize() {
         setOnClickListener(new OnClickListener() {
             @Override
