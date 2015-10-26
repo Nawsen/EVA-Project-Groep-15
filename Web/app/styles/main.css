@@ -14,7 +14,7 @@
     font-family: "artistamp";
     font-style: normal;
     font-weight: 700;
-    src: url("../fonts/Museo700-Regular.ttf");
+    src: url("../fonts/artistampmedium-webfont.ttf");
 }
 * {
     border-radius: 0 !important;
@@ -140,4 +140,7 @@ label.eva-input:hover {
 .artistamp {
     font-family: artistamp;
     padding-bottom: 1em;
+}
+h1 .reg {
+
 }
