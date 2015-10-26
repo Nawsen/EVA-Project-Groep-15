@@ -1,1 +1,7 @@
 /Backend/nbproject/private/
+/hogent.group15.UserJsonReader/nbproject/private/
+/Backend/build/
+/Backend/dist/
+/Android/.idea/*
+/Web/node_modules
+.DS_Store

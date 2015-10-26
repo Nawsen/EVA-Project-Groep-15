@@ -28,4 +28,32 @@
     <string name="register_register_button">Register</string>
     <string name="register_sex_male">Male</string>
     <string name="register_sex_female">Female</string>
+    <string name="facebook_app_id" translatable="false">1506320029692649</string>
+    <string name="create_account"><u>Create account</u></string>
+    <string name="action_bar_search">Search</string>
+    <string name="action_bar_share">Share</string>
+    <string name="challenge">Challenge</string>
+    <string name="current_challenge">Current challenge</string>
+    <string name="logout">Logout</string>
+    <string name="register_repeat_password_hint">Repeat password</string>
+    <string name="grade_omnivore">Omnivore</string>
+    <string name="grade_pescetariar">Pescetariar (no meat, fish ok)</string>
+    <string name="grade_parttime_vegetarian">Parttime vegetarian (at least 3 times per week vegetarian)</string>
+    <string name="grade_vegatarian">Vegetarian (no meat or fish)</string>
+    <string name="grade_vegan">Vegan (no animal products)</string>
+
+    <string name="next">Next</string>
+    <string name="register_choose_password">Choose a password</string>
+    <string name="validation_submit_name">Please enter your name</string>
+    <string name="validation_submit_email">Please enter your email</string>
+    <string name="validation_password_size">Password must be at least 7 characters</string>
+    <string name="validation_password_repeat">Passwords are not the same</string>
+
+    <string name="your_progress">Your progress</string>
+    <string name="ongoing_challenges">Ongoing challenges</string>
+    <string name="completed_challenges">Completed challenges</string>
+    <string name="achievements">Achievements</string>
+    <string name="network_error">Unable to connect to the internet!</string>
+    <string name="wrong_credentials">Incorrect email or password!</string>
+    <string name="validation_password">Fill in your password</string>
 </resources>

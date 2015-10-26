@@ -11,19 +11,30 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity android:name=".NextChallengeActivity" >
         </activity>
         <activity android:name=".ChallengeDetailsActivity" >
         </activity>
-        <activity android:name=".MainMenuActivity" ></activity>
+        <activity android:name=".MainMenuActivity" />
         <activity android:name=".LoginActivity" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginChoiceActivity" ></activity>
-        <activity android:name="hogent.group15.androidapp.RegisterActivity" >
+        <activity android:name=".RegisterActivity" >
+        </activity>
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity android:name=".ProgressActivity" >
         </activity>
     </application>
 
