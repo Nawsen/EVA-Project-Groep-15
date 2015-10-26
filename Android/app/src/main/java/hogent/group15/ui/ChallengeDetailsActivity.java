@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import hogent.group15.AsyncUtil;
-import hogent.group15.Challenge;
+import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
 import hogent.group15.ui.util.ActionBarConfig;
 

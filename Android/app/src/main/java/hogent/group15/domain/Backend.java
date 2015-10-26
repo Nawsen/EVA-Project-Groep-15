@@ -1,24 +1,20 @@
 package hogent.group15.domain;
 
 import android.os.AsyncTask;
+import android.util.JsonReader;
 import android.util.Log;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URI;
-import java.net.URL;
-import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
-
-import hogent.group15.AsyncUtil;
-import hogent.group15.Consumer;
 
 /**
  * Created by Frederik on 10/20/2015.
@@ -28,9 +24,10 @@ public class Backend {
     private URI backendServerUri;
     private static Backend backend;
     private final static String TAG = "BACKEND";
+    private String email = "";
 
     private Backend() {
-        backendServerUri = URI.create("http://178.62.232.69/backend/api/");
+        backendServerUri = URI.create("http://192.168.0.252:8080/backend/api/");
     }
 
     public static Backend getBackend() {
@@ -135,6 +132,8 @@ public class Backend {
                     while (in.hasNext()) {
                         dataIn.append(in.next());
                     }
+
+                    Backend.this.email = email;
                     return dataIn.toString();
                 } catch (JSONException e) {
                     Log.e(TAG, "Couldn't create JSON: " + e.getMessage());
@@ -162,6 +161,85 @@ public class Backend {
             protected void onPostExecute(String s) {
                 if (!isError) {
                     callback.onResponse(s);
+                }
+            }
+        };
+
+        task.execute();
+        return task;
+    }
+
+    public AsyncTask<Void, Void, List<Challenge>> getDailyChallenges(final OnNetworkResponseListener<List<Challenge>, IOException> callback) {
+        AsyncTask<Void, Void, List<Challenge>> task = new AsyncTask<Void, Void, List<Challenge>>() {
+
+            private boolean isError;
+
+            @Override
+            protected List<Challenge> doInBackground(Void... params) {
+                if (Backend.this.email == null || Backend.this.email.isEmpty()) {
+                    throw new IllegalStateException("User should be logged in before requesting daily challenges");
+                }
+
+                HttpURLConnection connection = null;
+                try {
+                    connection = (HttpURLConnection) backendServerUri.resolve("user/" + Backend.this.email + "/daily").toURL().openConnection();
+                    connection.addRequestProperty("Content-Type", "application/json");
+                    connection.setRequestMethod("GET");
+                    connection.setDoInput(true);
+
+                    Scanner in = new Scanner(connection.getInputStream());
+                    StringBuilder dataIn = new StringBuilder();
+
+                    while (in.hasNextLine()) {
+                        dataIn.append(in.nextLine());
+                    }
+
+                    List<Challenge> challenges = new ArrayList<>(3);
+                    JsonReader reader = new JsonReader(new StringReader(dataIn.toString()));
+                    reader.beginArray();
+                    for (int i = 0; i < 3; i++) {
+                        Challenge challenge = new Challenge();
+                        reader.beginObject();
+                        while (reader.hasNext()) {
+                            String propertyName = reader.nextName();
+                            if (propertyName.equals("imageUrl")) {
+                                challenge.setHeaderImageUri(URI.create(reader.nextString()));
+                            } else if (propertyName.equals("title")) {
+                                challenge.setTitle(reader.nextString());
+                            } else if (propertyName.equals("difficulty")) {
+                                challenge.setScore(Challenge.Difficulty.getScoreFor(reader.nextString()));
+                            } else if (propertyName.equals("id")) {
+                                challenge.setId(reader.nextInt());
+                            } else if (propertyName.equals("description")) {
+                                challenge.setDetailedDescription(reader.nextString());
+                            }
+                        }
+                        reader.endObject();
+
+                        challenges.add(challenge);
+                    }
+
+                    reader.close();
+                    return challenges;
+                } catch (
+                        IOException ioex
+                        )
+
+                {
+                    callback.onError(ioex);
+                    isError = true;
+                    return new ArrayList<>();
+                } finally
+
+                {
+                    connection.disconnect();
+                }
+            }
+
+            @Override
+            protected void onPostExecute(List<Challenge> list) {
+                if (!isError) {
+                    callback.onResponse(list);
                 }
             }
         };

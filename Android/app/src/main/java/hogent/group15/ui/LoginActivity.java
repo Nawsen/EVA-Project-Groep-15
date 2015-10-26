@@ -7,24 +7,17 @@ import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.View;
-import android.view.Window;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.facebook.FacebookSdk;
-import com.facebook.login.LoginResult;
-
-import java.io.IOException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hogent.group15.Logging;
 import hogent.group15.Validator;
 import hogent.group15.domain.Backend;
 import hogent.group15.domain.OnNetworkResponseListener;
-import hogent.group15.ui.controls.EvaButton;
 import hogent.group15.ui.util.ActionBarConfig;
 
 public class LoginActivity extends AppCompatActivity implements Validator {
@@ -58,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         Backend.getBackend().loginUser(email.getText().toString(), password.getText().toString(), new OnNetworkResponseListener<String, Backend.LoginResult>() {
             @Override
             public void onResponse(String data) {
-                startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainMenuActivityOld.class));
             }
 
             @Override

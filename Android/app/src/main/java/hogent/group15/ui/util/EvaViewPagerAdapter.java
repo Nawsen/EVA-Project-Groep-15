@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import hogent.group15.ui.R;
 import hogent.group15.ui.fragments.AchievementsFragment;
 import hogent.group15.ui.fragments.CompletedChallengesFragment;
+import hogent.group15.ui.fragments.NextChallengeFragment;
 import hogent.group15.ui.fragments.OngoingChallengesFragment;
 
 /**
@@ -30,7 +31,7 @@ public class EvaViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch(position) {
             case 0:
-                return new OngoingChallengesFragment();
+                return new NextChallengeFragment();
             case 1:
                 return new CompletedChallengesFragment();
             case 2:

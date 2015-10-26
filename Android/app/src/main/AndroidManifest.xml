@@ -15,11 +15,11 @@
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
 
-        <activity android:name=".NextChallengeActivity" >
+        <activity android:name=".fragments.NextChallengeFragment" >
         </activity>
         <activity android:name=".ChallengeDetailsActivity" >
         </activity>
-        <activity android:name=".MainMenuActivity" />
+        <activity android:name=".MainMenuActivityOld" />
         <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,7 +34,7 @@
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-        <activity android:name=".ProgressActivity" >
+        <activity android:name=".MainMenuActivity" >
         </activity>
     </application>
 

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="hogent.group15.ui.fragments.NextChallengeFragment">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp" android:layout_weight="1" />
+
+    <hogent.group15.ui.ChallengeView
+        android:id="@+id/first_challenge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="bottom" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp" android:layout_weight="1" />
+
+    <hogent.group15.ui.ChallengeView
+        android:id="@+id/second_challenge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp" android:layout_weight="1" />
+
+    <hogent.group15.ui.ChallengeView
+        android:id="@+id/third_challenge"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="top" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="0dp" android:layout_weight="1" />
+</LinearLayout>

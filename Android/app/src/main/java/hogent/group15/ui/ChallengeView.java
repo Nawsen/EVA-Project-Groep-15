@@ -5,13 +5,12 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import hogent.group15.AsyncUtil;
-import hogent.group15.Challenge;
+import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
 import hogent.group15.StringInterpolator;
 
@@ -78,6 +77,7 @@ public class ChallengeView extends LinearLayout {
                     image.setImageBitmap(bitmap);
                     if (onComplete != null) {
                         onComplete.run();
+                        ChallengeView.this.setAlpha(1f);
                     }
                 }
             });
