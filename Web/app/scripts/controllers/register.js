@@ -37,7 +37,7 @@ angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', '$http'
         grade:$scope.values[0]
     };
     $scope.validPassword = function () {
-        if (($scope.user.password === $scope.user.repeatPassword) && $scope.user.password.length > 7) {
+        if (($scope.user.password === $scope.user.repeatPassword) && $scope.user.password.length >= 7) {
             return true;
         } else {
             return false;
