@@ -4,3 +4,4 @@
 /Backend/dist/
 /Android/.idea/*
 /Web/node_modules
+.DS_Store
