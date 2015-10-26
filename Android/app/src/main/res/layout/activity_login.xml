@@ -17,6 +17,7 @@
         android:layout_above="@+id/controls"
         android:adjustViewBounds="true"
         android:scaleType="centerInside"
+        android:layout_alignParentTop="true"
         android:src="@drawable/eva" />
 
     <LinearLayout

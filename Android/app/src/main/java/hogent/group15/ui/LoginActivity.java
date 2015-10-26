@@ -1,6 +1,7 @@
 package hogent.group15.ui;
 
 import android.content.Intent;
+import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,9 +39,17 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         if (getIntent() != null) {
             String username = getIntent().getStringExtra("username");
             email.setText(username);
+        } else if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey("email")) {
+                email.setText(savedInstanceState.getString("email"));
+            }
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        outState.putString("email", email.getText().toString());
+    }
 
     public void onLogin(View v) {
 
@@ -51,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         Backend.getBackend().loginUser(email.getText().toString(), password.getText().toString(), new OnNetworkResponseListener<String, Backend.LoginResult>() {
             @Override
             public void onResponse(String data) {
+                password.setText("");
                 startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
             }
 

@@ -4,15 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.IOException;
+
 import hogent.group15.AsyncUtil;
+import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
 import hogent.group15.StringInterpolator;
+import hogent.group15.domain.OnNetworkResponseListener;
 
 /**
  * Created by Frederik on 10/11/2015.

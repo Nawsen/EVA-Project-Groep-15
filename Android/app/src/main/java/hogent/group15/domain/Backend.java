@@ -247,4 +247,62 @@ public class Backend {
         task.execute();
         return task;
     }
+
+    public void getChallengeDescription(final int descriptionId, final OnNetworkResponseListener<String, IOException> callback) {
+        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
+
+            private boolean isError;
+
+            @Override
+            protected String doInBackground(Void... params) {
+                if (Backend.this.email == null || Backend.this.email.isEmpty()) {
+                    throw new IllegalStateException("User should be logged in before requesting daily challenges");
+                }
+
+                HttpURLConnection connection = null;
+                try {
+                    connection = (HttpURLConnection) backendServerUri.resolve("user/" + Backend.this.email + "/" + descriptionId).toURL().openConnection();
+                    connection.addRequestProperty("Content-Type", "application/json");
+                    connection.setRequestMethod("GET");
+                    connection.setDoInput(true);
+
+                    Scanner in = new Scanner(connection.getInputStream());
+                    StringBuilder dataIn = new StringBuilder();
+
+                    while (in.hasNextLine()) {
+                        dataIn.append(in.nextLine());
+                    }
+
+                    Challenge challenge = new Challenge();
+                    JsonReader reader = new JsonReader(new StringReader(dataIn.toString()));
+                    reader.beginObject();
+                    while (reader.hasNext()) {
+                        String propertyName = reader.nextName();
+                        if (propertyName.equals("description")) {
+                            challenge.setDetailedDescription(reader.nextString());
+                            break;
+                        }
+                    }
+
+                    reader.close();
+                    return challenge.getDetailedDescription();
+                } catch (IOException ioex) {
+                    callback.onError(ioex);
+                    isError = true;
+                    return "";
+                } finally {
+                    connection.disconnect();
+                }
+            }
+
+            @Override
+            protected void onPostExecute(String description) {
+                if (!isError) {
+                    callback.onResponse(description);
+                }
+            }
+        };
+
+        task.execute();
+    }
 }

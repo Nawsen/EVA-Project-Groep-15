@@ -6,7 +6,5 @@
     <item android:id="@+id/item_share" android:title="@string/action_bar_share"
         android:actionProviderClass="android.widget.ShareActionProvider" app:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_share"/>
-    <item android:id="@+id/item_challenge_reminder" android:title="@string/current_challenge" app:showAsAction="ifRoom"
-        android:icon="@android:drawable/ic_popup_reminder"/>
-    <item android:id="@+id/item_logout" android:title="@string/logout" app:showAsAction="ifRoom|withText"/>
+    <item android:id="@+id/item_logout" android:title="@string/logout" app:showAsAction="ifRoom"/>
 </menu>
