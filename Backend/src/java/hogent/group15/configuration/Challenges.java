@@ -131,5 +131,6 @@ public class Challenges {
         user.setCurrentChallenge(null);
         em.persist(user);
         return Response.ok().build();
-    }            
+    }
+    
 }
