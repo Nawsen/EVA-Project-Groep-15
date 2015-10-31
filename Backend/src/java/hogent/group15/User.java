@@ -13,6 +13,7 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -126,7 +127,8 @@ public class User implements Serializable {
         this.birthDate = birthDate;
         this.password = password;
         //set good hashed & salted password
-        this.encPassword = hash(password.toCharArray(), generateSalt());
+	this.salt = generateSalt();
+        this.encPassword = hash(password.toCharArray(), this.salt);
     }
 
     public int getFacebookId() {
@@ -263,7 +265,6 @@ public class User implements Serializable {
 
     public static boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
         byte[] pwdHash = hash(password, salt);
-        Arrays.fill(password, Character.MIN_VALUE);
         if (pwdHash.length != expectedHash.length) {
             return false;
         }
