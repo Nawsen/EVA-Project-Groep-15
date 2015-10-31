@@ -41,7 +41,7 @@ import static org.eclipse.persistence.sessions.remote.corba.sun.TransporterHelpe
  *
  * @author Frederik & Wannes
  */
-@Path("user")
+@Path("users")
 @Dependent
 public class Users {
 
@@ -82,7 +82,7 @@ public class Users {
     @Consumes(MediaType.APPLICATION_JSON)
     public String login(User user) {
         User dbUser = em.find(User.class, user.getEmail());
-        if (dbUser != null && dbUser.checkPassword(user.getPassword())) {
+        if (dbUser != null && dbUser.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getPassword().getBytes())) {
             //TODO implement jsonwebtoken
             return getToken();
         } else {
