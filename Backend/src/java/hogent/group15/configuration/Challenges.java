@@ -4,16 +4,20 @@ import hogent.group15.Challenge;
 import hogent.group15.ChallengeCache;
 import hogent.group15.DailyChallenges;
 import hogent.group15.User;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
+import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -110,6 +114,26 @@ public class Challenges {
         user.setCurrentChallenge(null);
         em.persist(user);
         return Response.ok().build();
+    }
+    @Path("add")
+    @POST
+    @Transactional
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addChallenge(Challenge challenge){
+        Challenge dbCh = em.find(Challenge.class, challenge.getId());
+        if (dbCh != null){
+            return Response.status(Response.Status.BAD_REQUEST).entity("used").build();
+        }else{
+            Set<ConstraintViolation<Challenge>> violations = validator.validate(challenge);
+            if (!violations.isEmpty()) {
+                StringBuilder builder = new StringBuilder();
+                violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
+                throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).entity(builder.toString()).build());
+            } else {
+                em.persist(challenge);
+                return Response.status(Response.Status.CREATED).build();
+            }
+        }
     }
     
 }
