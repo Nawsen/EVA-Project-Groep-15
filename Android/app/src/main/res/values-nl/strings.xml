@@ -53,4 +53,6 @@
     <string name="network_error">Kan niet verbinden met het internet!</string>
     <string name="wrong_credentials">Verkeerd wachtwoord of email!</string>
     <string name="validation_password">Gelieve uw wachtwoord in te vullen</string>
+    <string name="no_completed_challenges">U heeft nog geen uitdagingen afgewerkt!</string>
+    <string name="no_achievements">U heeft nog geen prestaties behaald!</string>
 </resources>

@@ -27,7 +27,7 @@ public class Backend {
     private String email = "";
 
     private Backend() {
-        backendServerUri = URI.create("http://192.168.0.252:8080/backend/api/");
+        backendServerUri = URI.create("http://bitcode.io:8080/backend/api/");
     }
 
     public static Backend getBackend() {
@@ -145,9 +145,11 @@ public class Backend {
                         if (connection != null && connection.getResponseCode() == 401) {
                             callback.onError(LoginResult.WRONG_CREDENTIALS);
                         } else {
+                            Log.d("BACKEND", "Login Result (wrong credentials?): " + LoginResult.NETWORK_ERROR, ioex);
                             callback.onError(LoginResult.NETWORK_ERROR);
                         }
                     } catch (IOException e) {
+                        Log.d("BACKEND", "Login Result: " + e.getMessage(), e);
                         callback.onError(LoginResult.NETWORK_ERROR);
                     }
                     isError = true;

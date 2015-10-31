@@ -2,5 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="hogent.group15.ui.fragments.AchievementsFragment">
-
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/achievementsListView"></ListView>
 </FrameLayout>
