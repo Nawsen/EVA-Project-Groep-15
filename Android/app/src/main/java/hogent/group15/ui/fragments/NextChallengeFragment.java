@@ -17,19 +17,19 @@ import butterknife.ButterKnife;
 import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.domain.OnNetworkResponseListener;
-import hogent.group15.ui.ChallengeView;
+import hogent.group15.ui.controls.list.ChallengeListEntry;
 import hogent.group15.ui.R;
 
 public class NextChallengeFragment extends Fragment {
 
     @Bind(R.id.first_challenge)
-    public ChallengeView firstChallenge;
+    public ChallengeListEntry firstChallenge;
 
     @Bind(R.id.second_challenge)
-    public ChallengeView secondChallenge;
+    public ChallengeListEntry secondChallenge;
 
     @Bind(R.id.third_challenge)
-    public ChallengeView thirdChallenge;
+    public ChallengeListEntry thirdChallenge;
 
     @Nullable
     @Override

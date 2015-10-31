@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import butterknife.ButterKnife;
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
 
@@ -75,13 +79,19 @@ public class Achievement implements ListEntry {
     public View retrieveView(LayoutInflater inflater, ViewGroup parent) {
         View view = inflater.inflate(R.layout.achievement_entry, null);
 
-        ((TextView) view.findViewById(R.id.achievement_title)).setText(title);
-        if (description == null || description.isEmpty()) {
-            view.findViewById(R.id.achievement_description).setVisibility(View.INVISIBLE);
-            ((TextView) view.findViewById(R.id.achievement_description)).setText("");
+        TextView description = (TextView) view.findViewById(R.id.achievement_description);
+        TextView title = (TextView) view.findViewById(R.id.achievement_title);
+        title.setText(this.title);
+
+        if (this.description == null || this.description.isEmpty()) {
+            description.setVisibility(View.INVISIBLE);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(title.getLayoutParams());
+            params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+            params.addRule(RelativeLayout.RIGHT_OF, R.id.achievement_badge);
+            title.setLayoutParams(params);
         } else {
-            view.findViewById(R.id.achievement_title).setVisibility(View.VISIBLE);
-            ((TextView) view.findViewById(R.id.achievement_description)).setText(description);
+            title.setVisibility(View.VISIBLE);
+            description.setText(this.description);
         }
 
         view.findViewById(R.id.achievement_outerContainer).setBackground(box);

@@ -21,8 +21,9 @@ public class AchievementsRepository {
     }
 
     private AchievementsRepository() {
-        achievements.add(new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_achievements), android.R.drawable.ic_dialog_alert));
-        //achievements.add(new Achievement(MainMenuActivity.appContext, "Achievement #1"));
+        //achievements.add(new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_achievements), android.R.drawable.ic_dialog_alert));
+        achievements.add(new Achievement(MainMenuActivity.appContext, "Achievement #1"));
+        achievements.add(new Achievement(MainMenuActivity.appContext, "Achievement #2", "Description of the second achievement"));
     }
 
     public List<ListEntry> getAchievements() {

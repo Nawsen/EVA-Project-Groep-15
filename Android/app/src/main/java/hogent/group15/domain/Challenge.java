@@ -6,8 +6,8 @@ import android.view.ViewGroup;
 
 import java.io.Serializable;
 import java.net.URI;
-import java.util.List;
 
+import hogent.group15.ui.controls.list.ChallengeListEntry;
 import hogent.group15.ui.controls.ListEntry;
 
 /**
@@ -17,8 +17,9 @@ public class Challenge implements Serializable, ListEntry {
 
     @Override
     public View retrieveView(LayoutInflater inflater, ViewGroup parent) {
-        //TODO: Add list version of challenge
-        return null;
+        ChallengeListEntry view = new ChallengeListEntry(inflater.getContext());
+        view.updateContents(this);
+        return view;
     }
 
     public enum Difficulty {
