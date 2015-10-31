@@ -82,7 +82,7 @@ public class Users {
     @Consumes(MediaType.APPLICATION_JSON)
     public String login(User user) {
         User dbUser = em.find(User.class, user.getEmail());
-        if (dbUser != null && dbUser.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getPassword().getBytes())) {
+        if (dbUser != null && User.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getEncPassword())) {
             //TODO implement jsonwebtoken
             return getToken();
         } else {

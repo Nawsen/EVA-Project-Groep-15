@@ -68,10 +68,23 @@ public class User implements Serializable {
     @Size(min = 1, message = "lastName")
     private String lastName;
 
+    @Transient
     @NotNull(message = "password")
-    @Size(min = 7, message = "password")
     private String password;
 
+    public byte[] getEncPassword() {
+        return encPassword;
+    }
+
+    public void setEncPassword(byte[] encPassword) {
+        this.encPassword = encPassword;
+    }
+
+
+    
+    //encrypted password only for local usage!
+    private byte[] encPassword;
+    
     @Enumerated(EnumType.ORDINAL)
     @NotNull(message = "gender")
     private Gender gender;
@@ -111,8 +124,9 @@ public class User implements Serializable {
         this.address = address;
         this.grade = grade;
         this.birthDate = birthDate;
+        this.password = password;
         //set good hashed & salted password
-        this.password = Arrays.toString(hash(password.toCharArray(), generateSalt()));
+        this.encPassword = hash(password.toCharArray(), generateSalt());
     }
 
     public int getFacebookId() {
@@ -145,6 +159,7 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+        this.encPassword = hash(password.toCharArray(), generateSalt());
     }
 
     public Gender getGender() {
