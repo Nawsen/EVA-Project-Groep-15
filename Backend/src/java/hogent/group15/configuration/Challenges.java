@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -118,7 +119,7 @@ public class Challenges {
     @Path("add")
     @POST
     @Transactional
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
     public Response addChallenge(Challenge challenge){
         Challenge dbCh = em.find(Challenge.class, challenge.getId());
         if (dbCh != null){
@@ -131,6 +132,8 @@ public class Challenges {
                 throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).entity(builder.toString()).build());
             } else {
                 em.persist(challenge);
+                cache.addToCache(challenge);
+                
                 return Response.status(Response.Status.CREATED).build();
             }
         }

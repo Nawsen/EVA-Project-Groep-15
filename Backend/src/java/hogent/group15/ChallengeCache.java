@@ -33,7 +33,11 @@ public class ChallengeCache {
     public void init() {
 	allChallenges = em.createNamedQuery("Challenge.findAll", Challenge.class).getResultList();
     }
-
+    
+    public void addToCache(Challenge ch){
+        allChallenges.add(ch);
+    }
+    
     public DailyChallenges createDailyChallenges(User user) {
 	if (user.getDailyChallenges() != null && user.getDailyChallenges().getDate().isEqual(LocalDate.now())) {
             return user.getDailyChallenges();
