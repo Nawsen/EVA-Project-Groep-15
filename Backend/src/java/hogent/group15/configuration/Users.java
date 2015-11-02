@@ -51,9 +51,6 @@ public class Users {
     @Context
     private Validator validator;
 
-    @Inject
-    private ChallengeCache cache;
-
     @Path("register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
