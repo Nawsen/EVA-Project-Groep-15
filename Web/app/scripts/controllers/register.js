@@ -2,8 +2,8 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('RegisterCtrl',
-    ['$scope', '$location', '$http', '$state', 'auth',
-    function ($scope, $location, $http,  $state, auth) {
+    ['$scope', '$location', '$http', '$state', 'auth', 'messages',
+    function ($scope, $location, $http,  $state, auth, messages) {
     $scope.showHelpMail = false;
     $scope.showHelpPassword = false;
     $scope.showHelpRepeatPassword = false;
@@ -68,9 +68,8 @@ angular.module('eva').controller('RegisterCtrl',
             gender: $scope.convertGender(),
             grade: $scope.user.grade.val
         };
-        //var res = $http.post('http://178.62.232.69/backend/api/user/register', userObj);
-        //$location.path('/login');
-        $state.go('login');
+
+        messages.email = userObj.email;
 
         auth.register(userObj).error(function (error) {
             $scope.error = error;

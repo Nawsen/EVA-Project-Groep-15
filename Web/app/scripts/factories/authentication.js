@@ -39,7 +39,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
     auth.login = function(user){
 
          return $http.post('http://bitcode.io:8080/backend/api/user/login', user).success(function(data){
-         auth.saveToken(data.token);
+            auth.saveToken(data.token);
          });
 
     };

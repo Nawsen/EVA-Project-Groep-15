@@ -4,5 +4,4 @@
 angular.module('eva').controller('DashboardCtrl', ['$scope', '$location', 'auth', function ($scope, $location, auth) {
     $scope.user = {'firstname': 'voornaam', 'lastname': 'achternaam', 'avatar': 'http://placehold.it/150x150'};
 
-    console.log(auth.getToken());
 }]);
