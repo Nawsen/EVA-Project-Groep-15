@@ -2,37 +2,24 @@ package hogent.group15.ui;
 
 import android.content.Intent;
 import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hogent.group15.Consumer;
-import hogent.group15.StringInterpolator;
 import hogent.group15.domain.Backend;
-import hogent.group15.domain.OnNetworkResponseListener;
-import hogent.group15.domain.Sex;
-import hogent.group15.domain.VegetarianGrade;
+import hogent.group15.domain.User;
 import hogent.group15.ui.fragments.RegisterMainFragment;
 import hogent.group15.ui.fragments.RegisterPasswordFragment;
 import hogent.group15.ui.util.ActionBarConfig;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -107,24 +94,22 @@ public class RegisterActivity extends AppCompatActivity {
             registerButton.setText(R.string.register_register_button);
             currentMode = Mode.PASSWORD;
         } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
-            Backend.getBackend().registerUser(mainFragment.firstName.getText(), mainFragment.lastName.getText(), mainFragment.email.getText(), mainFragment.getSelectedSex(),
-                    passwordFragment.getPassword(), mainFragment.getSelectedGrade(), new OnNetworkResponseListener<String, IOException>() {
+            User user = new User(mainFragment.email.getText().toString(), passwordFragment.getPassword(), mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
+            Backend.getBackend().registerUser(user, new Callback<Response>() {
+                @Override
+                public void success(Response o, Response response) {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
+                }
 
+                @Override
+                public void failure(RetrofitError error) {
+                    runOnUiThread(new Runnable() {
                         @Override
-                        public void onResponse(String data) {
-                            startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
+                        public void run() {
+                            Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
                         }
-
-                        @Override
-                        public void onError(IOException ex) {
-                            runOnUiThread(new Runnable() {
-
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
+                    });
+                }
             });
         }
     }

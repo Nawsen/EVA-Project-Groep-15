@@ -18,7 +18,7 @@ import java.util.Map;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hogent.group15.Validator;
-import hogent.group15.domain.Sex;
+import hogent.group15.domain.Gender;
 import hogent.group15.domain.VegetarianGrade;
 import hogent.group15.ui.R;
 
@@ -42,13 +42,13 @@ public class RegisterMainFragment extends Fragment implements Validator {
     @Bind(R.id.register_grade)
     public Spinner grade;
 
-    private Map<String, Sex> sexMap = new HashMap<>();
+    private Map<String, Gender> sexMap = new HashMap<>();
     private Map<String, VegetarianGrade> vegetarianGradeMap = new HashMap<>();
 
     public RegisterMainFragment() {
     }
 
-    public Sex getSelectedSex() {
+    public Gender getSelectedSex() {
         return sexMap.get(sex.getSelectedItem());
     }
 
@@ -68,7 +68,7 @@ public class RegisterMainFragment extends Fragment implements Validator {
         Spinner sex = (Spinner) getView().findViewById(R.id.register_sex);
         Spinner grade = (Spinner) getView().findViewById(R.id.register_grade);
 
-        for (Sex s : Sex.values()) {
+        for (Gender s : Gender.values()) {
             sexMap.put(getString(s.getAndroidId()), s);
         }
 

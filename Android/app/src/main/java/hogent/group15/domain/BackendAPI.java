@@ -19,11 +19,14 @@ import retrofit.http.Path;
 public interface BackendAPI {
 
     @GET("/challenges/daily")
-    void getDailyChallenges(@Header("Authorization") String jwtToken, Callback<List<Challenge>> callback);
+    void getDailyChallenges(Callback<List<Challenge>> callback);
 
     @POST("/users/login")
     void login(@Body User user, Callback<JsonWebToken> token);
 
     @GET("/challenges/{challengeId}")
-    void getDetailedChallenge(@Header("Authorization") String jwtToken, @Path("challengeId") int id, Callback<Challenge> description);
+    void getDetailedChallenge(@Path("challengeId") int id, Callback<Challenge> description);
+
+    @POST("/users/register")
+    void register(@Body User user, Callback<Response> callback);
 }

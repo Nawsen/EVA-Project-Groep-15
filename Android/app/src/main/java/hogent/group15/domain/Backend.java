@@ -1,7 +1,10 @@
 package hogent.group15.domain;
 
 import android.os.AsyncTask;
+import android.telecom.Call;
 import android.util.Log;
+
+import com.google.gson.GsonBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,9 +17,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import retrofit.Callback;
+import retrofit.RequestInterceptor;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.converter.GsonConverter;
 
 /**
  * Created by Frederik on 10/20/2015.
@@ -26,7 +31,7 @@ public class Backend {
     private final URI backendServerUri;
     private static Backend backend;
     private final static String TAG = "BACKEND";
-    private final RestAdapter restAdapter = new RestAdapter.Builder().setEndpoint("http://192.168.0.188:8080/backend/api/").setLogLevel(RestAdapter.LogLevel.FULL).build();
+    private final RestAdapter restAdapter = doConfig(new RestAdapter.Builder()).build();
     private final BackendAPI backendAPI = restAdapter.create(BackendAPI.class);
     private JsonWebToken jwtToken;
 
@@ -47,71 +52,23 @@ public class Backend {
         WRONG_CREDENTIALS
     }
 
-    private String getToken() {
-        if (jwtToken == null) {
-            return null;
-        } else {
-            return "Bearer " + jwtToken.getToken();
-        }
+    private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
+        return adapter
+                .setEndpoint("http://192.168.0.188:8080/backend/api/")
+                .setLogLevel(RestAdapter.LogLevel.FULL)
+                .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
+                .setRequestInterceptor(new RequestInterceptor() {
+                    @Override
+                    public void intercept(RequestFacade request) {
+                        if (jwtToken != null) {
+                            request.addHeader("Authorization", "Bearer " + jwtToken.getToken());
+                        }
+                    }
+                });
     }
 
-    public AsyncTask<Void, Void, String> registerUser(final CharSequence firstName, final CharSequence lastName, final CharSequence email, final Sex sex, final CharSequence password,
-                                                      final VegetarianGrade grade, final OnNetworkResponseListener<String, IOException> callback) {
-        AsyncTask<Void, Void, String> task = new AsyncTask<Void, Void, String>() {
-
-            private boolean isError;
-
-            @Override
-            protected String doInBackground(Void... params) {
-                try {
-                    HttpURLConnection connection = (HttpURLConnection) backendServerUri.resolve("user/register").toURL().openConnection();
-                    connection.addRequestProperty("Content-Type", "application/json");
-                    connection.setRequestMethod("POST");
-                    connection.setDoInput(true);
-                    connection.setDoOutput(true);
-
-                    PrintWriter out = new PrintWriter(connection.getOutputStream());
-
-                    JSONObject user = new JSONObject();
-                    user.put("firstName", firstName);
-                    user.put("lastName", lastName);
-                    user.put("email", email);
-                    user.put("gender", sex.asInt());
-                    user.put("password", password);
-                    user.put("grade", grade.toString());
-                    out.println(user.toString());
-                    out.flush();
-
-                    Scanner in = new Scanner(connection.getInputStream());
-                    StringBuilder dataIn = new StringBuilder();
-
-                    while (in.hasNext()) {
-                        dataIn.append(in.next());
-                    }
-
-                    return dataIn.toString();
-                } catch (JSONException e) {
-                    Log.e(TAG, "Couldn't create JSON: " + e.getMessage());
-                    isError = true;
-                    return "json";
-                } catch (IOException ioex) {
-                    isError = true;
-                    callback.onError(ioex);
-                    return "";
-                }
-            }
-
-            @Override
-            protected void onPostExecute(String s) {
-
-                if (!isError) {
-                    callback.onResponse(s);
-                }
-            }
-        };
-
-        task.execute();
-        return task;
+    public void registerUser(User user, Callback<Response> callback) {
+        backendAPI.register(user, callback);
     }
 
     public void loginUser(User user, final Callback<JsonWebToken> callback) {
@@ -131,13 +88,13 @@ public class Backend {
 
     public void getDailyChallenges(final Callback<List<Challenge>> callback) {
         if (jwtToken != null) {
-            backendAPI.getDailyChallenges(getToken(), callback);
+            backendAPI.getDailyChallenges(callback);
         }
     }
 
     public void getDetailedChallenge(final int descriptionId, final Callback<Challenge> callback) {
         if(jwtToken != null) {
-            backendAPI.getDetailedChallenge(getToken(), descriptionId, callback);
+            backendAPI.getDetailedChallenge(descriptionId, callback);
         }
     }
 }
