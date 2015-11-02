@@ -36,6 +36,8 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".MainMenuActivity" >
         </activity>
+        <activity android:name=".LostPasswordActivity" >
+        </activity>
     </application>
 
 </manifest>

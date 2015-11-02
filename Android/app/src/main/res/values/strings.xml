@@ -58,4 +58,7 @@
     <string name="validation_password">Fill in your password</string>
     <string name="no_completed_challenges">You have not yet completed any challenges!</string>
     <string name="no_achievements">You have not yet earned any achievements!</string>
+    <string name="lost_password_title">Lost password</string>
+    <string name="lost_password_description">If you lost your password you can send a password reset link to your email. You will be able to enter a new password with the provided link.</string>
+    <string name="lost_password_button">Send link</string>
 </resources>

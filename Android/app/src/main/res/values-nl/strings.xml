@@ -55,4 +55,7 @@
     <string name="validation_password">Gelieve uw wachtwoord in te vullen</string>
     <string name="no_completed_challenges">U heeft nog geen uitdagingen afgewerkt!</string>
     <string name="no_achievements">U heeft nog geen prestaties behaald!</string>
+    <string name="lost_password_title">Wachtwoord vergeten</string>
+    <string name="lost_password_description">Als u uw wachtwoord vergeten bent kan u een link naar uw mail versturen om uw wachtwoord te herstellen. U zal een nieuw wachtwoord kunnen invullen met de ontvangen link.</string>
+    <string name="lost_password_button">Verstuur link</string>
 </resources>

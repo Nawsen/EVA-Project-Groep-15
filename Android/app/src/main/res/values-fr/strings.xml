@@ -55,4 +55,7 @@
     <string name="validation_password">Veuillez inserer votre mot de passe</string>
     <string name="no_completed_challenges">Vous n\'avez pas encore complet\é des d\éfis!</string>
     <string name="no_achievements">Vous n\'avez pas encore gagn\é des acquis!</string>
+    <string name="lost_password_title">Mot de passe oubli\é</string>
+    <string name="lost_password_description">Si vous avez oublié votre mot de passe, vous pouvez envoyer un lien pour réinitialiser votre mot de passe. Vous aurez la possibilité de metre un nouveau mot de passe avec le lien fourni.</string>
+    <string name="lost_password_button">Envoyer le lien</string>
 </resources>

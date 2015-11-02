@@ -94,6 +94,9 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         startActivity(new Intent(this, RegisterActivity.class));
     }
 
+    @OnClick(R.id.login_lost_password)
+    public void onLostPassword(View v) { startActivity(new Intent(getApplicationContext(), LostPasswordActivity.class)); }
+
     @Override
     public boolean validate() {
         if (email.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()) {
