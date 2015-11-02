@@ -4,6 +4,7 @@
 
 app.factory('auth', ['$http', '$window', function($http, $window){
     var auth = {};
+
     auth.saveToken = function (token){
         $window.localStorage['eva-token'] = token;
     };
@@ -16,8 +17,7 @@ app.factory('auth', ['$http', '$window', function($http, $window){
 
         if(token){
             var payload = JSON.parse($window.atob(token.split('.')[1]));
-
-            return payload.exp > Date.now() / 1000;
+            return payload.iat > Date.now() / 1000;
         } else {
             return false;
         }
@@ -27,19 +27,20 @@ app.factory('auth', ['$http', '$window', function($http, $window){
             var token = auth.getToken();
             var payload = JSON.parse($window.atob(token.split('.')[1]));
 
-            return payload.username;
+            return payload.jti;
         }
     };
     auth.register = function(user){
-        return $http.post('http://bitcode.io:8080/backend/api/user/register', user).success(function(data){
+        return $http.post('http://bitcode.io:8080/backend/api/users/register', user).success(function(data){
             //auth.saveToken(data.token);
+            //wordt toch niet teruggestuurd bij register.
         });
     };
 
     auth.login = function(user){
-
-         return $http.post('http://bitcode.io:8080/backend/api/user/login', user).success(function(data){
+         return $http.post('http://bitcode.io:8080/backend/api/users/login', user).success(function(data){
             auth.saveToken(data.token);
+             $http.defaults.headers.common.Authorization = 'Bearer ' + auth.getToken();
          });
 
     };
@@ -47,11 +48,6 @@ app.factory('auth', ['$http', '$window', function($http, $window){
     auth.logOut = function(){
         $window.localStorage.removeItem('eva-token');
     };
-
-
-
-
-
     return auth;
 }])
 
