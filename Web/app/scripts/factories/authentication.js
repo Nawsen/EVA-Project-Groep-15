@@ -31,15 +31,17 @@ app.factory('auth', ['$http', '$window', function($http, $window){
         }
     };
     auth.register = function(user){
-        return $http.post('https://bitcode.io:8080/backend/api/user/register', user).success(function(data){
-            auth.saveToken(data.token);
+        return $http.post('http://bitcode.io:8080/backend/api/user/register', user).success(function(data){
+            //auth.saveToken(data.token);
         });
     };
 
     auth.login = function(user){
-        return $http.post('https://bitcode.io:8080/backend/api/user/login', user).success(function(data){
-            auth.saveToken(data.token);
-        });
+
+         return $http.post('http://bitcode.io:8080/backend/api/user/login', user).success(function(data){
+         auth.saveToken(data.token);
+         });
+
     };
 
     auth.logOut = function(){
