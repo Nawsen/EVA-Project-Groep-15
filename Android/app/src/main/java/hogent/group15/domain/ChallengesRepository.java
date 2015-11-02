@@ -24,7 +24,7 @@ public class ChallengesRepository {
     private ChallengesRepository() {
         // challenges.add(new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_completed_challenges), android.R.drawable.ic_dialog_alert));
         challenges.add(new Challenge(1, URI.create("http://www.evavzw.be/sites/default/files/styles/header_image/public/recipe/header/chili.jpg?itok=LLuipNqt"), "Chili sin Carne",
-                "A detailed description of the preparation for Chili sin Carne", 3));
+                "A detailed description of the preparation for Chili sin Carne", "HARD"));
     }
 
     public List<ListEntry> getChallenges() {

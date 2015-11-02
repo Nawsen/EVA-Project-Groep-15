@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 import java.net.URI;
 
@@ -40,21 +42,28 @@ public class Challenge implements Serializable, ListEntry {
         }
     }
 
-    private int id;
-    private URI headerImageUri;
-    private String title;
-    private String detailedDescription;
-    private int score;
+    int id;
+
+    @SerializedName("imageUrl")
+    URI headerImageUri;
+
+    String title;
+
+    @SerializedName("description")
+    String detailedDescription;
+
+    @SerializedName("difficulty")
+    String difficulty;
 
     public Challenge() {
     }
 
-    public Challenge(int id, URI headerImageUri, String title, String detailedDescription, int score) {
+    public Challenge(int id, URI headerImageUri, String title, String detailedDescription, String difficulty) {
         this.id = id;
         this.headerImageUri = headerImageUri;
         this.title = title;
         this.detailedDescription = detailedDescription;
-        this.score = score;
+        this.difficulty = difficulty;
     }
 
     public String getDetailedDescription() {
@@ -73,12 +82,12 @@ public class Challenge implements Serializable, ListEntry {
         this.title = title;
     }
 
-    public int getScore() {
-        return score;
+    public String getDifficulty() {
+        return difficulty;
     }
 
-    public void setScore(int score) {
-        this.score = score;
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
     }
 
     public URI getHeaderImageUri() {

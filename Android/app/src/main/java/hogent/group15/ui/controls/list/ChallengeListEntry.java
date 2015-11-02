@@ -89,7 +89,7 @@ public class ChallengeListEntry extends FrameLayout {
         if (challenge != null) {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
-            score.setText(StringInterpolator.interpolate(scoreExpression, challenge.getScore()));
+            score.setText(StringInterpolator.interpolate(scoreExpression, challenge.getDifficulty()));
             AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
                 @Override
                 public void consume(Bitmap bitmap) {

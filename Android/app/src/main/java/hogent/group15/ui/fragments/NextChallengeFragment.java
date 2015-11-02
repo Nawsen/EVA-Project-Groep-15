@@ -19,6 +19,9 @@ import hogent.group15.domain.Challenge;
 import hogent.group15.domain.OnNetworkResponseListener;
 import hogent.group15.ui.controls.list.ChallengeListEntry;
 import hogent.group15.ui.R;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class NextChallengeFragment extends Fragment {
 
@@ -67,23 +70,23 @@ public class NextChallengeFragment extends Fragment {
     }
 
     public void refreshChallenges() {
-        Backend.getBackend().getDailyChallenges(new OnNetworkResponseListener<List<Challenge>, IOException>() {
+        Backend.getBackend().getDailyChallenges(new Callback<List<Challenge>>() {
 
             @Override
-            public void onResponse(List<Challenge> data) {
+            public void success(List<Challenge> data, Response response) {
                 firstChallenge.updateContents(data.get(0));
                 secondChallenge.updateContents(data.get(1));
                 thirdChallenge.updateContents(data.get(2));
             }
 
             @Override
-            public void onError(final IOException ex) {
+            public void failure(final RetrofitError error) {
                 NextChallengeFragment.this.getActivity().runOnUiThread(new Runnable() {
 
                     @Override
                     public void run() {
                         Toast.makeText(NextChallengeFragment.this.getContext(), getString(R.string.network_error), Toast.LENGTH_LONG);
-                        Log.e("NEXT CHALLENGES", "Couldn't retrieve new challenges: " + ex.getMessage());
+                        Log.e("NEXT CHALLENGES", "Couldn't retrieve new challenges: " + error.getMessage());
                     }
                 });
             }

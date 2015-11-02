@@ -18,8 +18,13 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hogent.group15.Validator;
 import hogent.group15.domain.Backend;
+import hogent.group15.domain.JsonWebToken;
 import hogent.group15.domain.OnNetworkResponseListener;
+import hogent.group15.domain.User;
 import hogent.group15.ui.util.ActionBarConfig;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class LoginActivity extends AppCompatActivity implements Validator {
 
@@ -57,26 +62,25 @@ public class LoginActivity extends AppCompatActivity implements Validator {
             return;
         }
 
-        Backend.getBackend().loginUser(email.getText().toString(), password.getText().toString(), new OnNetworkResponseListener<String, Backend.LoginResult>() {
+        Backend.getBackend().loginUser(new User(email.getText().toString(), password.getText().toString()), new Callback<JsonWebToken>() {
             @Override
-            public void onResponse(String data) {
+            public void success(JsonWebToken data, Response response) {
                 password.setText("");
                 startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
             }
 
             @Override
-            public void onError(final Backend.LoginResult result) {
-                Log.e("LOGIN", "result: " + result);
+            public void failure(final RetrofitError error) {
+                // Log.e("LOGIN", "result: " + error.getResponse());
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        switch (result) {
-                            case NETWORK_ERROR:
-                                Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
-                                break;
-                            case WRONG_CREDENTIALS:
+                        switch (error.getResponse().getStatus()) {
+                            case 401:
                                 Toast.makeText(getApplicationContext(), R.string.wrong_credentials, Toast.LENGTH_LONG).show();
                                 break;
+                            default:
+                                Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
                         }
                     }
                 });

@@ -84,14 +84,14 @@ public class Users {
         User dbUser = em.find(User.class, user.getEmail());
         if (dbUser != null && User.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getEncPassword())) {
             //TODO implement jsonwebtoken
-            return getToken();
+            return getToken(user.getEmail());
         } else {
             throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
         }
 
     }
 
-    public String getToken() {
+    public String getToken(String id) {
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 
@@ -101,7 +101,7 @@ public class Users {
         //We will sign our JWT with our ApiKey secret
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("secret");
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, signatureAlgorithm.getJcaName());
-        JwtBuilder builder = Jwts.builder().setId("demo@demo.be")
+        JwtBuilder builder = Jwts.builder().setId(id)
                                 .setIssuedAt(now)
                 .signWith(signatureAlgorithm, signingKey);
        

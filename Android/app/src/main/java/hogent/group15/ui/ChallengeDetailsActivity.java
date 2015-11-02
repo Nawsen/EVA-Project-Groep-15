@@ -9,14 +9,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.io.IOException;
-
 import hogent.group15.AsyncUtil;
 import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
-import hogent.group15.domain.OnNetworkResponseListener;
 import hogent.group15.ui.util.ActionBarConfig;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 public class ChallengeDetailsActivity extends AppCompatActivity {
 
@@ -34,16 +34,16 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.challenge_image);
         longDescription = (TextView) findViewById(R.id.challenge_long_description);
         updateContents((Challenge) getIntent().getSerializableExtra("challenge"));
-        Backend.getBackend().getChallengeDescription(currentChallenge.getId(), new OnNetworkResponseListener<String, IOException>() {
+        Backend.getBackend().getDetailedChallenge(currentChallenge.getId(), new Callback<Challenge>() {
 
             @Override
-            public void onResponse(String data) {
-                currentChallenge.setDetailedDescription(data);
+            public void success(Challenge data, Response response) {
+                currentChallenge.setDetailedDescription(data.getDetailedDescription());
                 longDescription.setText(currentChallenge.getDetailedDescription());
             }
 
             @Override
-            public void onError(IOException ex) {
+            public void failure(RetrofitError error) {
                 Log.e("DESCRIPTION RETRIEVAL", "Couldn't retrieve description for challenge: " + currentChallenge.getTitle());
             }
         });
