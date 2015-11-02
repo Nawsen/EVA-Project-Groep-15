@@ -1,12 +1,26 @@
 package hogent.group15.domain;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
 import java.io.Serializable;
 import java.net.URI;
+
+import hogent.group15.ui.controls.list.ChallengeListEntry;
+import hogent.group15.ui.controls.ListEntry;
 
 /**
  * Created by Frederik on 10/11/2015.
  */
-public class Challenge implements Serializable {
+public class Challenge implements Serializable, ListEntry {
+
+    @Override
+    public View retrieveView(LayoutInflater inflater, ViewGroup parent) {
+        ChallengeListEntry view = new ChallengeListEntry(inflater.getContext());
+        view.updateContents(this);
+        return view;
+    }
 
     public enum Difficulty {
 

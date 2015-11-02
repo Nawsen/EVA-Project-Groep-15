@@ -53,4 +53,6 @@
     <string name="network_error">Pas possible de se connecter \à l\'Internet!</string>
     <string name="wrong_credentials">E-mail ou mot de passe incorrect!</string>
     <string name="validation_password">Veuillez inserer votre mot de passe</string>
+    <string name="no_completed_challenges">Vous n\'avez pas encore complet\é des d\éfis!</string>
+    <string name="no_achievements">Vous n\'avez pas encore gagn\é des acquis!</string>
 </resources>

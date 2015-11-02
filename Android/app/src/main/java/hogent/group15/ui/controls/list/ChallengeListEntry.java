@@ -1,42 +1,48 @@
-package hogent.group15.ui;
+package hogent.group15.ui.controls.list;
 
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import java.io.IOException;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import hogent.group15.AsyncUtil;
-import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
 import hogent.group15.StringInterpolator;
-import hogent.group15.domain.OnNetworkResponseListener;
+import hogent.group15.ui.ChallengeDetailsActivity;
+import hogent.group15.ui.R;
 
 /**
  * Created by Frederik on 10/11/2015.
  */
-public class ChallengeView extends LinearLayout {
+public class ChallengeListEntry extends FrameLayout {
 
     private View root;
-    private TextView title;
-    private TextView score;
-    private ImageView image;
+
+    @Bind(R.id.challenge_title)
+    public TextView title;
+
+    @Bind(R.id.challenge_score)
+    public TextView score;
+
+    @Bind(R.id.challenge_image)
+    public ImageView image;
+
     private String scoreExpression;
     private Challenge currentChallenge;
 
-    public ChallengeView(Context context) {
+    public ChallengeListEntry(Context context) {
         super(context);
         initialize();
     }
 
-    public ChallengeView(Context context, AttributeSet attrs) {
+    public ChallengeListEntry(Context context, AttributeSet attrs) {
         super(context, attrs);
         initialize();
     }
@@ -61,21 +67,25 @@ public class ChallengeView extends LinearLayout {
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();
-        initComponents();
     }
 
     private void initComponents() {
-        title = (TextView) findViewById(R.id.challenge_title);
-        score = (TextView) findViewById(R.id.challenge_score);
-        image = (ImageView) findViewById(R.id.challenge_image);
+        ButterKnife.bind(this);
         scoreExpression = score.getText().toString();
     }
+
+    private boolean initializedComponents = false;
 
     public void updateContents(Challenge challenge) {
         updateContents(challenge, null);
     }
 
     public void updateContents(Challenge challenge, final Runnable onComplete) {
+        if(!initializedComponents) {
+            initComponents();
+            initializedComponents = true;
+        }
+
         if (challenge != null) {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
@@ -86,7 +96,7 @@ public class ChallengeView extends LinearLayout {
                     image.setImageBitmap(bitmap);
                     if (onComplete != null) {
                         onComplete.run();
-                        ChallengeView.this.setAlpha(1f);
+                        ChallengeListEntry.this.setAlpha(1f);
                     }
                 }
             });
