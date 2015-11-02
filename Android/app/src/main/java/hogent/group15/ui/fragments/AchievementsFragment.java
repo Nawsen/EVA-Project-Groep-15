@@ -45,5 +45,9 @@ public class AchievementsFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_achievements, container, false);
     }
 
-
+    // Unnecessary since AchievementsRepository saves achievements
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 }

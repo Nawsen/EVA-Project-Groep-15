@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 
-import hogent.group15.ui.fragments.NextChallengeFragment;
+import hogent.group15.ui.fragments.NextChallenge;
 import hogent.group15.ui.util.ActionBarConfig;
 
 public class MainMenuActivityOld extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class MainMenuActivityOld extends AppCompatActivity {
     }
 
     public void onGetChallenge(View v) {
-        startActivity(new Intent(this, NextChallengeFragment.class));
+        startActivity(new Intent(this, NextChallenge.class));
     }
 
     public void onGetProgress(View v) {

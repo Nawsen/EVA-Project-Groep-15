@@ -1,28 +1,41 @@
 package hogent.group15.ui;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import hogent.group15.AsyncUtil;
 import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
 import hogent.group15.ui.util.ActionBarConfig;
 import retrofit.Callback;
+import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
 public class ChallengeDetailsActivity extends AppCompatActivity {
 
-    private TextView title;
-    private ImageView image;
-    private TextView longDescription;
+    @Bind(R.id.challenge_title)
+    TextView title;
+
+    @Bind(R.id.challenge_image)
+    ImageView image;
+
+    @Bind(R.id.challenge_long_description)
+    TextView longDescription;
+
     private Challenge currentChallenge;
 
     @Override
@@ -30,16 +43,14 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_challenge_details);
 
-        title = (TextView) findViewById(R.id.challenge_title);
-        image = (ImageView) findViewById(R.id.challenge_image);
-        longDescription = (TextView) findViewById(R.id.challenge_long_description);
+        ButterKnife.bind(this);
         updateContents((Challenge) getIntent().getSerializableExtra("challenge"));
         Backend.getBackend().getDetailedChallenge(currentChallenge.getId(), new Callback<Challenge>() {
 
             @Override
             public void success(Challenge data, Response response) {
                 currentChallenge.setDetailedDescription(data.getDetailedDescription());
-                longDescription.setText(currentChallenge.getDetailedDescription());
+                longDescription.setText(currentChallenge.getDetailedDescription() == null ? "" : Html.fromHtml(currentChallenge.getDetailedDescription()));
             }
 
             @Override
@@ -52,7 +63,7 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
     public void updateContents(Challenge challenge) {
         currentChallenge = challenge;
         title.setText(challenge.getTitle());
-        longDescription.setText(challenge.getDetailedDescription());
+        longDescription.setText(challenge.getDetailedDescription() == null ? "" : Html.fromHtml(challenge.getDetailedDescription()));
         AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
             @Override
             public void consume(Bitmap bitmap) {
@@ -66,7 +77,20 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         return ActionBarConfig.onCreateOptionsMenu(menu, this);
     }
 
-    public void onAcceptChallenge(View v) {
+    @OnClick(R.id.challenge_accept)
+    public void onAcceptChallenge(Button b) {
+        Backend.getBackend().acceptChallenge(currentChallenge.getId(), new ResponseCallback() {
 
+            @Override
+            public void success(Response response) {
+                startActivity(new Intent(ChallengeDetailsActivity.this, MainMenuActivity.class));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Log.e(Backend.TAG, "Accepting challenge failed: " + error.getResponse());
+                success(null);
+            }
+        });
     }
 }

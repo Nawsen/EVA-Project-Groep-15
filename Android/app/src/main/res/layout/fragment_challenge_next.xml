@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="hogent.group15.ui.fragments.NextChallengeFragment">
+    tools:context="hogent.group15.ui.fragments.NextChallenge">
 
     <Space
         android:layout_width="0dp"

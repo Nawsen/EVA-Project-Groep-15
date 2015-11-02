@@ -18,6 +18,7 @@ import hogent.group15.ui.fragments.RegisterMainFragment;
 import hogent.group15.ui.fragments.RegisterPasswordFragment;
 import hogent.group15.ui.util.ActionBarConfig;
 import retrofit.Callback;
+import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
 
@@ -95,9 +96,9 @@ public class RegisterActivity extends AppCompatActivity {
             currentMode = Mode.PASSWORD;
         } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
             User user = new User(mainFragment.email.getText().toString(), passwordFragment.getPassword(), mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
-            Backend.getBackend().registerUser(user, new Callback<Response>() {
+            Backend.getBackend().registerUser(user, new ResponseCallback() {
                 @Override
-                public void success(Response o, Response response) {
+                public void success(Response response) {
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
                 }
 

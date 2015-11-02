@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">EVA</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
-    <string name="accept_challenge">Accepte défi</string>
+    <string name="accept_challenge">Fait le défi</string>
     <string name="choose_challenge">Choisi un défi:</string>
     <string name="welcome_notification">Bienvenu {{username}}</string>
     <string name="get_challenge">Regarde au défi</string>
@@ -55,4 +55,6 @@
     <string name="validation_password">Veuillez inserer votre mot de passe</string>
     <string name="no_completed_challenges">Vous n\'avez pas encore complet\é des d\éfis!</string>
     <string name="no_achievements">Vous n\'avez pas encore gagn\é des acquis!</string>
+    <string name="challenge_completed">Défi achevé</string>
+    <string name="congratulations">Congratulations!</string>
 </resources>

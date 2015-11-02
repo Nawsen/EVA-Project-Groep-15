@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
+import retrofit.ResponseCallback;
 import retrofit.RestAdapter;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -28,15 +29,13 @@ import retrofit.converter.GsonConverter;
  */
 public class Backend {
 
-    private final URI backendServerUri;
     private static Backend backend;
-    private final static String TAG = "BACKEND";
+    public final static String TAG = "BACKEND";
     private final RestAdapter restAdapter = doConfig(new RestAdapter.Builder()).build();
     private final BackendAPI backendAPI = restAdapter.create(BackendAPI.class);
     private JsonWebToken jwtToken;
 
     private Backend() {
-        backendServerUri = URI.create("");
     }
 
     public static Backend getBackend() {
@@ -47,14 +46,9 @@ public class Backend {
         return backend;
     }
 
-    public enum LoginResult {
-        NETWORK_ERROR,
-        WRONG_CREDENTIALS
-    }
-
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://bitcode.io:8080/backend/api/")
+                .setEndpoint("http://192.168.0.188:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -67,7 +61,7 @@ public class Backend {
                 });
     }
 
-    public void registerUser(User user, Callback<Response> callback) {
+    public void registerUser(User user, ResponseCallback callback) {
         backendAPI.register(user, callback);
     }
 
@@ -87,14 +81,33 @@ public class Backend {
     }
 
     public void getDailyChallenges(final Callback<List<Challenge>> callback) {
-        if (jwtToken != null) {
-            backendAPI.getDailyChallenges(callback);
-        }
+        backendAPI.getDailyChallenges(callback);
     }
 
-    public void getDetailedChallenge(final int descriptionId, final Callback<Challenge> callback) {
-        if(jwtToken != null) {
-            backendAPI.getDetailedChallenge(descriptionId, callback);
-        }
+    public void getDetailedChallenge(final int challengeId, final Callback<Challenge> callback) {
+        backendAPI.getDetailedChallenge(challengeId, callback);
+    }
+
+    public void acceptChallenge(int challengeId, ResponseCallback callback) {
+        backendAPI.acceptChallenge("", challengeId, callback);
+    }
+
+    public void getAcceptedChallenge(Callback<Challenge> callback) {
+        backendAPI.getAcceptedChallenge(callback);
+    }
+
+    public void completeCurrentChallenge(final ResponseCallback callback) {
+        backendAPI.completeChallenge("", new ResponseCallback() {
+            @Override
+            public void success(Response response) {
+                ChallengesRepository.getInstance().setCurrentChallenge(null);
+                callback.success(response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error);
+            }
+        });
     }
 }

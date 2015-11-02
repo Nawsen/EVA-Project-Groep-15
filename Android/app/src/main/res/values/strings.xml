@@ -58,4 +58,9 @@
     <string name="validation_password">Fill in your password</string>
     <string name="no_completed_challenges">You have not yet completed any challenges!</string>
     <string name="no_achievements">You have not yet earned any achievements!</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="challenge_completed">Challenge completed</string>
+    <string name="congratulations">Congratulations!</string>
 </resources>

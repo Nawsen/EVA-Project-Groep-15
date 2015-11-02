@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">EVA</string>
-    <string name="accept_challenge">Accepteer uitdaging</string>
+    <string name="accept_challenge">Uitdaging aangaan</string>
     <string name="challenge_score_notification">Score: {{score}}</string>
     <string name="choose_challenge">Kies een uitdaging:</string>
     <string name="welcome_notification">Welkom {{username}}</string>
@@ -55,4 +55,6 @@
     <string name="validation_password">Gelieve uw wachtwoord in te vullen</string>
     <string name="no_completed_challenges">U heeft nog geen uitdagingen afgewerkt!</string>
     <string name="no_achievements">U heeft nog geen prestaties behaald!</string>
+    <string name="challenge_completed">Uitdaging gelukt</string>
+    <string name="congratulations">Proficiat!</string>
 </resources>
