@@ -48,7 +48,7 @@ public class Backend {
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://192.168.0.188:8080/backend/api/")
+                .setEndpoint("http://bitcode.io:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -88,8 +88,20 @@ public class Backend {
         backendAPI.getDetailedChallenge(challengeId, callback);
     }
 
-    public void acceptChallenge(int challengeId, ResponseCallback callback) {
-        backendAPI.acceptChallenge("", challengeId, callback);
+    public void acceptChallenge(final Challenge challenge, final Callback<Challenge> callback) {
+        backendAPI.acceptChallenge(challenge.getId(), "", new ResponseCallback() {
+
+            @Override
+            public void success(Response response) {
+                ChallengesRepository.getInstance().setCurrentChallenge(challenge);
+                callback.success(challenge, response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error);
+            }
+        });
     }
 
     public void getAcceptedChallenge(Callback<Challenge> callback) {

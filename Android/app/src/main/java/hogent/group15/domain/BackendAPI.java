@@ -32,8 +32,8 @@ public interface BackendAPI {
     @POST("/users/register")
     void register(@Body User user, ResponseCallback callback);
 
-    @PUT("/{challengeId}/accept")
-    void acceptChallenge(@Body String body, @Header("challengeId") int id, ResponseCallback callback);
+    @PUT("/challenges/{challengeId}/accept")
+    void acceptChallenge(@Path("challengeId") int id, @Body String body, ResponseCallback callback);
 
     @GET("/challenges/accepted")
     void getAcceptedChallenge(Callback<Challenge> callback);

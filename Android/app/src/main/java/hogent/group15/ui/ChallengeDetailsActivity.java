@@ -79,17 +79,17 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
 
     @OnClick(R.id.challenge_accept)
     public void onAcceptChallenge(Button b) {
-        Backend.getBackend().acceptChallenge(currentChallenge.getId(), new ResponseCallback() {
+        Backend.getBackend().acceptChallenge(currentChallenge, new Callback<Challenge>() {
 
             @Override
-            public void success(Response response) {
-                startActivity(new Intent(ChallengeDetailsActivity.this, MainMenuActivity.class));
+            public void success(Challenge challenge, Response response) {
+                ChallengeDetailsActivity.this.finish();
             }
 
             @Override
             public void failure(RetrofitError error) {
                 Log.e(Backend.TAG, "Accepting challenge failed: " + error.getResponse());
-                success(null);
+                ChallengeDetailsActivity.this.finish();
             }
         });
     }

@@ -29,5 +29,5 @@
     <hogent.group15.ui.controls.EvaButton
         android:layout_width="wrap_content" android:text="@string/challenge_completed" android:textSize="@dimen/h1_font_size"
         android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
-        android:id="@+id/challenge_accept" style="@style/evaButtonGreen" android:paddingBottom="16dp"/>
+        android:id="@+id/challenge_accept" style="@style/evaButtonGreen" android:layout_marginBottom="16dp"/>
 </LinearLayout>
