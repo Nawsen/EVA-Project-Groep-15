@@ -46,7 +46,6 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
     };
     auth.setHeader = function () {
         $http.defaults.headers.common.Authorization = 'Bearer ' + auth.getToken();
-        $http.defaults.headers.common['Auth-Token'] = 'Bearer ' + auth.getToken();
     };
     auth.logOut = function () {
         $window.localStorage.removeItem('eva-token');

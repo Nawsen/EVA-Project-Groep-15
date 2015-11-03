@@ -46,8 +46,8 @@
         <div class="banner">
             <h3 class="challenge-title">Kies een uitdaging:</h3>
             <div id="challenges">
-                <article class="challenge" ng-repeat="challenge in challenges.challenges">
-                    <div class="pompoensoep">
+                <article class="challenge" ng-repeat="challenge in challenges">
+                    <div ng-style="{'background-image':'url({{challenge.imageUrl}})'}">
                         <p>{{challenge.title}}</p>
                     </div>
                 </article>

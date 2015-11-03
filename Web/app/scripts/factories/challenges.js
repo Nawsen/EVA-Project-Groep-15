@@ -11,7 +11,10 @@ app.factory('challenges', ['$http', 'auth', function ($http, auth) {
         }
         };
 
-        challenges.challenges = $http.get("http://ts.wannesvandorpe.be:666/backend/api/challenges/daily", config);
+        $http.get("http://ts.wannesvandorpe.be:666/backend/api/challenges/daily").success(function(data, status, headers, config) {
+            challenges.challenges = data;
+        });
+        return challenges.challenges;
     };
 
     return challenges;
