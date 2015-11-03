@@ -46,12 +46,12 @@
         <div class="banner">
             <h3 class="challenge-title">Kies een uitdaging:</h3>
             <div id="challenges">
-                <article class="challenge">
+                <article class="challenge" ng-repeat="challenge in challenges.challenges">
                     <div class="pompoensoep">
-                        <p>Maak een soepje klaar met een veel te lange titel om te kijken wat er juist gebeurt.</p>
+                        <p>{{challenge.title}}</p>
                     </div>
                 </article>
-                <article class="challenge">
+                <!--<article class="challenge">
                     <div class="knolselder">
                         <p>Maak nog een ander soepje klaar</p>
                     </div>
@@ -60,7 +60,7 @@
                     <div class="pompoenstoof">
                         <p>Ga eens op restaurant</p>
                     </div>
-                </article>
+                </article>-->
             </div>
         </div>
 

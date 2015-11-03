@@ -31,14 +31,14 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
         }
     };
     auth.register = function (user) {
-        return $http.post('http://bitcode.io:8080/backend/api/users/register', user).success(function (data) {
+        return $http.post('http://ts.wannesvandorpe.be:666/backend/api/users/register', user).success(function (data) {
             //auth.saveToken(data.token);
             //wordt toch niet teruggestuurd bij register.
         });
     };
 
     auth.login = function (user) {
-        return $http.post('http://bitcode.io:8080/backend/api/users/login', user).success(function (data) {
+        return $http.post('http://ts.wannesvandorpe.be:666/backend/api/users/login', user).success(function (data) {
             auth.saveToken(data.token);
             auth.setHeader();
         });
@@ -46,7 +46,8 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
     };
     auth.setHeader = function () {
         $http.defaults.headers.common.Authorization = 'Bearer ' + auth.getToken();
-    }
+        $http.defaults.headers.common['Auth-Token'] = 'Bearer ' + auth.getToken();
+    };
     auth.logOut = function () {
         $window.localStorage.removeItem('eva-token');
     };
