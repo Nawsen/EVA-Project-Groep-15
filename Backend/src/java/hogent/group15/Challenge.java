@@ -21,20 +21,21 @@ import javax.persistence.NamedQuery;
 public class Challenge implements Serializable {
 
     public enum Difficulty {
+
 	EASY, MEDIUM, HARD
     }
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    
+
     private String title;
     private String description;
     private String imageUrl;
-    
+
     @ManyToMany(fetch = FetchType.LAZY)
     private List<User> users;
-    
+
     @Enumerated(EnumType.ORDINAL)
     private Difficulty difficulty;
 
@@ -55,7 +56,7 @@ public class Challenge implements Serializable {
 	this.imageUrl = imageUrl;
 	this.difficulty = difficulty;
     }
-    
+
     public int getId() {
 	return id;
     }
@@ -95,6 +96,5 @@ public class Challenge implements Serializable {
     public void setDifficulty(Difficulty difficulty) {
 	this.difficulty = difficulty;
     }
-    
-    
+
 }

@@ -30,27 +30,27 @@ public class ChallengeWriter implements MessageBodyWriter<Challenge> {
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        return User.class.isAssignableFrom(type);
+	return User.class.isAssignableFrom(type);
     }
 
     @Override
     public long getSize(Challenge t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        return -1;
+	return -1;
     }
 
     @Override
     public void writeTo(Challenge t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-        JsonObjectBuilder jsonCha = Json.createObjectBuilder();
+	JsonObjectBuilder jsonCha = Json.createObjectBuilder();
 
-        jsonCha.add("id", t.getId());
-        jsonCha.add("title", t.getTitle());
-        jsonCha.add("description", t.getDescription());
-        jsonCha.add("difficulty", t.getDifficulty().name());
+	jsonCha.add("id", t.getId());
+	jsonCha.add("title", t.getTitle());
+	jsonCha.add("description", t.getDescription());
+	jsonCha.add("difficulty", t.getDifficulty().name());
 	jsonCha.add("imageUrl", t.getImageUrl());
-        
-        try(JsonWriter w = Json.createWriter(entityStream)){
-            w.writeObject(jsonCha.build());
-        }
+
+	try (JsonWriter w = Json.createWriter(entityStream)) {
+	    w.writeObject(jsonCha.build());
+	}
     }
 
 }

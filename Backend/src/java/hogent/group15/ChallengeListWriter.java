@@ -30,48 +30,47 @@ import javax.ws.rs.ext.Provider;
  */
 @Provider
 @Produces(MediaType.APPLICATION_JSON)
-public class ChallengeListWriter implements MessageBodyWriter<List<Challenge>>{
+public class ChallengeListWriter implements MessageBodyWriter<List<Challenge>> {
 
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        if (!List.class.isAssignableFrom(type)) {
-            return false;
-        }
+	if (!List.class.isAssignableFrom(type)) {
+	    return false;
+	}
 
-        if (genericType instanceof ParameterizedType) {
-            Type[] arguments = ((ParameterizedType) genericType).getActualTypeArguments();
-            return arguments.length == 1 && arguments[0].equals(Challenge.class);
-        } else {
-            return false;
-        }
-        
+	if (genericType instanceof ParameterizedType) {
+	    Type[] arguments = ((ParameterizedType) genericType).getActualTypeArguments();
+	    return arguments.length == 1 && arguments[0].equals(Challenge.class);
+	} else {
+	    return false;
+	}
+
     }
 
     @Override
     public long getSize(List<Challenge> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
-        return -1;
+	return -1;
     }
 
     @Override
     public void writeTo(List<Challenge> t, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException {
-        JsonArrayBuilder jsonChallenges = Json.createArrayBuilder();
-        
-        for (Challenge c : t){
-            JsonObjectBuilder jsonCha = Json.createObjectBuilder();
-            
-            jsonCha.add("id", c.getId());
-            jsonCha.add("title", c.getTitle());
-            jsonCha.add("difficulty", c.getDifficulty().name());
+	JsonArrayBuilder jsonChallenges = Json.createArrayBuilder();
+
+	for (Challenge c : t) {
+	    JsonObjectBuilder jsonCha = Json.createObjectBuilder();
+
+	    jsonCha.add("id", c.getId());
+	    jsonCha.add("title", c.getTitle());
+	    jsonCha.add("difficulty", c.getDifficulty().name());
 	    jsonCha.add("imageUrl", c.getImageUrl());
-            
-            jsonChallenges.add(jsonCha);
-        }
-        
-        try(JsonWriter out = Json.createWriter(entityStream)) {
-            out.writeArray(jsonChallenges.build());
-        }
-        
-        
+
+	    jsonChallenges.add(jsonCha);
+	}
+
+	try (JsonWriter out = Json.createWriter(entityStream)) {
+	    out.writeArray(jsonChallenges.build());
+	}
+
     }
 
 }

@@ -18,9 +18,11 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = KnownVegetarianGrade.KnownVegetarianGradeValidator.class)
 public @interface KnownVegetarianGrade {
-    
+
     String message() default "grade";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
 
     public static class KnownVegetarianGradeValidator implements ConstraintValidator<KnownVegetarianGrade, User.VegetarianGrade> {
@@ -33,6 +35,6 @@ public @interface KnownVegetarianGrade {
 	public boolean isValid(User.VegetarianGrade value, ConstraintValidatorContext context) {
 	    return value != User.VegetarianGrade.UNKNOWN;
 	}
-	
+
     }
 }

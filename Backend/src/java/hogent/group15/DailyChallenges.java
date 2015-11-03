@@ -21,64 +21,63 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "TBL_DAILY")
 public class DailyChallenges {
-    
+
     @Id
-    @GeneratedValue(strategy =GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    
+
     @ManyToOne
     private Challenge first;
-    
+
     @ManyToOne
     private Challenge second;
-    
+
     @ManyToOne
     private Challenge third;
-    
-    private LocalDate date;
+
+    private java.sql.Date challengesDate;
 
     public DailyChallenges() {
     }
-    
+
     public int getId() {
-        return id;
+	return id;
     }
 
     public void setId(int id) {
-        this.id = id;
+	this.id = id;
     }
 
     public Challenge getFirst() {
-        return first;
+	return first;
     }
 
     public void setFirst(Challenge first) {
-        this.first = first;
+	this.first = first;
     }
 
     public Challenge getSecond() {
-        return second;
+	return second;
     }
 
     public void setSecond(Challenge second) {
-        this.second = second;
+	this.second = second;
     }
 
     public Challenge getThird() {
-        return third;
+	return third;
     }
 
     public void setThird(Challenge third) {
-        this.third = third;
+	this.third = third;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public java.sql.Date getDate() {
+	return challengesDate;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(java.sql.Date date) {
+	this.challengesDate = date;
     }
-    
-    
+
 }
