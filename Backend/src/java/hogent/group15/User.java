@@ -40,17 +40,17 @@ public class User implements Serializable {
 
     public enum Gender {
 
-        MALE, FEMALE
+	MALE, FEMALE
     }
 
     public enum Role {
 
-        USER, ADMIN, ROOT
+	USER, ADMIN, ROOT
     }
 
     public enum VegetarianGrade {
 
-        OMNIVORE, PESCETARIAR, PARTTIME_VEGETARIAN, VEGETARIAN, VEGAN, UNKNOWN
+	OMNIVORE, PESCETARIAR, PARTTIME_VEGETARIAN, VEGETARIAN, VEGAN, UNKNOWN
     }
     @Transient
     private static final Random RANDOM = new SecureRandom();
@@ -74,18 +74,16 @@ public class User implements Serializable {
     private String password;
 
     public byte[] getEncPassword() {
-        return encPassword;
+	return encPassword;
     }
 
     public void setEncPassword(byte[] encPassword) {
-        this.encPassword = encPassword;
+	this.encPassword = encPassword;
     }
 
-
-    
     //encrypted password only for local usage!
     private byte[] encPassword;
-    
+
     @Enumerated(EnumType.ORDINAL)
     @NotNull(message = "gender")
     private Gender gender;
@@ -109,7 +107,6 @@ public class User implements Serializable {
     @Pattern(regexp = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$", message = "imageUrl")
     private String imageUrl;
 
-    private LocalDate birthDate;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;
@@ -117,187 +114,178 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String firstName, String lastName, String email, String password, Gender gender, Address address, VegetarianGrade grade, LocalDate birthDate) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.gender = gender;
-        this.address = address;
-        this.grade = grade;
-        this.birthDate = birthDate;
-        this.password = password;
-        //set good hashed & salted password
+    public User(String firstName, String lastName, String email, String password, Gender gender, Address address, VegetarianGrade grade) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.email = email;
+	this.gender = gender;
+	this.address = address;
+	this.grade = grade;
+	this.password = password;
+	//set good hashed & salted password
 	this.salt = generateSalt();
-        this.encPassword = hash(password.toCharArray(), this.salt);
+	this.encPassword = hash(password.toCharArray(), this.salt);
     }
 
     public int getFacebookId() {
-        return facebookId;
+	return facebookId;
     }
 
     public void setFacebookId(int facebookId) {
-        this.facebookId = facebookId;
+	this.facebookId = facebookId;
     }
 
     public String getFirstName() {
-        return firstName;
+	return firstName;
     }
 
     public void setFirstName(String firstName) {
-        this.firstName = firstName;
+	this.firstName = firstName;
     }
 
     public String getLastName() {
-        return lastName;
+	return lastName;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+	this.lastName = lastName;
     }
 
     public String getPassword() {
-        return password;
+	return password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
-        this.encPassword = hash(password.toCharArray(), generateSalt());
+	this.password = password;
+	this.encPassword = hash(password.toCharArray(), generateSalt());
     }
 
     public Gender getGender() {
-        return gender;
+	return gender;
     }
 
     public void setGender(Gender gender) {
-        this.gender = gender;
+	this.gender = gender;
     }
 
     public Address getAddress() {
-        return address;
+	return address;
     }
 
     public void setAddress(Address address) {
-        this.address = address;
+	this.address = address;
     }
 
     public VegetarianGrade getGrade() {
-        return grade;
+	return grade;
     }
 
     public void setGrade(VegetarianGrade grade) {
-        this.grade = grade;
+	this.grade = grade;
     }
 
     public Challenge getCurrentChallenge() {
-        return currentChallenge;
+	return currentChallenge;
     }
 
     public void setCurrentChallenge(Challenge currentChallenge) {
-        this.currentChallenge = currentChallenge;
+	this.currentChallenge = currentChallenge;
     }
 
     public List<Challenge> getCompletedChallenges() {
-        return completedChallenges;
+	return completedChallenges;
     }
 
     public void setCompletedChallenges(List<Challenge> completedChallenges) {
-        this.completedChallenges = completedChallenges;
+	this.completedChallenges = completedChallenges;
     }
 
     public byte[] getSalt() {
-        return salt;
+	return salt;
     }
 
     public void setSalt(byte[] salt) {
-        this.salt = salt;
+	this.salt = salt;
     }
 
     public String getImageUrl() {
-        return imageUrl;
+	return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public LocalDate getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(LocalDate birthDate) {
-        this.birthDate = birthDate;
+	this.imageUrl = imageUrl;
     }
 
     public String getEmail() {
-        return email;
+	return email;
     }
 
     public void setEmail(String email) {
-        this.email = email;
+	this.email = email;
     }
 
     public DailyChallenges getDailyChallenges() {
-        return dailyChallenges;
+	return dailyChallenges;
     }
 
     public void setDailyChallenges(DailyChallenges dailyChallenges) {
-        this.dailyChallenges = dailyChallenges;
+	this.dailyChallenges = dailyChallenges;
     }
 
     public static byte[] generateSalt() {
-        byte[] salt = new byte[16];
-        RANDOM.nextBytes(salt);
-        return salt;
+	byte[] salt = new byte[16];
+	RANDOM.nextBytes(salt);
+	return salt;
     }
 
     public static byte[] hash(char[] password, byte[] salt) {
-        PBEKeySpec spec = new PBEKeySpec(password, salt, 10000, 256);
-        Arrays.fill(password, Character.MIN_VALUE);
-        try {
-            SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            return skf.generateSecret(spec).getEncoded();
-        } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
-        } finally {
-            spec.clearPassword();
-        }
+	PBEKeySpec spec = new PBEKeySpec(password, salt, 10000, 256);
+	Arrays.fill(password, Character.MIN_VALUE);
+	try {
+	    SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
+	    return skf.generateSecret(spec).getEncoded();
+	} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+	    throw new AssertionError("Error while hashing a password: " + e.getMessage(), e);
+	} finally {
+	    spec.clearPassword();
+	}
     }
 
     public static boolean isExpectedPassword(char[] password, byte[] salt, byte[] expectedHash) {
-        byte[] pwdHash = hash(password, salt);
-        if (pwdHash.length != expectedHash.length) {
-            return false;
-        }
-        for (int i = 0; i < pwdHash.length; i++) {
-            if (pwdHash[i] != expectedHash[i]) {
-                return false;
-            }
-        }
-        return true;
+	byte[] pwdHash = hash(password, salt);
+	if (pwdHash.length != expectedHash.length) {
+	    return false;
+	}
+	for (int i = 0; i < pwdHash.length; i++) {
+	    if (pwdHash[i] != expectedHash[i]) {
+		return false;
+	    }
+	}
+	return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 29 * hash + Objects.hashCode(this.email);
-        hash = 29 * hash + this.facebookId;
-        hash = 29 * hash + Objects.hashCode(this.firstName);
-        hash = 29 * hash + Objects.hashCode(this.lastName);
-        return hash;
+	int hash = 3;
+	hash = 29 * hash + Objects.hashCode(this.email);
+	hash = 29 * hash + this.facebookId;
+	hash = 29 * hash + Objects.hashCode(this.firstName);
+	hash = 29 * hash + Objects.hashCode(this.lastName);
+	return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final User other = (User) obj;
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        return true;
+	if (obj == null) {
+	    return false;
+	}
+	if (getClass() != obj.getClass()) {
+	    return false;
+	}
+	final User other = (User) obj;
+	if (!Objects.equals(this.email, other.email)) {
+	    return false;
+	}
+	return true;
     }
 }

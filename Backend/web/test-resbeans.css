@@ -176,34 +176,34 @@ div#request {
 }
 
 a.tab {
-  background-image: url(images/tbuns.png);
-  border: 1px solid #000000;
-  border-color: #000000 #000000 #ffffff #000000;
-  text-decoration: none;
-  z-index: 100;
-  position: relative;
-  top: 2px;
+    background-image: url(images/tbuns.png);
+    border: 1px solid #000000;
+    border-color: #000000 #000000 #ffffff #000000;
+    text-decoration: none;
+    z-index: 100;
+    position: relative;
+    top: 2px;
 }
 
 a.tab, a.tab:visited {
-  color: #8060b0;
+    color: #8060b0;
 }
 
 a.tab:hover {
-  background-color: #a080d0;
-  border-color: #c0a0f0 #8060b0 #8060b0 #c0a0f0;
-  color: #ffe0ff;
+    background-color: #a080d0;
+    border-color: #c0a0f0 #8060b0 #8060b0 #c0a0f0;
+    color: #ffe0ff;
 }
 
 a.tab.activeTab, a.tab.activeTab:hover, a.tab.activeTab:visited {
-  background-image: url(images/tbsel.png);
-  border-color: #000000 #000000 #ffffff #000000;
-  color: #ffe0ff;
+    background-image: url(images/tbsel.png);
+    border-color: #000000 #000000 #ffffff #000000;
+    color: #ffe0ff;
 }
 
 a.tab.activeTab {
-  padding-bottom: 1px;
-  z-index: 102;
+    padding-bottom: 1px;
+    z-index: 102;
 }
 
 .menu
@@ -212,31 +212,31 @@ a.tab.activeTab {
 }
 
 div.tabMain {
-  z-index: 101;
-  /*padding: 0.5em;*/
-  border-style: solid;
-  border-width: 1px;
-  border-color: #80929B;
-  /*width: 540px;*/
-  width: 100%;
-  height: 300px;
+    z-index: 101;
+    /*padding: 0.5em;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: #80929B;
+    /*width: 540px;*/
+    width: 100%;
+    height: 300px;
 }
 
 .frame {
-  z-index: 101;
-  /*padding: 0.5em;*/
-  border-style: solid;
-  border-width: 1px;
-  border-color: #80929B;
-  /*width: 540px;*/
-  width: 100%;
-  height: 300px;
-  overflow: hidden;
+    z-index: 101;
+    /*padding: 0.5em;*/
+    border-style: solid;
+    border-width: 1px;
+    border-color: #80929B;
+    /*width: 540px;*/
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
 }
 
 div.tabMain {
-  background-color: #ffffff;
-  position: relative;
+    background-color: #ffffff;
+    position: relative;
 }
 
 /*.frame
@@ -250,22 +250,22 @@ div.tabMain {
 }*/
 
 div.button {
-  background-image: url(images/pbena.png);
-  background-repeat:  repeat-x;
-  color: #000000;
-  border: 1px solid #000000;
-  text-decoration: none;
-  width: 50px;
-  text-align: center;
+    background-image: url(images/pbena.png);
+    background-repeat:  repeat-x;
+    color: #000000;
+    border: 1px solid #000000;
+    text-decoration: none;
+    width: 50px;
+    text-align: center;
 }
 
 div.button:hover {
-  background-image: url(images/pbmou.png);
+    background-image: url(images/pbmou.png);
 }
 
 div.button:visited {
-  background-image: url(images/pbsel.png);
-  color: #ffffff;
+    background-image: url(images/pbsel.png);
+    color: #ffffff;
 }
 
 div#tableContent, div#headerInfo, div#structureInfo, div#rawContent, div#monitorContent{
@@ -276,13 +276,13 @@ div#tableContent, div#headerInfo, div#structureInfo, div#rawContent, div#monitor
 
 .item1, .item2
 {
-   font-size: 12px;
-   margin-top: -16px;
+    font-size: 12px;
+    margin-top: -16px;
 }
 
 .item1
 {
-   margin-left: 50px;
+    margin-left: 50px;
 }
 
 .item2 {
@@ -311,10 +311,10 @@ div#tableContent, div#headerInfo, div#structureInfo, div#rawContent, div#monitor
 
 .wht 
 {
-   color: #FFFFFF
+    color: #FFFFFF
 }
 
 .bld
 {
-   font-weight: bold
+    font-weight: bold
 }

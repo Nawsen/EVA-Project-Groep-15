@@ -51,15 +51,8 @@ public class UserJsonReader implements MessageBodyReader<User> {
 		    grade = User.VegetarianGrade.UNKNOWN;
 		}
 	    }
-	    
-	    LocalDate birthdate = null;
 
-	    try {
-		birthdate = LocalDate.parse(jsonUser.getString("birthdate", ""));
-	    } catch (DateTimeParseException ex) {
-	    }
-
-	    return new User(firstName, lastName, email, password, gender, address, grade, birthdate);
+	    return new User(firstName, lastName, email, password, gender, address, grade);
 	}
     }
 

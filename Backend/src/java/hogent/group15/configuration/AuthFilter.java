@@ -21,36 +21,33 @@ import javax.ws.rs.ext.Provider;
  */
 @Provider
 public class AuthFilter implements ContainerRequestFilter {
-    
+
     private static final String KEY = "secret";
-    
+
     @Override
     public void filter(ContainerRequestContext requestContext) {
-        try {
-            if (requestContext.getUriInfo().getAbsolutePath().toString().contains("login") || requestContext.getUriInfo().getAbsolutePath().toString().contains("register")){
-                return;
-            }
-            if (requestContext.getHeaderString("Authorization") != null){
-                //we need to split off the non usefull things from the header 
-                //in this case we need to chew off "Bearer "
-                String code = requestContext.getHeaderString("Authorization").split(" ")[1];
-                Claims claim = Jwts.parser().setSigningKey(KEY).parseClaimsJws(code).getBody();
-                //after we check if the claim is correct lets set the userID into the header
-                //with this we can identifie the user in class User.java
-                requestContext.getHeaders().add("email", claim.getId());
-            } else {
-                throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
-            }
+	try {
+	    if (requestContext.getUriInfo().getAbsolutePath().toString().contains("login") || requestContext.getUriInfo().getAbsolutePath().toString().contains("register")) {
+		return;
+	    }
+	    if (requestContext.getHeaderString("Authorization") != null) {
+		//we need to split off the non usefull things from the header 
+		//in this case we need to chew off "Bearer "
+		String code = requestContext.getHeaderString("Authorization").split(" ")[1];
+		Claims claim = Jwts.parser().setSigningKey(KEY).parseClaimsJws(code).getBody();
+		//after we check if the claim is correct lets set the userID into the header
+		//with this we can identifie the user in class User.java
+		requestContext.getHeaders().add("email", claim.getId());
+	    } else {
+		throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
+	    }
 
-            
-                
+	} catch (SignatureException e) {
+	    throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
 
-        } catch (SignatureException e) {
-            throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
-            
-        } catch (Exception ex){
-            throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
-        }
+	} catch (Exception ex) {
+	    throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
+	}
 
     }
 
