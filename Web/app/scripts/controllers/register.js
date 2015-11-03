@@ -1,7 +1,9 @@
 /**
  * Created by wannes on 9/10/2015.
  */
-angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', '$http', function ($scope, $location, $http) {
+angular.module('eva').controller('RegisterCtrl',
+    ['$scope', '$location', '$http', '$state', 'auth', 'messages',
+    function ($scope, $location, $http,  $state, auth, messages) {
     $scope.showHelpMail = false;
     $scope.showHelpPassword = false;
     $scope.showHelpRepeatPassword = false;
@@ -30,11 +32,11 @@ angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', '$http'
     ];
     $scope.user = {
         email: "stoerbeer@hotmail.com",
-        password:"wachtwoord",
-        repeatPassword:"wachtwoord",
+        password: "wachtwoord",
+        repeatPassword: "wachtwoord",
         firstName: "s",
         lastName: "s",
-        grade:$scope.values[0]
+        grade: $scope.values[0]
     };
     $scope.validPassword = function () {
         if (($scope.user.password === $scope.user.repeatPassword) && $scope.user.password.length >= 7) {
@@ -66,8 +68,14 @@ angular.module('eva').controller('RegisterCtrl', ['$scope', '$location', '$http'
             gender: $scope.convertGender(),
             grade: $scope.user.grade.val
         };
-        var res = $http.post('http://178.62.232.69/backend/api/user/register', userObj);
-        $location.path('/login');
+
+        messages.email = userObj.email;
+
+        auth.register(userObj).error(function (error) {
+            $scope.error = error;
+        }).then(function () {
+            $state.go('login');
+        });
     }
 
 

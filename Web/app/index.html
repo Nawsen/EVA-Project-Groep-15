@@ -2,24 +2,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Eva vzw</title>
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/common.css">
-    <link rel="stylesheet" href="styles/bootstrap-social.css">
-    <link rel="stylesheet" href="styles/font-awesome.min.css">
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-app="eva">
 
 <div class="">
     <div ui-view></div>
 </div>
-
-<script src="scripts/angular.min.js"></script>
-<script src="scripts/angular-ui-router.min.js"></script>
+<script src="bower_components/angular/angular.min.js"></script>
+<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script src="scripts/app.js"></script>
+<script src="scripts/factories/authentication.js"></script>
+<script src="scripts/factories/messages.js"></script>
 <script src="scripts/controllers/login.js"></script>
 <script src="scripts/controllers/dashboard.js"></script>
 <script src="scripts/controllers/register.js"></script>
+
 </body>
 </html>

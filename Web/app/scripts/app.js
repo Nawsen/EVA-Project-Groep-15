@@ -6,7 +6,6 @@ var app = angular.module('eva', ['ui.router']);
     app.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
 
 
-
         $stateProvider
             .state('login', {
                 url: '/login',
