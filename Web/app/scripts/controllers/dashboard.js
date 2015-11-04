@@ -50,14 +50,14 @@ app.controller('DashboardCtrl',
                     description: "Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus "
                 };
 
-                $http.get("http://bitcode.io:8080/backend/api/challenges/" + $scope.selectedChallenge().id).success(function (data, status, headers, config) {
+                $http.get("localhost:8080/backend/api/challenges/" + $scope.selectedChallenge().id).success(function (data, status, headers, config) {
                     //$scope.challenges = data;
                     console.log(data);
                 });
             }
             if (auth.isLoggedIn()) {
                 ""
-                $http.get("http://bitcode.io:8080/backend/api/challenges/daily").success(function (data, status, headers, config) {
+                $http.get("localhost:8080/backend/api/challenges/daily").success(function (data, status, headers, config) {
                  $scope.challenges = data;
                  console.log($scope.challenges[0]);
                  });

@@ -49,7 +49,6 @@
                 <article class="challenge" ng-repeat="challenge in challenges track by $index" ng-click="challengeClicked($index)" data-toggle="modal" data-target="#myModal">
                     <div ng-style="{'background-image':'url({{challenge.imageUrl}})'}">
                         <p>{{challenge.title}}</p>
-                        <p>{{challenge.imageUrl}}</p>
                     </div>
                 </article>
             </div>
@@ -61,10 +60,7 @@
                                 <div class="modalImage" ng-style="{'background-image':'url({{selectedChallenge().imageUrl}})'}">
                                     <p class="modalText">{{detailedChallenge.title}}</p>
                                 </div>
-                                <p>{{selectedChallenge().imageUrl}}</p>
                                 <p>{{detailedChallenge.description}}</p>
-
-
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default eva-submit-wit">Ga de challenge aan!</button>

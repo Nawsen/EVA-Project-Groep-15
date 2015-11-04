@@ -11,7 +11,7 @@ app.factory('challenges', ['$http', 'auth', function ($http, auth) {
         }
         };
 
-        $http.get("http://bitcode.io:8080/backend/api/challenges/daily").success(function(data, status, headers, config) {
+        $http.get("localhost:8080/backend/api/challenges/daily").success(function(data, status, headers, config) {
             challenges.challenges = data;
         });
         return challenges.challenges;
