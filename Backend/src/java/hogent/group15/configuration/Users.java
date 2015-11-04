@@ -16,6 +16,8 @@ import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -93,5 +95,11 @@ public class Users {
 
 	return "{ \"token\": \"" + builder.compact() + "\" }";
     }
-
+    @Path("detail")
+    @GET
+    public User getUserDetails(@HeaderParam("email") String email){
+        return em.find(User.class, email);
+        
+        
+    }
 }
