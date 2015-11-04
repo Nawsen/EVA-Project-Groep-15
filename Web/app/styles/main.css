@@ -4,18 +4,21 @@
     font-weight: 300;
     src: url("../fonts/Museo300-Regular.otf");
 }
+
 @font-face {
     font-family: "museo";
     font-style: normal;
     font-weight: 700;
     src: url("../fonts/Museo700-Regular.ttf");
 }
+
 @font-face {
     font-family: "artistamp";
     font-style: normal;
     font-weight: 700;
     src: url("../fonts/artistampmedium-webfont.ttf");
 }
+
 * {
     border-radius: 0 !important;
 }
@@ -97,23 +100,28 @@
     transition: border-color 0.15s linear, color 0.15s linear;
     transition: background-color 0.15s linear, color 0.15s linear;
 }
+
 .eva-input:focus {
     border: 2px solid #A4B239;
     outline: medium none;
 }
+
 .no-left-border {
-    border-left:0px;
+    border-left: 0px;
 }
+
 .radio-active {
     background: #a4b239;
-    color:white;
+    color: white;
 }
+
 label.eva-input:hover {
     background: #a4b239;
-    color:white;
+    color: white;
 }
+
 .eva-submit {
-    height:43px;
+    height: 43px;
     padding: 10px;
     display: inline-block;
     font-family: "museo", sans-serif;
@@ -127,22 +135,63 @@ label.eva-input:hover {
 .eva-submit:hover {
     background: #555757 none repeat scroll 0% 0%;
     border-color: #2F3030;
-    color:#fff;
+    color: #fff;
 }
+
 .eva-submit[disabled] {
     opacity: 0.5;
     border: solid 2px #808b2d;
     background: #a4b239;
 }
+
 .eva-submit[disabled]:hover {
     opacity: 0.5;
     border: solid 2px #808b2d;
     background: #a4b239;
 }
+.eva-submit-wit {
+    background: rgb(255,255,255);
+    transition: background-color 0.15s linear;
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 6px 15px;
+    border-width: 2px;
+    display: inline-block;
+    -webkit-tap-highlight-color: transparent;
+}
 .artistamp {
     font-family: artistamp;
     padding-bottom: 1em;
 }
-h1 .reg {
 
+.challenge {
+    text-align: center;
+    height:200px;
+    background-size: contain;
+    display:block;
+}
+
+#challenges .pompoensoep {
+    background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg"), no-repeat;
+    background-size: cover;
+}
+
+#challenges .knolselder {
+    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
+    background-size: cover;
+}
+
+#challenges .pompoenstoof {
+    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
+    background-size: cover;
+}
+.modalImage {
+    display: block;
+    background-size: cover;
+    min-height:200px;
+    text-align: center;
+}
+.modalText {
+    line-height: 20%;
 }
