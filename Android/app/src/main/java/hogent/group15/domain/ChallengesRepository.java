@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hogent.group15.Consumer;
+import hogent.group15.ui.MainMenuActivity;
+import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
+import hogent.group15.ui.controls.list.EmptyListEntry;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -16,6 +19,7 @@ import retrofit.client.Response;
  * Created by Brent on 10/31/2015.
  */
 public class ChallengesRepository {
+
     private static final ChallengesRepository INSTANCE = new ChallengesRepository();
 
     private List<ListEntry> completedChallenges = new ArrayList<>();
@@ -26,10 +30,29 @@ public class ChallengesRepository {
     }
 
     private ChallengesRepository() {
-        // completedChallenges.add(new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_completed_challenges), android.R.drawable.ic_dialog_alert));
-        completedChallenges.add(new Challenge(1, URI.create("http://www.evavzw.be/sites/default/files/styles/header_image/public/recipe/header/chili.jpg?itok=LLuipNqt"), "Chili sin Carne",
-                "A detailed description of the preparation for Chili sin Carne", "HARD"));
         refreshCurrentChallenge();
+    }
+
+    public void refreshCompletedChallenges(final Runnable callback) {
+        final ListEntry emptyEntry = new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_completed_challenges), android.R.drawable.ic_dialog_alert);
+        completedChallenges.clear();
+        Backend.getBackend().getCompletedChallenges(new Callback<List<Challenge>>() {
+            @Override
+            public void success(List<Challenge> challenges, Response response) {
+                if (challenges.isEmpty()) {
+                    completedChallenges.add(emptyEntry);
+                }
+
+                completedChallenges.addAll(challenges);
+                callback.run();
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                completedChallenges.add(emptyEntry);
+                callback.run();
+            }
+        });
     }
 
     public void refreshCurrentChallenge() {
@@ -45,6 +68,18 @@ public class ChallengesRepository {
                 Log.e(Backend.TAG, "Couldn't retrieve current challenge: " + error.getResponse());
             }
         });
+    }
+
+    private Runnable onCompletedChallengesChanged;
+    public void setOnCompletedChallengesChanged(Runnable callback) {
+        onCompletedChallengesChanged = callback;
+    }
+
+    public void addCompletedChallenge(Challenge challenge) {
+        completedChallenges.add(challenge);
+        if (onCompletedChallengesChanged != null) {
+            onCompletedChallengesChanged.run();
+        }
     }
 
     public List<ListEntry> getCompletedChallenges() {

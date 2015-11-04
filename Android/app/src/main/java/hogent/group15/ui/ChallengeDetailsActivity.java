@@ -1,10 +1,12 @@
 package hogent.group15.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,9 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
     @Bind(R.id.challenge_long_description)
     TextView longDescription;
 
+    @Bind(R.id.challenge_accept)
+    Button acceptButton;
+
     private Challenge currentChallenge;
 
     @Override
@@ -39,6 +44,9 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
         updateContents((Challenge) getIntent().getSerializableExtra("challenge"));
+        final boolean shouldShowButton = getIntent().hasExtra("showAcceptButton") && getIntent().getBooleanExtra("showAcceptButton", true);
+        acceptButton.setVisibility(shouldShowButton ? View.VISIBLE : View.GONE);
+
         Backend.getBackend().getDetailedChallenge(currentChallenge.getId(), new Callback<Challenge>() {
 
             @Override
@@ -58,7 +66,7 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         currentChallenge = challenge;
         title.setText(challenge.getTitle());
         longDescription.setText(challenge.getDetailedDescription() == null ? "" : Html.fromHtml(challenge.getDetailedDescription()));
-        Backend.getBackend().loadImageInto(this,challenge.getHeaderImageUri().toString(), image);
+        Backend.getBackend().loadImageInto(this, challenge.getHeaderImageUri().toString(), image);
     }
 
     @Override

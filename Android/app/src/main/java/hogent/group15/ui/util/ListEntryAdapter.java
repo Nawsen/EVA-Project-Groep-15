@@ -22,6 +22,7 @@ public class ListEntryAdapter extends BaseAdapter {
     public ListEntryAdapter(Activity owner, List<? extends ListEntry> entries) {
         this.entries = entries;
         inflater = owner.getLayoutInflater();
+
     }
 
     @Override

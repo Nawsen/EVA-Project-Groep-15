@@ -40,6 +40,7 @@ public class ChallengeListEntry extends FrameLayout {
 
     private String scoreExpression;
     private Challenge currentChallenge;
+    private boolean showAcceptChallenge = true;
 
     public ChallengeListEntry(Context context) {
         super(context);
@@ -61,6 +62,7 @@ public class ChallengeListEntry extends FrameLayout {
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ChallengeDetailsActivity.class);
                 intent.putExtra("challenge", currentChallenge);
+                intent.putExtra("showAcceptButton", showAcceptChallenge);
                 getContext().startActivity(intent);
             }
         });
@@ -99,5 +101,9 @@ public class ChallengeListEntry extends FrameLayout {
             if (onComplete != null)
                 onComplete.run();
         }
+    }
+
+    public void setShowAcceptChallengeButton(boolean shouldShow) {
+        showAcceptChallenge = shouldShow;
     }
 }

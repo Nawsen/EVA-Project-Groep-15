@@ -151,4 +151,22 @@ public class Backend {
             }
         });
     }
+
+    public void getCompletedChallenges(final Callback<List<Challenge>> callback) {
+        backendAPI.getCompletedChallenges(new Callback<List<Challenge>>() {
+            @Override
+            public void success(List<Challenge> challenges, Response response) {
+                for(Challenge c : challenges) {
+                    c.setShowAcceptChallengeButton(false);
+                }
+
+                callback.success(challenges, response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error);
+            }
+        });
+    }
 }
