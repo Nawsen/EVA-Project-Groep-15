@@ -31,11 +31,11 @@ angular.module('eva').controller('RegisterCtrl',
         }
     ];
     $scope.user = {
-        email: "stoerbeer@hotmail.com",
-        password: "wachtwoord",
-        repeatPassword: "wachtwoord",
-        firstName: "s",
-        lastName: "s",
+        email: "",
+        password: "",
+        repeatPassword: "",
+        firstName: "",
+        lastName: "",
         grade: $scope.values[0]
     };
     $scope.validPassword = function () {
