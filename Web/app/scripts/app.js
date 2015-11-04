@@ -21,6 +21,10 @@ var app = angular.module('eva', ['ui.router']);
                 url: '/register',
                 templateUrl: 'views/register.html',
                 controller: 'RegisterCtrl'
+            })
+            .state('completedchallenges', {
+                url: '/completed-challenges',
+                templateUrl: 'views/completedchallenges.html',
             });
         $urlRouterProvider.otherwise('/login');
 

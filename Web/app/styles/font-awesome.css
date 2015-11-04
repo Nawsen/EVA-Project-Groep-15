@@ -1,5 +1,5 @@
 /*
-Errno::ENOENT: No such file or directory - bootstrap-social.scss
+Errno::ENOENT: No such file or directory - font-awesome.scss
 
 Backtrace:
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.18/lib/sass/plugin/compiler.rb:482:in `read'
@@ -19,4 +19,4 @@ Backtrace:
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Errno::ENOENT: No such file or directory - bootstrap-social.scss"; }
+  content: "Errno::ENOENT: No such file or directory - font-awesome.scss"; }

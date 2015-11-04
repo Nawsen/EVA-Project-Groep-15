@@ -198,8 +198,8 @@ h1 {
   display: flex;
   flex-direction: row;
   -webkit-flex-direction: row;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   justify-content: center;
   -webkit-justify-content: center;
   align-items: center;
@@ -214,7 +214,9 @@ h1 {
     align-self: flex-start;
     box-sizing: border-box;
     margin-left: 1%;
-    max-width: 32%; }
+    max-width: 32%;
+    min-width: 300px;
+    margin-bottom: 10px; }
     #challenges article:first-of-type {
       margin-left: 0; }
   #challenges .challenge {
@@ -257,8 +259,8 @@ h1 {
   display: flex;
   flex-direction: row;
   -webkit-flex-direction: row;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   justify-content: center;
   -webkit-justify-content: center;
   align-items: center;
@@ -269,18 +271,20 @@ h1 {
   margin: 0 auto; }
   #stats div {
     flex-grow: 1;
-    align-self: flex-start;
-    box-sizing: border-box; }
+    align-self: center;
+    box-sizing: border-box;
+    margin: 0 0 20px 0; }
     #stats div .legend {
       display: block;
-      max-width: 150px;
+      width: 155px;
       background-size: 30%;
       overflow: visible;
       background: rgba(34, 34, 34, 0.7);
       border: 3px solid #222;
       border-radius: 5px;
       float: left;
-      margin: 10% 0 0 10%; }
+      flex-grow: 0;
+      margin: 65px 0 0 10%; }
       #stats div .legend .easy {
         background: url("../images/resources/lieasy.jpg");
         background-repeat: no-repeat;
@@ -309,7 +313,8 @@ h1 {
       width: 20%;
       text-indent: -100%;
       overflow: hidden;
-      float: left; }
+      float: left;
+      flex-grow: 1; }
   #stats #latest-achievements h4 {
     font-family: Artistamp, sans-serif;
     color: #fff;
@@ -318,7 +323,9 @@ h1 {
     float: left;
     clear: both;
     min-width: 420px;
+    max-width: 500px;
     width: 80%;
+    height: 84px;
     background: rgba(34, 34, 34, 0.7);
     border: 2px solid #0e2218;
     margin-bottom: 20px; }
@@ -380,6 +387,7 @@ h1 {
     #achievements #achievement-box .achievement {
       display: block;
       width: 45%;
+      min-width: 460px;
       margin-bottom: 20px;
       padding: 5px 8px 5px 9px;
       background-image: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
