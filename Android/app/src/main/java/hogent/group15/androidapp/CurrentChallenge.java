@@ -56,12 +56,7 @@ public class CurrentChallenge extends FrameLayout {
         this.currentChallenge = currentChallenge;
         title.setText(currentChallenge.getTitle());
         description.setText(Html.fromHtml(currentChallenge.getDetailedDescription()));
-        AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(currentChallenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
-            @Override
-            public void consume(Bitmap bitmap) {
-                image.setImageBitmap(bitmap);
-            }
-        });
+        Backend.getBackend().loadImageInto(this.getContext(), currentChallenge.getHeaderImageUri().toString(), image);
     }
 
     private Consumer<Challenge> onCompleteCallback;
