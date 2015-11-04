@@ -16,7 +16,7 @@
     -->
     <div id="nav">
         <div class="user-info">
-            <h1>Eva</h1>
+            <img src="images/eva-logo-white.png"/>
             <img src="{{user.avatar}}" class="user-avatar">
             <h2>Welcome <small>{{user.firstname}}</small></h2>
         </div>
@@ -44,10 +44,10 @@
 
         <!-- CHALLENGES -->
         <div class="banner">
-            <h3 class="challenge-title">Kies een uitdaging:</h3>
+            <h3 class="challenge-title">Kies een uitdaging</h3>
             <div id="challenges">
-                <article class="challenge" ng-repeat="challenge in challenges track by $index" ng-click="challengeClicked($index)" data-toggle="modal" data-target="#myModal">
-                    <div ng-style="{'background-image':'url({{challenge.imageUrl}})'}">
+                <article class="challenge box-border" ng-repeat="challenge in challenges track by $index" ng-click="challengeClicked($index)" data-toggle="modal" data-target="#myModal">
+                    <div ng-style="{'background-image':'url({{challenge.imageUrl}})', 'background-size': 'cover'}">
                         <p>{{challenge.title}}</p>
                     </div>
                 </article>
@@ -57,10 +57,10 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <div class="modalImage" ng-style="{'background-image':'url({{selectedChallenge().imageUrl}})'}">
-                                    <p class="modalText">{{detailedChallenge.title}}</p>
+                                <div class="modalImage" style="text-align: center;" ng-style="{'background-image':'url(' + detailedChallenge.imageUrl + ')'}">
+                                    <h2 class="modalText" style="padding-top: 100px; color: #fff; text-shadow: 0px 0px 4px #000;">{{detailedChallenge.title}}</h2>
                                 </div>
-                                <p>{{detailedChallenge.description}}</p>
+                                <p style="margin-top: 10px;">{{detailedChallenge.description}}</p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default eva-submit-wit">Ga de challenge aan!</button>

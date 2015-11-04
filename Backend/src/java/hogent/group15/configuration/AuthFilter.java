@@ -27,7 +27,7 @@ public class AuthFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) {
 	try {
-	    if (requestContext.getUriInfo().getAbsolutePath().toString().contains("login") || requestContext.getUriInfo().getAbsolutePath().toString().contains("register") || requestContext.getMethod().equalsIgnoreCase("option")) {
+	    if (requestContext.getUriInfo().getAbsolutePath().toString().contains("login") || requestContext.getUriInfo().getAbsolutePath().toString().contains("register") || requestContext.getMethod().equalsIgnoreCase("options")) {
 		return;
 	    }
 	    if (requestContext.getHeaderString("Authorization") != null) {

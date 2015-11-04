@@ -5,8 +5,8 @@
 var app = angular.module('eva');
 
 app.controller('DashboardCtrl',
-    ['$scope', 'auth', '$http',
-        function ($scope, auth, $http) {
+    ['$scope', 'auth', '$http', '$state',
+        function ($scope, auth, $http, $state) {
             $scope.user = {
                 'firstname': 'voornaam',
                 'lastname': 'achternaam',
@@ -37,30 +37,25 @@ app.controller('DashboardCtrl',
             $scope.selectedChallenge = function () {
                 return $scope.challenges[$scope.selectedIndex];
             }
+
             $scope.challengeClicked = function (arrayId) {
                 $scope.selectedIndex = arrayId;
                 $scope.loadChallengeData();
             }
+
             $scope.detailedChallenge = {};
 
             $scope.loadChallengeData = function () {
-                $scope.detailedChallenge = {
-                    id: 2,
-                    title: 'Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus',
-                    description: "Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus Maak Winterse conchiglie met veggiegehakt, boerenkool en pompoensaus "
-                };
-
-                $http.get("localhost:8080/backend/api/challenges/" + $scope.selectedChallenge().id).success(function (data, status, headers, config) {
-                    //$scope.challenges = data;
-                    console.log(data);
+                $http.get("http://localhost:8080/backend/api/challenges/" + $scope.selectedChallenge().id).success(function (data, status, headers, config) {
+                    $scope.detailedChallenge = data;
                 });
             }
+
             if (auth.isLoggedIn()) {
-                ""
-                $http.get("localhost:8080/backend/api/challenges/daily").success(function (data, status, headers, config) {
-                 $scope.challenges = data;
-                 console.log($scope.challenges[0]);
-                 });
+                $http.get("http://localhost:8080/backend/api/challenges/daily").success(function (data, status, headers, config) {
+                    $scope.challenges = data;
+                    console.log($scope.challenges[0]);
+                });
 
                 //challenges.getDailyChallenges();
                 //console.log(challenges.getDailyChallenges());
@@ -68,4 +63,4 @@ app.controller('DashboardCtrl',
                 $state.go('login');
             }
         }]
-);
+    );

@@ -152,7 +152,7 @@ label.eva-input:hover {
 .eva-submit-wit {
     background: rgb(255,255,255);
     transition: background-color 0.15s linear;
-    color: #fff;
+    color: #000 ;
     text-decoration: none;
     font-size: 16px;
     padding: 6px 15px;
