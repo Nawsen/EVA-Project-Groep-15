@@ -1,6 +1,7 @@
 package hogent.group15.ui;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import hogent.group15.AsyncUtil;
 import hogent.group15.domain.Backend;
@@ -53,12 +56,7 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         currentChallenge = challenge;
         title.setText(challenge.getTitle());
         longDescription.setText(challenge.getDetailedDescription());
-        AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
-            @Override
-            public void consume(Bitmap bitmap) {
-                image.setImageBitmap(bitmap);
-            }
-        });
+        Backend.getBackend().loadImageInto(this,challenge.getHeaderImageUri().toString(), image);
     }
 
     @Override

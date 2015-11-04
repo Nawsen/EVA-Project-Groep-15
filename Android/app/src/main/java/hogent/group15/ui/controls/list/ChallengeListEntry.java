@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hogent.group15.AsyncUtil;
+import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.Consumer;
 import hogent.group15.StringInterpolator;
@@ -93,20 +94,10 @@ public class ChallengeListEntry extends FrameLayout {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
             score.setText(StringInterpolator.interpolate(scoreExpression, challenge.getDifficulty()));
-            Picasso.with(this.getContext()).load(Uri.parse(challenge.getHeaderImageUri().toString())).into(image);
+            Backend.getBackend().loadImageInto(this.getContext(), challenge.getHeaderImageUri().toString(), image);
             ChallengeListEntry.this.setAlpha(1f);
             if (onComplete != null)
                 onComplete.run();
-//            AsyncUtil.getBitmapAsync(new AsyncUtil.BitmapParameter(challenge.getHeaderImageUri(), getResources()), new Consumer<Bitmap>() {
-//                @Override
-//                public void consume(Bitmap bitmap) {
-//                    image.setImageBitmap(bitmap);
-//                    if (onComplete != null) {
-//                        onComplete.run();
-//                        ChallengeListEntry.this.setAlpha(1f);
-//                    }
-//                }
-//            });
         }
     }
 }

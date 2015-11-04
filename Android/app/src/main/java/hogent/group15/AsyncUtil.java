@@ -35,23 +35,5 @@ public class AsyncUtil {
         }
     }
 
-    public static AsyncTask<BitmapParameter, Void, Bitmap> getBitmapAsync(BitmapParameter parameter, final Consumer<Bitmap> onPost) {
-        return new AsyncTask<BitmapParameter, Void, Bitmap>() {
-            @Override
-            protected Bitmap doInBackground(BitmapParameter... params) {
-                try {
-                    return BitmapFactory.decodeStream(params[0].getUri().toURL().openStream());
-                } catch (IOException e) {
-                    Log.e(Logging.ERROR.getTag(), "Couldn't read image from: " + params[0].getUri());
-                    return BitmapFactory.decodeResource(params[0].getResources(), R.drawable.question_mark);
-                }
-            }
 
-            @Override
-            protected void onPostExecute(Bitmap bitmap) {
-                super.onPostExecute(bitmap);
-                onPost.consume(bitmap);
-            }
-        }.execute(parameter);
-    }
 }
