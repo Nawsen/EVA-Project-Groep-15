@@ -99,6 +99,7 @@ public class Challenges {
 	}
 	if (user.getDailyChallenges().getSecond().getId() == id) {
 	    user.setCurrentChallenge(user.getDailyChallenges().getSecond());
+            em.persist(user);
 	    return Response.ok().build();
 	}
 	if (user.getDailyChallenges().getThird().getId() == id) {

@@ -98,7 +98,7 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private Challenge currentChallenge;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.PERSIST)
     private List<Challenge> completedChallenges;
 
     @Lob
@@ -106,7 +106,6 @@ public class User implements Serializable {
 
     @Pattern(regexp = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$", message = "imageUrl")
     private String imageUrl;
-
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;

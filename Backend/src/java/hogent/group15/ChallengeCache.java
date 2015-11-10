@@ -85,5 +85,8 @@ public class ChallengeCache {
 	//if we get here it means the user may not view the challenge info yet
 	return null;
     }
+    public int amount(){
+        return allChallenges.size();
+    }
 
 }

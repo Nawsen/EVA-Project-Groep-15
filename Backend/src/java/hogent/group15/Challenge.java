@@ -2,6 +2,7 @@ package hogent.group15;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -33,7 +34,7 @@ public class Challenge implements Serializable {
     private String description;
     private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     private List<User> users;
 
     @Enumerated(EnumType.ORDINAL)

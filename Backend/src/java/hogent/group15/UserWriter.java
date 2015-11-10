@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
@@ -27,6 +28,8 @@ import javax.ws.rs.ext.Provider;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserWriter implements MessageBodyWriter<User> {
 
+    private ChallengeCache cache;
+    
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 	return User.class.isAssignableFrom(type);
@@ -45,8 +48,27 @@ public class UserWriter implements MessageBodyWriter<User> {
 	jsonCha.add("firstName", t.getFirstName());
 	jsonCha.add("lastName", t.getLastName());
 	jsonCha.add("gender", t.getGender().name());
-	jsonCha.add("facebookId", t.getFacebookId());
-        jsonCha.add("imageUrl", t.getImageUrl());
+        if (t.getFacebookId() != 0){
+            jsonCha.add("facebookId", t.getFacebookId());
+        }
+	if (t.getImageUrl() != null){
+            jsonCha.add("imageUrl", t.getImageUrl());
+        }
+        if (t.getAddress().getCountry() != null){
+            jsonCha.add("addressCountry", t.getAddress().getCountry());
+        }
+        if (t.getAddress().getCity() != null){
+            jsonCha.add("addressCity", t.getAddress().getCity());
+        }
+        if (t.getAddress().getStreet() != null){
+            jsonCha.add("addressStreet", t.getAddress().getStreet());
+        }
+        if (t.getCompletedChallenges().isEmpty()){
+            jsonCha.add("percComp", 0);
+        } else {
+            int i = (cache.amount() * 100) / t.getCompletedChallenges().size();
+            jsonCha.add("percComp", i);
+        }
 
 	try (JsonWriter w = Json.createWriter(entityStream)) {
 	    w.writeObject(jsonCha.build());
