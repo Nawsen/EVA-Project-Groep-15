@@ -71,11 +71,16 @@ public class ChallengesRepository {
     }
 
     private Runnable onCompletedChallengesChanged;
+
     public void setOnCompletedChallengesChanged(Runnable callback) {
         onCompletedChallengesChanged = callback;
     }
 
     public void addCompletedChallenge(Challenge challenge) {
+        if (completedChallenges.size() == 1 && completedChallenges.get(0) instanceof EmptyListEntry) {
+            completedChallenges.clear();
+        }
+
         completedChallenges.add(challenge);
         if (onCompletedChallengesChanged != null) {
             onCompletedChallengesChanged.run();
@@ -91,6 +96,7 @@ public class ChallengesRepository {
     }
 
     private Consumer<Challenge> currentChallengeChangeCallback;
+
     public void setOnCurrentChallengeChange(Consumer<Challenge> callback) {
         this.currentChallengeChangeCallback = callback;
         callback.consume(currentChallenge);
@@ -98,7 +104,7 @@ public class ChallengesRepository {
 
     public void setCurrentChallenge(Challenge currentChallenge) {
         this.currentChallenge = currentChallenge;
-        if(currentChallengeChangeCallback != null) {
+        if (currentChallengeChangeCallback != null) {
             currentChallengeChangeCallback.consume(currentChallenge);
         }
     }

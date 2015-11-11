@@ -77,7 +77,7 @@ public class Backend {
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://169.254.80.80:8080/backend/api/")
+                .setEndpoint("http://192.168.0.146:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {

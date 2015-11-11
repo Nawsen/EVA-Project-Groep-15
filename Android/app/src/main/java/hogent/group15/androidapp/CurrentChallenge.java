@@ -71,6 +71,7 @@ public class CurrentChallenge extends FrameLayout {
         Backend.getBackend().completeCurrentChallenge(new ResponseCallback() {
             @Override
             public void success(Response response) {
+                currentChallenge.setShowAcceptChallengeButton(false);
                 ChallengesRepository.getInstance().addCompletedChallenge(currentChallenge);
                 if(onCompleteCallback != null) {
                     onCompleteCallback.consume(currentChallenge);

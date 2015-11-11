@@ -9,6 +9,7 @@ import com.google.gson.annotations.SerializedName;
 import java.io.Serializable;
 import java.net.URI;
 
+import hogent.group15.ui.R;
 import hogent.group15.ui.controls.list.ChallengeListEntry;
 import hogent.group15.ui.controls.ListEntry;
 
@@ -27,19 +28,19 @@ public class Challenge implements Serializable, ListEntry {
 
     public enum Difficulty {
 
-        EASY(1), MEDIUM(2), HARD(3);
+        EASY(R.string.difficulty_easy), MEDIUM(R.string.difficulty_medium), HARD(R.string.diffculty_hard);
 
         private int score;
         private Difficulty(int score) {
             this.score = score;
         }
 
-        public int getScore() {
+        public int getResourceId() {
             return score;
         }
 
-        public static int getScoreFor(String difficulty) {
-            return Difficulty.valueOf(difficulty).getScore();
+        public static int getResourceIdFor(String difficulty) {
+            return Difficulty.valueOf(difficulty).getResourceId();
         }
     }
 
