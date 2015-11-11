@@ -63,4 +63,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="challenge_completed">Challenge completed</string>
     <string name="congratulations">Congratulations!</string>
+    <string name="difficulty_easy">Easy</string>
+    <string name="difficulty_medium">Medium</string>
+    <string name="diffculty_hard">Hard</string>
 </resources>

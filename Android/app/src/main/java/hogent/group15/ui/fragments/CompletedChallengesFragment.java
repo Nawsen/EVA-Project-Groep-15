@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 
 import hogent.group15.domain.ChallengesRepository;
@@ -27,7 +29,20 @@ public class CompletedChallengesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         listView = (ListView) this.getView().findViewById(R.id.completedChallengesListView);
-        listView.setAdapter(new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance().getCompletedChallenges()));
+
+        ChallengesRepository.getInstance().refreshCompletedChallenges(new Runnable() {
+            @Override
+            public void run() {
+                final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance().getCompletedChallenges());
+                listView.setAdapter(adapter);
+                ChallengesRepository.getInstance().setOnCompletedChallengesChanged(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                    }
+                });
+            }
+        });
     }
 
     @Override

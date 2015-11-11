@@ -77,7 +77,7 @@ public class Backend {
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://bitcode.io:8080/backend/api/")
+                .setEndpoint("http://192.168.0.146:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -143,6 +143,24 @@ public class Backend {
             public void success(Response response) {
                 ChallengesRepository.getInstance().setCurrentChallenge(null);
                 callback.success(response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error);
+            }
+        });
+    }
+
+    public void getCompletedChallenges(final Callback<List<Challenge>> callback) {
+        backendAPI.getCompletedChallenges(new Callback<List<Challenge>>() {
+            @Override
+            public void success(List<Challenge> challenges, Response response) {
+                for(Challenge c : challenges) {
+                    c.setShowAcceptChallengeButton(false);
+                }
+
+                callback.success(challenges, response);
             }
 
             @Override

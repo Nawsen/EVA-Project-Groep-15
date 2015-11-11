@@ -40,4 +40,7 @@ public interface BackendAPI {
 
     @PUT("/challenges/complete")
     void completeChallenge(@Body String body, ResponseCallback callback);
+
+    @GET("/challenges/completed")
+    void getCompletedChallenges(Callback<List<Challenge>> challenges);
 }

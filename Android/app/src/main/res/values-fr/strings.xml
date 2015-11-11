@@ -57,4 +57,7 @@
     <string name="no_achievements">Vous n\'avez pas encore gagn\é des acquis!</string>
     <string name="challenge_completed">Défi achevé</string>
     <string name="congratulations">Congratulations!</string>
+    <string name="difficulty_easy">Facile</string>
+    <string name="difficulty_medium">Moyenne</string>
+    <string name="diffculty_hard">Difficile</string>
 </resources>

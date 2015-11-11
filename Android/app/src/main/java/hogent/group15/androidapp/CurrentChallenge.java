@@ -23,6 +23,7 @@ import hogent.group15.AsyncUtil;
 import hogent.group15.Consumer;
 import hogent.group15.domain.Backend;
 import hogent.group15.domain.Challenge;
+import hogent.group15.domain.ChallengesRepository;
 import hogent.group15.ui.R;
 import retrofit.Callback;
 import retrofit.ResponseCallback;
@@ -70,6 +71,8 @@ public class CurrentChallenge extends FrameLayout {
         Backend.getBackend().completeCurrentChallenge(new ResponseCallback() {
             @Override
             public void success(Response response) {
+                currentChallenge.setShowAcceptChallengeButton(false);
+                ChallengesRepository.getInstance().addCompletedChallenge(currentChallenge);
                 if(onCompleteCallback != null) {
                     onCompleteCallback.consume(currentChallenge);
                 }
@@ -80,7 +83,7 @@ public class CurrentChallenge extends FrameLayout {
             }
         });
 
-        Toast.makeText(getContext(), getContext().getString(R.string.congratulations), Toast.LENGTH_SHORT);
+        Toast.makeText(getContext(), getContext().getString(R.string.congratulations), Toast.LENGTH_SHORT).show();
     }
 
     public Challenge getCurrentChallenge() {

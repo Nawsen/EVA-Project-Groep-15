@@ -57,4 +57,7 @@
     <string name="no_achievements">U heeft nog geen prestaties behaald!</string>
     <string name="challenge_completed">Uitdaging gelukt</string>
     <string name="congratulations">Proficiat!</string>
+    <string name="difficulty_easy">Gemakkelijk</string>
+    <string name="difficulty_medium">Gemiddeld</string>
+    <string name="diffculty_hard">Moeilijk</string>
 </resources>
