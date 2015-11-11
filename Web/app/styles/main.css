@@ -172,20 +172,6 @@ label.eva-input:hover {
     display:block;
 }
 
-#challenges .pompoensoep {
-    background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg"), no-repeat;
-    background-size: cover;
-}
-
-#challenges .knolselder {
-    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
-    background-size: cover;
-}
-
-#challenges .pompoenstoof {
-    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
-    background-size: cover;
-}
 .modalImage {
     display: block;
     background-size: cover;

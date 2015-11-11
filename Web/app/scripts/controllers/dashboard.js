@@ -13,26 +13,7 @@ app.controller('DashboardCtrl',
                 'avatar': 'http://placehold.it/150x150'
             };
             $scope.challenges = {};
-            /*
-             Mock data
-             */
-            /*
-            $scope.challenges = [
-                {
-                    id: '230',
-                    title: 'test',
-                    imageUrl: 'images/challenges/pompoensoep_kokoscreme_basilicum.jpg'
-                },
-                {
-                    id: '945',
-                    title: 'test',
-                    imageUrl: 'images/challenges/knolseldersoep.jpg'
-                },
-                {
-                    id: '32',
-                    title: 'test',
-                    imageUrl: 'images/challenges/knolseldersoep.jpg'
-                }];*/
+
             $scope.selectedIndex = 0;
             $scope.selectedChallenge = function () {
                 return $scope.challenges[$scope.selectedIndex];
@@ -41,6 +22,9 @@ app.controller('DashboardCtrl',
             $scope.challengeClicked = function (arrayId) {
                 $scope.selectedIndex = arrayId;
                 $scope.loadChallengeData();
+            }
+            $scope.acceptChallenge =function (chId){
+                console.log(chId);
             }
 
             $scope.detailedChallenge = {};

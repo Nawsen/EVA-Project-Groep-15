@@ -239,16 +239,6 @@ h1 {
     transform: scale(1.055);
     -o-transform: scale(1.055);
     -webkit-transform: scale(1.055); }
-  #challenges .pompoensoep {
-    background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg"), no-repeat;
-    background-size: cover; }
-  #challenges .knolselder {
-    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
-    background-size: cover; }
-  #challenges .pompoenstoof {
-    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
-    background-size: cover; }
-
 /*** STATS ***/
 .banner-wrap {
   width: 100%;

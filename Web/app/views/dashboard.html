@@ -22,8 +22,8 @@
         </div>
         <nav>
             <ul>
-                <li><a href="#">Overview</a></li>
-                <li><a href="#" class="active">Challenges</a></li>
+                <li><a href="#" class="active">Overview</a></li>
+                <li><a href="#">Challenges</a></li>
                 <li><a href="#">Admin tools</a></li>
             </ul>
         </nav>
@@ -47,7 +47,7 @@
             <h3 class="challenge-title">Kies een uitdaging</h3>
             <div id="challenges">
                 <article class="challenge box-border" ng-repeat="challenge in challenges track by $index" ng-click="challengeClicked($index)" data-toggle="modal" data-target="#myModal">
-                    <div ng-style="{'background-image':'url({{challenge.imageUrl}})', 'background-size': 'cover'}">
+                    <div ng-style="{'background-image':'url(images/challenges/{{challenge.imageUrl}})', 'background-size': 'cover'}">
                         <p>{{challenge.title}}</p>
                     </div>
                 </article>
@@ -57,13 +57,13 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
-                                <div class="modalImage" style="text-align: center;" ng-style="{'background-image':'url(' + detailedChallenge.imageUrl + ')'}">
+                                <div class="modalImage" style="text-align: center;" ng-style="{'background-image':'url(images/challenges/' + detailedChallenge.imageUrl + ')'}">
                                     <h2 class="modalText" style="padding-top: 100px; color: #fff; text-shadow: 0px 0px 4px #000;">{{detailedChallenge.title}}</h2>
                                 </div>
                                 <p style="margin-top: 10px;">{{detailedChallenge.description}}</p>
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-default eva-submit-wit">Ga de challenge aan!</button>
+                            <div class="center-text modal-footer">
+                                <button type="button" class="btn btn-default eva-submit-wit" ng-click="acceptChallenge()">Ga de challenge aan!</button>
                             </div>
                         </div>
                     </div>
