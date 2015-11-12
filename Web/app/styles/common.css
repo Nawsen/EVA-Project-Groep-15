@@ -150,7 +150,7 @@ html, body {
 /*** Image replacing ***/
 h1 {
   display: block;
-  background: url("../images/eva-logo.png");
+  background: url("../images/eva-logo_light.png");
   background-repeat: no-repeat;
   background-size: cover;
   height: 82px;
@@ -239,6 +239,16 @@ h1 {
     transform: scale(1.055);
     -o-transform: scale(1.055);
     -webkit-transform: scale(1.055); }
+  #challenges .pompoensoep {
+    background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg"), no-repeat;
+    background-size: cover; }
+  #challenges .knolselder {
+    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
+    background-size: cover; }
+  #challenges .pompoenstoof {
+    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
+    background-size: cover; }
+
 /*** STATS ***/
 .banner-wrap {
   width: 100%;
@@ -248,8 +258,8 @@ h1 {
   display: flex;
   flex-direction: row;
   -webkit-flex-direction: row;
-  flex-wrap: nowrap;
-  -webkit-flex-wrap: nowrap;
+  flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
   justify-content: center;
   -webkit-justify-content: center;
   align-items: center;
@@ -266,6 +276,8 @@ h1 {
     flex-grow: 1;
     align-self: flex-start;
     box-sizing: border-box; }
+    #stats div:first-of-type {
+      margin-bottom: 20px; }
     #stats div .legend {
       display: block;
       max-width: 150px;
@@ -275,7 +287,7 @@ h1 {
       border: 3px solid #222;
       border-radius: 5px;
       float: left;
-      margin: 10% 0 0 10%; }
+      margin: 50px 0 0 10%; }
       #stats div .legend .easy {
         background: url("../images/resources/lieasy.jpg");
         background-repeat: no-repeat;
@@ -311,15 +323,15 @@ h1 {
     min-width: 420px;
     width: 80%;
     background: rgba(34, 34, 34, 0.7);
-    border: 2px solid #0e2218;
-    margin-bottom: 20px; }
+    border: 2px solid #0e2218; }
     #stats #latest-achievements .latest-achievement-badge .badge {
       display: block;
       max-width: 100px;
       max-width: 100px;
       min-width: 100px;
       min-height: 80px;
-      float: left; }
+      float: left;
+      margin: 0; }
     #stats #latest-achievements .latest-achievement-badge .badge-easy {
       background: url("../images/resources/badges/easy.png");
       background-color: rgba(255, 255, 255, 0.4);
