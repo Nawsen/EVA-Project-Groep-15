@@ -2,7 +2,7 @@
  * Created by Mathias on 29-Oct-15.
  */
 
-app.factory('auth', ['$http', '$window', function ($http, $window) {
+app.factory('auth', ['$http', '$window', 'NetworkingService', function ($http, $window, netService) {
     var auth = {};
 
     auth.saveToken = function (token) {
@@ -31,14 +31,14 @@ app.factory('auth', ['$http', '$window', function ($http, $window) {
         }
     };
     auth.register = function (user) {
-        return $http.post('http://localhost:8080/backend/api/users/register', user).success(function (data) {
+        return netService.post('/backend/api/users/register', user).success(function (data) {
             //auth.saveToken(data.token);
             //wordt toch niet teruggestuurd bij register.
         });
     };
 
     auth.login = function (user) {
-        return $http.post('http://localhost:8080/backend/api/users/login', user).success(function (data) {
+        return netService.post('/backend/api/users/login', user).success(function (data) {
             auth.saveToken(data.token);
             auth.setHeader();
         });

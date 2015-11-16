@@ -1,7 +1,7 @@
 /**
  * Created by mathi on 3/11/2015.
  */
-app.factory('challenges', ['$http', 'auth', function ($http, auth) {
+app.factory('challenges', ['$http', 'auth', 'NetworkService', function ($http, auth, netService) {
     var challenges = {};
     challenges.challenges = {};
     challenges.getDailyChallenges = function () {
@@ -11,7 +11,7 @@ app.factory('challenges', ['$http', 'auth', function ($http, auth) {
         }
         };
 
-        $http.get("localhost:8080/backend/api/challenges/daily").success(function(data, status, headers, config) {
+        netService.get("/backend/api/challenges/daily").success(function(data, status, headers, config) {
             challenges.challenges = data;
         });
         return challenges.challenges;
