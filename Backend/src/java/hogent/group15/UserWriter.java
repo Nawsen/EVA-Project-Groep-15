@@ -28,8 +28,6 @@ import javax.ws.rs.ext.Provider;
 @Produces(MediaType.APPLICATION_JSON)
 public class UserWriter implements MessageBodyWriter<User> {
 
-    private ChallengeCache cache;
-    
     @Override
     public boolean isWriteable(Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType) {
 	return User.class.isAssignableFrom(type);
@@ -66,7 +64,7 @@ public class UserWriter implements MessageBodyWriter<User> {
         if (t.getCompletedChallenges().isEmpty()){
             jsonCha.add("percComp", 0);
         } else {
-            int i = (cache.amount() * 100) / t.getCompletedChallenges().size();
+            int i = (21 * 100) / t.getCompletedChallenges().size();
             jsonCha.add("percComp", i);
         }
 
