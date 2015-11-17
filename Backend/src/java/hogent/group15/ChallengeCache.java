@@ -28,11 +28,15 @@ public class ChallengeCache {
     @PostConstruct
     @Transactional
     public void init() {
-	allChallenges = em.createNamedQuery("Challenge.findAll", Challenge.class).getResultList();
+	allChallenges = em.createNamedQuery("Challenge.findUsable", Challenge.class).getResultList();
     }
 
     public void addToCache(Challenge ch) {
 	allChallenges.add(ch);
+    }
+    
+    public void removeFromCache(Challenge ch) {
+	allChallenges.remove(ch);
     }
 
     public DailyChallenges createDailyChallenges(User user) {

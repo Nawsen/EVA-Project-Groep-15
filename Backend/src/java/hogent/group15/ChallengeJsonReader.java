@@ -1,12 +1,9 @@
 package hogent.group15;
 
-import hogent.group15.User.Gender;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
@@ -49,8 +46,7 @@ public class ChallengeJsonReader implements MessageBodyReader<Challenge> {
 		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.HARD);
 	    }
 
-	    return new Challenge(title, descr, imageUrl, Challenge.Difficulty.EASY);
-
+	    return new Challenge(title, descr, imageUrl, null);
 	}
     }
 

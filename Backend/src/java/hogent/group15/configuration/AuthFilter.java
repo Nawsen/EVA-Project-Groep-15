@@ -20,6 +20,7 @@ import javax.ws.rs.ext.Provider;
  * @author wannes
  */
 @Provider
+@Authorized
 public class AuthFilter implements ContainerRequestFilter {
 
     private static final String KEY = "secret";
@@ -27,9 +28,6 @@ public class AuthFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) {
 	try {
-	    if (requestContext.getUriInfo().getAbsolutePath().toString().contains("login") || requestContext.getUriInfo().getAbsolutePath().toString().contains("register") || requestContext.getMethod().equalsIgnoreCase("options")) {
-		return;
-	    }
 	    if (requestContext.getHeaderString("Authorization") != null) {
 		//we need to split off the non usefull things from the header 
 		//in this case we need to chew off "Bearer "

@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -13,7 +12,6 @@ import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -45,7 +43,7 @@ public class User implements Serializable {
 
     public enum Role {
 
-	USER, ADMIN, ROOT
+	USER, ADMIN
     }
 
     public enum VegetarianGrade {
@@ -109,6 +107,9 @@ public class User implements Serializable {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;
+    
+    @Enumerated(EnumType.ORDINAL)
+    private Role role;
 
     public User() {
     }
@@ -124,6 +125,14 @@ public class User implements Serializable {
 	//set good hashed & salted password
 	this.salt = generateSalt();
 	this.encPassword = hash(password.toCharArray(), this.salt);
+    }
+
+    public Role getRole() {
+	return role;
+    }
+
+    public void setRole(Role role) {
+	this.role = role;
     }
 
     public int getFacebookId() {

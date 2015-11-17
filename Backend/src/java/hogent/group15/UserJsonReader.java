@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.json.JsonReader;
