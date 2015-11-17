@@ -21,6 +21,17 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($
             url: '/register',
             templateUrl: 'views/register.html',
             controller: 'RegisterCtrl'
+        })
+        .state('index', {
+            url: '/index',
+            templateUrl: 'index.html',
+            controller: 'IndexCtrl'
         });
     $urlRouterProvider.otherwise('/login');
+}]);
+
+app.controller("IndexCtrl", ["$scope", "auth", function($scope, auth) {
+    $scope.loggedin = function() {
+        auth.isLoggedIn();
+    };
 }]);

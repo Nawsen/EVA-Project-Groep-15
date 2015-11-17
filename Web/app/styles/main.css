@@ -23,9 +23,12 @@
     border-radius: 0 !important;
 }
 
-.login-page form {
+#login-page form {
 
     margin: 20px 0 20px 0;
+}
+#login-page{
+    width: 100%;
 }
 
 .logintitle {
@@ -100,7 +103,9 @@
     transition: border-color 0.15s linear, color 0.15s linear;
     transition: background-color 0.15s linear, color 0.15s linear;
 }
-
+.ng-scope {
+    width: 100%;
+}
 .eva-input:focus {
     border: 2px solid #A4B239;
     outline: medium none;
