@@ -13,7 +13,23 @@
 <body ng-app="eva">
 
 <div class="">
+    <div id="wrapper">
+        <div id="nav">
+            <div class="user-info">
+                <img src="images/eva-logo-white.png"/>
+                <img src="{{user.avatar}}" class="user-avatar">
+                <h2>Welcome <small>{{user.firstname}}</small></h2>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Overview</a></li>
+                    <li><a href="#">Challenges</a></li>
+                    <li><a href="#">Admin tools</a></li>
+                </ul>
+            </nav>
+        </div>
     <div ui-view></div>
+    </div>
 </div>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>

@@ -91,7 +91,8 @@ html, body {
 
   #main {
     margin-left: 250px;
-    width: 100%;
+    width: calc(100% - 150px);
+
   }
 }
 
@@ -218,20 +219,6 @@ h1 {
     }
   }
 
-  .pompoensoep {
-    background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg"), no-repeat;
-    background-size: cover;
-  }
-
-  .knolselder {
-    background: url("../images/challenges/knolseldersoep.jpg"), no-repeat;
-    background-size: cover;
-  }
-
-  .pompoenstoof {
-    background: url("../images/challenges/Pompoenstoofpotje.jpg"), no-repeat;
-    background-size: cover;
-  }
 }
 
 /*** STATS ***/
@@ -445,27 +432,6 @@ h1 {
           text-align: center;
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
           word-break: keep-all;
-        }
-
-        &.temp-pompoensoep {
-          background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0% 50%;
-        }
-
-        &.temp-seldersoep {
-          background: url("../images/challenges/knolseldersoep.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0% 50%;
-        }
-
-        &.temp-resto {
-          background: url("../images/challenges/Pompoenstoofpotje.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0% 50%;
         }
 
       }

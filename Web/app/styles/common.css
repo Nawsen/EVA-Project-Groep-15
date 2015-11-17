@@ -145,7 +145,7 @@ html, body {
             border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
   #wrapper #main {
     margin-left: 250px;
-    width: 100%; }
+    width: calc(100% - 150px); }
 
 /*** Image replacing ***/
 h1 {
@@ -239,6 +239,7 @@ h1 {
     transform: scale(1.055);
     -o-transform: scale(1.055);
     -webkit-transform: scale(1.055); }
+
 /*** STATS ***/
 .banner-wrap {
   width: 100%;
@@ -396,21 +397,6 @@ h1 {
           text-align: center;
           text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
           word-break: keep-all; }
-        #achievements #achievement-box .achievement .achievement-image.temp-pompoensoep {
-          background: url("../images/challenges/pompoensoep_kokoscreme_basilicum.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0% 50%; }
-        #achievements #achievement-box .achievement .achievement-image.temp-seldersoep {
-          background: url("../images/challenges/knolseldersoep.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0% 50%; }
-        #achievements #achievement-box .achievement .achievement-image.temp-resto {
-          background: url("../images/challenges/Pompoenstoofpotje.jpg");
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0% 50%; }
       #achievements #achievement-box .achievement:nth-of-type(2n + 1) {
         margin-right: 2%; }
       #achievements #achievement-box .achievement .badge {
