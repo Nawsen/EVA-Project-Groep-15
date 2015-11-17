@@ -3,25 +3,24 @@
  */
 var app = angular.module('eva', ['ui.router']);
 
-    app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function($stateProvider, $urlRouterProvider, $httpProvider) {
-        $httpProvider.defaults.useXDomain = true;
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    $httpProvider.defaults.useXDomain = true;
 
-        $stateProvider
-            .state('login', {
-                url: '/login',
-                templateUrl: 'views/login.html',
-                controller: 'LoginCtrl'
-            })
-            .state('dashboard', {
-                url: '/dashboard',
-                templateUrl: 'views/dashboard.html',
-                controller: 'DashboardCtrl'
-            })
-            .state('register', {
-                url: '/register',
-                templateUrl: 'views/register.html',
-                controller: 'RegisterCtrl'
-            });
-        $urlRouterProvider.otherwise('/login');
-
-    }]);
+    $stateProvider
+        .state('login', {
+            url: '/login',
+            templateUrl: 'views/login.html',
+            controller: 'LoginCtrl'
+        })
+        .state('dashboard', {
+            url: '/dashboard',
+            templateUrl: 'views/dashboard.html',
+            controller: 'DashboardCtrl'
+        })
+        .state('register', {
+            url: '/register',
+            templateUrl: 'views/register.html',
+            controller: 'RegisterCtrl'
+        });
+    $urlRouterProvider.otherwise('/login');
+}]);

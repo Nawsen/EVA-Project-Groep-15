@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">EVA</string>
     <string name="accept_challenge">Uitdaging aangaan</string>
-    <string name="challenge_score_notification">Score: {{score}}</string>
+    <string name="challenge_score_notification">Moeilijkheid: {{score}}</string>
     <string name="choose_challenge">Kies een uitdaging:</string>
     <string name="welcome_notification">Welkom {{username}}</string>
     <string name="get_challenge">Bekijk uitdaging</string>

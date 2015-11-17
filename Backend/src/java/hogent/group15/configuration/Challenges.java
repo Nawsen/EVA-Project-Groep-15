@@ -119,11 +119,11 @@ public class Challenges {
 	if (user.getCurrentChallenge() == null) {
 	    throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).build());
 	}
-        user.getCurrentChallenge().getUsers().add(user);
+	
+//        user.getCurrentChallenge().getUsers().add(user);
 	user.getCompletedChallenges().add(user.getCurrentChallenge());
 	user.setCurrentChallenge(null);
 	em.persist(user);
-        em.flush();
 	return Response.ok().build();
     }
 
