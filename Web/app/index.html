@@ -6,41 +6,58 @@
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/common.css">
     <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body ng-app="eva">
 
+
 <div class="">
     <div id="wrapper">
-        <div id="nav" ng-show="loggedin()">
-            <div class="user-info">
-                <img src="images/eva-logo-white.png"/>
-                <img src="{{user.avatar}}" class="user-avatar">
-                <h2>Welcome <small>{{user.firstname}}</small></h2>
+        <div layout="row" ng-controller="AppCtrl" flex>
+            <md-sidenav layout="column" class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-lg')">
+                <md-toolbar class="md-medium-tall">
+                    <span>Toolbar</span>
+                </md-toolbar>
+                <md-content layout="column" flex>
+                    <span>Your sidenav</span>
+                </md-content>
+
+            </md-sidenav>
+            <div layout="column" flex id="content">
+                <md-toolbar layout="row">
+                    <div class="md-toolbar-tools">
+                        <i class="fa fa-bars pointer" ng-click="toggleMenu()" hide-gt-lg></i>
+                    </div>
+
+                </md-toolbar>
+                <md-content ui-view layout="column" flex>
+                </md-content>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Overview</a></li>
-                    <li><a href="#">Challenges</a></li>
-                    <li><a href="#">Admin tools</a></li>
-                </ul>
-            </nav>
         </div>
-    <div ui-view></div>
+
     </div>
 </div>
 <script src="bower_components/angular/angular.min.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script src="bower_components/angular-material/angular-material.js"></script>
+
 <script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/bootstrap/js/modal.js"></script>
+
+
 <script src="scripts/app.js"></script>
 <script src="scripts/factories/challenges.js"></script>
 <script src="scripts/factories/authentication.js"></script>
 <script src="scripts/factories/messages.js"></script>
 <script src="scripts/factories/networkservice.js"></script>
+
+<script src="scripts/controllers/sidebar.js"></script>
 <script src="scripts/controllers/login.js"></script>
 <script src="scripts/controllers/dashboard.js"></script>
 <script src="scripts/controllers/register.js"></script>
