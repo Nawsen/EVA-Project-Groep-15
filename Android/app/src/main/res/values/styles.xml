@@ -40,6 +40,10 @@
         <item name="android:paddingBottom">10dp</item>
     </style>
 
+    <style name="shareButtonOverride" parent="evaButton">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
+
     <style name="evaButtonGray" parent="evaButton">
         <item name="android:background">@drawable/eva_button_gray</item>
         <item name="android:textColor">#000</item>

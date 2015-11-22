@@ -1,14 +1,20 @@
 package hogent.group15.domain;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.v4.content.ContextCompat;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.facebook.share.model.ShareLinkContent;
+import com.facebook.share.widget.ShareButton;
 
 import org.w3c.dom.Text;
 
@@ -81,7 +87,16 @@ public class Achievement implements ListEntry {
 
         TextView description = (TextView) view.findViewById(R.id.achievement_description);
         TextView title = (TextView) view.findViewById(R.id.achievement_title);
+        ShareButton shareButton = (ShareButton) view.findViewById(R.id.achievement_share_button);
         title.setText(this.title);
+
+        shareButton.setShareContent(new ShareLinkContent.Builder()
+                .setContentTitle(getTitle())
+                .setContentDescription(getDescription().isEmpty() ? "No description" : getDescription())
+                .setImageUrl(Uri.parse("http://www.evavzw.be/sites/all/themes/wieni-subtheme/apple-touch-icon-152x152.png"))
+                .build());
+
+        shareButton.setCompoundDrawables(null, null, null, null);
 
         if (this.description == null || this.description.isEmpty()) {
             description.setVisibility(View.INVISIBLE);
@@ -89,6 +104,15 @@ public class Achievement implements ListEntry {
             params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
             params.addRule(RelativeLayout.RIGHT_OF, R.id.achievement_badge);
             title.setLayoutParams(params);
+
+            RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(shareButton.getLayoutParams());
+            buttonParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+            buttonParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+
+            Resources r = inflater.getContext().getResources();
+            int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, r.getDisplayMetrics());
+            buttonParams.setMargins(0, 0, px, 0);
+            shareButton.setLayoutParams(buttonParams);
         } else {
             title.setVisibility(View.VISIBLE);
             description.setText(this.description);
