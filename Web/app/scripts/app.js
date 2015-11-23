@@ -31,7 +31,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($
 }]);
 
 app.controller("IndexCtrl", ["$scope", "auth", function($scope, auth) {
-    $scope.loggedin = function() {
-        auth.isLoggedIn();
+    $scope.isLoggedIn = function() {
+        return auth.isLoggedIn();
     };
 }]);

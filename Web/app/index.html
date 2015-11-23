@@ -12,9 +12,9 @@
 </head>
 <body ng-app="eva">
 
-<div class="">
+<div class="" ng-controller="IndexCtrl">
     <div id="wrapper">
-        <div id="nav" ng-show="loggedin()">
+        <div id="nav" ng-show="isLoggedIn()">
             <div class="user-info">
                 <img src="images/eva-logo-white.png"/>
                 <img src="{{user.avatar}}" class="user-avatar">
