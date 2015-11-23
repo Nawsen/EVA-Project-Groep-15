@@ -1,7 +1,9 @@
 <html>
+
 <head>
     <meta charset="UTF-8">
     <title>Eva vzw</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/common.css">
@@ -10,40 +12,49 @@
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<body ng-app="eva">
 
-<div class="" ng-controller="IndexCtrl">
-    <div id="wrapper">
-        <div id="nav" ng-show="isLoggedIn()">
-            <div class="user-info">
-                <img src="images/eva-logo-white.png"/>
-                <img src="{{user.avatar}}" class="user-avatar">
-                <h2>Welcome <small>{{user.firstname}}</small></h2>
+<body ng-app="eva">
+    <div ng-controller="IndexCtrl" layout="column" ng-cloak>
+        <div id="wrapper">
+            <div id="nav" layout="row" flex ng-show="isLoggedIn()" style="width: 305px;">
+                <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
+                    <md-content layout-padding>
+                        <div class="user-info">
+                            <img src="images/eva-logo-white.png" />
+                            <img src="{{user.avatar}}" class="user-avatar">
+                            <h2>Welcome <small>{{user.firstname}}</small></h2>
+                        </div>
+                        <nav>
+                            <ul>
+                                <li><a href="#" class="active">Overview</a></li>
+                                <li><a href="#">Challenges</a></li>
+                                <li><a href="#">Admin tools</a></li>
+                            </ul>
+                        </nav>
+                    </md-content>
+                </md-sidenav>
             </div>
-            <nav>
-                <ul>
-                    <li><a href="#" class="active">Overview</a></li>
-                    <li><a href="#">Challenges</a></li>
-                    <li><a href="#">Admin tools</a></li>
-                </ul>
-            </nav>
+            <div ui-view></div>
         </div>
-    <div ui-view></div>
     </div>
-</div>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
-<script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/bootstrap/js/modal.js"></script>
-<script src="scripts/app.js"></script>
-<script src="scripts/factories/challenges.js"></script>
-<script src="scripts/factories/authentication.js"></script>
-<script src="scripts/factories/messages.js"></script>
-<script src="scripts/factories/networkservice.js"></script>
-<script src="scripts/controllers/login.js"></script>
-<script src="scripts/controllers/dashboard.js"></script>
-<script src="scripts/controllers/register.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/js/modal.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="scripts/factories/challenges.js"></script>
+    <script src="scripts/factories/authentication.js"></script>
+    <script src="scripts/factories/messages.js"></script>
+    <script src="scripts/factories/networkservice.js"></script>
+    <script src="scripts/controllers/login.js"></script>
+    <script src="scripts/controllers/dashboard.js"></script>
+    <script src="scripts/controllers/register.js"></script>
 
 </body>
+
 </html>
