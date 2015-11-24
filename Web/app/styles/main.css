@@ -22,7 +22,9 @@
 * {
     border-radius: 0 !important;
 }
-
+#welcome {
+    margin-left: 15px;
+}
 #login-page form {
 
     margin: 20px 0 20px 0;

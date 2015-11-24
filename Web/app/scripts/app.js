@@ -30,8 +30,20 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($
     $urlRouterProvider.otherwise('/login');
 }]);
 
-app.controller("IndexCtrl", ["$scope", "auth", function($scope, auth) {
+app.controller("IndexCtrl", ["$scope", "auth",'NetworkingService', function($scope, auth, netService) {
     $scope.isLoggedIn = function() {
         return auth.isLoggedIn();
     };
+    $scope.user = {};
+    function initSideBar(){
+        if (auth.isLoggedIn()) {
+            netService.get('/backend/api/users/detail').success(function (data, status) {
+                if (status == 200) {
+                   $scope.user = data;
+                    console.log(data);
+                }
+            });
+        }
+    }
+    initSideBar();
 }]);

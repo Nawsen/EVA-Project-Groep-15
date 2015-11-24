@@ -144,8 +144,8 @@ html, body {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1); }
   #wrapper #main {
-    margin-left: 250px;
-    width: calc(100% - 150px); }
+    margin-left: 300px;
+    width: calc(100% - 200px); }
 
 /*** Image replacing ***/
 h1 {
