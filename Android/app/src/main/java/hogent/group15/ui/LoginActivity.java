@@ -73,14 +73,13 @@ public class LoginActivity extends AppCompatActivity implements Validator {
             public void failure(final RetrofitError error) {
                 // Log.e("LOGIN", "result: " + error.getResponse());
                 runOnUiThread(new Runnable() {
+
                     @Override
                     public void run() {
-                        switch (error.getResponse().getStatus()) {
-                            case 401:
-                                Toast.makeText(getApplicationContext(), R.string.wrong_credentials, Toast.LENGTH_LONG).show();
-                                break;
-                            default:
-                                Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
+                        if (error.getResponse() == null) {
+                            Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
+                        } else if (error.getResponse().getStatus() == 401) {
+                            Toast.makeText(getApplicationContext(), R.string.wrong_credentials, Toast.LENGTH_LONG).show();
                         }
                     }
                 });

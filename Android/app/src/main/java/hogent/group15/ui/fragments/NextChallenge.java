@@ -45,7 +45,7 @@ public class NextChallenge extends FrameLayout {
     }
 
     public void refreshChallenges() {
-        Backend.getBackend().getDailyChallenges(new Callback<List<Challenge>>() {
+        Backend.getBackend().getDailyChallenges(getContext(), new Callback<List<Challenge>>() {
 
             @Override
             public void success(List<Challenge> data, Response response) {

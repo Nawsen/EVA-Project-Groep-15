@@ -102,6 +102,4 @@ public class Users {
     public User getUserDetails(@HeaderParam("email") String email){
         return em.find(User.class, email);
     }
-
-    
 }

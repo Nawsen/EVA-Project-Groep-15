@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hogent.group15;
 
 import java.io.IOException;
@@ -63,6 +58,13 @@ public class ChallengeListWriter implements MessageBodyWriter<List<Challenge>> {
 	    jsonCha.add("title", c.getTitle());
 	    jsonCha.add("difficulty", c.getDifficulty().name());
 	    jsonCha.add("imageUrl", c.getImageUrl());
+	    if (c.getDescription() != null && !c.getDescription().isEmpty()) {
+		jsonCha.add("description", c.getDescription());
+	    }
+	    
+	    if (c.getDate() != null) {
+		jsonCha.add("date", c.getDate().toString());
+	    }
 
 	    jsonChallenges.add(jsonCha);
 	}

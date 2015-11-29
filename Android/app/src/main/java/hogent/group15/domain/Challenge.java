@@ -5,9 +5,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.gson.annotations.SerializedName;
+import com.j256.ormlite.field.DataType;
+import com.j256.ormlite.field.DatabaseField;
+import com.j256.ormlite.table.DatabaseTable;
 
 import java.io.Serializable;
 import java.net.URI;
+import java.util.Date;
 
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.list.ChallengeListEntry;
@@ -16,6 +20,7 @@ import hogent.group15.ui.controls.ListEntry;
 /**
  * Created by Frederik on 10/11/2015.
  */
+@DatabaseTable(tableName = "Challenge")
 public class Challenge implements Serializable, ListEntry {
 
     @Override
@@ -31,6 +36,7 @@ public class Challenge implements Serializable, ListEntry {
         EASY(R.string.difficulty_easy), MEDIUM(R.string.difficulty_medium), HARD(R.string.diffculty_hard);
 
         private int score;
+
         private Difficulty(int score) {
             this.score = score;
         }
@@ -44,25 +50,33 @@ public class Challenge implements Serializable, ListEntry {
         }
     }
 
+    @DatabaseField(id = true)
     int id;
 
     @SerializedName("imageUrl")
-    URI headerImageUri;
+    @DatabaseField(columnName = "imageUri", canBeNull = false)
+    String headerImageUri;
 
+    @DatabaseField(columnName = "title", canBeNull = false)
     String title;
 
     @SerializedName("description")
+    @DatabaseField(columnName = "description", canBeNull = false)
     String detailedDescription;
 
     @SerializedName("difficulty")
+    @DatabaseField(columnName = "difficulty", canBeNull = false)
     String difficulty;
+
+    @DatabaseField(columnName = "date", canBeNull = false)
+    String date;
 
     private boolean showAcceptChallengeButton = true;
 
     public Challenge() {
     }
 
-    public Challenge(int id, URI headerImageUri, String title, String detailedDescription, String difficulty) {
+    public Challenge(int id, String headerImageUri, String title, String detailedDescription, String difficulty) {
         this.id = id;
         this.headerImageUri = headerImageUri;
         this.title = title;
@@ -94,11 +108,11 @@ public class Challenge implements Serializable, ListEntry {
         this.difficulty = difficulty;
     }
 
-    public URI getHeaderImageUri() {
+    public String getHeaderImageUri() {
         return headerImageUri;
     }
 
-    public void setHeaderImageUri(URI headerImageUri) {
+    public void setHeaderImageUri(String headerImageUri) {
         this.headerImageUri = headerImageUri;
     }
 

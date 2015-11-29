@@ -28,7 +28,8 @@ public class AuthFilter implements ContainerRequestFilter {
     @Override
     public void filter(ContainerRequestContext requestContext) {
 	try {
-	    if (requestContext.getMethod().equalsIgnoreCase("options")) {
+	    String path = requestContext.getUriInfo().getPath();
+	    if (requestContext.getMethod().equalsIgnoreCase("options") || path.equalsIgnoreCase("users/login") || path.equalsIgnoreCase("users/register")) {
 		return;
 	    }
 	    

@@ -1,6 +1,5 @@
 package hogent.group15;
 
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;

@@ -4,6 +4,7 @@ import hogent.group15.Challenge;
 import hogent.group15.ChallengeCache;
 import hogent.group15.DailyChallenges;
 import hogent.group15.User;
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -59,6 +60,30 @@ public class Challenges {
 	User user = em.find(User.class, email);
 	DailyChallenges ch = cache.createDailyChallenges(user);
 	em.persist(user);
+	
+	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
+	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
+	ch.getThird().setDate(new Date(System.currentTimeMillis()));
+	ch.getFirst().setDescription("");
+	ch.getSecond().setDescription("");
+	ch.getThird().setDescription("");
+	
+	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
+    }
+    
+    @Path("daily/complete")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public List<Challenge> getDailyChallengesComplete(@HeaderParam("email") String email) {
+	User user = em.find(User.class, email);
+	DailyChallenges ch = cache.createDailyChallenges(user);
+	em.persist(user);
+	
+	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
+	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
+	ch.getThird().setDate(new Date(System.currentTimeMillis()));
+	
 	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
     }
 

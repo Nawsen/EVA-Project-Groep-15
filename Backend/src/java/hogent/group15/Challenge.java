@@ -1,6 +1,7 @@
 package hogent.group15;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -14,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
 /**
  *
@@ -120,5 +122,16 @@ public class Challenge implements Serializable {
 
     public List<User> getUsers() {
 	return users;
+    }
+    
+    @Transient
+    private Date date;
+    
+    public void setDate(Date date) {
+	this.date = date;
+    }
+    
+    public Date getDate() {
+	return date;
     }
 }
