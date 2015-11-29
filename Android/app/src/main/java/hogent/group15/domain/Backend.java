@@ -3,12 +3,15 @@ package hogent.group15.domain;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.provider.ContactsContract;
 import android.telecom.Call;
 import android.transition.Fade;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.gson.GsonBuilder;
+import com.j256.ormlite.dao.CloseableIterable;
+import com.j256.ormlite.dao.CloseableIterator;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -18,6 +21,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
+import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -36,7 +41,7 @@ import retrofit.converter.GsonConverter;
 public class Backend {
 
     private static Backend backend;
-    public final static String TAG = "BACKEND";
+    public final static String TAG = Backend.class.getName();
     private final RestAdapter restAdapter = doConfig(new RestAdapter.Builder()).build();
     private final BackendAPI backendAPI = restAdapter.create(BackendAPI.class);
     private JsonWebToken jwtToken;
@@ -77,7 +82,7 @@ public class Backend {
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://192.168.0.146:8080/backend/api/")
+                .setEndpoint("http://192.168.0.140:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -109,11 +114,31 @@ public class Backend {
         });
     }
 
-    public void getDailyChallenges(final Callback<List<Challenge>> callback) {
-        backendAPI.getDailyChallenges(callback);
+    public void getDailyChallenges(final Context context, final Callback<List<Challenge>> callback) {
+        final Database database = Database.getInstance(context);
+        List<Challenge> challenges = database.getDailyChallenges();
+
+        if (challenges != null && challenges.size() >= 3) {
+            callback.success(challenges, null);
+            return;
+        }
+
+        backendAPI.getDailyChallenges(new Callback<List<Challenge>>() {
+            @Override
+            public void success(List<Challenge> challenges, Response response) {
+                database.saveChallenges(challenges);
+                callback.success(challenges, response);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                callback.failure(error);
+            }
+        });
     }
 
     public void getDetailedChallenge(final int challengeId, final Callback<Challenge> callback) {
+
         backendAPI.getDetailedChallenge(challengeId, callback);
     }
 
@@ -156,7 +181,7 @@ public class Backend {
         backendAPI.getCompletedChallenges(new Callback<List<Challenge>>() {
             @Override
             public void success(List<Challenge> challenges, Response response) {
-                for(Challenge c : challenges) {
+                for (Challenge c : challenges) {
                     c.setShowAcceptChallengeButton(false);
                 }
 

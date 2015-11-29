@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
-import java.math.BigDecimal;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
@@ -43,6 +42,10 @@ public class ChallengeWriter implements MessageBodyWriter<Challenge> {
 	jsonCha.add("description", t.getDescription());
 	jsonCha.add("difficulty", t.getDifficulty().name());
 	jsonCha.add("imageUrl", t.getImageUrl());
+	
+	if (t.getDate() != null) {
+		jsonCha.add("date", t.getDate().toString());
+	    }
 
 	try (JsonWriter w = Json.createWriter(entityStream)) {
 	    w.writeObject(jsonCha.build());

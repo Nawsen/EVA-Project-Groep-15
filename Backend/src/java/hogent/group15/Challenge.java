@@ -1,6 +1,7 @@
 package hogent.group15;
 
 import java.io.Serializable;
+import java.sql.Date;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -12,14 +13,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Transient;
 
 /**
  *
  * @author Frederik
  */
 @Entity
-@NamedQuery(name = "Challenge.findAll", query = "SELECT c FROM Challenge c")
+@NamedQueries({
+    @NamedQuery(name = "Challenge.findAll", query = "SELECT c FROM Challenge c"),
+    @NamedQuery(name = "Challenge.findUsable", query = "SELECT c FROM Challenge c WHERE c.usable = TRUE")
+})
 public class Challenge implements Serializable {
 
     public enum Difficulty {
@@ -41,6 +47,8 @@ public class Challenge implements Serializable {
 
     @Enumerated(EnumType.ORDINAL)
     private Difficulty difficulty;
+    
+    private boolean usable = true;
 
     public Challenge() {
     }
@@ -60,6 +68,14 @@ public class Challenge implements Serializable {
 	this.difficulty = difficulty;
     }
 
+    public boolean isUsable() {
+	return usable;
+    }
+
+    public void setUsable(boolean usable) {
+	this.usable = usable;
+    }
+    
     public int getId() {
 	return id;
     }
@@ -101,11 +117,21 @@ public class Challenge implements Serializable {
     }
 
     public void setUsers(List<User> users) {
-        this.users = users;
+	this.users = users;
     }
 
     public List<User> getUsers() {
-        return users;
+	return users;
     }
-
+    
+    @Transient
+    private Date date;
+    
+    public void setDate(Date date) {
+	this.date = date;
+    }
+    
+    public Date getDate() {
+	return date;
+    }
 }

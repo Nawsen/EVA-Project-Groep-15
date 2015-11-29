@@ -4,7 +4,7 @@ import hogent.group15.Challenge;
 import hogent.group15.ChallengeCache;
 import hogent.group15.DailyChallenges;
 import hogent.group15.User;
-import java.net.URI;
+import java.sql.Date;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
@@ -34,6 +34,7 @@ import javax.ws.rs.core.Response;
  */
 @Path("challenges")
 @Dependent
+@Authorized
 public class Challenges {
 
     @PersistenceContext
@@ -59,6 +60,30 @@ public class Challenges {
 	User user = em.find(User.class, email);
 	DailyChallenges ch = cache.createDailyChallenges(user);
 	em.persist(user);
+	
+	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
+	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
+	ch.getThird().setDate(new Date(System.currentTimeMillis()));
+	ch.getFirst().setDescription("");
+	ch.getSecond().setDescription("");
+	ch.getThird().setDescription("");
+	
+	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
+    }
+    
+    @Path("daily/complete")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Transactional
+    public List<Challenge> getDailyChallengesComplete(@HeaderParam("email") String email) {
+	User user = em.find(User.class, email);
+	DailyChallenges ch = cache.createDailyChallenges(user);
+	em.persist(user);
+	
+	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
+	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
+	ch.getThird().setDate(new Date(System.currentTimeMillis()));
+	
 	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
     }
 
@@ -99,7 +124,7 @@ public class Challenges {
 	}
 	if (user.getDailyChallenges().getSecond().getId() == id) {
 	    user.setCurrentChallenge(user.getDailyChallenges().getSecond());
-            em.persist(user);
+	    em.persist(user);
 	    return Response.ok().build();
 	}
 	if (user.getDailyChallenges().getThird().getId() == id) {
@@ -119,7 +144,7 @@ public class Challenges {
 	if (user.getCurrentChallenge() == null) {
 	    throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).build());
 	}
-	
+
 //        user.getCurrentChallenge().getUsers().add(user);
 	user.getCompletedChallenges().add(user.getCurrentChallenge());
 	user.setCurrentChallenge(null);
@@ -144,10 +169,61 @@ public class Challenges {
 	    } else {
 		em.persist(challenge);
 		cache.addToCache(challenge);
-
 		return Response.status(Response.Status.CREATED).build();
 	    }
 	}
     }
 
+    private boolean isAdmin(String email) {
+	User user = em.find(User.class, email);
+	return user == null ? false : user.getRole() == User.Role.ADMIN;
+    }
+
+    @Path("{id}/edit")
+    @PUT
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response editChallenge(@PathParam("id") int id, Challenge challenge, @HeaderParam("email") String email) {
+	isAdmin(email);
+	Challenge c = em.find(Challenge.class, id);
+
+	if (c == null) {
+	    return Response.notModified().build();
+	}
+
+	if (challenge.getDescription() != null && !challenge.getDescription().isEmpty()) {
+	    c.setDescription(challenge.getDescription());
+	}
+
+	if (challenge.getDifficulty() != null) {
+	    c.setDifficulty(challenge.getDifficulty());
+	}
+
+	if (challenge.getTitle() != null && !challenge.getTitle().isEmpty()) {
+	    c.setTitle(challenge.getTitle());
+	}
+
+	if (challenge.getImageUrl() != null && !challenge.getImageUrl().isEmpty()) {
+	    c.setImageUrl(challenge.getImageUrl());
+	}
+
+	em.merge(c);
+	return Response.noContent().build();
+    }
+
+    @Path("{id}/remove")
+    @GET
+    @Transactional
+    public Response removeChallenge(@PathParam("id") int id, @HeaderParam("email") String email) {
+	isAdmin(email);
+	Challenge c = em.find(Challenge.class, id);
+	if (c != null) {
+	    c.setUsable(false);
+	    cache.removeFromCache(c);
+	    em.merge(c);
+	    return Response.noContent().build();
+	}
+
+	return Response.notModified().build();
+    }
 }

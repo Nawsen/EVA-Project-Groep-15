@@ -95,11 +95,11 @@ public class Users {
 
 	return "{ \"token\": \"" + builder.compact() + "\" }";
     }
-    @Path("detail")
+    
+    @Path("details")
     @GET
+    @Authorized
     public User getUserDetails(@HeaderParam("email") String email){
         return em.find(User.class, email);
-        
-        
     }
 }

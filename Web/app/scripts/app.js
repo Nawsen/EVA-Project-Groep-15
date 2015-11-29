@@ -26,6 +26,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($
             url: '/index',
             templateUrl: 'index.html',
             controller: 'IndexCtrl'
+        }).state('completed', {
+            url: '/completed',
+            templateUrl: 'views/challenges.html',
+            controller: 'ChallengesCtrl'
         });
     $urlRouterProvider.otherwise('/login');
 }]);
