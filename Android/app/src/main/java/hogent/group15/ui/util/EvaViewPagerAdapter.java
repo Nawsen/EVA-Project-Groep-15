@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import hogent.group15.androidapp.CurrentChallenge;
+import hogent.group15.domain.Backend;
+import hogent.group15.domain.Domain;
 import hogent.group15.ui.R;
 import hogent.group15.ui.fragments.AchievementsFragment;
 import hogent.group15.ui.fragments.CompletedChallengesFragment;
@@ -35,10 +37,16 @@ public class EvaViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
+                Domain.activePage = Domain.ActivePage.ONGOING_CHALLENGES;
+                Domain.activeFragment = ongoingChallengesFragment;
                 return ongoingChallengesFragment;
             case 1:
+                Domain.activePage = Domain.ActivePage.COMPLETED_CHALLENGES;
+                Domain.activeFragment = completedChallengesFragment;
                 return completedChallengesFragment;
             case 2:
+                Domain.activePage = Domain.ActivePage.ACHIEVEMENTS;
+                Domain.activeFragment = achievementsFragment;
                 return achievementsFragment;
             default:
                 return null;

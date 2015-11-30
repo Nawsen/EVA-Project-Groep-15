@@ -21,6 +21,7 @@ import java.net.URI;
 import java.util.List;
 import java.util.Scanner;
 
+import butterknife.internal.ListenerClass;
 import hogent.group15.ui.R;
 import retrofit.Callback;
 import retrofit.RequestInterceptor;

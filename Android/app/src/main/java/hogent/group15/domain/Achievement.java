@@ -94,6 +94,7 @@ public class Achievement implements ListEntry {
                 .setContentTitle(getTitle())
                 .setContentDescription(getDescription().isEmpty() ? "No description" : getDescription())
                 .setImageUrl(Uri.parse("http://www.evavzw.be/sites/all/themes/wieni-subtheme/apple-touch-icon-152x152.png"))
+                .setContentUrl(Uri.parse("http://evavzw.be"))
                 .build());
 
         shareButton.setCompoundDrawables(null, null, null, null);
