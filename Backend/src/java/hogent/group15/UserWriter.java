@@ -51,15 +51,15 @@ public class UserWriter implements MessageBodyWriter<User> {
 	}
 
 	if (t.getAddress().getCountry() != null) {
-	    jsonCha.add("addressCountry", t.getAddress().getCountry());
+	    jsonCha.add("country", t.getAddress().getCountry());
 	}
 
 	if (t.getAddress().getCity() != null) {
-	    jsonCha.add("addressCity", t.getAddress().getCity());
+	    jsonCha.add("city", t.getAddress().getCity());
 	}
 
 	if (t.getAddress().getStreet() != null) {
-	    jsonCha.add("addressStreet", t.getAddress().getStreet());
+	    jsonCha.add("street", t.getAddress().getStreet());
 	}
 
 	if (t.getRole() != null) {
