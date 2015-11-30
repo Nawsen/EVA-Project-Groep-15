@@ -44,21 +44,21 @@ angular.module('eva').controller('RegisterCtrl',
         } else {
             return false;
         }
-    }
+    };
     $scope.validForm = function () {
         if ($scope.user.firstName != "" && $scope.user.lastName != "") {
             return true
         } else {
             return false;
         }
-    }
+    };
     $scope.convertGender = function () {
         if ($scope.selectedTab === 'male') {
             return 0
         } else {
             return 1
         }
-    }
+    };
     $scope.register = function () {
         var userObj = {
             email: $scope.user.email,

@@ -57,7 +57,7 @@ app.controller('DashboardCtrl',
                     $state.go('login');
                 }
             }
-            
+            console.log('test');
             $scope.acceptChallenge = function (challengeId) {
                 netService.put('/backend/api/challenges/' + $scope.selectedChallenge().id + '/accept').success(function (data, status) {
                     initializeDashboard();
