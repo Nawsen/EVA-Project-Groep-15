@@ -158,6 +158,9 @@ h1 {
   text-indent: -100%;
   margin: 10px auto 0 auto; }
 
+.user-avatar {
+  width: 150px; }
+
 /*** GENERAL CLASSES ***/
 .box-border {
   background: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
