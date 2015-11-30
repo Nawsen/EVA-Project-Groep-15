@@ -57,8 +57,9 @@ public class Users {
 		violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
 		throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
 	    } else {
+		user.setRole(User.Role.USER);
 		em.persist(user);
-		return Response.created(URI.create("/users/me")).build();
+		return Response.created(URI.create("/users/details")).build();
 	    }
 	}
     }
@@ -95,11 +96,11 @@ public class Users {
 
 	return "{ \"token\": \"" + builder.compact() + "\" }";
     }
-    
+
     @Path("details")
     @GET
     @Authorized
-    public User getUserDetails(@HeaderParam("email") String email){
-        return em.find(User.class, email);
+    public User getUserDetails(@HeaderParam("email") String email) {
+	return em.find(User.class, email);
     }
 }

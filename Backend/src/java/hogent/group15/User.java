@@ -57,7 +57,7 @@ public class User implements Serializable {
     @Pattern(regexp = "^([A-Z|a-z|0-9](\\.|_){0,1})+[A-Z|a-z|0-9]\\@([A-Z|a-z|0-9])+((\\.){0,1}[A-Z|a-z|0-9]){2}\\.[a-z]{2,3}$", message = "email")
     private String email;
 
-    private int facebookId;
+    private long facebookId;
 
     @NotNull(message = "firstName")
     @Size(min = 1, message = "firstName")
@@ -102,7 +102,6 @@ public class User implements Serializable {
     @Lob
     private byte[] salt = new byte[32];
 
-    @Pattern(regexp = "^([\\w\\.\\-_]+)?\\w+@[\\w-_]+(\\.\\w+){1,}$", message = "imageUrl")
     private String imageUrl;
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
@@ -135,11 +134,11 @@ public class User implements Serializable {
 	this.role = role;
     }
 
-    public int getFacebookId() {
+    public long getFacebookId() {
 	return facebookId;
     }
 
-    public void setFacebookId(int facebookId) {
+    public void setFacebookId(long facebookId) {
 	this.facebookId = facebookId;
     }
 
@@ -276,7 +275,7 @@ public class User implements Serializable {
     public int hashCode() {
 	int hash = 3;
 	hash = 29 * hash + Objects.hashCode(this.email);
-	hash = 29 * hash + this.facebookId;
+	hash = 29 * hash + (int) (this.facebookId % Math.round(Math.pow(2, 32))) - 1;
 	hash = 29 * hash + Objects.hashCode(this.firstName);
 	hash = 29 * hash + Objects.hashCode(this.lastName);
 	return hash;

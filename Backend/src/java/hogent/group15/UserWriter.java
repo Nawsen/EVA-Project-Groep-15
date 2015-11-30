@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import javax.json.Json;
 import javax.json.JsonObjectBuilder;
 import javax.json.JsonWriter;
@@ -40,20 +41,37 @@ public class UserWriter implements MessageBodyWriter<User> {
 	jsonCha.add("firstName", t.getFirstName());
 	jsonCha.add("lastName", t.getLastName());
 	jsonCha.add("gender", t.getGender().name());
+
 	if (t.getFacebookId() != 0) {
 	    jsonCha.add("facebookId", t.getFacebookId());
 	}
+
 	if (t.getImageUrl() != null) {
 	    jsonCha.add("imageUrl", t.getImageUrl());
 	}
+
 	if (t.getAddress().getCountry() != null) {
 	    jsonCha.add("addressCountry", t.getAddress().getCountry());
 	}
+
 	if (t.getAddress().getCity() != null) {
 	    jsonCha.add("addressCity", t.getAddress().getCity());
 	}
+
 	if (t.getAddress().getStreet() != null) {
 	    jsonCha.add("addressStreet", t.getAddress().getStreet());
+	}
+
+	if (t.getRole() != null) {
+	    jsonCha.add("role", t.getRole().toString());
+	}
+
+	if (t.getGrade() != null) {
+	    jsonCha.add("grade", t.getGrade().toString());
+	}
+
+	if (t.getImageUrl() != null) {
+	    jsonCha.add("imageUrl", t.getImageUrl());
 	}
 
 	int i = t.getCompletedChallenges().size();
