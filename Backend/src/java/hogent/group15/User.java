@@ -93,10 +93,10 @@ public class User implements Serializable {
     @KnownVegetarianGrade
     private VegetarianGrade grade;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Challenge currentChallenge;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Challenge> completedChallenges;
 
     @Lob
@@ -107,7 +107,7 @@ public class User implements Serializable {
 
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;
-    
+
     @Enumerated(EnumType.ORDINAL)
     private Role role;
 

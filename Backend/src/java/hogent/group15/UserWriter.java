@@ -40,27 +40,24 @@ public class UserWriter implements MessageBodyWriter<User> {
 	jsonCha.add("firstName", t.getFirstName());
 	jsonCha.add("lastName", t.getLastName());
 	jsonCha.add("gender", t.getGender().name());
-        if (t.getFacebookId() != 0){
-            jsonCha.add("facebookId", t.getFacebookId());
-        }
-	if (t.getImageUrl() != null){
-            jsonCha.add("imageUrl", t.getImageUrl());
-        }
-        if (t.getAddress().getCountry() != null){
-            jsonCha.add("addressCountry", t.getAddress().getCountry());
-        }
-        if (t.getAddress().getCity() != null){
-            jsonCha.add("addressCity", t.getAddress().getCity());
-        }
-        if (t.getAddress().getStreet() != null){
-            jsonCha.add("addressStreet", t.getAddress().getStreet());
-        }
-        if (t.getCompletedChallenges().isEmpty()){
-            jsonCha.add("percComp", 0);
-        } else {
-            int i = (21 * 100) / t.getCompletedChallenges().size();
-            jsonCha.add("percComp", i);
-        }
+	if (t.getFacebookId() != 0) {
+	    jsonCha.add("facebookId", t.getFacebookId());
+	}
+	if (t.getImageUrl() != null) {
+	    jsonCha.add("imageUrl", t.getImageUrl());
+	}
+	if (t.getAddress().getCountry() != null) {
+	    jsonCha.add("addressCountry", t.getAddress().getCountry());
+	}
+	if (t.getAddress().getCity() != null) {
+	    jsonCha.add("addressCity", t.getAddress().getCity());
+	}
+	if (t.getAddress().getStreet() != null) {
+	    jsonCha.add("addressStreet", t.getAddress().getStreet());
+	}
+
+	int i = t.getCompletedChallenges().size();
+	jsonCha.add("completedCount", i);
 
 	try (JsonWriter w = Json.createWriter(entityStream)) {
 	    w.writeObject(jsonCha.build());

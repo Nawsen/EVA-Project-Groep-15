@@ -42,12 +42,12 @@ public class Challenge implements Serializable {
     private String description;
     private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<User> users;
 
     @Enumerated(EnumType.ORDINAL)
     private Difficulty difficulty;
-    
+
     private boolean usable = true;
 
     public Challenge() {
@@ -75,7 +75,7 @@ public class Challenge implements Serializable {
     public void setUsable(boolean usable) {
 	this.usable = usable;
     }
-    
+
     public int getId() {
 	return id;
     }
@@ -123,14 +123,14 @@ public class Challenge implements Serializable {
     public List<User> getUsers() {
 	return users;
     }
-    
+
     @Transient
     private Date date;
-    
+
     public void setDate(Date date) {
 	this.date = date;
     }
-    
+
     public Date getDate() {
 	return date;
     }
