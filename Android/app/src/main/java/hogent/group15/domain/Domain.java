@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 
+import com.facebook.Profile;
 import com.facebook.share.model.ShareContent;
 import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
@@ -15,6 +16,8 @@ public class Domain {
 
     public static ActivePage activePage = ActivePage.NONE;
     public static Fragment activeFragment = null;
+
+    public static Profile facebookProfile;
 
     public enum ActivePage {
         ONGOING_CHALLENGES,

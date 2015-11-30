@@ -11,13 +11,24 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
+import com.facebook.ProfileTracker;
+import com.facebook.internal.PermissionType;
+import com.facebook.login.LoginBehavior;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hogent.group15.Validator;
 import hogent.group15.domain.Backend;
+import hogent.group15.domain.Domain;
 import hogent.group15.domain.JsonWebToken;
 import hogent.group15.domain.OnNetworkResponseListener;
 import hogent.group15.domain.User;
@@ -34,6 +45,13 @@ public class LoginActivity extends AppCompatActivity implements Validator {
     @Bind(R.id.login_password)
     public EditText password;
 
+    @Bind(R.id.facebook_login_button)
+    public LoginButton loginButton;
+
+    private CallbackManager cm;
+
+    private ProfileTracker profileTracker;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +67,41 @@ public class LoginActivity extends AppCompatActivity implements Validator {
                 email.setText(savedInstanceState.getString("email"));
             }
         }
+
+        loginButton.setReadPermissions("email", "public_profile", "user_about_me", "user_location", "user_friends");
+
+        cm = CallbackManager.Factory.create();
+        loginButton.registerCallback(cm, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                System.out.println("LOGIN RESULT " + loginResult.getAccessToken().getToken());
+            }
+
+            @Override
+            public void onCancel() {
+
+            }
+
+            @Override
+            public void onError(FacebookException error) {
+
+            }
+        });
+
+        loginButton.setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
+        profileTracker = new ProfileTracker() {
+            @Override
+            protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                Domain.facebookProfile = currentProfile;
+            }
+        };
+        profileTracker.startTracking();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        cm.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
