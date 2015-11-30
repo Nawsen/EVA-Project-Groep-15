@@ -22,6 +22,7 @@
             <div id="nav" layout="row" flex ng-show="isLoggedIn()" style="width: 305px;">
                 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
                     <md-content layout-padding>
+                        <span class="logout glyphicon glyphicon-log-out" ng-click="logout()"></span>
                         <div class="user-info">
                             <img src="images/eva-logo-white.png" />
                             <img ng-src="{{user.imageUrl}}" class="user-avatar">
@@ -53,6 +54,7 @@
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-toasty/dist/angular-toasty.min.js"></script>
+    <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
     <script src="scripts/app.js"></script>
     <script src="scripts/controllers/index.js"></script>
     <script src="scripts/factories/challenges.js"></script>

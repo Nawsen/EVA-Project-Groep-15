@@ -3,8 +3,8 @@
  */
 var app = angular.module('eva');
 angular.module('eva').controller('LoginCtrl',
-    ['$scope', '$http', '$location', '$state', 'auth', 'messages',
-        function ($scope, $http, $location, $state, auth, messages) {
+    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook',
+        function ($scope, $http, $location, $state, auth, messages, Facebook) {
             $scope.user = {
                 email: messages.email,
                 password: ""
@@ -17,7 +17,6 @@ angular.module('eva').controller('LoginCtrl',
             $scope.login = function () {
                 auth.login($scope.user).error(function (error) {
                     $scope.error = error;
-                    console.log(error);
                     angular.element(document.querySelector('#emailwarn')).text("Wrong email!");
                     angular.element(document.querySelector('#passwordwarn')).text("Wrong password!");
                 }).then(function () {
@@ -33,8 +32,23 @@ angular.module('eva').controller('LoginCtrl',
                 return false;
 
             }
+            $scope.checkFacebookStatus;
+            $scope.checkFacebookStatus = function () {
+                Facebook.getLoginStatus(function(response) {
+                    if(response.status === 'connected') {
+                        $scope.fbLogin();
+                    }
+                });
+            }
+            $scope.fbLogin = function() {
+                Facebook.api('/me?fields=first_name,last_name', function(response) {
+                   console.log(response);
+                });
+            };
             $scope.facebooklogin = function () {
-                //TODO implement facebook api
+                Facebook.login(function(response) {
+                    $scope.checkFacebookStatus();
+                });
                 $state.go('dashboard');
                 return false;
             }

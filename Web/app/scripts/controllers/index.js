@@ -21,6 +21,10 @@ app.controller("IndexCtrl", ["$scope", "auth",'NetworkingService', '$state', 'to
             });
         }
     }
+    $scope.logout = function () {
+        auth.logOut();
+        $state.go('login');
+    }
     function removeActive(){
         $("#overviewButton").removeClass("active");
         $("#completedButton").removeClass("active");

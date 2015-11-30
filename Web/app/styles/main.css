@@ -188,3 +188,10 @@ label.eva-input:hover {
 .modalText {
     line-height: 20%;
 }
+.logout{
+    cursor: hand;
+    left: 280px;
+    top: 5px;
+    color: #FFF;
+    font-size: 20px;
+}

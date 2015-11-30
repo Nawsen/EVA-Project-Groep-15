@@ -17,6 +17,7 @@
     "html5-boilerplate": "~5.2.0",
     "ng-dialog": "~0.5.5",
     "angular-material": "~0.11.4",
-    "angular-toasty": "~1.0.4"
+    "angular-toasty": "~1.0.4",
+    "angular-facebook": "~0.2.3"
   }
 }
