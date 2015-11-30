@@ -41,10 +41,13 @@ app.controller("IndexCtrl", ["$scope", "auth",'NetworkingService', function($sco
     $scope.user = {};
     function initSideBar(){
         if (auth.isLoggedIn()) {
-            netService.get('/backend/api/users/detail').success(function (data, status) {
+            netService.get('/backend/api/users/details').success(function (data, status) {
                 if (status == 200) {
                    $scope.user = data;
-                    console.log(data);
+
+                    if (data.imageUrl == "" || !data.imageUrl){
+                        $scope.user.imageUrl = "http://www.gravatar.com/avatar/2b4daf6ced6cd12b76fbe41bd1584108?d=mm&s=250&r=G";
+                    }
                 }
             });
         }

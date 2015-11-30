@@ -7,12 +7,6 @@ var app = angular.module('eva');
 app.controller('DashboardCtrl',
     ['$scope', 'auth', '$http', '$state', 'NetworkingService',
         function ($scope, auth, $http, $state, netService) {
-            $scope.user = {
-                'firstname': 'voornaam',
-                'lastname': 'achternaam',
-                'avatar': 'http://placehold.it/150x150'
-            };
-
             $scope.challenges = {};
 
             $scope.selectedIndex = 0;
