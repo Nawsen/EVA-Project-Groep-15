@@ -36,6 +36,10 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider','toastyConfi
             url: '/completed',
             templateUrl: 'views/challenges.html',
             controller: 'ChallengesCtrl'
+        }).state('settings', {
+            url: '/settings',
+            templateUrl: 'views/settings.html',
+            controller: 'SettingsCtrl'
         });
     $urlRouterProvider.otherwise('/login');
 }]);

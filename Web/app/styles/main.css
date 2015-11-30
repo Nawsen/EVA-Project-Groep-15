@@ -47,6 +47,9 @@
     padding-left: 0;
 }
 
+.margin-left {
+    margin-left: 5px;
+}
 .center-text {
     text-align: center;
 }
