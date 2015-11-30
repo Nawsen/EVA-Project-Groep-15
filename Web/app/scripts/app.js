@@ -1,11 +1,17 @@
 /**
  * Created by wannes on 9/10/2015.
  */
-var app = angular.module('eva', ['ui.router']);
+var app = angular.module('eva', ['ui.router', 'angular-toasty']);
 
-app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $httpProvider) {
+app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider','toastyConfigProvider', function ($stateProvider, $urlRouterProvider, $httpProvider, toastyConfigProvider) {
     $httpProvider.defaults.useXDomain = true;
-
+    toastyConfigProvider.setConfig({
+        sound: true,
+        shake: false,
+        position: 'bottom-left',
+        showClose: false,
+        clickToClose: true
+    });
     $stateProvider
         .state('login', {
             url: '/login',
@@ -32,25 +38,4 @@ app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider', function ($
             controller: 'ChallengesCtrl'
         });
     $urlRouterProvider.otherwise('/login');
-}]);
-
-app.controller("IndexCtrl", ["$scope", "auth",'NetworkingService', function($scope, auth, netService) {
-    $scope.isLoggedIn = function() {
-        return auth.isLoggedIn();
-    };
-    $scope.user = {};
-    function initSideBar(){
-        if (auth.isLoggedIn()) {
-            netService.get('/backend/api/users/details').success(function (data, status) {
-                if (status == 200) {
-                   $scope.user = data;
-
-                    if (data.imageUrl == "" || !data.imageUrl){
-                        $scope.user.imageUrl = "http://www.gravatar.com/avatar/2b4daf6ced6cd12b76fbe41bd1584108?d=mm&s=250&r=G";
-                    }
-                }
-            });
-        }
-    }
-    initSideBar();
 }]);

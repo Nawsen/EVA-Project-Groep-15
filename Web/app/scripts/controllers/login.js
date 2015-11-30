@@ -1,6 +1,7 @@
 /**
  * Created by wannes on 9/10/2015.
  */
+var app = angular.module('eva');
 angular.module('eva').controller('LoginCtrl',
     ['$scope', '$http', '$location', '$state', 'auth', 'messages',
         function ($scope, $http, $location, $state, auth, messages) {
@@ -11,6 +12,7 @@ angular.module('eva').controller('LoginCtrl',
             //check if user is already logged in
             if (auth.isLoggedIn()){
                 $state.go('dashboard');
+                $scope.$emit('initSideBar');
             }
             $scope.login = function () {
                 auth.login($scope.user).error(function (error) {
@@ -22,6 +24,7 @@ angular.module('eva').controller('LoginCtrl',
                     angular.element(document.querySelector('#emailwarn')).text("");
                     angular.element(document.querySelector('#passwordwarn')).text("");
                     $state.go('dashboard');
+                    $scope.$emit('initSideBar');
                 });
 
 

@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="bower_components/angular-toasty/dist/angular-toasty.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 
 <body ng-app="eva">
+
     <div ng-controller="IndexCtrl" layout="column" ng-cloak>
         <div id="wrapper">
+
             <div id="nav" layout="row" flex ng-show="isLoggedIn()" style="width: 305px;">
                 <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$mdMedia('gt-md')">
                     <md-content layout-padding>
@@ -31,12 +34,15 @@
                                 <li><a href="#">Admin tools</a></li>
                             </ul>
                         </nav>
+
                     </md-content>
                 </md-sidenav>
             </div>
             <div ui-view></div>
+
         </div>
     </div>
+    <toasty></toasty>
     <script src="bower_components/angular/angular.min.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
@@ -46,7 +52,9 @@
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/angular-toasty/dist/angular-toasty.min.js"></script>
     <script src="scripts/app.js"></script>
+    <script src="scripts/controllers/index.js"></script>
     <script src="scripts/factories/challenges.js"></script>
     <script src="scripts/factories/authentication.js"></script>
     <script src="scripts/factories/messages.js"></script>

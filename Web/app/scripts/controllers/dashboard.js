@@ -5,8 +5,8 @@
 var app = angular.module('eva');
 
 app.controller('DashboardCtrl',
-    ['$scope', 'auth', '$http', '$state', 'NetworkingService',
-        function ($scope, auth, $http, $state, netService) {
+    ['$scope', 'auth', '$http', '$state', 'NetworkingService','toasty',
+        function ($scope, auth, $http, $state, netService, toasty) {
             $scope.challenges = {};
 
             $scope.selectedIndex = 0;
@@ -36,6 +36,10 @@ app.controller('DashboardCtrl',
             function initializeDashboard() {
                 if (auth.isLoggedIn()) {
                     netService.get('/backend/api/challenges/accepted').success(function (data, status) {
+                        toasty.success({
+                            title: 'Successfully logged in!',
+                            msg: 'Welcome ' + auth.currentUser()
+                        });
                         if (status == 204) {
                             $scope.hasAcceptedChallenge = false;
                             netService.get('/backend/api/challenges/daily').success(function (data) {
