@@ -8,6 +8,10 @@ angular.module('eva').controller('LoginCtrl',
                 email: messages.email,
                 password: ""
             };
+            //check if user is already logged in
+            if (auth.isLoggedIn()){
+                $state.go('dashboard');
+            }
             $scope.login = function () {
                 auth.login($scope.user).error(function (error) {
                     $scope.error = error;
