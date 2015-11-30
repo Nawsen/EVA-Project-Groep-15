@@ -36,10 +36,7 @@ app.controller('DashboardCtrl',
             function initializeDashboard() {
                 if (auth.isLoggedIn()) {
                     netService.get('/backend/api/challenges/accepted').success(function (data, status) {
-                        toasty.success({
-                            title: 'Successfully logged in!',
-                            msg: 'Welcome ' + auth.currentUser()
-                        });
+
                         if (status == 204) {
                             $scope.hasAcceptedChallenge = false;
                             netService.get('/backend/api/challenges/daily').success(function (data) {
