@@ -1,4 +1,4 @@
-package hogent.group15.androidapp;
+package hogent.group15.domain;
 
 
 import android.content.Context;

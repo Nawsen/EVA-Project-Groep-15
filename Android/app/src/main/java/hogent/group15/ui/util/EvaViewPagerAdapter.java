@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import hogent.group15.androidapp.CurrentChallenge;
+import hogent.group15.domain.CurrentChallenge;
 import hogent.group15.ui.R;
 import hogent.group15.ui.fragments.AchievementsFragment;
 import hogent.group15.ui.fragments.CompletedChallengesFragment;
