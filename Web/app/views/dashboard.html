@@ -43,8 +43,6 @@
                          ng-repeat="challenge in challenges track by $index"
                          ng-click="showSelectedChallengeDetails($index)" data-toggle="modal"
                          data-target="#challengeDetailsModal">
-                    <h3 class="challenge-title">Kies een uitdaging</h3>
-
                     <div ng-style="{'background-image':'url(' + challenge.imageUrl + ')', 'background-size': 'cover'}">
                         <p>{{challenge.title}}</p>
                     </div>
