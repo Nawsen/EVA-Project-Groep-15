@@ -35,6 +35,12 @@ app.controller('DashboardCtrl',
             
             function initializeDashboard() {
                 if (auth.isLoggedIn()) {
+                    netService.get('/backend/api/users/details').success(function (data, status) {
+                        if (status == 200){
+                            $("#innerbar").css("width", data.percComp + "%");
+                            console.log(data.percComp);
+                        }
+                    });
                     netService.get('/backend/api/challenges/accepted').success(function (data, status) {
 
                         if (status == 204) {
@@ -57,6 +63,10 @@ app.controller('DashboardCtrl',
             
             $scope.acceptChallenge = function (challengeId) {
                 netService.put('/backend/api/challenges/' + $scope.selectedChallenge().id + '/accept').success(function (data, status) {
+                    toasty.info({
+                        title: 'Successfully accepted challenge!',
+                        msg: ''
+                    });
                     initializeDashboard();
                 });
             };
@@ -64,6 +74,10 @@ app.controller('DashboardCtrl',
             $scope.completeChallenge = function() {
                 netService.put('/backend/api/challenges/complete').success(function() {
                     $scope.hasAcceptedChallenge = false;
+                    toasty.info({
+                        title: 'Successfully Completed challenge!',
+                        msg: ''
+                    });
                     initializeDashboard();
                 }).error(function(err) {
                     console.log(err);

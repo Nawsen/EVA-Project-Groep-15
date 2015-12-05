@@ -22,14 +22,17 @@
 * {
     border-radius: 0 !important;
 }
+
 #welcome {
     margin-left: 25px;
 }
+
 #login-page form {
 
     margin: 20px 0 20px 0;
 }
-#login-page{
+
+#login-page {
     width: 100%;
 }
 
@@ -105,9 +108,11 @@
     transition: border-color 0.15s linear, color 0.15s linear;
     transition: background-color 0.15s linear, color 0.15s linear;
 }
+
 .ng-scope {
     width: 100%;
 }
+
 .eva-input:focus {
     border: 2px solid #A4B239;
     outline: medium none;
@@ -139,6 +144,7 @@ label.eva-input:hover {
     background: #a4b239;
     transition: background-color 0.15s linear, border-color 0.15s linear;
 }
+
 .eva-submit:hover {
     background: #555757 none repeat scroll 0% 0%;
     border-color: #2F3030;
@@ -156,10 +162,11 @@ label.eva-input:hover {
     border: solid 2px #808b2d;
     background: #a4b239;
 }
+
 .eva-submit-wit {
-    background: rgb(255,255,255);
+    background: rgb(255, 255, 255);
     transition: background-color 0.15s linear;
-    color: #000 ;
+    color: #000;
     text-decoration: none;
     font-size: 16px;
     padding: 6px 15px;
@@ -167,6 +174,7 @@ label.eva-input:hover {
     display: inline-block;
     -webkit-tap-highlight-color: transparent;
 }
+
 .artistamp {
     font-family: artistamp;
     padding-bottom: 1em;
@@ -174,24 +182,34 @@ label.eva-input:hover {
 
 .challenge {
     text-align: center;
-    height:200px;
+    height: 200px;
     background-size: contain;
-    display:block;
+    display: block;
 }
 
 .modalImage {
     display: block;
     background-size: cover;
-    min-height:200px;
+    min-height: 200px;
     text-align: center;
 }
+
 .modalText {
     line-height: 20%;
 }
-.logout{
+
+.logout {
     cursor: hand;
     left: 280px;
     top: 5px;
     color: #FFF;
     font-size: 20px;
+}
+
+#achievements #achievement-box .achievement .achievement-image.temp-pompoensoep {
+    background: url("http://www.evavzw.be/sites/all/themes/wieni-subtheme/img/bg_pattern_chalkboard.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0% 50%;
+
 }

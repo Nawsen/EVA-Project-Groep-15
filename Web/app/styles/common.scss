@@ -405,7 +405,6 @@ h1 {
       display: block;
       width: 45%;
       margin-bottom: 20px;
-      padding: 5px 8px 5px 9px;
 
       background-image: url("../images/resources/boxulc.png"), url("../images/resources/boxurc.png"), url("../images/resources/boxblc.png"), url("../images/resources/boxbrc.png");
       background-position: 0% 0%, 100% 0%, 0% 100%, 100% 100%;
@@ -415,7 +414,8 @@ h1 {
       .achievement-image {
         height: 110px;
         width: 100%;
-        margin-top: -10px;
+        border-style: solid;
+        border-color: #FFFFFF #FFFFFF;
 
         h5 {
           font-family: Museo500, sans-serif;
