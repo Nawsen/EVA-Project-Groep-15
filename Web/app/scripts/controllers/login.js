@@ -41,14 +41,14 @@ angular.module('eva').controller('LoginCtrl',
                 });
             }
             $scope.fbLogin = function() {
-                Facebook.api('/me?fields=first_name,last_name', function(response) {
+                Facebook.api('/me?fields=first_name,last_name,email', function(response) {
                    console.log(response);
                 });
             };
             $scope.facebooklogin = function () {
                 Facebook.login(function(response) {
                     $scope.checkFacebookStatus();
-                });
+                },{'scope': 'email,public_profile,user_friends'});
                 $state.go('dashboard');
                 return false;
             }
