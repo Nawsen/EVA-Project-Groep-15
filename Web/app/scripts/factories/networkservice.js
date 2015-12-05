@@ -1,5 +1,5 @@
 angular.module('eva').factory('NetworkingService', ['$http', function($http) {
-    var endpoint = 'http://bitcode.io:8080';
+    var endpoint = 'http://localhost:8080';
     var factory = {};
     
     factory.get = function(path) {

@@ -5,13 +5,13 @@
 var app = angular.module('eva');
 
 app.controller('DashboardCtrl',
-    ['$scope', 'auth', '$http', '$state', 'NetworkingService','toasty',
+    ['$scope', 'auth', '$http', '$state', 'NetworkingService', 'toasty',
         function ($scope, auth, $http, $state, netService, toasty) {
             $scope.challenges = {};
 
             $scope.selectedIndex = 0;
             $scope.hasAcceptedChallenge = false;
-            
+
             $scope.selectedChallenge = function () {
                 return $scope.challenges[$scope.selectedIndex];
             };
@@ -20,8 +20,8 @@ app.controller('DashboardCtrl',
                 $scope.selectedIndex = arrayId;
                 $scope.loadChallengeData();
             };
-            
-            $scope.showAcceptedChallengeDetails = function() {
+
+            $scope.showAcceptedChallengeDetails = function () {
                 $scope.detailedChallenge = $scope.acceptedChallenge;
             };
 
@@ -32,7 +32,7 @@ app.controller('DashboardCtrl',
                     $scope.detailedChallenge = data;
                 });
             };
-            
+
             function initializeDashboard() {
                 if (auth.isLoggedIn()) {
                     netService.get('/backend/api/users/details').success(function (data, status) {
@@ -60,7 +60,7 @@ app.controller('DashboardCtrl',
                     $state.go('login');
                 }
             }
-            
+
             $scope.acceptChallenge = function (challengeId) {
                 netService.put('/backend/api/challenges/' + $scope.selectedChallenge().id + '/accept').success(function (data, status) {
                     toasty.info({
@@ -70,20 +70,20 @@ app.controller('DashboardCtrl',
                     initializeDashboard();
                 });
             };
-            
-            $scope.completeChallenge = function() {
-                netService.put('/backend/api/challenges/complete').success(function() {
+
+            $scope.completeChallenge = function () {
+                netService.put('/backend/api/challenges/complete').success(function () {
                     $scope.hasAcceptedChallenge = false;
                     toasty.info({
                         title: 'Successfully Completed challenge!',
                         msg: ''
                     });
                     initializeDashboard();
-                }).error(function(err) {
+                }).error(function (err) {
                     console.log(err);
                 });
             };
-            
+
             initializeDashboard();
         }]
     );

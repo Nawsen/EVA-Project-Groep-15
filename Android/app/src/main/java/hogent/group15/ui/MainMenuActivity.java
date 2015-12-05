@@ -9,12 +9,8 @@ import android.view.Menu;
 
 import java.util.List;
 
-import hogent.group15.androidapp.CurrentChallenge;
-import hogent.group15.domain.Challenge;
-import hogent.group15.domain.ChallengesRepository;
 import hogent.group15.ui.fragments.AchievementsFragment;
 import hogent.group15.ui.fragments.CompletedChallengesFragment;
-import hogent.group15.ui.fragments.NextChallenge;
 import hogent.group15.ui.util.ActionBarConfig;
 import hogent.group15.ui.util.EvaViewPagerAdapter;
 

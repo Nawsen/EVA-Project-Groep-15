@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import hogent.group15.Consumer;
-import hogent.group15.androidapp.CurrentChallenge;
+import hogent.group15.domain.CurrentChallenge;
 import hogent.group15.domain.Challenge;
 import hogent.group15.domain.ChallengesRepository;
 

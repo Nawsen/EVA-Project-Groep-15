@@ -19,6 +19,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
@@ -57,8 +58,9 @@ public class Users {
 		violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
 		throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
 	    } else {
+		user.setRole(User.Role.USER);
 		em.persist(user);
-		return Response.created(URI.create("/users/me")).build();
+		return Response.created(URI.create("/users/details")).build();
 	    }
 	}
     }
@@ -76,7 +78,6 @@ public class Users {
 	} else {
 	    throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
 	}
-
     }
 
     public String getToken(String id) {
@@ -95,11 +96,63 @@ public class Users {
 
 	return "{ \"token\": \"" + builder.compact() + "\" }";
     }
-    
+
     @Path("details")
     @GET
     @Authorized
-    public User getUserDetails(@HeaderParam("email") String email){
-        return em.find(User.class, email);
+    public User getUserDetails(@HeaderParam("email") String email) {
+	return em.find(User.class, email);
+    }
+
+    @Path("update")
+    @PUT
+    @Authorized
+    @Transactional
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response updateUser(@HeaderParam("email") String email, User user) {
+	User currentUser = em.find(User.class, email);
+	if (currentUser != null) {
+	    if (user.getAddress() != null) {
+		currentUser.setAddress(user.getAddress());
+	    }
+
+	    if (user.getFacebookId() != 0) {
+		currentUser.setFacebookId(user.getFacebookId());
+	    }
+
+	    if (user.getFirstName() != null && !user.getFirstName().isEmpty()) {
+		currentUser.setFirstName(user.getFirstName());
+	    }
+
+	    if (user.getLastName() != null && !user.getLastName().isEmpty()) {
+		currentUser.setLastName(user.getLastName());
+	    }
+
+	    if (user.getPassword() != null && !user.getPassword().isEmpty()) {
+		currentUser.setPassword(currentUser.getPassword());
+	    } else {
+		currentUser.setPassword("1234567");
+	    }
+	    
+	    if (user.getGrade() != null) {
+		currentUser.setGrade(user.getGrade());
+	    }
+	    
+	    if (user.getImageUrl() != null && !user.getImageUrl().isEmpty()) {
+		currentUser.setImageUrl(user.getImageUrl());
+	    }
+	    
+	    Set<ConstraintViolation<User>> violations = validator.validate(currentUser);
+	    if (!violations.isEmpty()) {
+		StringBuilder builder = new StringBuilder();
+		violations.stream().map(cv -> cv.getMessage() + " ").forEach(builder::append);
+		throw new WebApplicationException(Response.status(Status.BAD_REQUEST).entity(builder.toString()).build());
+	    } else {
+		em.merge(currentUser);
+		return Response.created(URI.create("/users/details")).build();
+	    }
+	} else {
+	    throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
+	}
     }
 }
