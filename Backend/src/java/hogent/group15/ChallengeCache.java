@@ -1,5 +1,6 @@
 package hogent.group15;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -33,14 +34,21 @@ public class ChallengeCache {
     public void addToCache(Challenge ch) {
 	allChallenges.add(ch);
     }
-    
+
     public void removeFromCache(Challenge ch) {
 	allChallenges.remove(ch);
     }
 
     public DailyChallenges createDailyChallenges(User user) {
-	if (user.getDailyChallenges() != null && user.getDailyChallenges().getDate() != null && user.getDailyChallenges().getDate().equals(new java.sql.Date(new Date().getTime()))) {
-	    return user.getDailyChallenges();
+	if (user.getDailyChallenges() != null && user.getDailyChallenges().getDate() != null) {
+	    Calendar daily = Calendar.getInstance();
+	    daily.setTime(user.getDailyChallenges().getDate());
+	    Calendar today = Calendar.getInstance();
+
+	    if (daily.get(Calendar.YEAR) == today.get(Calendar.YEAR) && daily.get(Calendar.MONTH) == today.get(Calendar.MONTH)
+		    && daily.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)) {
+		return user.getDailyChallenges();
+	    }
 	}
 
 	if (user.getDailyChallenges() == null) {
@@ -88,8 +96,9 @@ public class ChallengeCache {
 	//if we get here it means the user may not view the challenge info yet
 	return null;
     }
-    public int amount(){
-        return allChallenges.size();
+
+    public int amount() {
+	return allChallenges.size();
     }
 
 }

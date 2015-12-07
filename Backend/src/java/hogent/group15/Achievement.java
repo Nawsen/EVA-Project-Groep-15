@@ -6,7 +6,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  *
@@ -25,9 +24,6 @@ public class Achievement {
     @Enumerated(EnumType.ORDINAL)
     private AchievementType type;
 
-    @ManyToOne
-    private User user;
-
     public enum AchievementType {
 
 	COMPLETED, ACCEPTED, CANCELLED
@@ -40,14 +36,6 @@ public class Achievement {
 	this.name = name;
 	this.description = description;
 	this.score = score;
-	this.type = type;
-    }
-
-    public Achievement(String name, String description, int score, AchievementType type, User user) {
-	this.name = name;
-	this.description = description;
-	this.score = score;
-	this.user = user;
 	this.type = type;
     }
 
@@ -89,14 +77,6 @@ public class Achievement {
 
     public void setScore(int score) {
 	this.score = score;
-    }
-
-    public User getUser() {
-	return user;
-    }
-
-    public void setUser(User user) {
-	this.user = user;
     }
 
     @Override
@@ -147,18 +127,13 @@ public class Achievement {
 	    return this;
 	}
 
-	public Builder user(User user) {
-	    this.user = user;
-	    return this;
-	}
-
 	public Builder type(AchievementType type) {
 	    this.type = type;
 	    return this;
 	}
 
 	public Achievement build() {
-	    return new Achievement(name, description, score, type, user);
+	    return new Achievement(name, description, score, type);
 	}
     }
 }

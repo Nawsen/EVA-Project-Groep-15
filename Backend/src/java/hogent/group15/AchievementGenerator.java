@@ -35,17 +35,39 @@ public class AchievementGenerator {
 	if (change == Achievement.AchievementType.COMPLETED) {
 	    int completedChallengesCount = user.getCompletedChallenges().size();
 	    if (achievementCompletedChallenges.containsKey(completedChallengesCount)) {
-		Achievement achievement = achievementCompletedChallenges.get(completedChallengesCount).user(user).build();
+		Achievement achievement = achievementCompletedChallenges.get(completedChallengesCount).build();
+		manager.persist(achievement);
 		user.getAchievements().add(achievement);
 	    }
 
 	    manager.merge(user);
 	} else if (change == Achievement.AchievementType.ACCEPTED) {
-	    boolean any = user.getAchievements().stream().anyMatch(a -> a.getType() == Achievement.AchievementType.ACCEPTED);
-	    if (!any) {
-		user.getAchievements().add(new Achievement("Eerste uitdaging geaccepteerd", "Je hebt de eerste uitdaging geaccepteerd!", 1, Achievement.AchievementType.ACCEPTED, user));
+	    if (!hasAnyAchievementsOfType(user, Achievement.AchievementType.ACCEPTED)) {
+		Achievement achievement = new Achievement("Eerste uitdaging geaccepteerd", "Je hebt de eerste uitdaging geaccepteerd!", 1, Achievement.AchievementType.ACCEPTED);
+		manager.persist(achievement);
+		user.getAchievements().add(achievement);
+		manager.merge(user);
+	    }
+	} else if (change == Achievement.AchievementType.CANCELLED) {
+	    if (!hasAnyAchievementsOfType(user, Achievement.AchievementType.CANCELLED)) {
+		Achievement achievement = new Achievement("Uitdaging mislukt", "Je kon een uitdaging niet volbrengen", 1, Achievement.AchievementType.CANCELLED);
+		manager.persist(achievement);
+		user.getAchievements().add(achievement);
 		manager.merge(user);
 	    }
 	}
+    }
+
+    private boolean hasAnyAchievementsOfType(User user, Achievement.AchievementType type) {
+	boolean any = false;
+
+	for (Achievement achievement : user.getAchievements()) {
+	    if (achievement.getType() == type) {
+		any = true;
+		break;
+	    }
+	}
+
+	return any;
     }
 }

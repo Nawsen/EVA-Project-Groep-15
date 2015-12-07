@@ -72,7 +72,7 @@ public class User implements Serializable {
     @NotNull(message = "password")
     private String password;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private List<Achievement> achievements;
 
     public byte[] getEncPassword() {
@@ -112,7 +112,7 @@ public class User implements Serializable {
 
     private String imageUrl;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;
 
     @Enumerated(EnumType.ORDINAL)

@@ -20,7 +20,7 @@ import retrofit.http.Path;
  */
 public interface BackendAPI {
 
-    @GET("/challenges/daily/complete")
+    @GET("/challenges/daily/detailed")
     void getDailyChallenges(Callback<List<Challenge>> callback);
 
     @POST("/users/login")

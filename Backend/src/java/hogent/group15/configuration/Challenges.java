@@ -41,13 +41,13 @@ public class Challenges {
 
     @PersistenceContext
     private EntityManager em;
-    
+
     @Context
     private Validator validator;
-    
+
     @Inject
     private ChallengeCache cache;
-    
+
     @Inject
     private AchievementGenerator achievements;
 
@@ -66,19 +66,16 @@ public class Challenges {
     public List<Challenge> getDailyChallenges(@HeaderParam("email") String email) {
 	User user = em.find(User.class, email);
 	DailyChallenges ch = cache.createDailyChallenges(user);
-	em.persist(user);
+	em.merge(user);
 
 	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
 	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
 	ch.getThird().setDate(new Date(System.currentTimeMillis()));
-	ch.getFirst().setDescription("");
-	ch.getSecond().setDescription("");
-	ch.getThird().setDescription("");
 
 	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
     }
 
-    @Path("daily/complete")
+    @Path("daily/detailed")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
@@ -124,28 +121,42 @@ public class Challenges {
 	if (user.getCurrentChallenge() != null && user.getCurrentChallenge().getId() == id) {
 	    return Response.status(Response.Status.BAD_REQUEST).build();
 	}
-	
+
 	if (user.getDailyChallenges().getFirst().getId() == id) {
 	    user.setCurrentChallenge(user.getDailyChallenges().getFirst());
-	    em.persist(user);
+	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();
 	}
-	
+
 	if (user.getDailyChallenges().getSecond().getId() == id) {
 	    user.setCurrentChallenge(user.getDailyChallenges().getSecond());
-	    em.persist(user);
+	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();
 	}
-	
+
 	if (user.getDailyChallenges().getThird().getId() == id) {
 	    user.setCurrentChallenge(user.getDailyChallenges().getThird());
-	    em.persist(user);
+	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();
 	}
 	return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+    
+    @Path("fail")
+    @PUT
+    @Transactional
+    public Response failDailyChallenge(@HeaderParam("email") String email) {
+	User user = em.find(User.class, email);
+	if (user.getCurrentChallenge() == null) {
+	    return Response.notModified().build();
+	}
+	
+	user.setCurrentChallenge(null);
+	achievements.generateAchievements(user, Achievement.AchievementType.CANCELLED);
+	return Response.noContent().build();
     }
 
     @Path("complete")
@@ -155,14 +166,13 @@ public class Challenges {
 	//if the challenge is user.currentchallenge then remove it & add to completedchallenge 
 	User user = em.find(User.class, email);
 	if (user.getCurrentChallenge() == null) {
-	    throw new WebApplicationException(Response.status(Response.Status.BAD_REQUEST).build());
+	    return Response.notModified().build();
 	}
 
-	user.getCurrentChallenge().getUsers().add(user);
 	user.getCompletedChallenges().add(user.getCurrentChallenge());
 	user.setCurrentChallenge(null);
 	achievements.generateAchievements(user, Achievement.AchievementType.COMPLETED);
-	return Response.ok().build();
+	return Response.noContent().build();
     }
 
     @Path("add")
