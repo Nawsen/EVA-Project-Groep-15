@@ -21,6 +21,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -71,12 +72,19 @@ public class User implements Serializable {
     @NotNull(message = "password")
     private String password;
 
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<Achievement> achievements;
+
     public byte[] getEncPassword() {
 	return encPassword;
     }
 
     public void setEncPassword(byte[] encPassword) {
 	this.encPassword = encPassword;
+    }
+
+    public List<Achievement> getAchievements() {
+	return achievements;
     }
 
     //encrypted password only for local usage!
@@ -104,7 +112,7 @@ public class User implements Serializable {
 
     private String imageUrl;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     private DailyChallenges dailyChallenges;
 
     @Enumerated(EnumType.ORDINAL)
