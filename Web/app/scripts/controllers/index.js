@@ -13,7 +13,6 @@ app.controller("IndexCtrl", ["$scope", "auth",'NetworkingService', function($sco
                     if (data.imageUrl == "" || !data.imageUrl){
                         $scope.user.imageUrl = "http://www.gravatar.com/avatar/2b4daf6ced6cd12b76fbe41bd1584108?d=mm&s=250&r=G";
                     }
-                    console.log($scope.user);
                 }
             });
         }

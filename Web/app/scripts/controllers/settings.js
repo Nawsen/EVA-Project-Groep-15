@@ -5,7 +5,21 @@ angular.module('eva').controller('SettingsCtrl',
     ['$scope', '$location', 'NetworkingService',
         function ($scope, $location, netService) {
             $scope.showHelpMail = false;
-            $scope.showHelpPassword = false;
+            $scope.passwordFocused = false;
+            $scope.showHelpPassword = function () {
+                if ($scope.passwordFocused) {
+                    if ($scope.userNew.password != undefined) {
+                        if ($scope.userNew.password.length >= 7) {
+                            return false;
+                        }
+                        return true;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return false;
+                }
+            };
             $scope.showHelpRepeatPassword = false;
             $scope.values = [
                 {
@@ -59,31 +73,47 @@ angular.module('eva').controller('SettingsCtrl',
                         }
                     }
                 }
-                console.log('test');
+
             }
 
             function loadUserData() {
-                console.log('test');
+
                 netService.get('/backend/api/users/details').success(function (data) {
+
                     $scope.userOld = data;
-                    $scope.user = data;
+                    $scope.userNew = data;
                 });
             }
 
             $scope.validPassword = function () {
-                if (($scope.userNew.password === $scope.userNew.repeatPassword) && $scope.userNew.password.length >= 7) {
+                if ($scope.userNew.hasOwnProperty("password") && $scope.userNew.password != undefined) {
+                    if ($scope.userNew.password === $scope.userNew.repeatPassword) {
+                        if ($scope.userNew.password != '') {
+                            if ($scope.userNew.password.length >= 7) {
+                                // passwords match, aren't empty and long enough
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            // empty password, valid (no change, but password property was created)
+                            return true;
+                        }
+                        return false;
+                    } else {
+                        // passwords don't match
+                        return false;
+                    }
+                } else {
+                    // has no password property -> password wasn't changed
                     return true;
-                } else {
-                    return false;
                 }
             };
-            $scope.validForm = function () {
-                if ($scope.user.firstName != "" && $scope.user.lastName != "") {
-                    return true
-                } else {
-                    return false;
-                }
+
+            $scope.sendData = function () {
+                removeUnchangedProperties();
+                console.log($scope.userCleaned);
             };
-            removeUnchangedProperties();
+
             loadUserData();
         }]);
