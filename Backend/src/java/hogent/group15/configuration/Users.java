@@ -1,15 +1,25 @@
 package hogent.group15.configuration;
 
+import hogent.group15.FacebookData;
+import hogent.group15.FacebookDataReader;
 import hogent.group15.User;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.security.Key;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.crypto.spec.SecretKeySpec;
 import javax.enterprise.context.Dependent;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonObjectBuilder;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -45,6 +55,8 @@ public class Users {
     @Context
     private Validator validator;
 
+    private static final List<String> REQUIRED_PERMISSIONS = Arrays.asList("user_about_me", "email", "public_profile", "user_location", "user_friends");
+
     @Path("register")
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -68,12 +80,11 @@ public class Users {
     }
 
     @Path("login")
-    @Transactional
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public String login(User user) {
-	if(user.getAccessToken().isEmpty() || user.getFacebookId() == 0) {
+    public Response login(User user) {
+	if ((user.getAccessToken() != null && user.getAccessToken().isEmpty()) || user.getFacebookId() == 0) {
 	    return regularLogin(user);
 	} else {
 	    return facebookLogin(user);
@@ -81,20 +92,63 @@ public class Users {
     }
 
     @Transactional
-    private String regularLogin(User user) {
+    private Response regularLogin(User user) {
 	User dbUser = em.find(User.class, user.getEmail());
 	if (dbUser != null && User.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getEncPassword())) {
-	    return getToken(user.getEmail());
+	    return Response.ok(getToken(user.getEmail())).build();
 	} else {
-	    throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
+	    return Response.status(Status.UNAUTHORIZED).entity(createJsonMessage("Unable to login")).build();
 	}
     }
-    
+
     @Transactional
-    private String facebookLogin(User user) {
-	Client c = ClientBuilder.newClient();
-	Response r = c.target("https://graph.facebook.com").path("me?fields=id&access_token=" + user.getAccessToken()).request(MediaType.APPLICATION_JSON_TYPE).get();
-	return r.toString();
+    @Produces(MediaType.APPLICATION_JSON)
+    private Response facebookLogin(User user) {
+	if (!hasRequiredPermissions(user)) {
+	    return Response.status(400).entity(createJsonMessage("not enough permissions")).build();
+	}
+
+	FacebookData data = getFacebookData(user);
+
+	if (user.getFacebookId() != data.getId()) {
+	    return Response.status(400).entity(createJsonMessage("incorrect facebook user!")).build();
+	}
+
+	User dbUser = em.find(User.class, data.getEmail());
+	if (dbUser != null) {
+	    if(dbUser.getFacebookId() == 0) {
+		dbUser.setFacebookId(data.getId());
+	    }
+	    
+	    return Response.ok(getToken(data.getEmail())).build();
+	} else {
+	    return Response.status(404).entity(data).build();
+	}
+    }
+
+    private FacebookData getFacebookData(User user) {
+	Client c = ClientBuilder.newClient().register(FacebookDataReader.class);
+	Map<String, Object> params = new HashMap<>();
+	params.put("fields", "id,email,gender,first_name,last_name,picture");
+	params.put("token", user.getAccessToken());
+	FacebookData fdc = c.target("https://graph.facebook.com/me?fields={fields}&access_token={token}").resolveTemplates(params).request().get().readEntity(FacebookData.class);
+	c.close();
+	return fdc;
+    }
+
+    private boolean hasRequiredPermissions(User user) {
+	Client c = ClientBuilder.newClient().register(FacebookDataReader.class);
+	Map<String, Object> params = new HashMap<>();
+	params.put("fields", "permissions");
+	params.put("token", user.getAccessToken());
+	FacebookData fdc = c.target("https://graph.facebook.com/me?fields={fields}&access_token={token}").resolveTemplates(params).request(MediaType.APPLICATION_JSON).get().readEntity(FacebookData.class);
+	boolean hasAll = REQUIRED_PERMISSIONS.stream().allMatch(v -> fdc.getPermissions().getOrDefault(v, false));
+	c.close();
+	return hasAll;
+    }
+    
+    private JsonObject createJsonMessage(String message) {
+	return Json.createObjectBuilder().add("message", message).build();
     }
 
     public String getToken(String id) {
