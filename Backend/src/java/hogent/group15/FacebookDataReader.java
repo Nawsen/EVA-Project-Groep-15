@@ -41,7 +41,7 @@ public class FacebookDataReader implements MessageBodyReader<FacebookData> {
 	    String lastName = root.getString("last_name", "");
 	    JsonObject picture = root.getJsonObject("picture");
 	    String pictureUrl = "";
-	    String gender = root.getString("gender", "");
+	    int gender = root.getString("gender", "").equalsIgnoreCase("male") ? 0:1;
 	    Map<String, Boolean> permissionsMap = new HashMap<>();
 	    if (picture != null) {
 		JsonObject pData = picture.getJsonObject("data");

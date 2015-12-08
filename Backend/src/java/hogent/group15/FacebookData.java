@@ -8,11 +8,11 @@ public class FacebookData {
     private String firstName;
     private String lastName;
     private String email;
-    private String gender;
+    private int gender;
     private String pictureUrl;
     private Map<String, Boolean> permissions;
 
-    public FacebookData(long id, String firstName, String lastName, String email, String gender, String pictureUrl, Map<String, Boolean> permissions) {
+    public FacebookData(long id, String firstName, String lastName, String email, int gender, String pictureUrl, Map<String, Boolean> permissions) {
 	this.id = id;
 	this.firstName = firstName;
 	this.lastName = lastName;
@@ -54,11 +54,11 @@ public class FacebookData {
 	this.email = email;
     }
 
-    public String getGender() {
+    public int getGender() {
 	return gender;
     }
 
-    public void setGender(String gender) {
+    public void setGender(int gender) {
 	this.gender = gender;
     }
 
