@@ -92,6 +92,8 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         profileTracker = new ProfileTracker() {
             @Override
             protected void onCurrentProfileChanged(Profile oldProfile, Profile currentProfile) {
+                if (currentProfile != null)
+                    System.out.println(currentProfile.getId() + " is the ID");
                 Domain.facebookProfile = currentProfile;
             }
         };
