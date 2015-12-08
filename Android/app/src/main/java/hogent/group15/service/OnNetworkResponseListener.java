@@ -1,4 +1,4 @@
-package hogent.group15.domain;
+package hogent.group15.service;
 
 import java.io.IOException;
 

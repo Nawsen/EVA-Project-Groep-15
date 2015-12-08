@@ -1,12 +1,13 @@
-package hogent.group15.domain;
+package hogent.group15.data;
 
 import android.util.Log;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import hogent.group15.Consumer;
+import hogent.group15.service.Backend;
+import hogent.group15.domain.Challenge;
 import hogent.group15.ui.MainMenuActivity;
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;

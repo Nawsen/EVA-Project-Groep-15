@@ -1,15 +1,13 @@
 package hogent.group15.ui.controls;
 
 import android.content.Context;
-import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.PagerTabStripV22;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.TextView;
 
-import hogent.group15.FontManager;
+import hogent.group15.ui.FontManager;
 
 /**
  * Created by Brent on 10/24/2015.

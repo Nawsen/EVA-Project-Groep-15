@@ -1,31 +1,19 @@
-package hogent.group15.domain;
+package hogent.group15.service;
 
 import android.content.Context;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.ContactsContract;
-import android.telecom.Call;
-import android.transition.Fade;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.gson.GsonBuilder;
-import com.j256.ormlite.dao.CloseableIterable;
-import com.j256.ormlite.dao.CloseableIterator;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
+import hogent.group15.data.ChallengesRepository;
+import hogent.group15.data.Database;
+import hogent.group15.domain.Challenge;
+import hogent.group15.domain.Gender;
+import hogent.group15.domain.User;
 import hogent.group15.ui.R;
 import retrofit.Callback;
 import retrofit.RequestInterceptor;

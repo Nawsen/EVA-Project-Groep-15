@@ -1,4 +1,4 @@
-package hogent.group15;
+package hogent.group15.ui;
 
 import android.content.Context;
 import android.graphics.Typeface;

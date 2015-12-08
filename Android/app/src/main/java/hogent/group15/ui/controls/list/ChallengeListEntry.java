@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import hogent.group15.domain.Backend;
+import hogent.group15.service.Backend;
 import hogent.group15.domain.Challenge;
-import hogent.group15.StringInterpolator;
+import hogent.group15.ui.StringInterpolator;
 import hogent.group15.ui.ChallengeDetailsActivity;
 import hogent.group15.ui.R;
 

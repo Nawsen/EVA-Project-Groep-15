@@ -1,16 +1,13 @@
-package hogent.group15.domain;
-
-import android.telecom.Call;
+package hogent.group15.service;
 
 import java.util.List;
 
-import hogent.group15.ui.controls.list.ChallengeListEntry;
+import hogent.group15.domain.Challenge;
+import hogent.group15.domain.User;
 import retrofit.Callback;
 import retrofit.ResponseCallback;
-import retrofit.client.Response;
 import retrofit.http.Body;
 import retrofit.http.GET;
-import retrofit.http.Header;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 import retrofit.http.Path;

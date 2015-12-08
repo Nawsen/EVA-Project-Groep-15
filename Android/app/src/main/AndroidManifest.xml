@@ -19,7 +19,6 @@
         </activity>
         <activity android:name=".ChallengeDetailsActivity" >
         </activity>
-        <activity android:name=".MainMenuActivityOld" />
         <activity android:name=".LoginActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

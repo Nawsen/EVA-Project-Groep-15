@@ -1,6 +1,5 @@
 package hogent.group15.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -14,7 +13,7 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hogent.group15.domain.Backend;
+import hogent.group15.service.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.ui.util.ActionBarConfig;
 import retrofit.Callback;
