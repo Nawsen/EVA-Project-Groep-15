@@ -23,6 +23,8 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -71,13 +73,28 @@ public class Users {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public String login(User user) {
+	if(user.getAccessToken().isEmpty() || user.getFacebookId() == 0) {
+	    return regularLogin(user);
+	} else {
+	    return facebookLogin(user);
+	}
+    }
+
+    @Transactional
+    private String regularLogin(User user) {
 	User dbUser = em.find(User.class, user.getEmail());
 	if (dbUser != null && User.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getEncPassword())) {
-	    //TODO implement jsonwebtoken
 	    return getToken(user.getEmail());
 	} else {
 	    throw new WebApplicationException(Response.status(Status.UNAUTHORIZED).build());
 	}
+    }
+    
+    @Transactional
+    private String facebookLogin(User user) {
+	Client c = ClientBuilder.newClient();
+	Response r = c.target("https://graph.facebook.com").path("me?fields=id&access_token=" + user.getAccessToken()).request(MediaType.APPLICATION_JSON_TYPE).get();
+	return r.toString();
     }
 
     public String getToken(String id) {
@@ -133,15 +150,15 @@ public class Users {
 	    } else {
 		currentUser.setPassword("1234567");
 	    }
-	    
+
 	    if (user.getGrade() != null) {
 		currentUser.setGrade(user.getGrade());
 	    }
-	    
+
 	    if (user.getImageUrl() != null && !user.getImageUrl().isEmpty()) {
 		currentUser.setImageUrl(user.getImageUrl());
 	    }
-	    
+
 	    Set<ConstraintViolation<User>> violations = validator.validate(currentUser);
 	    if (!violations.isEmpty()) {
 		StringBuilder builder = new StringBuilder();
