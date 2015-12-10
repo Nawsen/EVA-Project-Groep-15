@@ -50,7 +50,7 @@ public class Challenge implements Serializable, ListEntry {
         }
     }
 
-    @DatabaseField(id = true)
+    @DatabaseField(id = true, uniqueCombo = true)
     int id;
 
     @SerializedName("imageUrl")
@@ -68,7 +68,7 @@ public class Challenge implements Serializable, ListEntry {
     @DatabaseField(columnName = "difficulty", canBeNull = false)
     String difficulty;
 
-    @DatabaseField(columnName = "date", canBeNull = false)
+    @DatabaseField(columnName = "date", canBeNull = false, uniqueCombo = true)
     String date;
 
     private boolean showAcceptChallengeButton = true;

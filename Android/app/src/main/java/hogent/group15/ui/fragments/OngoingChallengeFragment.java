@@ -43,7 +43,7 @@ public class OngoingChallengeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ChallengesRepository.getInstance().setOnCurrentChallengeChange(new Consumer<Challenge>() {
+        ChallengesRepository.getInstance(getContext()).setOnCurrentChallengeChange(new Consumer<Challenge>() {
 
             @Override
             public void consume(Challenge challenge) {

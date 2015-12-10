@@ -29,12 +29,12 @@ public class CompletedChallengesFragment extends Fragment {
         super.onStart();
         listView = (ListView) this.getView().findViewById(R.id.completedChallengesListView);
 
-        ChallengesRepository.getInstance().refreshCompletedChallenges(new Runnable() {
+        ChallengesRepository.getInstance(getContext()).refreshCompletedChallenges(new Runnable() {
             @Override
             public void run() {
-                final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance().getCompletedChallenges());
+                final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
                 listView.setAdapter(adapter);
-                ChallengesRepository.getInstance().setOnCompletedChallengesChanged(new Runnable() {
+                ChallengesRepository.getInstance(getContext()).setOnCompletedChallengesChanged(new Runnable() {
                     @Override
                     public void run() {
                         adapter.notifyDataSetChanged();

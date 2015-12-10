@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -46,7 +47,7 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         final boolean shouldShowButton = getIntent().hasExtra("showAcceptButton") && getIntent().getBooleanExtra("showAcceptButton", true);
         acceptButton.setVisibility(shouldShowButton ? View.VISIBLE : View.GONE);
 
-        Backend.getBackend().getDetailedChallenge(currentChallenge.getId(), new Callback<Challenge>() {
+        Backend.getBackend(this).getDetailedChallenge(currentChallenge.getId(), new Callback<Challenge>() {
 
             @Override
             public void success(Challenge data, Response response) {
@@ -65,17 +66,22 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         currentChallenge = challenge;
         title.setText(challenge.getTitle());
         longDescription.setText(challenge.getDetailedDescription() == null ? "" : Html.fromHtml(challenge.getDetailedDescription()));
-        Backend.getBackend().loadImageInto(this, challenge.getHeaderImageUri().toString(), image);
+        Backend.getBackend(this).loadImageInto(challenge.getHeaderImageUri().toString(), image);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ActionBarConfig.onCreateOptionsMenu(menu, this);
+        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        return ActionBarConfig.getInstance(this).onOptionsItemSelected(item);
     }
 
     @OnClick(R.id.challenge_accept)
     public void onAcceptChallenge(Button b) {
-        Backend.getBackend().acceptChallenge(currentChallenge, new Callback<Challenge>() {
+        Backend.getBackend(this).acceptChallenge(currentChallenge, new Callback<Challenge>() {
 
             @Override
             public void success(Challenge challenge, Response response) {

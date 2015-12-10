@@ -2,6 +2,7 @@ package hogent.group15.data;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.util.Log;
 
 import com.j256.ormlite.android.apptools.OrmLiteSqliteOpenHelper;
@@ -14,7 +15,10 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import hogent.group15.Consumer;
 import hogent.group15.domain.Challenge;
 
 /**
@@ -25,8 +29,11 @@ public class Database {
     private static Database database;
 
     private static final String DATABASE_NAME = "eva";
-    private static final int DATABASE_VERSION = 8;
+    private static final int DATABASE_VERSION = 9;
     private static final String TAG = Database.class.getName();
+
+    // Enable serialized async calls
+    private ExecutorService executorService = Executors.newFixedThreadPool(1);
 
     private final EvaDatabaseHelper helper;
     private Dao<Challenge, Integer> challengeDao;
@@ -51,54 +58,87 @@ public class Database {
         return database;
     }
 
-    public synchronized Challenge findChallengeById(int id) {
-        Log.i(TAG, "Retrieving challenge with id " + id);
-        if (challengeDao == null) {
-            return null;
-        }
+    public synchronized void findChallengeById(int id, final Consumer<Challenge> onFound) {
+        AsyncTask<Integer, Void, Challenge> task = new AsyncTask<Integer, Void, Challenge>() {
+            @Override
+            protected Challenge doInBackground(Integer... params) {
+                int id = params[0];
+                Log.i(TAG, "Retrieving challenge with id " + id);
+                if (challengeDao == null) {
+                    return null;
+                }
 
-        try {
-            return challengeDao.queryForId(id);
-        } catch (SQLException e) {
-            Log.e(TAG, "Couldn't retrieve challenge with id " + id, e);
-            return null;
-        }
+                try {
+                    return challengeDao.queryForId(id);
+                } catch (SQLException e) {
+                    Log.e(TAG, "Couldn't retrieve challenge with id " + id, e);
+                    return null;
+                }
+            }
+
+            @Override
+            protected void onPostExecute(Challenge challenge) {
+                onFound.consume(challenge);
+            }
+        };
+
+        task.executeOnExecutor(executorService, id);
     }
 
     public synchronized void saveChallenges(List<Challenge> challenges) {
-        Log.i(TAG, "Saving " + challenges.size() + " challenges");
+        AsyncTask<Challenge, Void, Void> task = new AsyncTask<Challenge, Void, Void>() {
+            @Override
+            protected Void doInBackground(Challenge... params) {
+                Log.i(TAG, "Saving " + params.length + " challenges");
 
-        if (challengeDao == null) {
-            Log.e(TAG, "Couldn't save challenges because challengeDAO is not present");
-            return;
-        }
+                if (challengeDao == null) {
+                    Log.e(TAG, "Couldn't save challenges because challengeDAO is not present");
+                } else {
+                    for (Challenge c : params) {
+                        try {
+                            challengeDao.create(c);
+                        } catch (SQLException e) {
+                            Log.e(TAG, "Couldn't save challenge with id " + c.getId() + " into database", e);
+                        }
+                    }
+                }
 
-        for (Challenge c : challenges) {
-            try {
-                challengeDao.create(c);
-            } catch (SQLException e) {
-                Log.e(TAG, "Couldn't save challenge with id " + c.getId() + " into database", e);
+                return null;
             }
-        }
+        };
+
+        task.executeOnExecutor(executorService, challenges.toArray(new Challenge[challenges.size()]));
     }
 
-    public synchronized List<Challenge> getDailyChallenges() {
-        Log.i(TAG, "Retrieving today's daily challenges");
-        if (challengeDao == null) {
-            return null;
-        }
+    public synchronized void getDailyChallenges(final Consumer<List<Challenge>> onFound) {
+        AsyncTask<Void, Void, List<Challenge>> task = new AsyncTask<Void, Void, List<Challenge>>() {
+            @Override
+            protected List<Challenge> doInBackground(Void... params) {
+                Log.i(TAG, "Retrieving today's daily challenges");
+                if (challengeDao == null) {
+                    return null;
+                }
 
-        QueryBuilder<Challenge, Integer> builder = challengeDao.queryBuilder();
-        Calendar today = new GregorianCalendar();
-        String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DAY_OF_MONTH);
+                QueryBuilder<Challenge, Integer> builder = challengeDao.queryBuilder();
+                Calendar today = new GregorianCalendar();
+                String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DAY_OF_MONTH);
 
-        try {
-            builder.where().eq("date", date);
-            return challengeDao.query(builder.prepare());
-        } catch (SQLException e) {
-            Log.e(TAG + ": getDailyChallenges", "Couldn't construct query", e);
-            throw new RuntimeException();
-        }
+                try {
+                    builder.where().eq("date", date);
+                    return challengeDao.query(builder.prepare());
+                } catch (SQLException e) {
+                    Log.e(TAG + ": getDailyChallenges", "Couldn't construct query", e);
+                    throw new RuntimeException();
+                }
+            }
+
+            @Override
+            protected void onPostExecute(List<Challenge> challenges) {
+                onFound.consume(challenges);
+            }
+        };
+
+        task.executeOnExecutor(executorService);
     }
 
     private static class EvaDatabaseHelper extends OrmLiteSqliteOpenHelper {

@@ -90,7 +90,7 @@ public class ChallengeListEntry extends FrameLayout {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
             score.setText(StringInterpolator.interpolate(scoreExpression, getContext().getString(Challenge.Difficulty.getResourceIdFor(challenge.getDifficulty()))));
-            Backend.getBackend().loadImageInto(this.getContext(), challenge.getHeaderImageUri().toString(), image);
+            Backend.getBackend(getContext()).loadImageInto(challenge.getHeaderImageUri().toString(), image);
             ChallengeListEntry.this.setAlpha(1f);
             if (onComplete != null)
                 onComplete.run();

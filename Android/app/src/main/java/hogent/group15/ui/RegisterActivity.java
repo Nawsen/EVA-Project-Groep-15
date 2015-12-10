@@ -57,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ActionBarConfig.onCreateOptionsMenu(menu, this);
+        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_logout);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class RegisterActivity extends AppCompatActivity {
             currentMode = Mode.PASSWORD;
         } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
             User user = new User(mainFragment.email.getText().toString(), passwordFragment.getPassword(), mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
-            Backend.getBackend().registerUser(user, new ResponseCallback() {
+            Backend.getBackend(this).registerUser(user, new ResponseCallback() {
                 @Override
                 public void success(Response response) {
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));

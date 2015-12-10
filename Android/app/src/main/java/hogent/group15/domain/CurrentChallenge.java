@@ -48,7 +48,7 @@ public class CurrentChallenge extends FrameLayout {
         this.currentChallenge = currentChallenge;
         title.setText(currentChallenge.getTitle());
         description.setText(Html.fromHtml(currentChallenge.getDetailedDescription()));
-        Backend.getBackend().loadImageInto(this.getContext(), currentChallenge.getHeaderImageUri().toString(), image);
+        Backend.getBackend(getContext()).loadImageInto(currentChallenge.getHeaderImageUri().toString(), image);
     }
 
     private Consumer<Challenge> onCompleteCallback;
@@ -59,11 +59,11 @@ public class CurrentChallenge extends FrameLayout {
 
     @OnClick(R.id.challenge_accept)
     public void onCompleteChallenge(Button b) {
-        Backend.getBackend().completeCurrentChallenge(new ResponseCallback() {
+        Backend.getBackend(getContext()).completeCurrentChallenge(new ResponseCallback() {
             @Override
             public void success(Response response) {
                 currentChallenge.setShowAcceptChallengeButton(false);
-                ChallengesRepository.getInstance().addCompletedChallenge(currentChallenge);
+                ChallengesRepository.getInstance(getContext()).addCompletedChallenge(currentChallenge);
                 if(onCompleteCallback != null) {
                     onCompleteCallback.consume(currentChallenge);
                 }
