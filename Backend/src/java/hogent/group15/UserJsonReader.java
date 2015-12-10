@@ -51,10 +51,13 @@ public class UserJsonReader implements MessageBodyReader<User> {
 		    grade = User.VegetarianGrade.UNKNOWN;
 		}
 	    }
+	    
+	    String facebookAccessToken = jsonUser.getString("accessToken", "");
 
 	    User user = new User(firstName, lastName, email, password, gender, address, grade);
 	    user.setImageUrl(imageUrl);
 	    user.setFacebookId(facebookId);
+	    user.setAccessToken(facebookAccessToken);
 	    return user;
 	}
     }
