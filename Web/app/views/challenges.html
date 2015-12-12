@@ -21,7 +21,7 @@
 		<!-- PROGRESSBAR -->
 		<div id="progressbar">
 			<div>
-				<h3>Progress</h3>
+				<h3>{{translation.getCurrentlySelected().progress}}</h3>
 				<div>
 					<!-- Outer Progressbar-->
 					<div>
@@ -33,7 +33,7 @@
 
 		<!-- CHALLENGES -->
 		<div class="banner">
-			<h3 class="challenge-title">Voltooide uitdagingen</h3>
+			<h3 class="challenge-title">{{translation.getCurrentlySelected().challenges_completed}}</h3>
 			<div id="challenges">
 				<article class="challenge box-border" ng-repeat="challenge in challenges track by $index" ng-click="showSelectedChallengeDetails($index)"
 				data-toggle="modal" data-target="#myModal">

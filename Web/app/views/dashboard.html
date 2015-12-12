@@ -21,7 +21,7 @@
         <!-- PROGRESSBAR -->
         <div id="progressbar">
             <div>
-                <h3>Progress</h3>
+                <h3>{{translation.getCurrentlySelected().progress}}</h3>
 
                 <div>
                     <!-- Outer Progressbar-->
@@ -34,7 +34,7 @@
 
         <!-- CHALLENGES -->
         <div class="banner">
-            <h3 ng-hide="hasAcceptedChallenge" class="challenge-title">Kies een uitdaging</h3>
+            <h3 ng-hide="hasAcceptedChallenge" class="challenge-title">{{translation.getCurrentlySelected().choose_challenge}}</h3>
 
             <h3 ng-show="hasAcceptedChallenge" class="challenge-title">Jouw actieve uitdaging</h3>
 
@@ -93,7 +93,7 @@
             <div class="banner-wrap">
                 <!-- ALL ACHIEVEMENTS -->
                 <div id="achievements">
-                    <div class="challenge-title">All Achievements</div>
+                    <div class="challenge-title">{{translation.getCurrentlySelected().achievements_all}}</div>
 
                     <div id="achievement-box" >
 

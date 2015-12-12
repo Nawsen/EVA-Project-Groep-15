@@ -12,32 +12,36 @@
 
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control eva-input" placeholder="Wachtwoord" name="password"
+                    <input type="password" class="form-control eva-input"
+                           placeholder="{{translation.getCurrentlySelected().login_password}}" name="password"
                            ng-focus="passwordFocused = true" ng-blur="passwordFocused = false" required
                            ng-model="userNew.password" ng-maxlength="128"/>
 
                     <!--<div class="alert alert-info" ng-hide="((!showHelpPassword || validPassword()) || userNew.password != undefined)">-->
                     <div class="alert alert-info" ng-hide="userNew.password == undefined"
                          ng-show="showHelpPassword()">
-                        Een wachtwoord is minstens 7 karakters en maximum 128.
+                        {{translation.getCurrentlySelected().register_hint_password}}
                     </div>
 
                 </div>
                 <div class="form-group">
-                    <input type="password" class="form-control eva-input" placeholder="Herhaal wachtwoord"
+                    <input type="password" class="form-control eva-input"
+                           placeholder="{{translation.getCurrentlySelected().register_repeat_password}}"
                            name="repeatpassword" ng-model="userNew.repeatPassword" ng-focus="showHelpRepeatPassword = true"
                            ng-blur="showHelpRepeatPassword = false"/>
 
                     <div class="alert alert-info" ng-hide="(!showHelpRepeatPassword || validPassword())">
-                        Herhaal uw wachtwoord.
+                        {{translation.getCurrentlySelected().register_repeat_password}}
                     </div>
 
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control eva-input" placeholder="Voornaam" ng-model="userNew.firstName"/>
+                    <input type="text" class="form-control eva-input"
+                           placeholder="{{translation.getCurrentlySelected().register_first_name}}" ng-model="userNew.firstName"/>
                 </div>
                 <div class="form-group">
-                    <input type="text" class="form-control eva-input" placeholder="Achternaam" ng-model="userNew.lastName"/>
+                    <input type="text" class="form-control eva-input"
+                           placeholder="{{translation.getCurrentlySelected().register_name}}" ng-model="userNew.lastName"/>
                 </div>
                 <div class="form-group">
                     <select class="form-control eva-input" name="select" required ng-model="userNew.grade"

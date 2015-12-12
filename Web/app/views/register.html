@@ -4,7 +4,24 @@
         <div class="text-center">
             <img src="images/eva-logo.png" alt="eva logo"/>
 
-            <h2 class="logintitle">{{translation.getCurrentlySelected().register}}</h2>
+                <h2 class="logintitle">
+                    {{translation.getCurrentlySelected().register}}
+                    <div>
+                <span class="col-lg-2 col-lg-offset-3">
+                    <img ng-click="translation.selectEnglish()" src="images/resources/gb.png" style="cursor:pointer">
+                </span>
+
+                <span class="col-lg-2">
+                    <img ng-click="translation.selectDutch()" src="images/resources/be.png" style="cursor:pointer">
+                </span>
+
+                <span class="col-lg-2">
+                    <img ng-click="translation.selectFrench()" src="images/resources/fr.png" style="cursor:pointer">
+                </span>
+                    </div>
+                </h2>
+
+
         </div>
         <form class="form-group" name="registerForm">
             <div class="form-group">

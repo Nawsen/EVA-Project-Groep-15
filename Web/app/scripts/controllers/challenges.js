@@ -1,6 +1,7 @@
 angular.module('eva').controller('ChallengesCtrl',
-    ['$scope', 'auth', '$http', '$state', 'NetworkingService',
-        function ($scope, auth, $http, $state, netService) {
+    ['$scope', 'auth', '$http', '$state', 'NetworkingService', 'translation',
+        function ($scope, auth, $http, $state, netService, translation) {
+            $scope.translation = translation;
             $scope.user = {
                 'firstname': 'voornaam',
                 'lastname': 'achternaam',

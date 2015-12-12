@@ -16,14 +16,17 @@
 
                 <div class="form-group">
                     <div class="alert-danger loginerror" id="passwordwarn"></div>
-                    <input type="password" class="form-control input-underline input-lg eva-input" ng-model="user.password"
+                    <input type="password" class="form-control input-underline input-lg eva-input"
+                           ng-model="user.password"
                            placeholder="{{translation.getCurrentlySelected().login_password}}">
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success btn-outline btn-lg btn-block eva-submit">{{translation.getCurrentlySelected().login_button}}</button>
+            <button type="submit" class="btn btn-success btn-outline btn-lg btn-block eva-submit">
+                {{translation.getCurrentlySelected().login_button}}
+            </button>
 
-            <h4 class="text-center dl-horizontal" > {{translation.getCurrentlySelected().login_or}} </h4>
+            <h4 class="text-center dl-horizontal"> {{translation.getCurrentlySelected().login_or}} </h4>
             <a id="fblogin" href="" ng-click="facebooklogin()" class="btn btn-block btn-social btn-lg btn-facebook">
                 <i class="fa fa-facebook">
 
@@ -31,8 +34,23 @@
                 {{translation.getCurrentlySelected().login_facebook_login}}
             </a>
         </form>
-            <a id="register" href="" ng-click="register()">{{translation.getCurrentlySelected().create_account}}</a>
+        <span class="col-lg-12">
+            <a class="col-lg-8" id="register" href="" ng-click="register()">{{translation.getCurrentlySelected().create_account}}</a>
+            <span class="col-lg-1">
+                <img ng-click="translation.selectEnglish()" src="images/resources/gb.png"
+                     style="cursor:pointer">
+            </span>
 
+            <span class="col-lg-1">
+                <img ng-click="translation.selectDutch()" src="images/resources/be.png"
+                     style="cursor:pointer">
+            </span>
+
+            <span class="col-lg-1">
+                <img ng-click="translation.selectFrench()" src="images/resources/fr.png"
+                     style="cursor:pointer">
+            </span>
+        </span>
     </div>
 
 </div>
