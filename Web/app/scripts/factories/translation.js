@@ -76,6 +76,43 @@ angular.module('eva').factory('translation', function () {
         grade_vegetarian: "Vegetariër (geen vlees of vis)",
         grade_vegan: "Veganist (geen dierlijke producten)"
     };
-    strings.french = {};
+    strings.french = {
+        challenge_score_notification: "Difficulté: ",
+        accept_challenge: "Fait le défi",
+        choose_challenge: "Choisi un défi:",
+        welcome_notification: "Bienvenu ",
+        get_challenge: "Regarde au défi",
+        get_progress: "Regarde à l\'amélioration",
+        login_alternative_login: "Connexion alternative",
+        login_facebook_login: "Se connecter avec Facebook",
+        login_email: "Adresse e-mail",
+        login_password: "Password",
+        login_lost_password: "Mot de passe oublié?",
+        login_button: "Se connecter",
+        login_or: "Ou",
+        register: "Se faire inscrire",
+        register_personal_info_label: "Données personelles",
+        register_first_name: "Prénom",
+        register_name: "Nom",
+        register_email: "Adresse E-mail",
+        register_address_label: "Adresse",
+        register_street: "Rue",
+        register_postal_code: "Code Postale",
+        register_city: "City",
+        register_account_label: "Compte",
+        register_sex_male: "Masculin",
+        register_sex_female: "Feminin",
+        create_account: "Créer un compte",
+        action_bar_search: "Chercher",
+        action_bar_share: "Partager",
+        challenge: "Défi",
+        current_challenge: "Défi actuel",
+        logout: "Se déconnecter",
+        grade_omnivore: "Omnivore",
+        grade_pescetariar: "Pescétarien (pas de viande, poisson est ok)",
+        grade_parttime_vegetarian: "Végétarien à temps partiel (au moins 3 fois par semaine un repas végétarien)",
+        grade_vegetarian: "Végétarien (pas de viande ou poisson)",
+        grade_vegan: "Végan (pas de produits animals)"
+    };
     return strings;
 });
