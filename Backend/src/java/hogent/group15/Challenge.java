@@ -3,7 +3,7 @@ package hogent.group15;
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
-import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -15,6 +15,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Transient;
+import org.hibernate.validator.constraints.Length;
 
 /**
  *
@@ -38,7 +39,10 @@ public class Challenge implements Serializable {
 
     private String title;
     
+    
+    @Column(length = 10000)
     private String description;
+    
     private String imageUrl;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -46,25 +50,26 @@ public class Challenge implements Serializable {
 
     @Enumerated(EnumType.ORDINAL)
     private Difficulty difficulty;
+    
+    @Column(name = "ChallengeGroup")
+    private int group;
 
     private boolean usable = true;
 
     public Challenge() {
     }
 
-    public Challenge(int id, String title, String description, String imageUrl, Difficulty difficulty) {
+    public Challenge(int id, String title, String description, String imageUrl, Difficulty difficulty, int group) {
+	this(title, description, imageUrl, difficulty, group);
 	this.id = id;
-	this.title = title;
-	this.description = description;
-	this.imageUrl = imageUrl;
-	this.difficulty = difficulty;
     }
 
-    public Challenge(String title, String description, String imageUrl, Difficulty difficulty) {
+    public Challenge(String title, String description, String imageUrl, Difficulty difficulty, int group) {
 	this.title = title;
 	this.description = description;
 	this.imageUrl = imageUrl;
 	this.difficulty = difficulty;
+	this.group = group;
     }
 
     public boolean isUsable() {
@@ -132,5 +137,35 @@ public class Challenge implements Serializable {
 
     public Date getDate() {
 	return date;
+    }
+
+    public int getGroup() {
+	return group;
+    }
+
+    public void setGroup(int group) {
+	this.group = group;
+    }
+    
+    @Override
+    public int hashCode() {
+	int hash = 3;
+	hash = 47 * hash + this.id;
+	return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+	if (obj == null) {
+	    return false;
+	}
+	if (getClass() != obj.getClass()) {
+	    return false;
+	}
+	final Challenge other = (Challenge) obj;
+	if (this.id != other.id) {
+	    return false;
+	}
+	return true;
     }
 }

@@ -6,8 +6,10 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Random;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -22,7 +24,6 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
@@ -59,7 +60,7 @@ public class User implements Serializable {
     private String email;
 
     private long facebookId;
-    
+
     private transient String accessToken;
 
     @NotNull(message = "firstName")
@@ -114,8 +115,8 @@ public class User implements Serializable {
 
     private String imageUrl;
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
-    private DailyChallenges dailyChallenges;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    private List<DailyChallenges> dailyChallenges;
 
     @Enumerated(EnumType.ORDINAL)
     private Role role;
@@ -241,12 +242,29 @@ public class User implements Serializable {
 	this.email = email;
     }
 
-    public DailyChallenges getDailyChallenges() {
+    public List<DailyChallenges> getDailyChallenges() {
 	return dailyChallenges;
     }
 
-    public void setDailyChallenges(DailyChallenges dailyChallenges) {
+    public void setDailyChallenges(List<DailyChallenges> dailyChallenges) {
 	this.dailyChallenges = dailyChallenges;
+    }
+
+    public Optional<DailyChallenges> getDailyChallengesForToday() {
+	return getDailyChallengesForDay(Calendar.getInstance());
+    }
+
+    public Optional<DailyChallenges> getDailyChallengesForDay(Calendar date) {
+	for (DailyChallenges dc : getDailyChallenges()) {
+	    Calendar daily = Calendar.getInstance();
+	    daily.setTime(dc.getDate());
+	    if (daily.get(Calendar.YEAR) == date.get(Calendar.YEAR) && daily.get(Calendar.MONTH) == date.get(Calendar.MONTH)
+		    && daily.get(Calendar.DAY_OF_MONTH) == date.get(Calendar.DAY_OF_MONTH)) {
+		return Optional.of(dc);
+	    }
+	};
+	
+	return Optional.empty();
     }
 
     public static byte[] generateSalt() {
@@ -313,5 +331,5 @@ public class User implements Serializable {
     public void setAccessToken(String accessToken) {
 	this.accessToken = accessToken;
     }
-    
+
 }

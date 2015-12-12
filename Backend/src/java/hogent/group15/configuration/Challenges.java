@@ -6,9 +6,9 @@ import hogent.group15.Challenge;
 import hogent.group15.ChallengeCache;
 import hogent.group15.DailyChallenges;
 import hogent.group15.User;
-import java.sql.Date;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -18,6 +18,7 @@ import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.HeaderParam;
 import javax.ws.rs.POST;
@@ -25,6 +26,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -63,32 +65,24 @@ public class Challenges {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public List<Challenge> getDailyChallenges(@HeaderParam("email") String email) {
-	User user = em.find(User.class, email);
-	DailyChallenges ch = cache.createDailyChallenges(user);
-	em.merge(user);
-
-	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
-	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
-	ch.getThird().setDate(new Date(System.currentTimeMillis()));
-
-	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
+    public List<DailyChallenges> getDailyChallenges(@HeaderParam("email") String email, @QueryParam("days") @DefaultValue("1") int days) {
+	List<DailyChallenges> challenges = getDailyChallengesDetailed(email, days);
+	challenges.forEach(dc -> dc.setDetailed(false));
+	return challenges;
     }
 
     @Path("daily/detailed")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Transactional
-    public List<Challenge> getDailyChallengesComplete(@HeaderParam("email") String email) {
+    public List<DailyChallenges> getDailyChallengesDetailed(@HeaderParam("email") String email, @QueryParam("days") @DefaultValue("1") int days) {
 	User user = em.find(User.class, email);
-	DailyChallenges ch = cache.createDailyChallenges(user);
-	em.persist(user);
-
-	ch.getFirst().setDate(new Date(System.currentTimeMillis()));
-	ch.getSecond().setDate(new Date(System.currentTimeMillis()));
-	ch.getThird().setDate(new Date(System.currentTimeMillis()));
-
-	return Arrays.asList(new Challenge[]{ch.getFirst(), ch.getSecond(), ch.getThird()});
+	List<DailyChallenges> original = cache.createDailyChallenges(user, days);
+	List<DailyChallenges> ch = new ArrayList<>(original);
+	ch.removeAll(user.getDailyChallenges());
+	user.getDailyChallenges().addAll(ch);
+	em.merge(user);
+	return original;
     }
 
     @Path("{challengeID}")
@@ -96,7 +90,7 @@ public class Challenges {
     @Produces(MediaType.APPLICATION_JSON)
     public Challenge getChallengeDetails(@HeaderParam("email") String email, @PathParam("challengeID") int id) {
 	User user = em.find(User.class, email);
-	Challenge challenge = cache.getChallenge(user, id);
+	Challenge challenge = cache.getChallenge(id);
 	if (challenge != null) {
 	    return challenge;
 	} else {
@@ -121,23 +115,28 @@ public class Challenges {
 	if (user.getCurrentChallenge() != null && user.getCurrentChallenge().getId() == id) {
 	    return Response.status(Response.Status.BAD_REQUEST).build();
 	}
+	
+	Optional<DailyChallenges> challenges = user.getDailyChallengesForToday();
 
-	if (user.getDailyChallenges().getFirst().getId() == id) {
-	    user.setCurrentChallenge(user.getDailyChallenges().getFirst());
+	Optional<Challenge> first = challenges.isPresent() ? Optional.of(challenges.get().getFirst()) : Optional.empty();
+	if (first.isPresent() && first.get().getId() == id) {
+	    user.setCurrentChallenge(first.get());
 	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();
 	}
 
-	if (user.getDailyChallenges().getSecond().getId() == id) {
-	    user.setCurrentChallenge(user.getDailyChallenges().getSecond());
+	Optional<Challenge> second = challenges.isPresent() ? Optional.of(challenges.get().getSecond()) : Optional.empty();
+	if (second.isPresent() && second.get().getId() == id) {
+	    user.setCurrentChallenge(second.get());
 	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();
 	}
 
-	if (user.getDailyChallenges().getThird().getId() == id) {
-	    user.setCurrentChallenge(user.getDailyChallenges().getThird());
+	Optional<Challenge> third = challenges.isPresent() ? Optional.of(challenges.get().getThird()) : Optional.empty();
+	if (third.isPresent() && third.get().getId() == id) {
+	    user.setCurrentChallenge(third.get());
 	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();

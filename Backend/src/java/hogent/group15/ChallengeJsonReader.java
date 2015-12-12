@@ -35,18 +35,19 @@ public class ChallengeJsonReader implements MessageBodyReader<Challenge> {
 	    String title = jsonChallenge.getString("title", "");
 	    String descr = jsonChallenge.getString("description", "");
 	    String imageUrl = jsonChallenge.getString("imageUrl", "");
+	    int group = jsonChallenge.getInt("group", 0);
 	    int tempDiff = jsonChallenge.getInt("difficulty", -1);
 	    if (tempDiff == 0) {
-		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.EASY);
+		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.EASY, group);
 	    }
 	    if (tempDiff == 1) {
-		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.MEDIUM);
+		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.MEDIUM, group);
 	    }
 	    if (tempDiff == 2) {
-		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.HARD);
+		return new Challenge(title, descr, imageUrl, Challenge.Difficulty.HARD, group);
 	    }
 
-	    return new Challenge(title, descr, imageUrl, null);
+	    return new Challenge(title, descr, imageUrl, null, group);
 	}
     }
 

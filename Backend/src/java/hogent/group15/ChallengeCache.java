@@ -1,11 +1,17 @@
 package hogent.group15;
 
+import java.sql.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.stream.Collectors;
 import javax.annotation.PostConstruct;
 import javax.ejb.ConcurrencyManagement;
 import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Schedule;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -25,6 +31,11 @@ public class ChallengeCache {
     @PersistenceContext(type = PersistenceContextType.TRANSACTION)
     private EntityManager em;
 
+    @Schedule(hour = "0,2,4,6,8,10,12,14,16,18,20,22")
+    public void onSchedule() {
+	init();
+    }
+    
     @PostConstruct
     @Transactional
     public void init() {
@@ -39,62 +50,63 @@ public class ChallengeCache {
 	allChallenges.remove(ch);
     }
 
-    public DailyChallenges createDailyChallenges(User user) {
-	if (user.getDailyChallenges() != null && user.getDailyChallenges().getDate() != null) {
-	    Calendar daily = Calendar.getInstance();
-	    daily.setTime(user.getDailyChallenges().getDate());
-	    Calendar today = Calendar.getInstance();
+    public List<DailyChallenges> createDailyChallenges(User user, int days) {
+	List<DailyChallenges> result = new ArrayList<>();
 
-	    if (daily.get(Calendar.YEAR) == today.get(Calendar.YEAR) && daily.get(Calendar.MONTH) == today.get(Calendar.MONTH)
-		    && daily.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)) {
-		return user.getDailyChallenges();
+	for (int i = 0; i < days; i++) {
+	    Calendar today = Calendar.getInstance();
+	    today.add(Calendar.DAY_OF_MONTH, i);
+	    result.add(user.getDailyChallengesForDay(today).orElse(generateDailyChallengesFor(today, result)));
+	}
+
+	return result;
+    }
+    
+    private DailyChallenges generateDailyChallengesFor(Calendar date, List<DailyChallenges> existing) {
+	List<Challenge> challenges = existing.stream().map(DailyChallenges::getChallenges).flatMap(List::stream).collect(Collectors.toList());
+	Map<Integer, Integer> groupMap = new HashMap<>();
+	challenges.forEach(c -> groupMap.compute(c.getGroup(), (k, v) -> v == null || v == 0 ? 1 : v + 1));
+	List<Challenge> result = new ArrayList<>();
+	
+	Random rand = new Random();
+
+	while (result.size() < 3) {
+	    Challenge randomChallenge = randomChallenge(rand);
+	    if (result.contains(randomChallenge)) {
+		continue;
+	    }
+	    
+	    float score = 4f;
+	    
+	    if (challenges.contains(randomChallenge)) {
+		score -= 3.9;
+	    } else {
+		int total = groupMap.keySet().stream().map(groupMap::get).reduce(0, (lhs, rhs) -> lhs + rhs);
+		total = total == 0 ? 1 : total;
+		score -= 4 * groupMap.getOrDefault(randomChallenge.getGroup(), 0) / total;
+		
+		if (result.stream().anyMatch(c -> c.getDifficulty() == randomChallenge.getDifficulty())) {
+		    score = Math.max(0, score - 3.5f);
+		}
+	    }
+	    
+	    if (rand.nextFloat() * 4 < score) {
+		result.add(randomChallenge);
 	    }
 	}
-
-	if (user.getDailyChallenges() == null) {
-	    user.setDailyChallenges(new DailyChallenges());
-	}
-
-	if (allChallenges.size() > 2) {
-	    user.getDailyChallenges().setFirst(allChallenges.get(0));
-	    user.getDailyChallenges().setSecond(allChallenges.get(1));
-	    user.getDailyChallenges().setThird(allChallenges.get(2));
-	    user.getDailyChallenges().setDate(new java.sql.Date(new Date().getTime()));
-	}
-
-	return user.getDailyChallenges();
+	
+	DailyChallenges finalResult = new DailyChallenges(result.get(0), result.get(1), result.get(2));
+	finalResult.setDate(new Date(date.getTimeInMillis()));
+	em.persist(finalResult);
+	return finalResult;
+    }
+    
+    private Challenge randomChallenge(Random random) {
+	return allChallenges.get(random.nextInt(allChallenges.size()));
     }
 
-    public Challenge getChallenge(User user, int id) {
-	//Check first for dailychallenges as this will be the most commonly used
-	if (user.getDailyChallenges() == null) {
-	    return null;
-	}
-
-	if (user.getDailyChallenges().getFirst().getId() == id) {
-	    return user.getDailyChallenges().getFirst();
-	}
-
-	if (user.getDailyChallenges().getSecond().getId() == id) {
-	    return user.getDailyChallenges().getSecond();
-	}
-
-	if (user.getDailyChallenges().getThird().getId() == id) {
-	    return user.getDailyChallenges().getThird();
-	}
-
-	if (user.getCurrentChallenge() != null && user.getCurrentChallenge().getId() == id) {
-	    return user.getCurrentChallenge();
-	}
-
-	//if we didn't find it here user asks info about a completed challenge
-	for (Challenge c : user.getCompletedChallenges()) {
-	    if (c.getId() == id) {
-		return c;
-	    }
-	}
-	//if we get here it means the user may not view the challenge info yet
-	return null;
+    public Challenge getChallenge(int id) {
+	return em.find(Challenge.class, id);
     }
 
     public int amount() {

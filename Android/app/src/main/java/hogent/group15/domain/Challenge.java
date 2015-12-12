@@ -50,8 +50,11 @@ public class Challenge implements Serializable, ListEntry {
         }
     }
 
-    @DatabaseField(id = true, uniqueCombo = true)
+    @DatabaseField(uniqueCombo = true)
     int id;
+
+    @DatabaseField(generatedId = true)
+    int dbId;
 
     @SerializedName("imageUrl")
     @DatabaseField(columnName = "imageUri", canBeNull = false)

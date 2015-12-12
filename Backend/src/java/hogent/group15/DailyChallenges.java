@@ -1,11 +1,14 @@
 package hogent.group15;
 
+import java.util.Arrays;
+import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  *
@@ -29,10 +32,27 @@ public class DailyChallenges {
     private Challenge third;
 
     private java.sql.Date challengesDate;
+    
+    @Transient
+    private boolean detailed = true;
 
     public DailyChallenges() {
     }
+    
+    public DailyChallenges(Challenge first, Challenge second, Challenge third) {
+	this.first = first;
+	this.second = second;
+	this.third = third;
+    }
 
+    public boolean isDetailed() {
+	return detailed;
+    }
+
+    public void setDetailed(boolean detailed) {
+	this.detailed = detailed;
+    }
+    
     public int getId() {
 	return id;
     }
@@ -71,6 +91,12 @@ public class DailyChallenges {
 
     public void setDate(java.sql.Date date) {
 	this.challengesDate = date;
+    }
+    
+    public List<Challenge> getChallenges() {
+	return Arrays.asList(new Challenge[]{
+	    getFirst(), getSecond(), getThird()
+	});
     }
 
 }
