@@ -3,7 +3,13 @@ angular.module('eva').factory('translation', function () {
 
 
     strings.english = {
-        current_challenge: "Current challenge",
+        settings:"Settings",
+        ongoing_challenges:"Current challenges",
+        progress:"Progress",
+        overview:"Overview",
+        challenges:"Challenges",
+        challenges_completed:"Completed challenges",
+        achievements_all: "All achievements",
         challenge_score_notification: "Difficulty: ",
         accept_challenge: "Accept challenge",
         choose_challenge: "Choose a challenge:",
@@ -45,7 +51,13 @@ angular.module('eva').factory('translation', function () {
         grade_vegan: "Vegan (no animal products)"
     };
     strings.dutch = {
-        current_challenge: "Jouw actieve uitdaging",
+        settings:"Instellingen",
+        ongoing_challenges:"Lopende uitdagingen",
+        progress:"Voortgang",
+        overview:"Overzicht",
+        challenges:"Uitdagingen",
+        challenges_completed:"Voltooide uitdagingen",
+        achievements_all: "Alle prestaties",
         challenge_score_notification: "Moeilijkheid: ",
         accept_challenge: "Uitdaging aangaan",
         choose_challenge: "Kies een uitdaging:",
@@ -87,7 +99,13 @@ angular.module('eva').factory('translation', function () {
         grade_vegan: "Veganist (geen dierlijke producten)"
     };
     strings.french = {
-        current_challenge: "Votre défi active",
+        settings:"Paramètres",
+        ongoing_challenges:"Défis en cours",
+        progress:"Progrès",
+        overview:"Résumé",
+        challenges:"Défis",
+        challenges_completed:"Défis finis",
+        achievements_all: "Acquis",
         challenge_score_notification: "Difficulté: ",
         accept_challenge: "Fait le défi",
         choose_challenge: "Choisi un défi:",
@@ -97,7 +115,7 @@ angular.module('eva').factory('translation', function () {
         login_alternative_login: "Connexion alternative",
         login_facebook_login: "Se connecter avec Facebook",
         login_email: "Adresse e-mail",
-        login_password: "Password",
+        login_password: "Mot de passe",
         login_lost_password: "Mot de passe oublié?",
         login_button: "Se connecter",
         login_or: "Ou",

@@ -2,8 +2,8 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('SettingsCtrl',
-    ['$scope', '$location', 'NetworkingService',
-        function ($scope, $location, netService) {
+    ['$scope', '$location', 'NetworkingService','translation',
+        function ($scope, $location, netService, translation) {
             $scope.showHelpMail = false;
             $scope.passwordFocused = false;
             $scope.showHelpPassword = function () {
@@ -24,23 +24,23 @@ angular.module('eva').controller('SettingsCtrl',
             $scope.values = [
                 {
                     "val": "OMNIVORE",
-                    "text": "Omnivoor"
+                    "text": translation.getCurrentlySelected().grade_omnivore
                 },
                 {
                     "val": "PESCETARIAR",
-                    "text": "Pescotariër (geen vlees, wel vis)"
+                    "text": translation.getCurrentlySelected().grade_pescetariar
                 },
                 {
                     "val": "PARTTIME_VEGETARIAN",
-                    "text": "Parttime-vegetariër (Minstens 3 keer per week vegetarisch)"
+                    "text": translation.getCurrentlySelected().grade_parttime_vegetarian
                 },
                 {
                     "val": "VEGETARIAN",
-                    "text": "Vegetariër (geen vlees of vis)"
+                    "text": translation.getCurrentlySelected().grade_vegetarian
                 },
                 {
                     "val": "VEGAN",
-                    "text": "Veganist (geen dierlijke producten)"
+                    "text": translation.getCurrentlySelected().grade_vegan
                 }
             ];
             $scope.userOld = {
