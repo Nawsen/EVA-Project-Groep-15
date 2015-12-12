@@ -452,27 +452,38 @@ h1 {
       }
 
       .badge-easy {
-        background: url("../images/resources/badges/easy.png");
+        background: url("../images/resources/badges/Tree_Growing.png");
         background-color: rgba($white, 0.3);
         background-repeat: no-repeat;
-        background-size: 90%;
-        background-position: 50% 50%;
+        -webkit-background-size: 400%;
+        background-size: 400%;
+        background-position: 30px -35px;
       }
 
       .badge-medium {
-        background: url("../images/resources/badges/medium.png");
+        background: url("../images/resources/badges/Tree_Growing.png");
         background-color: rgba($white, 0.3);
         background-repeat: no-repeat;
-        background-size: 90%;
-        background-position: 50% 50%;
+        -webkit-background-size: 430%;
+        background-size: 430%;
+        background-position: -37px -48px;
       }
 
       .badge-hard {
-        background: url("../images/resources/badges/hard.png");
+        background: url("../images/resources/badges/Tree_Growing.png");
         background-color: rgba($white, 0.3);
         background-repeat: no-repeat;
-        background-size: 90%;
-        background-position: 50% 50%;
+        -webkit-background-size: 390%;
+        background-size: 390%;
+        background-position: -107px -33px;
+      }
+      .badge-expert {
+        background: url("../images/resources/badges/Tree_Growing.png");
+        background-color: rgba($white, 0.3);
+        background-repeat: no-repeat;
+        -webkit-background-size: 350%;
+        background-size: 320%;
+        background-position: -145px -3px;
       }
     }
   }

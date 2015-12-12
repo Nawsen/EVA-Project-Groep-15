@@ -93,39 +93,21 @@
             <div class="banner-wrap">
                 <!-- ALL ACHIEVEMENTS -->
                 <div id="achievements">
+                    <div class="challenge-title">All Achievements</div>
 
-                    <h4>All Achievements</h4>
-
-                    <div id="achievement-box">
+                    <div id="achievement-box" >
 
                         <!-- ACHIEVEMENT 1 -->
-                        <div class="achievement box-border">
-                            <div class="badge badge-easy"></div>
+                        <div class="achievement box-border" ng-repeat="achievement in achievements track by $index">
+                            <div ng-show="achievement.score == 1" class="badge badge-easy"></div>
+                            <div ng-show="achievement.score > 1 && achievement.score < 6" class="badge badge-medium"></div>
+                            <div ng-show="achievement.score > 6 && achievement.score < 17" class="badge badge-hard"></div>
+                            <div ng-show="achievement.score > 17" class="badge badge-expert"></div>
                             <div class="achievement-image temp-pompoensoep">
-                                <h5>Achievement title</h5>
-
-                                <p>Achievement description that is waay to long to see what happens on big
-                                    descriptions</p>
-                            </div>
-                        </div>
-
-                        <!-- ACHIEVEMENT 2 -->
-                        <div class="achievement box-border">
-                            <div class="badge badge-medium"></div>
-                            <div class="achievement-image temp-pompoensoep">
-                                <h5>This achievement title is long enough to reach the edge</h5>
-
-                                <p>Achievement description</p>
-                            </div>
-                        </div>
-
-                        <!-- ACHIEVEMENT 3 -->
-                        <div class="achievement box-border">
-                            <div class="badge badge-hard"></div>
-                            <div class="achievement-image temp-pompoensoep">
-                                <h5>Do 3 backflips in succession</h5>
-
-                                <p>Do 3x a backflip and to show of do a 360° noscope headshot at the end</p>
+                                <h5>{{achievement.name}}</h5>
+                                <p>
+                                    {{achievement.description}}
+                                </p>
                             </div>
                         </div>
                     </div>
