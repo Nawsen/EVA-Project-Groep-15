@@ -14,7 +14,7 @@ app.controller("IndexCtrl", ["$scope", "auth",'NetworkingService', '$state', 'to
                         msg: 'Welcome ' + auth.currentUser()
                     });
                     if (data.imageUrl == "" || !data.imageUrl){
-                        $scope.user.imageUrl = "http://www.gravatar.com/avatar/2b4daf6ced6cd12b76fbe41bd1584108?d=mm&s=250&r=G";
+                        $scope.user.imageUrl = "http://cdn-9chat-fun.9cache.com/static/dist/images/avatar-default.png";
                     }
                     console.log($scope.user);
                 }

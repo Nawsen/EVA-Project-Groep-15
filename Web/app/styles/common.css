@@ -410,22 +410,32 @@ h1 {
         min-height: 110px;
         float: left; }
       #achievements #achievement-box .achievement .badge-easy {
-        background: url("../images/resources/badges/easy.png");
+        background: url("../images/resources/badges/Tree_Growing.png");
         background-color: rgba(255, 255, 255, 0.3);
         background-repeat: no-repeat;
-        background-size: 90%;
-        background-position: 50% 50%; }
+        -webkit-background-size: 400%;
+        background-size: 400%;
+        background-position: 30px -35px; }
       #achievements #achievement-box .achievement .badge-medium {
-        background: url("../images/resources/badges/medium.png");
+        background: url("../images/resources/badges/Tree_Growing.png");
         background-color: rgba(255, 255, 255, 0.3);
         background-repeat: no-repeat;
-        background-size: 90%;
-        background-position: 50% 50%; }
+        -webkit-background-size: 430%;
+        background-size: 430%;
+        background-position: -37px -48px; }
       #achievements #achievement-box .achievement .badge-hard {
-        background: url("../images/resources/badges/hard.png");
+        background: url("../images/resources/badges/Tree_Growing.png");
         background-color: rgba(255, 255, 255, 0.3);
         background-repeat: no-repeat;
-        background-size: 90%;
-        background-position: 50% 50%; }
+        -webkit-background-size: 390%;
+        background-size: 390%;
+        background-position: -107px -33px; }
+      #achievements #achievement-box .achievement .badge-expert {
+        background: url("../images/resources/badges/Tree_Growing.png");
+        background-color: rgba(255, 255, 255, 0.3);
+        background-repeat: no-repeat;
+        -webkit-background-size: 350%;
+        background-size: 320%;
+        background-position: -145px -3px; }
 
 /*# sourceMappingURL=common.css.map */

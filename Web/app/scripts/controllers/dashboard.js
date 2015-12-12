@@ -25,6 +25,7 @@ app.controller('DashboardCtrl',
                 $scope.detailedChallenge = $scope.acceptedChallenge;
             };
 
+
             $scope.detailedChallenge = {};
 
             $scope.loadChallengeData = function () {
@@ -36,9 +37,9 @@ app.controller('DashboardCtrl',
             function initializeDashboard() {
                 if (auth.isLoggedIn()) {
                     netService.get('/backend/api/users/details').success(function (data, status) {
-                        if (status == 200){
-                            $("#innerbar").css("width", data.percComp + "%");
-                            console.log(data.percComp);
+                        if (status == 200) {
+                            $("#innerbar").css("width", (data.completedCount * 100) / 21 + "%");
+                            console.log((data.completedCount * 100) / 21);
                         }
                     });
                     netService.get('/backend/api/challenges/accepted').success(function (data, status) {
@@ -53,6 +54,12 @@ app.controller('DashboardCtrl',
                             $scope.acceptedChallenge = data;
                         }
                     });
+
+                    netService.get('/backend/api/achievements').success(function (data, status, headers, config) {
+                        $scope.achievements = data;
+                        console.log(data);
+                    });
+
 
                     //challenges.getDailyChallenges();
                     //console.log(challenges.getDailyChallenges());
@@ -86,4 +93,4 @@ app.controller('DashboardCtrl',
 
             initializeDashboard();
         }]
-    );
+);
