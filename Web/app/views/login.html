@@ -10,26 +10,28 @@
             <div class="form-content">
                 <div class="form-group">
                     <div class="alert-danger loginerror" id="emailwarn"></div>
-                    <input type="email" class="form-control input-underline input-lg eva-input" ng-model="user.email" placeholder="Email">
+                    <input type="email" class="form-control input-underline input-lg eva-input" ng-model="user.email"
+                           placeholder="{{translation.getCurrentlySelected().login_email}}">
                 </div>
 
                 <div class="form-group">
                     <div class="alert-danger loginerror" id="passwordwarn"></div>
-                    <input type="password" class="form-control input-underline input-lg eva-input" ng-model="user.password" placeholder="Password">
+                    <input type="password" class="form-control input-underline input-lg eva-input" ng-model="user.password"
+                           placeholder="{{translation.getCurrentlySelected().login_password}}">
                 </div>
             </div>
 
-            <button type="submit" class="btn btn-success btn-outline btn-lg btn-block eva-submit">Login</button>
+            <button type="submit" class="btn btn-success btn-outline btn-lg btn-block eva-submit">{{translation.getCurrentlySelected().login_button}}</button>
 
-            <h4 class="text-center dl-horizontal" > OR </h4>
+            <h4 class="text-center dl-horizontal" > {{translation.getCurrentlySelected().login_or}} </h4>
             <a id="fblogin" href="" ng-click="facebooklogin()" class="btn btn-block btn-social btn-lg btn-facebook">
                 <i class="fa fa-facebook">
 
                 </i>
-                Sign in with Facebook
+                {{translation.getCurrentlySelected().login_facebook_login}}
             </a>
         </form>
-            <a id="register" href="" ng-click="register()">Register for an account?</a>
+            <a id="register" href="" ng-click="register()">{{translation.getCurrentlySelected().create_account}}</a>
 
     </div>
 

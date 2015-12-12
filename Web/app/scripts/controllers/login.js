@@ -3,8 +3,9 @@
  */
 var app = angular.module('eva');
 angular.module('eva').controller('LoginCtrl',
-    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook',
-        function ($scope, $http, $location, $state, auth, messages, Facebook) {
+    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook', 'translation',
+        function ($scope, $http, $location, $state, auth, messages, Facebook, translation) {
+            $scope.translation = translation;
             $scope.user = {
                 email: messages.email,
                 password: ""
