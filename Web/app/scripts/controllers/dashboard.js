@@ -5,8 +5,11 @@
 var app = angular.module('eva');
 
 app.controller('DashboardCtrl',
-    ['$scope', 'auth', '$http', '$state', 'NetworkingService','toasty',
-        function ($scope, auth, $http, $state, netService, toasty) {
+    ['$scope', 'auth', '$http', '$state', 'NetworkingService', 'toasty', 'translation',
+        function ($scope, auth, $http, $state, netService, toasty, translation) {
+
+            $scope.strings = translation.english;
+            console.log($scope.strings);
             $scope.challenges = {};
 
             $scope.selectedIndex = 0;
