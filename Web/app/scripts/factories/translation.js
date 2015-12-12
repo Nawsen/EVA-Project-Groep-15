@@ -3,6 +3,7 @@ angular.module('eva').factory('translation', function () {
 
 
     strings.english = {
+        current_challenge: "Current challenge",
         challenge_score_notification: "Difficulty: ",
         accept_challenge: "Accept challenge",
         choose_challenge: "Choose a challenge:",
@@ -44,6 +45,7 @@ angular.module('eva').factory('translation', function () {
         grade_vegan: "Vegan (no animal products)"
     };
     strings.dutch = {
+        current_challenge: "Jouw actieve uitdaging",
         challenge_score_notification: "Moeilijkheid: ",
         accept_challenge: "Uitdaging aangaan",
         choose_challenge: "Kies een uitdaging:",
@@ -79,28 +81,29 @@ angular.module('eva').factory('translation', function () {
         current_challenge: "Huidige uitdaging",
         logout: "Afmelden",
         grade_omnivore: "Omnivoor",
-        grade_pescetariar: "Pescotariër (geen vlees, wel vis)",
-        grade_parttime_vegetarian: "Parttime-vegetariër (minstens 3 keer per week vegetarisch)",
-        grade_vegetarian: "Vegetariër (geen vlees of vis)",
+        grade_pescetariar: "PescotariÃ«r (geen vlees, wel vis)",
+        grade_parttime_vegetarian: "Parttime-vegetariÃ«r (minstens 3 keer per week vegetarisch)",
+        grade_vegetarian: "VegetariÃ«r (geen vlees of vis)",
         grade_vegan: "Veganist (geen dierlijke producten)"
     };
     strings.french = {
-        challenge_score_notification: "Difficulté: ",
-        accept_challenge: "Fait le défi",
-        choose_challenge: "Choisi un défi:",
+        current_challenge: "Votre dÃ©fi active",
+        challenge_score_notification: "DifficultÃ©: ",
+        accept_challenge: "Fait le dÃ©fi",
+        choose_challenge: "Choisi un dÃ©fi:",
         welcome_notification: "Bienvenu ",
-        get_challenge: "Regarde au défi",
-        get_progress: "Regarde à l\'amélioration",
+        get_challenge: "Regarde au dÃ©fi",
+        get_progress: "Regarde Ã  l\'amÃ©lioration",
         login_alternative_login: "Connexion alternative",
         login_facebook_login: "Se connecter avec Facebook",
         login_email: "Adresse e-mail",
         login_password: "Password",
-        login_lost_password: "Mot de passe oublié?",
+        login_lost_password: "Mot de passe oubliÃ©?",
         login_button: "Se connecter",
         login_or: "Ou",
         register: "Se faire inscrire",
-        register_personal_info_label: "Données personelles",
-        register_first_name: "Prénom",
+        register_personal_info_label: "DonnÃ©es personelles",
+        register_first_name: "PrÃ©nom",
         register_name: "Nom",
         register_email: "Adresse E-mail",
         register_address_label: "Adresse",
@@ -110,20 +113,20 @@ angular.module('eva').factory('translation', function () {
         register_account_label: "Compte",
         register_sex_male: "Masculin",
         register_sex_female: "Feminin",
-        register_repeat_password: "Répéter mot de passe",
-        register_hint_email: "Une adresse e-mail ressemble à ceci: example@mail.be",
-        register_hint_password: "Votre mot de passe doit être compris entre 7 et 128 caractères.",
-        create_account: "Créer un compte",
+        register_repeat_password: "RÃ©pÃ©ter mot de passe",
+        register_hint_email: "Une adresse e-mail ressemble Ã  ceci: example@mail.be",
+        register_hint_password: "Votre mot de passe doit Ãªtre compris entre 7 et 128 caractÃ¨res.",
+        create_account: "CrÃ©er un compte",
         action_bar_search: "Chercher",
         action_bar_share: "Partager",
-        challenge: "Défi",
-        current_challenge: "Défi actuel",
-        logout: "Se déconnecter",
+        challenge: "DÃ©fi",
+        current_challenge: "DÃ©fi actuel",
+        logout: "Se dÃ©connecter",
         grade_omnivore: "Omnivore",
-        grade_pescetariar: "Pescétarien (pas de viande, poisson est ok)",
-        grade_parttime_vegetarian: "Végétarien à temps partiel (au moins 3 fois par semaine un repas végétarien)",
-        grade_vegetarian: "Végétarien (pas de viande ou poisson)",
-        grade_vegan: "Végan (pas de produits animals)"
+        grade_pescetariar: "PescÃ©tarien (pas de viande, poisson est ok)",
+        grade_parttime_vegetarian: "VÃ©gÃ©tarien Ã  temps partiel (au moins 3 fois par semaine un repas vÃ©gÃ©tarien)",
+        grade_vegetarian: "VÃ©gÃ©tarien (pas de viande ou poisson)",
+        grade_vegan: "VÃ©gan (pas de produits animals)"
     };
 
 
