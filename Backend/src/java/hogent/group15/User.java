@@ -60,7 +60,8 @@ public class User implements Serializable {
 
     private long facebookId;
     
-    private transient String accessToken;
+    @Transient
+    private String accessToken;
 
     @NotNull(message = "firstName")
     @Size(min = 1, message = "firstName")

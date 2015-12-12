@@ -1,11 +1,14 @@
 package hogent.group15.service;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
 
@@ -34,7 +37,7 @@ public class Backend {
     private static Backend backend;
     private final RestAdapter restAdapter = doConfig(new RestAdapter.Builder()).build();
     private final BackendAPI backendAPI = restAdapter.create(BackendAPI.class);
-    private JsonWebToken jwtToken;
+    private LoginResponse jwtToken;
     private Context context;
 
     public static final String TAG = Backend.class.getName();
@@ -52,11 +55,6 @@ public class Backend {
         return backend;
     }
 
-    public enum LoginResult {
-        NETWORK_ERROR,
-        WRONG_CREDENTIALS
-    }
-
     public void loadImageInto(String uri, ImageView view) {
         loadImageInto(Uri.parse(uri), view);
     }
@@ -70,14 +68,13 @@ public class Backend {
     }
 
     public void loadImageInto(Uri uri, ImageView view, int placeHolder, int errorImage) {
-
         //Picasso.with(context).setIndicatorsEnabled(true);
         Picasso.with(context).load(uri).placeholder(placeHolder).error(errorImage).into(view);
     }
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://192.168.0.185:8080/backend/api/")
+                .setEndpoint("http://78.22.45.237:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -113,7 +110,7 @@ public class Backend {
                 return false;
             }
 
-            jwtToken = new JsonWebToken(token);
+            jwtToken = new LoginResponse(token);
             return true;
         }
 
@@ -123,13 +120,24 @@ public class Backend {
     public void logoutUser() {
         getSharedPreferences().edit().remove(TOKEN_KEY).commit();
         jwtToken = null;
+        LoginManager.getInstance().logOut();
         Log.i(TAG, "Logged out");
     }
 
-    public void loginUser(User user, final Callback<JsonWebToken> callback) {
-        backendAPI.login(user, new Callback<JsonWebToken>() {
+    public void loginUser(User user, final Callback<LoginResponse> callback) {
+        backendAPI.login(user, new Callback<LoginResponse>() {
             @Override
-            public void success(JsonWebToken s, Response response) {
+            public void success(LoginResponse s, Response response) {
+                if (response.getStatus() == 200) {
+                    s.setType(LoginResponse.LoginResponseType.REGULAR);
+                    onTokenReceived(s, response);
+                } else if (response.getStatus() == 202) {
+                    s.setType(LoginResponse.LoginResponseType.FACEBOOK_REGISTER);
+                    callback.success(s, response);
+                }
+            }
+
+            private void onTokenReceived(LoginResponse s, Response response) {
                 jwtToken = s;
                 SharedPreferences preferences = getSharedPreferences();
                 preferences.edit().putString(TOKEN_KEY, s.getToken()).commit();

@@ -12,9 +12,16 @@ public class User {
     String lastName;
     Gender gender;
     VegetarianGrade grade;
+    String facebookId;
+    String accessToken;
 
 
     public User() {
+    }
+
+    public User(String facebookId, String accessToken, boolean facebook) {
+        this.facebookId = facebookId;
+        this.accessToken = accessToken;
     }
 
     public User(String email, String password) {

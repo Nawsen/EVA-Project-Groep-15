@@ -5,15 +5,19 @@ import android.os.PersistableBundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.facebook.login.LoginManager;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hogent.group15.service.Backend;
 import hogent.group15.domain.User;
+import hogent.group15.service.LoginResponse;
 import hogent.group15.ui.fragments.RegisterMainFragment;
 import hogent.group15.ui.fragments.RegisterPasswordFragment;
 import hogent.group15.ui.util.ActionBarConfig;
@@ -34,6 +38,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private Mode currentMode = Mode.MAIN;
 
+    private boolean isFacebookRegister;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +53,18 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         ButterKnife.bind(this);
+
+        if (getIntent() != null) {
+            if (getIntent().getSerializableExtra("facebookData") != null) {
+                LoginResponse lr = (LoginResponse) getIntent().getSerializableExtra("facebookData");
+                Bundle b = new Bundle();
+                isFacebookRegister = true;
+                b.putSerializable("facebookData", lr);
+                if (mainFragment != null)
+                    mainFragment.setArguments(b);
+            }
+        }
+
     }
 
     @Override
@@ -57,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_logout);
+        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_logout, R.id.item_share, R.id.item_search);
     }
 
     @Override
@@ -93,24 +111,36 @@ public class RegisterActivity extends AppCompatActivity {
                     .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).commit();
             registerButton.setText(R.string.register_register_button);
             currentMode = Mode.PASSWORD;
+        } else if (isFacebookRegister) {
+            User user = new User(mainFragment.email.getText().toString(), "", mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
+            doRegister(user);
         } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
             User user = new User(mainFragment.email.getText().toString(), passwordFragment.getPassword(), mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
-            Backend.getBackend(this).registerUser(user, new ResponseCallback() {
-                @Override
-                public void success(Response response) {
+            doRegister(user);
+        }
+    }
+
+    private void doRegister(User user) {
+        Backend.getBackend(this).registerUser(user, new ResponseCallback() {
+            @Override
+            public void success(Response response) {
+                if(isFacebookRegister) {
+                    LoginManager.getInstance().logOut();
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                } else {
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
                 }
+            }
 
-                @Override
-                public void failure(RetrofitError error) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-            });
-        }
+            @Override
+            public void failure(RetrofitError error) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
     }
 }

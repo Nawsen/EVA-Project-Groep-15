@@ -20,6 +20,7 @@ import butterknife.ButterKnife;
 import hogent.group15.Validator;
 import hogent.group15.domain.Gender;
 import hogent.group15.domain.VegetarianGrade;
+import hogent.group15.service.LoginResponse;
 import hogent.group15.ui.R;
 
 /**
@@ -84,6 +85,15 @@ public class RegisterMainFragment extends Fragment implements Validator {
         gradeAdapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
         grade.setAdapter(gradeAdapter);
         ButterKnife.bind(this, getView());
+        if (getArguments() != null) {
+            LoginResponse lr = (LoginResponse) getArguments().getSerializable("facebookData");
+            if (lr.getType() == LoginResponse.LoginResponseType.FACEBOOK_REGISTER) {
+                firstName.setText(lr.getFirstName());
+                lastName.setText(lr.getLastName());
+                email.setText(lr.getEmail());
+                sex.setSelection(lr.getGender() == 0 ? 1 : 0);
+            }
+        }
     }
 
     @Override
@@ -92,10 +102,12 @@ public class RegisterMainFragment extends Fragment implements Validator {
         if (firstName.getText().toString().trim().isEmpty()) {
             firstName.setError(getString(R.string.validation_submit_name));
             valid = false;
-        } if (lastName.getText().toString().trim().isEmpty()) {
+        }
+        if (lastName.getText().toString().trim().isEmpty()) {
             lastName.setError(getString(R.string.validation_submit_name));
             valid = false;
-        } if (!Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()) {
+        }
+        if (!Patterns.EMAIL_ADDRESS.matcher(email.getText()).matches()) {
             email.setError(getString(R.string.validation_submit_email));
             valid = false;
         }
