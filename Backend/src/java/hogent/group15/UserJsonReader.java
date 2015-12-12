@@ -39,7 +39,7 @@ public class UserJsonReader implements MessageBodyReader<User> {
 	    String password = jsonUser.getString("password", "");
 	    int tempGender = jsonUser.getInt("gender", -1);
 	    long facebookId = Long.parseLong(jsonUser.getString("facebookId", "0"));
-	    String imageUrl = jsonUser.getString("imageUrl", "www.gravatar.com/avatar/00000000000000000000000000000000?d=mm");
+	    String imageUrl = jsonUser.getString("imageUrl", "http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm");
 	    Gender gender = tempGender < 0 || tempGender > 1 ? null : Gender.values()[tempGender];
 	    Address address = new Address(jsonUser.getString("country", ""), jsonUser.getString("street", ""), jsonUser.getString("city", ""));
 	    User.VegetarianGrade grade = null;
