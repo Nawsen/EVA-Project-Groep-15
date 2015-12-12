@@ -38,7 +38,44 @@ angular.module('eva').factory('translation', function () {
         grade_vegetarian: "Vegetarian (no meat or fish)",
         grade_vegan: "Vegan (no animal products)"
     };
-    strings.dutch = {};
+    strings.dutch = {
+        challenge_score_notification: "Moeilijkheid: ",
+        accept_challenge: "Uitdaging aangaan",
+        choose_challenge: "Kies een uitdaging:",
+        welcome_notification: "Welkom ",
+        get_challenge: "Bekijk uitdaging",
+        get_progress: "Bekijk vooruitgang",
+        login_alternative_login: "Alternatieve Login",
+        login_facebook_login: "Aanmelden met Facebook",
+        login_email: "E-mail",
+        login_password: "Wachtwoord",
+        login_lost_password: "Wachtwoord vergeten?",
+        login_button: "Aanmelden",
+        login_or: "Of",
+        register: "Registreren",
+        register_personal_info_label: "Persoonlijke gegevens",
+        register_first_name: "Voornaam",
+        register_name: "Achternaam",
+        register_email: "E-mail",
+        register_address_label: "Adres",
+        register_street: "Straat",
+        register_postal_code: "Postcode",
+        register_city: "Plaats",
+        register_account_label: "Account",
+        register_sex_male: "Man",
+        register_sex_female: "Vrouw",
+        create_account: "Maak een account",
+        action_bar_search: "Zoeken",
+        action_bar_share: "Delen",
+        challenge: "Uitdaging",
+        current_challenge: "Huidige uitdaging",
+        logout: "Afmelden",
+        grade_omnivore: "Omnivoor",
+        grade_pescetariar: "Pescotariër (geen vlees, wel vis)",
+        grade_parttime_vegetarian: "Parttime-vegetariër (minstens 3 keer per week vegetarisch)",
+        grade_vegetarian: "Vegetariër (geen vlees of vis)",
+        grade_vegan: "Veganist (geen dierlijke producten)"
+    };
     strings.french = {};
     return strings;
 });
