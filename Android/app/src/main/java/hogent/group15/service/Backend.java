@@ -14,6 +14,7 @@ import java.util.List;
 import hogent.group15.Consumer;
 import hogent.group15.data.ChallengesRepository;
 import hogent.group15.data.Database;
+import hogent.group15.domain.Achievement;
 import hogent.group15.domain.Challenge;
 import hogent.group15.domain.Gender;
 import hogent.group15.domain.User;
@@ -57,22 +58,24 @@ public class Backend {
         WRONG_CREDENTIALS
     }
 
-    public void loadImageInto(String uri, ImageView view) {
-        loadImageInto(Uri.parse(uri), view);
+    public void loadImageInto(String uri, com.squareup.picasso.Callback callback, ImageView view) {
+        loadImageInto(Uri.parse(uri), callback, view);
     }
 
-    public void loadImageInto(Uri uri, ImageView view) {
-        loadImageInto(uri, view, R.drawable.loading_placeholder);
+    public void loadImageInto(Uri uri, com.squareup.picasso.Callback callback, ImageView view) {
+        loadImageInto(uri, callback, view, R.drawable.loading_placeholder);
     }
 
-    public void loadImageInto(Uri uri, ImageView view, int placeHolder) {
-        loadImageInto(uri, view, placeHolder, android.R.drawable.stat_notify_error);
+    public void loadImageInto(Uri uri, com.squareup.picasso.Callback callback, ImageView view, int placeHolder) {
+        loadImageInto(uri, callback, view, placeHolder, android.R.drawable.stat_notify_error);
     }
 
-    public void loadImageInto(Uri uri, ImageView view, int placeHolder, int errorImage) {
-
-        //Picasso.with(context).setIndicatorsEnabled(true);
-        Picasso.with(context).load(uri).placeholder(placeHolder).error(errorImage).into(view);
+    public void loadImageInto(Uri uri, com.squareup.picasso.Callback callback, ImageView view, int placeHolder, int errorImage) {
+        if (callback != null) {
+            Picasso.with(context).load(uri).placeholder(placeHolder).error(errorImage).into(view, callback);
+        } else {
+            Picasso.with(context).load(uri).placeholder(placeHolder).error(errorImage).into(view);
+        }
     }
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
@@ -88,6 +91,10 @@ public class Backend {
                         }
                     }
                 });
+    }
+
+    public void getAchievements(Callback<List<Achievement>> achievements) {
+        backendAPI.getAchievements(achievements);
     }
 
     public void registerUser(User user, ResponseCallback callback) {

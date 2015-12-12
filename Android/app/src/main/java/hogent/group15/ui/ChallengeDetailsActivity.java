@@ -66,7 +66,17 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         currentChallenge = challenge;
         title.setText(challenge.getTitle());
         longDescription.setText(challenge.getDetailedDescription() == null ? "" : Html.fromHtml(challenge.getDetailedDescription()));
-        Backend.getBackend(this).loadImageInto(challenge.getHeaderImageUri().toString(), image);
+        Backend.getBackend(this).loadImageInto(challenge.getHeaderImageUri().toString(), new com.squareup.picasso.Callback() {
+            @Override
+            public void onSuccess() {
+                image.setVisibility(View.VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+                image.setVisibility(View.GONE);
+            }
+        }, image);
     }
 
     @Override

@@ -115,35 +115,18 @@ public class Challenges {
 	if (user.getCurrentChallenge() != null && user.getCurrentChallenge().getId() == id) {
 	    return Response.status(Response.Status.BAD_REQUEST).build();
 	}
-	
-	Optional<DailyChallenges> challenges = user.getDailyChallengesForToday();
 
-	Optional<Challenge> first = challenges.isPresent() ? Optional.of(challenges.get().getFirst()) : Optional.empty();
-	if (first.isPresent() && first.get().getId() == id) {
-	    user.setCurrentChallenge(first.get());
+	Challenge challenge = cache.getChallenge(id);
+	if (challenge != null) {
+	    user.setCurrentChallenge(challenge);
 	    em.merge(user);
 	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
 	    return Response.ok().build();
 	}
 
-	Optional<Challenge> second = challenges.isPresent() ? Optional.of(challenges.get().getSecond()) : Optional.empty();
-	if (second.isPresent() && second.get().getId() == id) {
-	    user.setCurrentChallenge(second.get());
-	    em.merge(user);
-	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
-	    return Response.ok().build();
-	}
-
-	Optional<Challenge> third = challenges.isPresent() ? Optional.of(challenges.get().getThird()) : Optional.empty();
-	if (third.isPresent() && third.get().getId() == id) {
-	    user.setCurrentChallenge(third.get());
-	    em.merge(user);
-	    achievements.generateAchievements(user, Achievement.AchievementType.ACCEPTED);
-	    return Response.ok().build();
-	}
 	return Response.status(Response.Status.BAD_REQUEST).build();
     }
-    
+
     @Path("fail")
     @PUT
     @Transactional
@@ -152,7 +135,7 @@ public class Challenges {
 	if (user.getCurrentChallenge() == null) {
 	    return Response.notModified().build();
 	}
-	
+
 	user.setCurrentChallenge(null);
 	achievements.generateAchievements(user, Achievement.AchievementType.CANCELLED);
 	return Response.noContent().build();
@@ -168,9 +151,14 @@ public class Challenges {
 	    return Response.notModified().build();
 	}
 
-	user.getCompletedChallenges().add(user.getCurrentChallenge());
+	if (!user.getCompletedChallenges().contains(user.getCurrentChallenge())) {
+	    user.getCompletedChallenges().add(user.getCurrentChallenge());
+	    user.getCurrentChallenge().getUsers().add(user);
+	}
+	
 	user.setCurrentChallenge(null);
 	achievements.generateAchievements(user, Achievement.AchievementType.COMPLETED);
+	em.merge(user);
 	return Response.noContent().build();
     }
 

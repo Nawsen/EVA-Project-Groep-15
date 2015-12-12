@@ -7,10 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import java.util.List;
 
 import hogent.group15.data.AchievementsRepository;
+import hogent.group15.domain.Achievement;
 import hogent.group15.ui.R;
 import hogent.group15.ui.util.ListEntryAdapter;
+import retrofit.Callback;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,9 +34,23 @@ public class AchievementsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         listView = (ListView) this.getView().findViewById(R.id.achievementsListView);
-        listView.setAdapter(new ListEntryAdapter(getActivity(), AchievementsRepository.getInstance().getAchievements()));
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        AchievementsRepository.getInstance(getContext()).refreshAchievements(new Callback<List<Achievement>>() {
+            @Override
+            public void success(List<Achievement> achievements, Response response) {
+                listView.setAdapter(new ListEntryAdapter(getActivity(), AchievementsRepository.getInstance(getContext()).getAchievements()));
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                Toast.makeText(getContext(), "Couldn't get all your achievements", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

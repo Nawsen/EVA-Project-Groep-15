@@ -2,6 +2,7 @@ package hogent.group15.service;
 
 import java.util.List;
 
+import hogent.group15.domain.Achievement;
 import hogent.group15.domain.Challenge;
 import hogent.group15.domain.User;
 import retrofit.Callback;
@@ -40,4 +41,7 @@ public interface BackendAPI {
 
     @GET("/challenges/completed")
     void getCompletedChallenges(Callback<List<Challenge>> challenges);
+
+    @GET("/achievements")
+    void getAchievements(Callback<List<Achievement>> onReceived);
 }

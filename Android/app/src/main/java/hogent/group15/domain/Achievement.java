@@ -1,8 +1,5 @@
 package hogent.group15.domain;
 
-import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,19 +7,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
+import com.google.gson.annotations.SerializedName;
 
-import butterknife.ButterKnife;
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
 
 public class Achievement implements ListEntry {
 
-    private String title;
-    private String description;
+    @SerializedName("name")
+    String title;
+    String description;
+    int score;
 
-    private Drawable badge;
-    private Drawable box;
+    private transient int badge;
+    private transient int box;
 
     public String getTitle() {
         return title;
@@ -40,39 +38,51 @@ public class Achievement implements ListEntry {
         this.description = description;
     }
 
-    public Drawable getBadge() {
+    public int getBadge() {
         return badge;
     }
 
-    public void setBadge(Drawable badge) {
+    public void setBadge(int badge) {
         this.badge = badge;
     }
 
-    public Drawable getBox() {
+    public int getBox() {
         return box;
     }
 
-    public void setBox(Drawable box) {
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public void setBox(int box) {
         this.box = box;
     }
 
-    public Achievement(Context context, String title) {
-        this(context, title, "");
+    public Achievement() {
+        this("");
     }
 
-    public Achievement(Context context, String title, String description) {
-        this(context, title, description, R.drawable.easy);
+    public Achievement(String title) {
+        this(title, "");
     }
 
-    public Achievement(Context context, String title, String description, int badge) {
-        this(context, title, description, badge, R.drawable.double_line);
+    public Achievement(String title, String description) {
+        this(title, description, R.drawable.easy);
     }
 
-    public Achievement(Context context, String title, String description, int badge, int box) {
+    public Achievement(String title, String description, int badge) {
+        this(title, description, badge, 0);
+    }
+
+    public Achievement(String title, String description, int badge, int box) {
         this.title = title;
         this.description = description;
-        this.badge = ContextCompat.getDrawable(context, badge);
-        this.box = ContextCompat.getDrawable(context, box);
+        this.badge = badge;
+        this.box = box;
     }
 
     @Override
@@ -94,8 +104,23 @@ public class Achievement implements ListEntry {
             description.setText(this.description);
         }
 
-        view.findViewById(R.id.achievement_outerContainer).setBackground(box);
-        ((ImageView) view.findViewById(R.id.achievement_badge)).setImageDrawable(badge);
+        view.findViewById(R.id.achievement_outerContainer).setBackgroundResource(box);
+
+        int badge = R.drawable.tree_1;
+
+        if (score >= 21) {
+            badge = R.drawable.tree_5;
+        } else if (score >= 17) {
+            badge = R.drawable.tree_4;
+        } else if (score >= 6) {
+            badge = R.drawable.tree_3;
+        } else if (score > 1) {
+            badge = R.drawable.tree_2;
+        } else {
+            badge = R.drawable.tree_1;
+        }
+
+        ((ImageView) view.findViewById(R.id.achievement_badge)).setImageResource(badge);
         return view;
     }
 }

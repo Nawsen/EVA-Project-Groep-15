@@ -8,6 +8,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import hogent.group15.service.Backend;
@@ -62,6 +64,7 @@ public class ChallengeListEntry extends FrameLayout {
         });
 
         root = inflate(getContext(), R.layout.view_challenge, this);
+        ChallengeListEntry.this.setAlpha(0f);
     }
 
     @Override
@@ -90,8 +93,19 @@ public class ChallengeListEntry extends FrameLayout {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
             score.setText(StringInterpolator.interpolate(scoreExpression, getContext().getString(Challenge.Difficulty.getResourceIdFor(challenge.getDifficulty()))));
-            Backend.getBackend(getContext()).loadImageInto(challenge.getHeaderImageUri().toString(), image);
-            ChallengeListEntry.this.setAlpha(1f);
+            Backend.getBackend(getContext()).loadImageInto(challenge.getHeaderImageUri(), new Callback() {
+                @Override
+                public void onSuccess() {
+                    ChallengeListEntry.this.setAlpha(1f);
+                }
+
+                @Override
+                public void onError() {
+                    ChallengeListEntry.this.setAlpha(1f);
+                    image.setVisibility(GONE);
+                }
+            }, image);
+
             if (onComplete != null)
                 onComplete.run();
         }

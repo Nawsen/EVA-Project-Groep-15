@@ -3,6 +3,7 @@ package hogent.group15.ui.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,12 +29,13 @@ public class CompletedChallengesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         listView = (ListView) this.getView().findViewById(R.id.completedChallengesListView);
+        final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
+        listView.setAdapter(adapter);
 
+        Log.i("CompletedChallenges", "Starting refresh of completed challenges");
         ChallengesRepository.getInstance(getContext()).refreshCompletedChallenges(new Runnable() {
             @Override
             public void run() {
-                final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
-                listView.setAdapter(adapter);
                 ChallengesRepository.getInstance(getContext()).setOnCompletedChallengesChanged(new Runnable() {
                     @Override
                     public void run() {

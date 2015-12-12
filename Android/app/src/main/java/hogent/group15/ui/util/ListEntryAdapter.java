@@ -22,12 +22,11 @@ public class ListEntryAdapter extends BaseAdapter {
     public ListEntryAdapter(Activity owner, List<? extends ListEntry> entries) {
         this.entries = entries;
         inflater = owner.getLayoutInflater();
-
     }
 
     @Override
     public int getCount() {
-        return entries.size() <= 0 ? 1 : entries.size();
+        return entries.size();
     }
 
     @Override

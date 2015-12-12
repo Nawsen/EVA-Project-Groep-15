@@ -100,8 +100,8 @@
                         <!-- ACHIEVEMENT 1 -->
                         <div class="achievement box-border" ng-repeat="achievement in achievements track by $index">
                             <div ng-show="achievement.score == 1" class="badge badge-easy"></div>
-                            <div ng-show="achievement.score > 1 && achievement.score < 6" class="badge badge-medium"></div>
-                            <div ng-show="achievement.score > 6 && achievement.score < 17" class="badge badge-hard"></div>
+                            <div ng-show="achievement.score > 1 && achievement.score <= 6" class="badge badge-medium"></div>
+                            <div ng-show="achievement.score > 6 && achievement.score <= 17" class="badge badge-hard"></div>
                             <div ng-show="achievement.score > 17" class="badge badge-expert"></div>
                             <div class="achievement-image temp-pompoensoep">
                                 <h5>{{achievement.name}}</h5>

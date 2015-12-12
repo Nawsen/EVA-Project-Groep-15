@@ -38,12 +38,12 @@ public class AchievementGenerator {
 		Achievement achievement = achievementCompletedChallenges.get(completedChallengesCount).build();
 		manager.persist(achievement);
 		user.getAchievements().add(achievement);
+		manager.merge(user);
 	    }
 
-	    manager.merge(user);
 	} else if (change == Achievement.AchievementType.ACCEPTED) {
 	    if (!hasAnyAchievementsOfType(user, Achievement.AchievementType.ACCEPTED)) {
-		Achievement achievement = new Achievement("Eerste uitdaging geaccepteerd", "Je hebt de eerste uitdaging geaccepteerd!", 1, Achievement.AchievementType.ACCEPTED);
+		Achievement achievement = new Achievement("Eerste uitdaging", "Je hebt de eerste uitdaging geaccepteerd!", 1, Achievement.AchievementType.ACCEPTED);
 		manager.persist(achievement);
 		user.getAchievements().add(achievement);
 		manager.merge(user);

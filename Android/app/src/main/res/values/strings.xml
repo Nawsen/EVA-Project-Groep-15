@@ -56,7 +56,6 @@
     <string name="network_error">Unable to connect to the internet!</string>
     <string name="wrong_credentials">Incorrect email or password!</string>
     <string name="validation_password">Fill in your password</string>
-    <string name="no_completed_challenges">You have not yet completed any challenges!</string>
     <string name="no_achievements">You have not yet earned any achievements!</string>
 
 <!-- TODO: Remove or change this placeholder text -->
@@ -67,4 +66,5 @@
     <string name="difficulty_medium">Medium</string>
     <string name="diffculty_hard">Hard</string>
     <string name="preference_file_key" translatable="false">eva</string>
+    <string name="no_completed_achievements">You have not received any achievements!</string>
 </resources>

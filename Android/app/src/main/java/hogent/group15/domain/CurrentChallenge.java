@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -48,7 +50,17 @@ public class CurrentChallenge extends FrameLayout {
         this.currentChallenge = currentChallenge;
         title.setText(currentChallenge.getTitle());
         description.setText(Html.fromHtml(currentChallenge.getDetailedDescription()));
-        Backend.getBackend(getContext()).loadImageInto(currentChallenge.getHeaderImageUri().toString(), image);
+        Backend.getBackend(getContext()).loadImageInto(currentChallenge.getHeaderImageUri(), new Callback() {
+            @Override
+            public void onSuccess() {
+                image.setVisibility(VISIBLE);
+            }
+
+            @Override
+            public void onError() {
+                image.setVisibility(GONE);
+            }
+        }, image);
     }
 
     private Consumer<Challenge> onCompleteCallback;
@@ -64,7 +76,7 @@ public class CurrentChallenge extends FrameLayout {
             public void success(Response response) {
                 currentChallenge.setShowAcceptChallengeButton(false);
                 ChallengesRepository.getInstance(getContext()).addCompletedChallenge(currentChallenge);
-                if(onCompleteCallback != null) {
+                if (onCompleteCallback != null) {
                     onCompleteCallback.consume(currentChallenge);
                 }
             }
