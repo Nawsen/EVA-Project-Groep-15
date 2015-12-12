@@ -1,4 +1,4 @@
-package hogent.group15.domain;
+package hogent.group15.service;
 
 /**
  * Created by Frederik on 11/2/2015.

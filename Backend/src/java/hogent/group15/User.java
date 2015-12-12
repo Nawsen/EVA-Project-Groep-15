@@ -59,6 +59,8 @@ public class User implements Serializable {
     private String email;
 
     private long facebookId;
+    
+    private transient String accessToken;
 
     @NotNull(message = "firstName")
     @Size(min = 1, message = "firstName")
@@ -303,4 +305,13 @@ public class User implements Serializable {
 	}
 	return true;
     }
+
+    public String getAccessToken() {
+	return accessToken;
+    }
+
+    public void setAccessToken(String accessToken) {
+	this.accessToken = accessToken;
+    }
+    
 }

@@ -1,24 +1,14 @@
 package hogent.group15.ui.fragments;
 
 import android.content.Context;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
-import java.io.IOException;
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import hogent.group15.domain.Backend;
+import hogent.group15.service.Backend;
 import hogent.group15.domain.Challenge;
-import hogent.group15.domain.OnNetworkResponseListener;
 import hogent.group15.ui.controls.list.ChallengeListEntry;
 import hogent.group15.ui.R;
 import retrofit.Callback;
@@ -45,7 +35,7 @@ public class NextChallenge extends FrameLayout {
     }
 
     public void refreshChallenges() {
-        Backend.getBackend().getDailyChallenges(getContext(), new Callback<List<Challenge>>() {
+        Backend.getBackend(getContext()).getDailyChallenges(getContext(), new Callback<List<Challenge>>() {
 
             @Override
             public void success(List<Challenge> data, Response response) {

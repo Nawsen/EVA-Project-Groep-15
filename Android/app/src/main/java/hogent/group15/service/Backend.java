@@ -1,31 +1,22 @@
-package hogent.group15.domain;
+package hogent.group15.service;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.ContactsContract;
-import android.telecom.Call;
-import android.transition.Fade;
 import android.util.Log;
 import android.widget.ImageView;
 
 import com.google.gson.GsonBuilder;
-import com.j256.ormlite.dao.CloseableIterable;
-import com.j256.ormlite.dao.CloseableIterator;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.sql.SQLException;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
+import hogent.group15.Consumer;
+import hogent.group15.data.ChallengesRepository;
+import hogent.group15.data.Database;
+import hogent.group15.domain.Challenge;
+import hogent.group15.domain.Gender;
+import hogent.group15.domain.User;
 import hogent.group15.ui.R;
 import retrofit.Callback;
 import retrofit.RequestInterceptor;
@@ -41,17 +32,21 @@ import retrofit.converter.GsonConverter;
 public class Backend {
 
     private static Backend backend;
-    public final static String TAG = Backend.class.getName();
     private final RestAdapter restAdapter = doConfig(new RestAdapter.Builder()).build();
     private final BackendAPI backendAPI = restAdapter.create(BackendAPI.class);
     private JsonWebToken jwtToken;
+    private Context context;
 
-    private Backend() {
+    public static final String TAG = Backend.class.getName();
+    private static final String TOKEN_KEY = "token";
+
+    private Backend(Context context) {
+        this.context = context;
     }
 
-    public static Backend getBackend() {
+    public static Backend getBackend(Context context) {
         if (backend == null) {
-            backend = new Backend();
+            backend = new Backend(context);
         }
 
         return backend;
@@ -62,19 +57,19 @@ public class Backend {
         WRONG_CREDENTIALS
     }
 
-    public void loadImageInto(Context context, String uri, ImageView view) {
-        loadImageInto(context, Uri.parse(uri), view);
+    public void loadImageInto(String uri, ImageView view) {
+        loadImageInto(Uri.parse(uri), view);
     }
 
-    public void loadImageInto(Context context, Uri uri, ImageView view) {
-        loadImageInto(context, uri, view, R.drawable.loading_placeholder);
+    public void loadImageInto(Uri uri, ImageView view) {
+        loadImageInto(uri, view, R.drawable.loading_placeholder);
     }
 
-    public void loadImageInto(Context context, Uri uri, ImageView view, int placeHolder) {
-        loadImageInto(context, uri, view, placeHolder, android.R.drawable.stat_notify_error);
+    public void loadImageInto(Uri uri, ImageView view, int placeHolder) {
+        loadImageInto(uri, view, placeHolder, android.R.drawable.stat_notify_error);
     }
 
-    public void loadImageInto(Context context, Uri uri, ImageView view, int placeHolder, int errorImage) {
+    public void loadImageInto(Uri uri, ImageView view, int placeHolder, int errorImage) {
 
         //Picasso.with(context).setIndicatorsEnabled(true);
         Picasso.with(context).load(uri).placeholder(placeHolder).error(errorImage).into(view);
@@ -82,7 +77,7 @@ public class Backend {
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://192.168.0.204:8080/backend/api/")
+                .setEndpoint("http://192.168.0.185:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -99,11 +94,46 @@ public class Backend {
         backendAPI.register(user, callback);
     }
 
+    private SharedPreferences getSharedPreferences() {
+        String key = context.getString(R.string.preference_file_key);
+        Log.i(TAG, "Retrieving SharedPreferences for file: " + key);
+        return context.getSharedPreferences(key, Context.MODE_PRIVATE);
+    }
+
+    /**
+     * Try logging in using the existing token stored in shared preferences.
+     *
+     * @return login succeeded
+     */
+    public boolean loginUser() {
+        SharedPreferences preferences = getSharedPreferences();
+        if (preferences.contains(TOKEN_KEY)) {
+            final String token = preferences.getString(TOKEN_KEY, "");
+            if (token.isEmpty()) {
+                return false;
+            }
+
+            jwtToken = new JsonWebToken(token);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void logoutUser() {
+        getSharedPreferences().edit().remove(TOKEN_KEY).commit();
+        jwtToken = null;
+        Log.i(TAG, "Logged out");
+    }
+
     public void loginUser(User user, final Callback<JsonWebToken> callback) {
         backendAPI.login(user, new Callback<JsonWebToken>() {
             @Override
             public void success(JsonWebToken s, Response response) {
                 jwtToken = s;
+                SharedPreferences preferences = getSharedPreferences();
+                preferences.edit().putString(TOKEN_KEY, s.getToken()).commit();
+                Log.i(TAG, "Saved JWT: '" + s.getToken() + "' in preference file");
                 callback.success(s, response);
             }
 
@@ -116,23 +146,26 @@ public class Backend {
 
     public void getDailyChallenges(final Context context, final Callback<List<Challenge>> callback) {
         final Database database = Database.getInstance(context);
-        List<Challenge> challenges = database.getDailyChallenges();
-
-        if (challenges != null && challenges.size() >= 3) {
-            callback.success(challenges, null);
-            return;
-        }
-
-        backendAPI.getDailyChallenges(new Callback<List<Challenge>>() {
+        database.getDailyChallenges(new Consumer<List<Challenge>>() {
             @Override
-            public void success(List<Challenge> challenges, Response response) {
-                database.saveChallenges(challenges);
-                callback.success(challenges, response);
-            }
+            public void consume(List<Challenge> challenges) {
+                if (challenges != null && challenges.size() >= 3) {
+                    callback.success(challenges, null);
+                    return;
+                }
 
-            @Override
-            public void failure(RetrofitError error) {
-                callback.failure(error);
+                backendAPI.getDailyChallenges(new Callback<List<Challenge>>() {
+                    @Override
+                    public void success(List<Challenge> challenges, Response response) {
+                        database.saveChallenges(challenges);
+                        callback.success(challenges, response);
+                    }
+
+                    @Override
+                    public void failure(RetrofitError error) {
+                        callback.failure(error);
+                    }
+                });
             }
         });
     }
@@ -147,7 +180,7 @@ public class Backend {
 
             @Override
             public void success(Response response) {
-                ChallengesRepository.getInstance().setCurrentChallenge(challenge);
+                ChallengesRepository.getInstance(context).setCurrentChallenge(challenge);
                 callback.success(challenge, response);
             }
 
@@ -166,7 +199,7 @@ public class Backend {
         backendAPI.completeChallenge("", new ResponseCallback() {
             @Override
             public void success(Response response) {
-                ChallengesRepository.getInstance().setCurrentChallenge(null);
+                ChallengesRepository.getInstance(context).setCurrentChallenge(null);
                 callback.success(response);
             }
 

@@ -2,14 +2,8 @@ package hogent.group15.domain;
 
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.telecom.Call;
 import android.text.Html;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -19,13 +13,10 @@ import android.widget.Toast;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import hogent.group15.AsyncUtil;
 import hogent.group15.Consumer;
-import hogent.group15.domain.Backend;
-import hogent.group15.domain.Challenge;
-import hogent.group15.domain.ChallengesRepository;
+import hogent.group15.data.ChallengesRepository;
+import hogent.group15.service.Backend;
 import hogent.group15.ui.R;
-import retrofit.Callback;
 import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -57,7 +48,7 @@ public class CurrentChallenge extends FrameLayout {
         this.currentChallenge = currentChallenge;
         title.setText(currentChallenge.getTitle());
         description.setText(Html.fromHtml(currentChallenge.getDetailedDescription()));
-        Backend.getBackend().loadImageInto(this.getContext(), currentChallenge.getHeaderImageUri().toString(), image);
+        Backend.getBackend(getContext()).loadImageInto(currentChallenge.getHeaderImageUri().toString(), image);
     }
 
     private Consumer<Challenge> onCompleteCallback;
@@ -68,11 +59,11 @@ public class CurrentChallenge extends FrameLayout {
 
     @OnClick(R.id.challenge_accept)
     public void onCompleteChallenge(Button b) {
-        Backend.getBackend().completeCurrentChallenge(new ResponseCallback() {
+        Backend.getBackend(getContext()).completeCurrentChallenge(new ResponseCallback() {
             @Override
             public void success(Response response) {
                 currentChallenge.setShowAcceptChallengeButton(false);
-                ChallengesRepository.getInstance().addCompletedChallenge(currentChallenge);
+                ChallengesRepository.getInstance(getContext()).addCompletedChallenge(currentChallenge);
                 if(onCompleteCallback != null) {
                     onCompleteCallback.consume(currentChallenge);
                 }

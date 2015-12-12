@@ -1,22 +1,15 @@
 package hogent.group15.ui.fragments;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import hogent.group15.domain.AchievementsRepository;
+import hogent.group15.data.AchievementsRepository;
 import hogent.group15.ui.R;
-import hogent.group15.ui.controls.ListEntry;
-import hogent.group15.ui.controls.list.EmptyListEntry;
 import hogent.group15.ui.util.ListEntryAdapter;
 
 /**

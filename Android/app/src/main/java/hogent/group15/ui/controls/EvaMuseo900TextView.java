@@ -4,9 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import hogent.group15.FontManager;
+import hogent.group15.ui.FontManager;
 
 /**
  * Created by Brent on 10/20/2015.

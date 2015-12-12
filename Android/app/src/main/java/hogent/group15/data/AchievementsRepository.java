@@ -1,12 +1,11 @@
-package hogent.group15.domain;
+package hogent.group15.data;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import hogent.group15.domain.Achievement;
 import hogent.group15.ui.MainMenuActivity;
-import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
-import hogent.group15.ui.controls.list.EmptyListEntry;
 
 /**
  * Created by Brent on 10/31/2015.

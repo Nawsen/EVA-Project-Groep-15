@@ -1,8 +1,7 @@
-package hogent.group15;
+package hogent.group15.ui;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Utility class that can interpolate strings typically used in the user interface. In the

@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.View;
@@ -17,9 +16,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import hogent.group15.Validator;
-import hogent.group15.domain.Backend;
-import hogent.group15.domain.JsonWebToken;
-import hogent.group15.domain.OnNetworkResponseListener;
+import hogent.group15.service.Backend;
+import hogent.group15.service.JsonWebToken;
 import hogent.group15.domain.User;
 import hogent.group15.ui.util.ActionBarConfig;
 import retrofit.Callback;
@@ -38,6 +36,12 @@ public class LoginActivity extends AppCompatActivity implements Validator {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
+
+        if (Backend.getBackend(this).loginUser()) {
+            startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
+            return;
+        }
+
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
@@ -57,12 +61,11 @@ public class LoginActivity extends AppCompatActivity implements Validator {
     }
 
     public void onLogin(View v) {
-
         if (!validate()) {
             return;
         }
 
-        Backend.getBackend().loginUser(new User(email.getText().toString(), password.getText().toString()), new Callback<JsonWebToken>() {
+        Backend.getBackend(this).loginUser(new User(email.getText().toString(), password.getText().toString()), new Callback<JsonWebToken>() {
             @Override
             public void success(JsonWebToken data, Response response) {
                 password.setText("");
@@ -89,7 +92,7 @@ public class LoginActivity extends AppCompatActivity implements Validator {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ActionBarConfig.onCreateOptionsMenu(menu, this, R.id.item_logout);
+        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_logout);
     }
 
     @OnClick(R.id.login_register)

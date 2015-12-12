@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 import hogent.group15.Consumer;
 import hogent.group15.domain.CurrentChallenge;
 import hogent.group15.domain.Challenge;
-import hogent.group15.domain.ChallengesRepository;
+import hogent.group15.data.ChallengesRepository;
 
 /**
  * Created by Frederik on 11/2/2015.
@@ -43,7 +43,7 @@ public class OngoingChallengeFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        ChallengesRepository.getInstance().setOnCurrentChallengeChange(new Consumer<Challenge>() {
+        ChallengesRepository.getInstance(getContext()).setOnCurrentChallengeChange(new Consumer<Challenge>() {
 
             @Override
             public void consume(Challenge challenge) {

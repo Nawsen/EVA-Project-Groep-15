@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import hogent.group15.domain.Backend;
+import hogent.group15.service.Backend;
 import hogent.group15.domain.Challenge;
-import hogent.group15.StringInterpolator;
+import hogent.group15.ui.StringInterpolator;
 import hogent.group15.ui.ChallengeDetailsActivity;
 import hogent.group15.ui.R;
 
@@ -90,7 +90,7 @@ public class ChallengeListEntry extends FrameLayout {
             currentChallenge = challenge;
             title.setText(challenge.getTitle());
             score.setText(StringInterpolator.interpolate(scoreExpression, getContext().getString(Challenge.Difficulty.getResourceIdFor(challenge.getDifficulty()))));
-            Backend.getBackend().loadImageInto(this.getContext(), challenge.getHeaderImageUri().toString(), image);
+            Backend.getBackend(getContext()).loadImageInto(challenge.getHeaderImageUri().toString(), image);
             ChallengeListEntry.this.setAlpha(1f);
             if (onComplete != null)
                 onComplete.run();

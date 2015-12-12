@@ -7,10 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import hogent.group15.domain.ChallengesRepository;
+import hogent.group15.data.ChallengesRepository;
 import hogent.group15.ui.R;
 import hogent.group15.ui.util.ListEntryAdapter;
 
@@ -30,12 +29,12 @@ public class CompletedChallengesFragment extends Fragment {
         super.onStart();
         listView = (ListView) this.getView().findViewById(R.id.completedChallengesListView);
 
-        ChallengesRepository.getInstance().refreshCompletedChallenges(new Runnable() {
+        ChallengesRepository.getInstance(getContext()).refreshCompletedChallenges(new Runnable() {
             @Override
             public void run() {
-                final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance().getCompletedChallenges());
+                final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
                 listView.setAdapter(adapter);
-                ChallengesRepository.getInstance().setOnCompletedChallengesChanged(new Runnable() {
+                ChallengesRepository.getInstance(getContext()).setOnCompletedChallengesChanged(new Runnable() {
                     @Override
                     public void run() {
                         adapter.notifyDataSetChanged();

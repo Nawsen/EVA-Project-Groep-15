@@ -1,12 +1,14 @@
-package hogent.group15.domain;
+package hogent.group15.data;
 
+import android.content.Context;
 import android.util.Log;
 
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
 import hogent.group15.Consumer;
+import hogent.group15.service.Backend;
+import hogent.group15.domain.Challenge;
 import hogent.group15.ui.MainMenuActivity;
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
@@ -20,23 +22,29 @@ import retrofit.client.Response;
  */
 public class ChallengesRepository {
 
-    private static final ChallengesRepository INSTANCE = new ChallengesRepository();
+    private static ChallengesRepository INSTANCE;
 
     private List<ListEntry> completedChallenges = new ArrayList<>();
     private Challenge currentChallenge;
+    private Context context;
 
-    public static ChallengesRepository getInstance() {
+    public static ChallengesRepository getInstance(Context context) {
+        if (INSTANCE == null) {
+            INSTANCE = new ChallengesRepository(context);
+        }
+
         return INSTANCE;
     }
 
-    private ChallengesRepository() {
+    private ChallengesRepository(Context context) {
+        this.context = context;
         refreshCurrentChallenge();
     }
 
     public void refreshCompletedChallenges(final Runnable callback) {
         final ListEntry emptyEntry = new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_completed_challenges), android.R.drawable.ic_dialog_alert);
         completedChallenges.clear();
-        Backend.getBackend().getCompletedChallenges(new Callback<List<Challenge>>() {
+        Backend.getBackend(context).getCompletedChallenges(new Callback<List<Challenge>>() {
             @Override
             public void success(List<Challenge> challenges, Response response) {
                 if (challenges.isEmpty()) {
@@ -56,7 +64,7 @@ public class ChallengesRepository {
     }
 
     public void refreshCurrentChallenge() {
-        Backend.getBackend().getAcceptedChallenge(new Callback<Challenge>() {
+        Backend.getBackend(context).getAcceptedChallenge(new Callback<Challenge>() {
             @Override
             public void success(Challenge challenge, Response response) {
                 setCurrentChallenge(challenge);
