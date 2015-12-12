@@ -25,7 +25,10 @@
                         <div class="user-info">
                             <img src="images/eva-logo-white.png" />
                             <img ng-src="{{user.imageUrl}}" class="user-avatar">
-                            <h2 id="welcome">Welcome <small>{{user.firstName}}</small></h2>
+
+                            <h2 id="welcome">{{translation.currentlySelected.welcome_notification}}
+                                <small>{{user.firstName}}</small>
+                            </h2>
                         </div>
                         <nav>
                             <ul>
@@ -33,6 +36,11 @@
                                 <li><a href="/app/#/completed">Challenges</a></li>
                                 <li><a href="#">Admin tools</a></li>
                             </ul>
+                            <button ng-click="translation.selectEnglish()">English</button>
+                            |
+                            <button ng-click="translation.selectDutch()">Dutch</button>
+                            |
+                            <button ng-click="translation.selectFrench()">French</button>
                         </nav>
 
                     </md-content>

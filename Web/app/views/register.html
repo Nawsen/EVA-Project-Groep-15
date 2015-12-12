@@ -4,26 +4,29 @@
         <div class="text-center">
             <img src="images/eva-logo.png" alt="eva logo"/>
 
-            <h2 class="logintitle">Registreer</h2>
+            <h2 class="logintitle">{{translation.getCurrentlySelected().register}}</h2>
         </div>
         <form class="form-group" name="registerForm">
             <div class="form-group">
-                <input type="email" class="form-control eva-input has-error" placeholder="E-mailadres"
+                <input type="email" class="form-control eva-input has-error"
+                       placeholder="{{translation.getCurrentlySelected().login_email}}"
                        name="email" ng-focus="showHelpMail = true" ng-blur="showHelpMail = false"
                        required
                        ng-model="user.email"/>
 
                 <div class="alert alert-info" ng-hide="(!showHelpMail || registerForm.email.$valid)">
-                    Een e-mailadres ziet er zo uit: voorbeeld@mail.be
+                    {{translation.getCurrentlySelected().register_hint_email}}
                 </div>
             </div>
             <div class="form-group">
-                <input type="password" class="form-control eva-input" placeholder="Wachtwoord" name="password"
+                <input type="password" class="form-control eva-input"
+                       placeholder="{{translation.getCurrentlySelected().login_password}}"
+                       name="password"
                        ng-focus="showHelpPassword = true" ng-blur="showHelpPassword = false" required
                        ng-model="user.password" ng-minlength="7" ng-maxlength="128"/>
 
                 <div class="alert alert-info" ng-hide="(!showHelpPassword || registerForm.password.$valid)">
-                    Een wachtwoord is minstens 7 karakters en maximum 128.
+                    {{translation.getCurrentlySelected().register_hint_password}}
                 </div>
                 <!--<div ng-repeat="error in registerForm.password.$error" class="alert alert-danger">
                         Too short
@@ -36,19 +39,23 @@
                 </div>-->
             </div>
             <div class="form-group">
-                <input type="password" class="form-control eva-input" placeholder="Herhaal wachtwoord"
+                <input type="password" class="form-control eva-input"
+                       placeholder="{{translation.getCurrentlySelected().register_repeat_password}}"
                        name="repeatpassword" ng-model="user.repeatPassword" ng-focus="showHelpRepeatPassword = true"
                        ng-blur="showHelpRepeatPassword = false"/>
 
                 <div class="alert alert-info" ng-hide="(!showHelpRepeatPassword || validPassword())">
-                    Herhaal uw wachtwoord.
+                    {{translation.getCurrentlySelected().register_repeat_password}}
                 </div>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control eva-input" placeholder="Voornaam" ng-model="user.firstName"/>
+                <input type="text" class="form-control eva-input"
+                       placeholder="{{translation.getCurrentlySelected().register_first_name}}"
+                       ng-model="user.firstName"/>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control eva-input" placeholder="Achternaam" ng-model="user.lastName"/>
+                <input type="text" class="form-control eva-input"
+                       placeholder="{{translation.getCurrentlySelected().register_name}}" ng-model="user.lastName"/>
             </div>
 
             <div class="form-group">
@@ -56,11 +63,13 @@
 
                     <label class="btn col-md-6 form-control eva-input"
                            ng-class="{'radio-active':selectedTab === 'male'}" ng-click="selectedTab = 'male'">
-                        <input type="radio" name="gender" id="male" value="male"/> Man
+                        <input type="radio" name="gender" id="male" value="male"/>
+                        {{translation.getCurrentlySelected().register_sex_male}}
                     </label>
                     <label class="btn col-md-6 form-control eva-input no-left-border"
                            ng-class="{'radio-active':selectedTab === 'female'}" ng-click="selectedTab = 'female'">
-                        <input type="radio" name="gender" value="female" id="female"/> Vrouw
+                        <input type="radio" name="gender" value="female" id="female"/>
+                        {{translation.getCurrentlySelected().register_sex_female}}
                     </label>
                 </div>
             </div>
@@ -80,7 +89,7 @@
                 <button class="btn btn-default form-control eva-submit" type="submit"
                         ng-disabled="!(registerForm.email.$valid && validPassword() && validForm())"
                         ng-click="register()">
-                    Registreer
+                    {{translation.getCurrentlySelected().register}}
                 </button>
             </div>
         </form>

@@ -1,5 +1,7 @@
 angular.module('eva').factory('translation', function () {
     var strings = {};
+
+
     strings.english = {
         challenge_score_notification: "Difficulty: ",
         accept_challenge: "Accept challenge",
@@ -26,6 +28,9 @@ angular.module('eva').factory('translation', function () {
         register_account_label: "Account",
         register_sex_male: "Male",
         register_sex_female: "Female",
+        register_repeat_password: "Repeat password",
+        register_hint_email: "A valid e-mail looks like this: example@mail.be",
+        register_hint_password: "Your password has to be between 7 and 128 characters.",
         create_account: "Create account",
         action_bar_search: "Search",
         action_bar_share: "Share",
@@ -64,6 +69,9 @@ angular.module('eva').factory('translation', function () {
         register_account_label: "Account",
         register_sex_male: "Man",
         register_sex_female: "Vrouw",
+        register_repeat_password: "Herhaal wachtwoord",
+        register_hint_email: "Een e-mailadres ziet er zo uit: voorbeeld@mail.be",
+        register_hint_password: "Een wachtwoord is minstens 7 karakters en maximum 128.",
         create_account: "Maak een account",
         action_bar_search: "Zoeken",
         action_bar_share: "Delen",
@@ -102,6 +110,9 @@ angular.module('eva').factory('translation', function () {
         register_account_label: "Compte",
         register_sex_male: "Masculin",
         register_sex_female: "Feminin",
+        register_repeat_password: "Répéter mot de passe",
+        register_hint_email: "Une adresse e-mail ressemble à ceci: example@mail.be",
+        register_hint_password: "Votre mot de passe doit être compris entre 7 et 128 caractères.",
         create_account: "Créer un compte",
         action_bar_search: "Chercher",
         action_bar_share: "Partager",
@@ -114,5 +125,24 @@ angular.module('eva').factory('translation', function () {
         grade_vegetarian: "Végétarien (pas de viande ou poisson)",
         grade_vegan: "Végan (pas de produits animals)"
     };
+
+
+    strings.currentlySelected = strings.english;
+    strings.getCurrentlySelected = function () {
+        return strings.currentlySelected;
+    };
+    strings.selectEnglish = function () {
+        strings.currentlySelected = strings.english;
+        console.log(strings.getCurrentlySelected());
+    };
+    strings.selectDutch = function () {
+        strings.currentlySelected = strings.dutch;
+        console.log(strings.getCurrentlySelected());
+    };
+    strings.selectFrench = function () {
+        strings.currentlySelected = strings.french;
+    };
+
+
     return strings;
 });

@@ -8,8 +8,8 @@ app.controller('DashboardCtrl',
     ['$scope', 'auth', '$http', '$state', 'NetworkingService', 'toasty', 'translation',
         function ($scope, auth, $http, $state, netService, toasty, translation) {
 
-            $scope.strings = translation.english;
-            console.log($scope.strings);
+            $scope.translation = translation;
+            console.log($scope.translation);
             $scope.challenges = {};
 
             $scope.selectedIndex = 0;
