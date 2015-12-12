@@ -26,7 +26,10 @@
                         <div class="user-info">
                             <img src="images/eva-logo-white.png" />
                             <img ng-src="{{user.imageUrl}}" class="user-avatar">
-                            <h2 id="welcome">Welcome <small>{{user.firstName}}</small></h2>
+
+                            <h2 id="welcome">{{translation.currentlySelected.welcome_notification}}
+                                <small>{{user.firstName}}</small>
+                            </h2>
                         </div>
                         <nav>
                             <ul>
@@ -34,6 +37,11 @@
                                 <li><a id="completedButton" href="" ng-click="completed()">Challenges</a></li>
                                 <li><a id="adminButton" href="">Admin tools</a></li>
                             </ul>
+                            <button ng-click="translation.selectEnglish()">English</button>
+                            |
+                            <button ng-click="translation.selectDutch()">Dutch</button>
+                            |
+                            <button ng-click="translation.selectFrench()">French</button>
                         </nav>
 
                     </md-content>
@@ -49,9 +57,9 @@
     <script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="bower_components/bootstrap/js/modal.js"></script>
+    <script src="bower_components/bootstrap/js/tab.js"></script>
     <script src="bower_components/angular-aria/angular-aria.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-toasty/dist/angular-toasty.min.js"></script>
     <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
@@ -61,10 +69,12 @@
     <script src="scripts/factories/authentication.js"></script>
     <script src="scripts/factories/messages.js"></script>
     <script src="scripts/factories/networkservice.js"></script>
+    <script src="scripts/factories/translation.js"></script>
     <script src="scripts/controllers/login.js"></script>
     <script src="scripts/controllers/dashboard.js"></script>
     <script src="scripts/controllers/register.js"></script>
     <script src="scripts/controllers/challenges.js"></script>
+    <script src="scripts/controllers/settings.js"></script>
 </body>
 
 </html>

@@ -51,5 +51,5 @@ app.factory('auth', ['$http', '$window', 'NetworkingService', function ($http, $
         $window.localStorage.removeItem('eva-token');
     };
     return auth;
-}])
+}]);
 
