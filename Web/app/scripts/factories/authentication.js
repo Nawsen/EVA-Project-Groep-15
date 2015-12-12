@@ -39,6 +39,7 @@ app.factory('auth', ['$http', '$window', 'NetworkingService', function ($http, $
 
     auth.login = function (user) {
         return netService.post('/backend/api/users/login', user).success(function (data) {
+            //TODO write check for if facebook login was preformed
             auth.saveToken(data.token);
             auth.setHeader();
         });

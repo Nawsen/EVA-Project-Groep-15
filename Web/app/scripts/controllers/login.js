@@ -3,8 +3,8 @@
  */
 var app = angular.module('eva');
 angular.module('eva').controller('LoginCtrl',
-    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook',
-        function ($scope, $http, $location, $state, auth, messages, Facebook) {
+    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook','toasty',
+        function ($scope, $http, $location, $state, auth, messages, Facebook, toasty) {
             $scope.user = {
                 email: messages.email,
                 password: ""
@@ -32,28 +32,22 @@ angular.module('eva').controller('LoginCtrl',
                 return false;
 
             }
-            $scope.checkFacebookStatus;
-            $scope.checkFacebookStatus = function () {
-                Facebook.getLoginStatus(function(response) {
-                    if(response.status === 'connected') {
-                        $scope.fbLogin();
-                    }
-                });
-            }
-            $scope.fbLogin = function() {
-                Facebook.api('/me?fields=first_name,last_name,email', function(response) {
-                   console.log(response);
-                });
-            };
             $scope.facebooklogin = function () {
                 Facebook.login(function(response) {
-                    $scope.checkFacebookStatus();
-                },{'scope': 'email,public_profile,user_friends'});
-                $state.go('dashboard');
+                    console.log(response);
+                    $scope.user.facebookId = response.authResponse.userID;
+                    $scope.user.accessToken = response.authResponse.accessToken;
+                    auth.login($scope.user).error(function (error) {
+                        toasty.error({
+                            title: 'Something went wrong!',
+                            msg: 'Please try again or notify an admin.'
+                        });
+                    });
+                },{'scope': 'email,public_profile,user_friends,user_about_me,user_location'});
+
                 return false;
             }
             $scope.register = function () {
-                //TODO implement facebook api
                 $state.go('register');
                 return false;
             }
