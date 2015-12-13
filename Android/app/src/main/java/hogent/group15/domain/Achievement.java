@@ -84,7 +84,7 @@ public class Achievement implements ListEntry {
     }
 
     public Achievement(String title, String description, int badge) {
-        this(title, description, badge, 0);
+        this(title, description, badge, R.drawable.achievement_background);
     }
 
     public Achievement(String title, String description, int badge, int box) {
@@ -134,7 +134,7 @@ public class Achievement implements ListEntry {
 
         view.findViewById(R.id.achievement_outerContainer).setBackgroundResource(box);
 
-        int badge = R.drawable.tree_1;
+        int badge;
 
         if (score >= 21) {
             badge = R.drawable.tree_5;

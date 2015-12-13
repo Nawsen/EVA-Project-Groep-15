@@ -5,47 +5,63 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal">
 
-    <ImageView
-        android:id="@+id/achievement_badge"
-        android:layout_width="75dp" android:layout_alignParentLeft="true"
+    <FrameLayout
+        android:id="@+id/achievement_badge_wrap"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_height="75dp"
-        android:layout_marginRight="20dp" android:layout_marginTop="10dp" android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_gravity="center_vertical"/>
+        android:layout_gravity="center_vertical"
+        android:background="#44ffffff">
+
+        <ImageView
+            android:id="@+id/achievement_badge"
+            android:layout_width="75dp"
+            android:layout_height="75dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_gravity="center"
+        />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/achievement_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Achievement title"
-        android:layout_toRightOf="@+id/achievement_badge"
         android:layout_alignParentTop="true"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle" />
+        android:layout_toRightOf="@+id/achievement_badge_wrap"
+        android:text="Achievement title"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.DialogWindowTitle"
+        android:textColor="@android:color/white" />
 
     <TextView
         android:id="@+id/achievement_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/achievement_title"
         android:layout_alignLeft="@id/achievement_title"
-        android:text="Achievement description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas molestie feugiat purus." />
+        android:layout_below="@+id/achievement_title"
+        android:layout_marginRight="5dp"
+        android:text="Achievement description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas molestie feugiat purus."
+        android:textColor="@android:color/white" />
 
     <com.facebook.share.widget.ShareButton
+        android:id="@+id/achievement_share_button"
+        style="@style/shareButtonOverride"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/ic_menu_share"
+        android:layout_alignBaseline="@id/achievement_title"
         android:layout_alignParentRight="true"
-        android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
-        android:id="@+id/achievement_share_button"
-        android:text=""
-        style="@style/shareButtonOverride"
+        android:layout_marginTop="10dp"
+        android:background="@android:drawable/ic_menu_share"
+        android:paddingBottom="0dp"
         android:paddingLeft="0dp"
         android:paddingRight="0dp"
-        android:paddingBottom="0dp"
         android:paddingTop="0dp"
 
-        android:layout_alignBaseline="@id/achievement_title"/>
+        android:text="" />
 </RelativeLayout>
