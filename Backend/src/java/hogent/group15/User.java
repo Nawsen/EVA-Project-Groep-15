@@ -175,7 +175,9 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
 	this.password = password;
-	this.encPassword = hash(password.toCharArray(), generateSalt());
+	byte[] salt = generateSalt();
+	setSalt(salt);
+	this.encPassword = hash(password.toCharArray(), salt);
     }
 
     public Gender getGender() {
@@ -276,6 +278,7 @@ public class User implements Serializable {
     public static byte[] hash(char[] password, byte[] salt) {
 	PBEKeySpec spec = new PBEKeySpec(password, salt, 10000, 256);
 	Arrays.fill(password, Character.MIN_VALUE);
+	
 	try {
 	    SecretKeyFactory skf = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 	    return skf.generateSecret(spec).getEncoded();

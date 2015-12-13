@@ -198,7 +198,7 @@ public class Users {
 	    }
 
 	    if (user.getPassword() != null && !user.getPassword().isEmpty()) {
-		currentUser.setPassword(currentUser.getPassword());
+		currentUser.setPassword(user.getPassword());
 	    }
 
 	    if (user.getGrade() != null) {

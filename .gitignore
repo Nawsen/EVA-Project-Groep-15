@@ -7,3 +7,4 @@
 .DS_Store
 .idea/
 build/web
+/Web/npm-debug.log

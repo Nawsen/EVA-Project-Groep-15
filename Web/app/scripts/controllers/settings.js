@@ -2,8 +2,8 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('SettingsCtrl',
-    ['$scope', '$location', 'NetworkingService','translation',
-        function ($scope, $location, netService, translation) {
+    ['$scope', '$location', 'NetworkingService','translation', '$state',
+        function ($scope, $location, netService, translation, $state) {
             $scope.showHelpMail = false;
             $scope.passwordFocused = false;
             $scope.showHelpPassword = function () {
@@ -112,7 +112,9 @@ angular.module('eva').controller('SettingsCtrl',
 
             $scope.sendData = function () {
                 removeUnchangedProperties();
-                console.log($scope.userCleaned);
+                netService.put('/backend/api/users/update', $scope.userCleaned).then(function () {
+                    $state.go('dashboard');
+                });
             };
 
             loadUserData();

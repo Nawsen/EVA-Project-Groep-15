@@ -40,7 +40,6 @@ app.controller('DashboardCtrl',
                     netService.get('/backend/api/users/details').success(function (data, status) {
                         if (status == 200) {
                             $("#innerbar").css("width", (data.completedCount * 100) / 21 + "%");
-                            console.log((data.completedCount * 100) / 21);
                         }
                     });
                     netService.get('/backend/api/challenges/accepted').success(function (data, status) {
@@ -58,9 +57,7 @@ app.controller('DashboardCtrl',
 
                     netService.get('/backend/api/achievements').success(function (data, status, headers, config) {
                         $scope.achievements = data;
-                        console.log(data);
                     });
-
 
                     //challenges.getDailyChallenges();
                     //console.log(challenges.getDailyChallenges());
@@ -72,8 +69,8 @@ app.controller('DashboardCtrl',
             $scope.acceptChallenge = function (challengeId) {
                 netService.put('/backend/api/challenges/' + $scope.selectedChallenge().id + '/accept').success(function (data, status) {
                     toasty.info({
-                        title: 'Successfully accepted challenge!',
-                        msg: ''
+                        title: 'Good luck',
+                        msg: 'You\'ve accepted the challenge!'
                     });
                     initializeDashboard();
                 });
@@ -83,8 +80,8 @@ app.controller('DashboardCtrl',
                 netService.put('/backend/api/challenges/complete').success(function () {
                     $scope.hasAcceptedChallenge = false;
                     toasty.info({
-                        title: 'Successfully Completed challenge!',
-                        msg: ''
+                        title: 'Congratulations',
+                        msg: 'You\'ve completed the challenge!'
                     });
                     initializeDashboard();
                 }).error(function (err) {
