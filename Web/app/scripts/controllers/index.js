@@ -25,7 +25,7 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
         $scope.logout = function () {
             auth.logOut();
             $state.go('login');
-        }
+        };
         function removeActive() {
             $("#overviewButton").removeClass("active");
             $("#completedButton").removeClass("active");
@@ -34,25 +34,25 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
         }
 
         $scope.overview = function () {
-            removeActive()
+            removeActive();
             $("#overviewButton").addClass("active");
             $state.go('dashboard');
-        }
+        };
         $scope.completed = function () {
-            removeActive()
+            removeActive();
             $("#completedButton").addClass("active");
             $state.go('completed');
-        }
+        };
         $scope.settings = function () {
-            removeActive()
+            removeActive();
             $("#settingsButton").addClass("active");
             $state.go('settings');
-        }
+        };
         $scope.admin = function () {
-            removeActive()
+            removeActive();
             $("#adminButton").addClass("active");
             $state.go('admin');
-        }
+        };
         $scope.initSideBar();
         $scope.$on("initSideBar", function () {
             $scope.initSideBar();

@@ -2,8 +2,9 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('SettingsCtrl',
-    ['$scope', '$location', 'NetworkingService', 'translation', '$state',
-        function ($scope, $location, netService, translation, $state) {
+    ['$scope', '$location', 'NetworkingService', 'translation', '$state', 'translation',
+        function ($scope, $location, netService, translation, $state, translation) {
+            $scope.translation = translation;
             $scope.showHelpMail = false;
             $scope.passwordFocused = false;
             $scope.showHelpPassword = function () {

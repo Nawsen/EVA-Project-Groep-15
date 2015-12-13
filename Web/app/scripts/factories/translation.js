@@ -3,6 +3,7 @@ angular.module('eva').factory('translation', function () {
 
 
     strings.english = {
+        edit: "Edit",
         settings:"Settings",
         ongoing_challenges:"Current challenges",
         progress:"Progress",
@@ -51,6 +52,7 @@ angular.module('eva').factory('translation', function () {
         grade_vegan: "Vegan (no animal products)"
     };
     strings.dutch = {
+        edit: "Pas aan",
         settings:"Instellingen",
         ongoing_challenges:"Lopende uitdagingen",
         progress:"Voortgang",
@@ -99,6 +101,7 @@ angular.module('eva').factory('translation', function () {
         grade_vegan: "Veganist (geen dierlijke producten)"
     };
     strings.french = {
+        edit: "Editer",
         settings:"Paramètres",
         ongoing_challenges:"Défis en cours",
         progress:"Progrès",
