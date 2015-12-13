@@ -1,8 +1,10 @@
 package hogent.group15.ui.fragments;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,7 +33,8 @@ public class CompletedChallengesFragment extends Fragment {
     public void onStart() {
         super.onStart();
         recyclerView = (RecyclerView) this.getView().findViewById(R.id.completedChallengesListView);
-        LinearLayoutManager llm = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        Configuration config = getActivity().getResources().getConfiguration();
+        LinearLayoutManager llm = llm = new GridLayoutManager(getContext(), config.smallestScreenWidthDp > 720 ? 2 : 1);
         recyclerView.setLayoutManager(llm);
         final RecyclerView.Adapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
         recyclerView.setAdapter(adapter);

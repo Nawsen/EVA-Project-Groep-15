@@ -82,6 +82,7 @@ public class ChallengesRepository {
 
     public void setOnCompletedChallengesChanged(Runnable callback) {
         onCompletedChallengesChanged = callback;
+        callback.run();
     }
 
     public void addCompletedChallenge(Challenge challenge) {

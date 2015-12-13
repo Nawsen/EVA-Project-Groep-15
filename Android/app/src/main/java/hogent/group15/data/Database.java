@@ -29,7 +29,7 @@ public class Database {
     private static Database database;
 
     private static final String DATABASE_NAME = "eva";
-    private static final int DATABASE_VERSION = 10;
+    private static final int DATABASE_VERSION = 16;
     private static final String TAG = Database.class.getName();
 
     // Enable serialized async calls

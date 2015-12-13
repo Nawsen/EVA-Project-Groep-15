@@ -5,6 +5,7 @@ import android.content.res.Resources;
 import android.net.Uri;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -45,6 +46,11 @@ public class AchievementListEntry extends FrameLayout {
     private void initialize() {
         root = inflate(getContext(), R.layout.achievement_entry, this);
         ButterKnife.bind(this);
+        Resources r = getContext().getResources();
+        int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, r.getDisplayMetrics());
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.setMargins(px, px, px, px);
+        setLayoutParams(params);
     }
 
     public void updateContents(Achievement achievement) {
