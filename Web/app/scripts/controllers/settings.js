@@ -2,7 +2,7 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('SettingsCtrl',
-    ['$scope', '$location', 'NetworkingService','translation', '$state',
+    ['$scope', '$location', 'NetworkingService', 'translation', '$state',
         function ($scope, $location, netService, translation, $state) {
             $scope.showHelpMail = false;
             $scope.passwordFocused = false;
@@ -49,7 +49,7 @@ angular.module('eva').controller('SettingsCtrl',
                 repeatPassword: "",
                 firstName: "",
                 lastName: "",
-                grade: $scope.values[0]
+                grade: "OMNIVORE"
             };
             $scope.userNew = {
                 email: "bla@bla.be",
@@ -57,7 +57,7 @@ angular.module('eva').controller('SettingsCtrl',
                 repeatPassword: "",
                 firstName: "",
                 lastName: "",
-                grade: $scope.values[0]
+                grade: "OMNIVORE"
             };
             $scope.userCleaned = {};
 
@@ -77,11 +77,18 @@ angular.module('eva').controller('SettingsCtrl',
             }
 
             function loadUserData() {
-
                 netService.get('/backend/api/users/details').success(function (data) {
-
+                    console.log(data);
                     $scope.userOld = data;
                     $scope.userNew = data;
+                    for (var property in $scope.values) {
+                        if ($scope.values.hasOwnProperty(property)) {
+                            if ($scope.values[property].val == data.grade) {
+                                $scope.userOld.grade = $scope.values[property];
+                                $scope.userNew.grade = $scope.values[property];
+                            }
+                        }
+                    }
                 });
             }
 
