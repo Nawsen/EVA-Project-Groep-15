@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -48,10 +49,6 @@ public class ChallengeListEntry extends FrameLayout {
         initialize();
     }
 
-    public Challenge getChallenge() {
-        return currentChallenge;
-    }
-
     private void initialize() {
         setOnClickListener(new OnClickListener() {
             @Override
@@ -65,6 +62,7 @@ public class ChallengeListEntry extends FrameLayout {
 
         root = inflate(getContext(), R.layout.view_challenge, this);
         ChallengeListEntry.this.setAlpha(0f);
+        setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
     }
 
     @Override

@@ -20,8 +20,10 @@ import com.facebook.share.widget.ShareButton;
 
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
+import hogent.group15.ui.controls.list.AchievementListEntry;
+import hogent.group15.ui.util.ListEntryAdapter;
 
-public class Achievement implements ListEntry {
+public class Achievement implements ListEntry<AchievementListEntry> {
 
     @SerializedName("name")
     String title;
@@ -95,60 +97,7 @@ public class Achievement implements ListEntry {
     }
 
     @Override
-    public View retrieveView(LayoutInflater inflater, ViewGroup parent) {
-        View view = inflater.inflate(R.layout.achievement_entry, null);
-
-        TextView description = (TextView) view.findViewById(R.id.achievement_description);
-        TextView title = (TextView) view.findViewById(R.id.achievement_title);
-        title.setText(this.title);
-        ShareButton shareButton = (ShareButton) view.findViewById(R.id.achievement_share_button);
-
-        shareButton.setShareContent(new ShareLinkContent.Builder()
-                .setContentTitle(getTitle())
-                .setContentDescription(getDescription().isEmpty() ? "No description" : getDescription())
-                .setImageUrl(Uri.parse("http://www.evavzw.be/sites/all/themes/wieni-subtheme/apple-touch-icon-152x152.png"))
-                .setContentUrl(Uri.parse("http://evavzw.be"))
-                .build());
-
-        shareButton.setCompoundDrawables(null, null, null, null);
-
-        if (this.description == null || this.description.isEmpty()) {
-            description.setVisibility(View.INVISIBLE);
-            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(title.getLayoutParams());
-            params.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-            params.addRule(RelativeLayout.RIGHT_OF, R.id.achievement_badge);
-            title.setLayoutParams(params);
-
-            RelativeLayout.LayoutParams buttonParams = new RelativeLayout.LayoutParams(shareButton.getLayoutParams());
-            buttonParams.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
-            buttonParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
-
-            Resources r = inflater.getContext().getResources();
-            int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 10, r.getDisplayMetrics());
-            buttonParams.setMargins(0, 0, px, 0);
-            shareButton.setLayoutParams(buttonParams);
-        } else {
-            title.setVisibility(View.VISIBLE);
-            description.setText(this.description);
-        }
-
-        view.findViewById(R.id.achievement_outerContainer).setBackgroundResource(box);
-
-        int badge = R.drawable.tree_1;
-
-        if (score >= 21) {
-            badge = R.drawable.tree_5;
-        } else if (score >= 17) {
-            badge = R.drawable.tree_4;
-        } else if (score >= 6) {
-            badge = R.drawable.tree_3;
-        } else if (score > 1) {
-            badge = R.drawable.tree_2;
-        } else {
-            badge = R.drawable.tree_1;
-        }
-
-        ((ImageView) view.findViewById(R.id.achievement_badge)).setImageResource(badge);
-        return view;
+    public void bindToView(ListEntryAdapter.EntryViewHolder<AchievementListEntry> holder) {
+        holder.getView().updateContents(this);
     }
 }
