@@ -22,7 +22,7 @@ public interface BackendAPI {
     void getDailyChallenges(Callback<List<Challenge>> callback);
 
     @POST("/users/login")
-    void login(@Body User user, Callback<JsonWebToken> token);
+    void login(@Body User user, Callback<LoginResponse> token);
 
     @GET("/challenges/{challengeId}")
     void getDetailedChallenge(@Path("challengeId") int id, Callback<Challenge> description);

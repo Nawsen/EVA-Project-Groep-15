@@ -4,15 +4,18 @@ import android.app.Activity;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import hogent.group15.domain.FBShare;
 import hogent.group15.service.Backend;
 import hogent.group15.ui.LoginActivity;
 import hogent.group15.ui.R;
+import hogent.group15.ui.fragments.OngoingChallengeFragment;
 
 /**
  * Created by Frederik on 10/19/2015.
@@ -55,6 +58,10 @@ public class ActionBarConfig {
         if (item.getItemId() == R.id.item_logout) {
             Backend.getBackend(context).logoutUser();
             context.startActivity(new Intent(context, LoginActivity.class));
+            return true;
+
+        } else if (item.getItemId() == R.id.item_share) {
+            FBShare.with().share();
             return true;
         } else {
             return false;

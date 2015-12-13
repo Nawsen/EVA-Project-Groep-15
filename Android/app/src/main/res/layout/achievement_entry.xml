@@ -31,4 +31,21 @@
         android:layout_below="@+id/achievement_title"
         android:layout_alignLeft="@id/achievement_title"
         android:text="Achievement description Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas molestie feugiat purus." />
+
+    <com.facebook.share.widget.ShareButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:drawable/ic_menu_share"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/achievement_share_button"
+        android:text=""
+        style="@style/shareButtonOverride"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp"
+
+        android:layout_alignBaseline="@id/achievement_title"/>
 </RelativeLayout>

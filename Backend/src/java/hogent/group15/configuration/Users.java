@@ -82,17 +82,23 @@ public class Users {
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(User user) {
-	if ((user.getAccessToken() != null && user.getAccessToken().isEmpty()) || user.getFacebookId() == 0) {
+	if(user.getAccessToken() == null ||user.getFacebookId() == 0) {
 	    return regularLogin(user);
-	} else {
-	    return facebookLogin(user);
+	} else if (user.getAccessToken() != null) {
+	    if(user.getAccessToken().isEmpty() || user.getFacebookId() == 0) {
+		return regularLogin(user);
+	    } else {
+		return facebookLogin(user);
+	    }
 	}
+	
+	return regularLogin(user);
     }
 
     @Transactional
     private Response regularLogin(User user) {
 	User dbUser = em.find(User.class, user.getEmail());
-	if (dbUser != null && User.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getEncPassword())) {
+	if (dbUser != null && User.isExpectedPassword(user.getPassword().toCharArray(), dbUser.getSalt(), dbUser.getEncPassword()) && dbUser.getFacebookId() == 0) {
 	    return Response.ok(getToken(user.getEmail())).build();
 	} else {
 	    return Response.status(Status.UNAUTHORIZED).entity(createJsonMessage("Unable to login")).build();
@@ -120,7 +126,7 @@ public class Users {
 	    
 	    return Response.ok(getToken(data.getEmail())).build();
 	} else {
-	    return Response.status(404).entity(data).build();
+	    return Response.status(202).entity(data).build();
 	}
     }
 

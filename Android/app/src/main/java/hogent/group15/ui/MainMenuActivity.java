@@ -47,7 +47,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this);
+        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_share);
     }
 
     @Override

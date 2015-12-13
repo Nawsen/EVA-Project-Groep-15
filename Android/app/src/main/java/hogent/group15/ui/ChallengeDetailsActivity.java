@@ -1,5 +1,6 @@
 package hogent.group15.ui;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Html;
@@ -11,9 +12,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.facebook.share.model.ShareLinkContent;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import hogent.group15.domain.FBShare;
 import hogent.group15.service.Backend;
 import hogent.group15.domain.Challenge;
 import hogent.group15.ui.util.ActionBarConfig;
@@ -46,7 +50,21 @@ public class ChallengeDetailsActivity extends AppCompatActivity {
         updateContents((Challenge) getIntent().getSerializableExtra("challenge"));
         final boolean shouldShowButton = getIntent().hasExtra("showAcceptButton") && getIntent().getBooleanExtra("showAcceptButton", true);
         acceptButton.setVisibility(shouldShowButton ? View.VISIBLE : View.GONE);
-
+        if (shouldShowButton) {
+            FBShare.with(this).setShareAction(new ShareLinkContent.Builder()
+                    .setContentTitle("I'm about to start " + currentChallenge.getTitle())
+                    .setContentDescription(currentChallenge.getDetailedDescription().isEmpty() ? "No description" : currentChallenge.getDetailedDescription())
+                    .setImageUrl(Uri.parse("http://www.evavzw.be/sites/all/themes/wieni-subtheme/apple-touch-icon-152x152.png"))
+                    .setContentUrl(Uri.parse("http://evavzw.be"))
+                    .build());
+        } else {
+            FBShare.with(this).setShareAction(new ShareLinkContent.Builder()
+                    .setContentTitle("I have completed " + currentChallenge.getTitle())
+                    .setContentDescription(currentChallenge.getDetailedDescription().isEmpty() ? "No description" : currentChallenge.getDetailedDescription())
+                    .setImageUrl(Uri.parse("http://www.evavzw.be/sites/all/themes/wieni-subtheme/apple-touch-icon-152x152.png"))
+                    .setContentUrl(Uri.parse("http://evavzw.be"))
+                    .build());
+        }
         Backend.getBackend(this).getDetailedChallenge(currentChallenge.getId(), new Callback<Challenge>() {
 
             @Override

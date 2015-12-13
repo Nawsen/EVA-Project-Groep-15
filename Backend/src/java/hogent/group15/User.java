@@ -52,6 +52,7 @@ public class User implements Serializable {
 
 	OMNIVORE, PESCETARIAR, PARTTIME_VEGETARIAN, VEGETARIAN, VEGAN, UNKNOWN
     }
+    
     @Transient
     private static final Random RANDOM = new SecureRandom();
 
@@ -61,8 +62,9 @@ public class User implements Serializable {
 
     private long facebookId;
 
+    @Transient
     private transient String accessToken;
-
+    
     @NotNull(message = "firstName")
     @Size(min = 1, message = "firstName")
     private String firstName;
