@@ -70,7 +70,7 @@ public class Backend {
     }
 
     public void loadImageInto(Uri uri, com.squareup.picasso.Callback callback, ImageView view) {
-        loadImageInto(uri, callback, view, R.drawable.loading_placeholder);
+        loadImageInto(uri, callback, view, 0);
     }
 
     public void loadImageInto(Uri uri, com.squareup.picasso.Callback callback, ImageView view, int placeHolder) {
@@ -87,12 +87,12 @@ public class Backend {
 
     public void loadImageInto(Uri uri, ImageView view, int placeHolder, int errorImage) {
         //Picasso.with(context).setIndicatorsEnabled(true);
-        Picasso.with(context).load(uri).placeholder(placeHolder).error(errorImage).into(view);
+        Picasso.with(context).load(uri).error(errorImage).into(view);
     }
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://192.168.0.114:8080/backend/api/")
+                .setEndpoint("http://78.22.47.223:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {

@@ -1,8 +1,12 @@
 package hogent.group15.ui.fragments;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +15,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import hogent.group15.data.AchievementsRepository;
 import hogent.group15.domain.Achievement;
 import hogent.group15.ui.R;
@@ -24,7 +30,8 @@ import retrofit.client.Response;
  */
 public class AchievementsFragment extends Fragment {
 
-    private ListView listView;
+    @Bind(R.id.achievementsListView)
+    public RecyclerView recyclerView;
 
     public AchievementsFragment() {
         // Required empty public constructor
@@ -33,7 +40,7 @@ public class AchievementsFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        listView = (ListView) this.getView().findViewById(R.id.achievementsListView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -42,7 +49,13 @@ public class AchievementsFragment extends Fragment {
         AchievementsRepository.getInstance(getContext()).refreshAchievements(new Callback<List<Achievement>>() {
             @Override
             public void success(List<Achievement> achievements, Response response) {
-                listView.setAdapter(new ListEntryAdapter(getActivity(), AchievementsRepository.getInstance(getContext()).getAchievements()));
+                LinearLayoutManager llm = null;
+                Configuration config = getActivity().getResources().getConfiguration();
+                //llm = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+                llm = new GridLayoutManager(getContext(), config.smallestScreenWidthDp > 720 ? 2 : 1);
+                recyclerView.setLayoutManager(llm);
+
+                recyclerView.setAdapter(new ListEntryAdapter(getActivity(), AchievementsRepository.getInstance(getContext()).getAchievements()));
             }
 
             @Override
