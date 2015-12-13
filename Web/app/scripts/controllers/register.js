@@ -77,7 +77,5 @@ angular.module('eva').controller('RegisterCtrl',
                 }).then(function () {
                     $state.go('login');
                 });
-            }
-
-
+            };
         }]);
