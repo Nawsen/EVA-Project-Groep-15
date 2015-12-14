@@ -1,4 +1,4 @@
-angular.module('eva').factory('translation', function (messages) {
+angular.module('eva').factory('translation', function () {
     var strings = {};
 
 
@@ -28,6 +28,7 @@ angular.module('eva').factory('translation', function (messages) {
         login_or: "Or",
         login_successful: "Login successful",
         login_error: "Something's wrong! Please correct you credentials.",
+        login_error_fb: "Something's wrong! Please contact an administrator.",
         register: "Register",
         register_personal_info_label: "Personal Info",
         register_first_name: "First Name",
@@ -90,6 +91,7 @@ angular.module('eva').factory('translation', function (messages) {
         login_or: "Of",
         login_successful: "Succesvol aangemeld",
         login_error: "Er is iets mis! Vul uw gegevens opnieuw in alsjeblieft.",
+        login_error_fb: "Er is iets mis! Contacteer een beheerder.",
         register: "Registreren",
         register_personal_info_label: "Persoonlijke gegevens",
         register_first_name: "Voornaam",
@@ -152,6 +154,7 @@ angular.module('eva').factory('translation', function (messages) {
         login_or: "Ou",
         login_successful: "Succès connecter",
         login_error: "Quelque chose ne va! Entrez vos données s'il vous plaît.",
+        login_error_fb: "Quelque chose ne va!",
         register: "Se faire inscrire",
         register_personal_info_label: "Données personelles",
         register_first_name: "Prénom",
@@ -192,20 +195,17 @@ angular.module('eva').factory('translation', function (messages) {
 
 
     strings.currentlySelected = strings.english;
-    messages.currentlySelected = "english";
     strings.getCurrentlySelected = function () {
         return strings.currentlySelected;
     };
     strings.selectEnglish = function () {
         strings.currentlySelected = strings.english;
-        messages.currentlySelected = "english";    };
+    };
     strings.selectDutch = function () {
         strings.currentlySelected = strings.dutch;
-        messages.currentlySelected = "dutch";
     };
     strings.selectFrench = function () {
         strings.currentlySelected = strings.french;
-        messages.currentlySelected = "french";
     };
 
 

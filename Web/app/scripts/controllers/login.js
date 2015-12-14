@@ -39,7 +39,7 @@ angular.module('eva').controller('LoginCtrl',
                 $scope.password = "";
                 return false;
 
-            }
+            };
 
             $scope.facebooklogin = function () {
                 Facebook.login(function (response) {
@@ -48,8 +48,7 @@ angular.module('eva').controller('LoginCtrl',
                     $scope.user.accessToken = response.authResponse.accessToken;
                     auth.login($scope.user).error(function (error) {
                         toasty.error({
-                            title: 'Something went wrong!',
-                            msg: 'Please try again or notify an admin.'
+                            title: translation.getCurrentlySelected().login_error_fb
                         });
                     }).then(function (data) {
                         if ($window.localStorage['eva-fbreg']){
@@ -65,7 +64,6 @@ angular.module('eva').controller('LoginCtrl',
                 return false;
             };
             $scope.register = function () {
-                //TODO implement facebook api
                 $state.go('register');
                 return false;
             }

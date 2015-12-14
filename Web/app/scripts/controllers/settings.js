@@ -46,9 +46,6 @@ angular.module('eva').controller('SettingsCtrl',
             $scope.userCleaned = {};
 
 
-            $scope.translate = function (name) {
-                return translation.getCurrentlySelected()["grade_" + name.toLowerCase()]
-            };
             /**
              * Niet noodzakelijk, heb ik gewoon geschreven voor cleanliness.
              */
@@ -64,11 +61,9 @@ angular.module('eva').controller('SettingsCtrl',
             }
 
             function loadUserData() {
-                console.log($scope.grades.getTranslation("OMNIVORE"));
                 netService.get('/backend/api/users/details').success(function (data) {
                     $scope.userOld = data;
                     $scope.userNew = data;
-                    console.log(data);
                     $scope.facebook = false;
                     if (data.facebook){
                         $scope.facebook = true;
@@ -76,22 +71,10 @@ angular.module('eva').controller('SettingsCtrl',
                     for (var property in $scope.values) {
                         if ($scope.values.hasOwnProperty(property)) {
                             if ($scope.values[property].val == data.grade) {
-                                console.log($scope.values[property]);
                                 $scope.userOld.grade = $scope.values[property];
                                 $scope.userNew.grade = $scope.values[property];
-                                console.log($scope.userNew);
                             }
                         }
-                    }
-                    if (messages.currentlySelected == "english") {
-                        console.log('en');
-                        translation.selectEnglish();
-                    } else if (messages.currentlySelected == "dutch") {
-                        console.log('du');
-                        translation.selectDutch();
-                    } else if (messages.currentlySelected == "french") {
-                        console.log('fr');
-                        translation.selectFrench();
                     }
                 });
             }

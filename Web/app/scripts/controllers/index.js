@@ -22,7 +22,6 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
                         if (data.imageUrl == "" || !data.imageUrl) {
                             $scope.user.imageUrl = "http://cdn-9chat-fun.9cache.com/static/dist/images/avatar-default.png";
                         }
-                        console.log($scope.user);
                     }
                 });
             }
