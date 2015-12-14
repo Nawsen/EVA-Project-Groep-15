@@ -72,12 +72,13 @@ public class LoginActivity extends AppCompatActivity implements Validator {
         cm = CallbackManager.Factory.create();
         loginButton.registerCallback(cm, new FacebookCallback<LoginResult>() {
             @Override
-            public void onSuccess(LoginResult loginResult) {
+            public void onSuccess(final LoginResult loginResult) {
                 Backend.getBackend(getApplicationContext()).loginUser(new User(loginResult.getAccessToken().getUserId(), loginResult.getAccessToken().getToken(), true),
                         new Callback<LoginResponse>() {
                             @Override
                             public void success(LoginResponse loginResponse, Response response) {
                                 if (loginResponse.getType() == LoginResponse.LoginResponseType.FACEBOOK_REGISTER) {
+                                    loginResponse.setFbAccessToken(loginResult.getAccessToken().getToken());
                                     startActivity(new Intent(getBaseContext(), RegisterActivity.class).putExtra("facebookData", loginResponse));
                                 } else {
                                     startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
@@ -102,7 +103,7 @@ public class LoginActivity extends AppCompatActivity implements Validator {
             }
         });
 
-        loginButton.setLoginBehavior(LoginBehavior.NATIVE_WITH_FALLBACK);
+        loginButton.setLoginBehavior(LoginBehavior.WEB_ONLY);
 
     }
 
