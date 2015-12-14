@@ -79,7 +79,6 @@ angular.module('eva').controller('SettingsCtrl',
 
             function loadUserData() {
                 netService.get('/backend/api/users/details').success(function (data) {
-                    console.log(data);
                     $scope.userOld = data;
                     $scope.userNew = data;
                     if (data.facebookId != 0){
@@ -122,7 +121,9 @@ angular.module('eva').controller('SettingsCtrl',
             };
 
             $scope.sendData = function () {
+                $scope.userNew.grade = $scope.userNew.grade.val;
                 removeUnchangedProperties();
+
                 netService.put('/backend/api/users/update', $scope.userCleaned).then(function () {
                     $state.go('dashboard');
                 });
