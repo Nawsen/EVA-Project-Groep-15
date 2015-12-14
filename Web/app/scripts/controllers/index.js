@@ -1,5 +1,12 @@
 app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 'toasty', 'translation', 'messages',
     function ($scope, auth, netService, $state, toasty, translation, messages) {
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.5&appId=1618258668410463";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
         $scope.translation = translation;
         $scope.isLoggedIn = function () {
             return auth.isLoggedIn();
