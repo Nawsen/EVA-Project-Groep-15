@@ -33,7 +33,7 @@ html, body {
     background: url("../images/resources/blackboard_menu.jpg"), no-repeat;
     background-size: cover;
     height: 100%;
-    width: 250px;
+    width: 305px;
     position: fixed;
 
     .user-info {
@@ -165,7 +165,10 @@ h1 {
 
 // FLEX CONFIG FOR CHALLENGES
 .banner {
-  margin: 3% 0;
+  margin: 3% 0%;
+}
+.bannertext {
+  margin: 3% 35%;
 }
 
 #challenges {
@@ -181,7 +184,7 @@ h1 {
   -webkit-align-content: flex-start;
   width: 95%;
   margin: 0 auto;
-  padding: 30px 0 70px;
+  padding: 30px 0 10px;
 
   article {
     flex-grow: 1;

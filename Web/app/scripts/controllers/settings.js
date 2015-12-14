@@ -46,6 +46,9 @@ angular.module('eva').controller('SettingsCtrl',
             $scope.userCleaned = {};
 
 
+            $scope.translate = function (name) {
+                return translation.getCurrentlySelected()["grade_" + name.toLowerCase()]
+            };
             /**
              * Niet noodzakelijk, heb ik gewoon geschreven voor cleanliness.
              */
@@ -75,7 +78,7 @@ angular.module('eva').controller('SettingsCtrl',
                                 $scope.userNew.grade = $scope.values[property];
                             }
                         }
-                    }
+                    }  
                 });
             }
 
@@ -107,9 +110,6 @@ angular.module('eva').controller('SettingsCtrl',
             $scope.sendData = function () {
                 $scope.userNew.grade = $scope.userNew.grade.val;
                 removeUnchangedProperties();
-                console.log("user cleaned:");
-                console.log($scope.userCleaned);
-
                 netService.put('/backend/api/users/update', $scope.userCleaned).then(function () {
                     $state.go('dashboard');
                 });

@@ -49,7 +49,7 @@
                 </article>
             </div>
             <div ng-show="hasAcceptedChallenge" id="challenges">
-                <article class="challenge box-border" style="max-width: 45%;"
+                <article class="challenge box-border"
                          data-toggle="modal" data-target="#challengeDetailsModal"
                          ng-click="showAcceptedChallengeDetails()">
                     <div ng-style="{'background-image':'url(' + acceptedChallenge.imageUrl + ')'}">
@@ -63,6 +63,10 @@
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-body">
+                                <!-- Facebook Share Button -->
+                                <a class="btnz share facebook" href="#" ng-hide="hasAcceptedChallenge" ng-click="share(detailedChallenge, 0)"><i class="fa fa-facebook"></i> Share</a>
+                                <a class="btnz share facebook" href="#" ng-show="hasAcceptedChallenge" ng-click="share(detailedChallenge, 1)"><i class="fa fa-facebook"></i> Share</a>
+                                <br />
                                 <div class="modalImage" style="text-align: center;"
                                      ng-style="{'background-image':'url(' + detailedChallenge.imageUrl + ')'}">
                                     <h2 class="modalText"
@@ -82,6 +86,10 @@
                                 <button type="button" class="btn btn-default eva-submit-wit"
                                         ng-click="completeChallenge()" data-dismiss="modal">
                                     {{translation.getCurrentlySelected().complete_challenge}}
+                                </button>
+                                <button type="button" class="btn btn-default eva-submit-wit"
+                                        ng-click="cancelChallenge()" data-dismiss="modal">
+                                    {{translation.getCurrentlySelected().cancel_challenge}}
                                 </button>
                             </div>
                         </div>
@@ -106,6 +114,7 @@
                             <div ng-show="achievement.score > 6 && achievement.score <= 17" class="badge badge-hard"></div>
                             <div ng-show="achievement.score > 17" class="badge badge-expert"></div>
                             <div class="achievement-image temp-pompoensoep">
+                                <a class="btnz2 share facebook " href="#" ng-click="share(achievement, 3)"><i class="fa fa-facebook"></i> Share</a>
                                 <h5>{{achievement.name}}</h5>
                                 <p>
                                     {{achievement.description}}

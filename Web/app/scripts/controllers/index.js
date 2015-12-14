@@ -1,12 +1,39 @@
 app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 'toasty', 'translation', 'messages',
     function ($scope, auth, netService, $state, toasty, translation, messages) {
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/nl_NL/sdk.js#xfbml=1&version=v2.5&appId=1618258668410463";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
         $scope.translation = translation;
         $scope.isLoggedIn = function () {
             return auth.isLoggedIn();
         };
         $scope.user = {};
+        var isSidebarVisible = false;
+        $scope.mobile = function () {
+            if (!isSidebarVisible){
+                isSidebarVisible = true;
+                $('#nav').css('display', 'block');
+            } else {
+                isSidebarVisible = false;
+                $('#nav').css('display', 'none');
+            }
+
+        };
+        function minimize(){
+            console.log($('#menu').css('display'));
+            if($('#menu').css('display') == 'block'){
+                isSidebarVisible = false;
+                $('#nav').css('display', 'none');
+            }
+
+        }
         $scope.initSideBar = function () {
             if (auth.isLoggedIn()) {
+
                 netService.get('/backend/api/users/details').success(function (data, status) {
                     if (status == 200) {
                         $scope.user = data;
@@ -41,16 +68,19 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
             removeActive();
             $("#overviewButton").addClass("active");
             $state.go('dashboard');
+            minimize();
         };
         $scope.completed = function () {
             removeActive();
             $("#completedButton").addClass("active");
             $state.go('completed');
+            minimize();
         };
         $scope.settings = function () {
             removeActive();
             $("#settingsButton").addClass("active");
             $state.go('settings');
+            minimize();
         };
         $scope.admin = function () {
             removeActive();

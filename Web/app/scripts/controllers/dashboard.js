@@ -5,8 +5,8 @@
 var app = angular.module('eva');
 
 app.controller('DashboardCtrl',
-    ['$scope', 'auth', '$http', '$state', 'NetworkingService', 'toasty', 'translation',
-        function ($scope, auth, $http, $state, netService, toasty, translation) {
+    ['$scope', 'auth', '$http', '$window', '$state', 'NetworkingService', 'toasty', 'translation',
+        function ($scope, auth, $http, $window, $state, netService, toasty, translation) {
             $scope.translation = translation;
             $scope.challenges = {};
 
@@ -25,7 +25,67 @@ app.controller('DashboardCtrl',
             $scope.showAcceptedChallengeDetails = function () {
                 $scope.detailedChallenge = $scope.acceptedChallenge;
             };
+            //social
+            $scope.share = function(challenge, i){
+                if (i==0){
+                    FB.ui(
+                        {
+                            method: 'feed',
+                            name: 'I am about to start the challenge : "' + challenge.title + '", anyone wants to help?',
+                            link: 'http://www.evavzw.be',
+                            picture: challenge.imageUrl,
+                            caption: 'Goto www.evavzw.be for more fun challenges!',
+                            description: challenge.description,
+                            message: ''
+                        }, function(response){
+                            $window.location.reload();
+                        });
+                }
 
+                if (i==1){
+                    FB.ui(
+                        {
+                            method: 'feed',
+                            name: 'I just accepted the "' + challenge.title + '" challenge.',
+                            link: 'http://www.evavzw.be',
+                            picture: challenge.imageUrl,
+                            caption: 'Goto www.evavzw.be for more fun challenges!',
+                            description: challenge.description,
+                            message: ''
+                        }, function(response){
+                            $window.location.reload();
+                        });
+                }
+                if (i==2){
+                    FB.ui(
+                        {
+                            method: 'feed',
+                            name: 'I just completed the "' + challenge.title + '" challenge!',
+                            link: 'http://www.evavzw.be',
+                            picture: challenge.imageUrl,
+                            caption: 'Goto www.evavzw.be for more fun challenges!',
+                            description: challenge.description,
+                            message: ''
+                        }, function(response){
+                            $window.location.reload();
+                        });
+                }
+                if (i==3){
+                    FB.ui(
+                        {
+                            method: 'feed',
+                            name: 'I just unlocked the "' + challenge.name + '" achievement!',
+                            link: 'http://www.evavzw.be',
+                            picture: challenge.imageUrl,
+                            caption: 'Goto www.evavzw.be for more fun challenges!',
+                            description: challenge.description,
+                            message: ''
+                        }, function(response){
+                            $window.location.reload();
+                        });
+                }
+
+            }
 
             $scope.detailedChallenge = {};
 
@@ -75,6 +135,18 @@ app.controller('DashboardCtrl',
                     initializeDashboard();
                 });
             };
+            $scope.cancelChallenge = function () {
+                netService.put('/backend/api/challenges/fail').success(function () {
+                    $scope.hasAcceptedChallenge = false;
+                    toasty.info({
+                        title: translation.getCurrentlySelected().challenge_cancel_title,
+                        msg: translation.getCurrentlySelected().challenge_cancel_message
+                    });
+                    initializeDashboard();
+                }).error(function (err) {
+                    console.log(err);
+                });
+            }
 
             $scope.completeChallenge = function () {
                 netService.put('/backend/api/challenges/complete').success(function () {

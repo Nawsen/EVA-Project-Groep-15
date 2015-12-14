@@ -109,7 +109,7 @@ html, body {
     background: url("../images/resources/blackboard_menu.jpg"), no-repeat;
     background-size: cover;
     height: 100%;
-    width: 250px;
+    width: 305px;
     position: fixed; }
     #wrapper #nav .user-info img {
       display: block;
@@ -201,7 +201,10 @@ h1 {
   padding: 20px 0 0 0; }
 
 .banner {
-  margin: 3% 0; }
+  margin: 3% 0%; }
+
+.bannertext {
+  margin: 3% 35%; }
 
 #challenges {
   display: flex;
@@ -216,7 +219,7 @@ h1 {
   -webkit-align-content: flex-start;
   width: 95%;
   margin: 0 auto;
-  padding: 30px 0 70px; }
+  padding: 30px 0 10px; }
   #challenges article {
     flex-grow: 1;
     flex-shrink: 1;

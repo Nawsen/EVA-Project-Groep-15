@@ -10,6 +10,7 @@ angular.module('eva').controller('LoginCtrl',
                 email: messages.email,
                 password: ""
             };
+            $('#menu').css('display', 'none');
             //check if user is already logged in
             if (auth.isLoggedIn()){
                 $state.go('dashboard');
@@ -32,6 +33,7 @@ angular.module('eva').controller('LoginCtrl',
                     messages.loggedIn = true;
                     $state.go('dashboard');
                     $scope.$emit('initSideBar');
+                    $('#menu').css('display', 'block');
                 });
 
 
@@ -61,6 +63,7 @@ angular.module('eva').controller('LoginCtrl',
                 }, {'scope': 'email,public_profile,user_friends,user_about_me,user_location'});
                 messages.loggedIn = true;
                 $state.go('dashboard');
+                $('#menu').css('display', 'block');
                 return false;
             };
             $scope.register = function () {

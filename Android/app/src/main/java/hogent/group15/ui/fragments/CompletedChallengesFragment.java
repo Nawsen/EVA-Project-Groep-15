@@ -30,7 +30,7 @@ public class CompletedChallengesFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
-    private ProgressBar progressBar;
+
 
     public CompletedChallengesFragment() {
         // Required empty public constructor
@@ -39,29 +39,18 @@ public class CompletedChallengesFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d("CompletedChallenges", "Setting progress to: " + ChallengesRepository.getInstance(getContext()).getCompletedChallengesCount());
     }
 
     @Override
     public void onStart() {
         super.onStart();
         recyclerView = (RecyclerView) this.getView().findViewById(R.id.completedChallengesListView);
-        progressBar = (ProgressBar) this.getView().findViewById(R.id.challengeProgress);
         Configuration config = getActivity().getResources().getConfiguration();
         LinearLayoutManager llm = llm = new GridLayoutManager(getContext(), config.smallestScreenWidthDp > 720 ? 2 : 1);
         recyclerView.setLayoutManager(llm);
         final RecyclerView.Adapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
         recyclerView.setAdapter(adapter);
-        ChallengesRepository.getInstance(getContext()).setOnProgressUpdate(new Consumer<Integer>() {
-            @Override
-            public void consume(Integer integer) {
-                if (progressBar != null) {
-                    progressBar.setProgress(integer);
-                }
-            }
-        });
 
-        Log.i("CompletedChallenges", "Starting refresh of completed challenges");
         ChallengesRepository.getInstance(getContext()).refreshCompletedChallenges(new Runnable() {
             @Override
             public void run() {
@@ -71,19 +60,6 @@ public class CompletedChallengesFragment extends Fragment {
                         adapter.notifyDataSetChanged();
                     }
                 });
-            }
-        });
-
-        ChallengesRepository.getInstance(getContext()).updateCompletedCount(new Callback<Integer>() {
-            @Override
-            public void success(Integer integer, Response response) {
-                Log.d("CompletedChallenges", "Setting progress to: " + integer);
-                progressBar.setProgress(integer);
-            }
-
-            @Override
-            public void failure(RetrofitError error) {
-
             }
         });
     }
