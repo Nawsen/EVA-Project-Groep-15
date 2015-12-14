@@ -69,8 +69,8 @@ app.controller('DashboardCtrl',
             $scope.acceptChallenge = function (challengeId) {
                 netService.put('/backend/api/challenges/' + $scope.selectedChallenge().id + '/accept').success(function (data, status) {
                     toasty.info({
-                        title: 'Good luck',
-                        msg: 'You\'ve accepted the challenge!'
+                        title: translation.getCurrentlySelected().challenge_good_luck,
+                        msg: translation.getCurrentlySelected().challenge_accept_message
                     });
                     initializeDashboard();
                 });
@@ -80,8 +80,8 @@ app.controller('DashboardCtrl',
                 netService.put('/backend/api/challenges/complete').success(function () {
                     $scope.hasAcceptedChallenge = false;
                     toasty.info({
-                        title: 'Congratulations',
-                        msg: 'You\'ve completed the challenge!'
+                        title: translation.getCurrentlySelected().challenge_complete_title,
+                        msg: translation.getCurrentlySelected().challenge_complete_message
                     });
                     initializeDashboard();
                 }).error(function (err) {

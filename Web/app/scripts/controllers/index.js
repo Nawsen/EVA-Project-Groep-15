@@ -1,5 +1,5 @@
-app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 'toasty', 'translation',
-    function ($scope, auth, netService, $state, toasty, translation) {
+app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 'toasty', 'translation', 'messages',
+    function ($scope, auth, netService, $state, toasty, translation, messages) {
         $scope.translation = translation;
         $scope.isLoggedIn = function () {
             return auth.isLoggedIn();
@@ -10,10 +10,15 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
                 netService.get('/backend/api/users/details').success(function (data, status) {
                     if (status == 200) {
                         $scope.user = data;
-                        toasty.success({
-                            title: 'Successfully logged in!',
-                            msg: 'Welcome ' + auth.currentUser()
-                        });
+                        if (messages.hasOwnProperty("loggedIn")) {
+                            if (messages.loggedIn) {
+                                toasty.success({
+                                    title: translation.getCurrentlySelected().login_successful,
+                                    msg: translation.getCurrentlySelected().welcome_notification + auth.currentUser()
+                                });
+                            }
+                        }
+
                         if (data.imageUrl == "" || !data.imageUrl) {
                             $scope.user.imageUrl = "http://cdn-9chat-fun.9cache.com/static/dist/images/avatar-default.png";
                         }
@@ -21,7 +26,7 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
                     }
                 });
             }
-        }
+        };
         $scope.logout = function () {
             auth.logOut();
             $state.go('login');

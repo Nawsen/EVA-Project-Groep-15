@@ -39,8 +39,12 @@ app.factory('auth', ['$http', '$window', 'NetworkingService', function ($http, $
 
     auth.login = function (user) {
         return netService.post('/backend/api/users/login', user).success(function (data) {
-            auth.saveToken(data.token);
-            auth.setHeader();
+            if (data.email){
+                $window.localStorage['eva-fbreg'] = JSON.stringify(data);
+            } else {
+                auth.saveToken(data.token);
+                auth.setHeader();
+            }
         });
 
     };

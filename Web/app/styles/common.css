@@ -191,7 +191,7 @@ h1 {
       #progressbar div div div {
         background: #dd5633;
         margin: 0;
-        width: 40%; }
+        width: 0%; }
 
 /*** CHALLENGES ***/
 .challenge-title {

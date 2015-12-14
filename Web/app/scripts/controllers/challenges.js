@@ -39,6 +39,11 @@ angular.module('eva').controller('ChallengesCtrl',
                     netService.get('/backend/api/challenges/completed').success(function (data) {
                         $scope.challenges = data;
                     });
+                    netService.get('/backend/api/users/details').success(function (data, status) {
+                        if (status == 200) {
+                            $("#innerbar").css("width", (data.completedCount * 100) / 21 + "%");
+                        }
+                    });
                 } else {
                     $state.go('login');
                 }

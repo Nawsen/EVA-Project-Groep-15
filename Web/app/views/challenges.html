@@ -17,20 +17,20 @@
 
 
 	<!-- CONTENT STARTS HERE -->
-	<div id="main">
-		<!-- PROGRESSBAR -->
-		<div id="progressbar">
-			<div>
-				<h3>{{translation.getCurrentlySelected().progress}}</h3>
-				<div>
-					<!-- Outer Progressbar-->
-					<div>
-						<!-- Inner Progressbar-->
-					</div>
-				</div>
-			</div>
-		</div>
+    <div id="main">
+        <!-- PROGRESSBAR -->
+        <div id="progressbar">
+            <div>
+                <h3>{{translation.getCurrentlySelected().progress}}</h3>
 
+                <div>
+                    <!-- Outer Progressbar-->
+                    <div id="innerbar">
+                        <!-- Inner Progressbar-->
+                    </div>
+                </div>
+            </div>
+        </div>
 		<!-- CHALLENGES -->
 		<div class="banner">
 			<h3 class="challenge-title">{{translation.getCurrentlySelected().challenges_completed}}</h3>
@@ -41,6 +41,14 @@
 						<p>{{challenge.title}}</p>
 					</div>
 				</article>
+                <div ng-show="challenges.length == 0" style="text-align: center;">
+
+                    {{translation.getCurrentlySelected().challenge_none_completed}}
+                    <br>
+
+                    <img src="../app/images/resources/sadsmiley.png" style="margin-top:20px;"/>
+
+                </div>
 			</div>
 			<div class="challenges">
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
