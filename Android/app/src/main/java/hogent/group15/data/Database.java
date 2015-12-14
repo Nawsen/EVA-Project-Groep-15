@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 
 import hogent.group15.Consumer;
 import hogent.group15.domain.Challenge;
+import hogent.group15.service.Backend;
 
 /**
  * Created by Frederik on 11/27/2015.
@@ -29,7 +30,7 @@ public class Database {
     private static Database database;
 
     private static final String DATABASE_NAME = "eva";
-    private static final int DATABASE_VERSION = 16;
+    private static final int DATABASE_VERSION = 19;
     private static final String TAG = Database.class.getName();
 
     // Enable serialized async calls
@@ -85,7 +86,11 @@ public class Database {
         task.executeOnExecutor(executorService, id);
     }
 
-    public synchronized void saveChallenges(List<Challenge> challenges) {
+    public synchronized void saveChallenges(Context context, List<Challenge> challenges) {
+        for (Challenge c : challenges) {
+            c.setJsonWebToken(Backend.getBackend(context).getToken());
+        }
+
         AsyncTask<Challenge, Void, Void> task = new AsyncTask<Challenge, Void, Void>() {
             @Override
             protected Void doInBackground(Challenge... params) {
@@ -110,7 +115,7 @@ public class Database {
         task.executeOnExecutor(executorService, challenges.toArray(new Challenge[challenges.size()]));
     }
 
-    public synchronized void getDailyChallenges(final Consumer<List<Challenge>> onFound) {
+    public synchronized void getDailyChallenges(final Context context, final Consumer<List<Challenge>> onFound) {
         AsyncTask<Void, Void, List<Challenge>> task = new AsyncTask<Void, Void, List<Challenge>>() {
             @Override
             protected List<Challenge> doInBackground(Void... params) {
@@ -124,7 +129,7 @@ public class Database {
                 String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DAY_OF_MONTH);
 
                 try {
-                    builder.where().eq("date", date);
+                    builder.where().eq("date", date).and().eq("token", Backend.getBackend(context).getToken());
                     return challengeDao.query(builder.prepare());
                 } catch (SQLException e) {
                     Log.e(TAG + ": getDailyChallenges", "Couldn't construct query", e);

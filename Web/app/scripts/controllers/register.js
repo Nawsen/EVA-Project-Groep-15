@@ -118,17 +118,19 @@ angular.module('eva').controller('RegisterCtrl',
                 });
             };
             $scope.registerFb = function () {
-                $window.localStorage.removeItem('eva-fbreg');
+
+                console.log("-----------");
+                console.log($scope.user);
                 var userObj = {
                     email: $scope.user.email,
                     firstName: $scope.user.firstName,
                     lastName: $scope.user.lastName,
-                    facebookId: $scope.user.facebookid,
+                    facebookId: $scope.user.facebookid.toString(),
                     gender: $scope.convertGender(),
                     grade: $scope.user.grade.val,
                     imageUrl: $scope.user.imageUrl
                 };
-
+                console.log(userObj);
                 auth.register(userObj).error(function (error) {
                     $scope.error = error;
                 }).then(function () {
@@ -139,5 +141,6 @@ angular.module('eva').controller('RegisterCtrl',
                         $state.go('login');
                     }
                 });
+                $window.localStorage.removeItem('eva-fbreg');
             };
         }]);
