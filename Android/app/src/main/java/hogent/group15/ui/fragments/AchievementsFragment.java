@@ -7,19 +7,25 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import hogent.group15.Consumer;
 import hogent.group15.data.AchievementsRepository;
+import hogent.group15.data.ChallengesRepository;
 import hogent.group15.domain.Achievement;
 import hogent.group15.ui.R;
+import hogent.group15.ui.StringInterpolator;
 import hogent.group15.ui.util.ListEntryAdapter;
 import retrofit.Callback;
 import retrofit.RetrofitError;
@@ -33,6 +39,14 @@ public class AchievementsFragment extends Fragment {
     @Bind(R.id.achievementsListView)
     public RecyclerView recyclerView;
 
+    @Bind(R.id.challengeProgress)
+    ProgressBar progressBar;
+
+    @Bind(R.id.challenges_left)
+    TextView challengesLeft;
+
+    private String challengesLeftUninterpolated;
+
     public AchievementsFragment() {
         // Required empty public constructor
     }
@@ -41,6 +55,33 @@ public class AchievementsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         ButterKnife.bind(this, getView());
+        challengesLeftUninterpolated = challengesLeft.getText().toString();
+        ChallengesRepository.getInstance(getContext()).setOnProgressUpdate(new Consumer<Integer>() {
+            @Override
+            public void consume(Integer integer) {
+                if (progressBar != null) {
+                    progressBar.setProgress(integer);
+                    if (integer < 21) {
+                        challengesLeft.setText(StringInterpolator.interpolate(challengesLeftUninterpolated, 21 - integer));
+                    } else {
+                        challengesLeft.setText(R.string.all_challenges_completed);
+                    }
+                }
+            }
+        });
+
+        ChallengesRepository.getInstance(getContext()).updateCompletedCount(new Callback<Integer>() {
+            @Override
+            public void success(Integer integer, Response response) {
+                Log.d("CompletedChallenges", "Setting progress to: " + integer);
+                progressBar.setProgress(integer);
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+            }
+        });
     }
 
     @Override

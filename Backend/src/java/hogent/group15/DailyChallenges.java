@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 public class DailyChallenges {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @ManyToOne

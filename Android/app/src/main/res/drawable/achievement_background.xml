@@ -2,12 +2,9 @@
     <item android:drawable="@drawable/blackboard_bg_small" />
     <item>
         <shape xmlns:android="http://schemas.android.com/apk/res/android">
-            <solid>
-
-            </solid>
             <stroke
                 android:width="7px"
-                android:color="@android:color/white"/>
+                android:color="#ffbcbcbc"/>
         </shape>
     </item>
 </layer-list>

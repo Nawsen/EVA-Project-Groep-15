@@ -12,6 +12,7 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -129,6 +130,9 @@ public class Database {
                 String date = today.get(Calendar.YEAR) + "-" + (today.get(Calendar.MONTH) + 1) + "-" + today.get(Calendar.DAY_OF_MONTH);
 
                 try {
+                    if (Backend.getBackend(context).getToken() == null) {
+                        return new ArrayList<>();
+                    }
                     builder.where().eq("date", date).and().eq("token", Backend.getBackend(context).getToken());
                     return challengeDao.query(builder.prepare());
                 } catch (SQLException e) {

@@ -1,10 +1,47 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent" android:orientation="vertical"
     tools:context="hogent.group15.ui.fragments.AchievementsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="105dp"
+        android:background="@drawable/chalkboard_green"
+        android:paddingBottom="30dp"
+        android:paddingTop="30dp">
+
+        <hogent.group15.ui.controls.EvaMuseo900TextView
+            android:id="@+id/your_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:text="@string/your_progress"
+            android:layout_alignParentLeft="true"
+            android:textColor="#FFF" />
+
+        <hogent.group15.ui.controls.EvaMuseo500TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/challenges_left"
+            android:id="@+id/challenges_left"
+            android:layout_toRightOf="@+id/your_progress" />
+
+        <ProgressBar
+            android:id="@+id/challengeProgress"
+            style="@style/EvaProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:progress="0"
+            android:layout_below="@+id/your_progress"
+            android:max="21"/>
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/achievementsListView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-</FrameLayout>
+</LinearLayout>
