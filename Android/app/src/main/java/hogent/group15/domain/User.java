@@ -15,6 +15,15 @@ public class User {
     String facebookId;
     String accessToken;
 
+    int completedCount;
+
+    public int getCompletedCount() {
+        return completedCount;
+    }
+
+    public void setCompletedCount(int completedCount) {
+        this.completedCount = completedCount;
+    }
 
     public User() {
     }

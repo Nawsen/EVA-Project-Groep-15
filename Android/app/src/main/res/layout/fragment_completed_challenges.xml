@@ -28,7 +28,8 @@
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
-            android:progress="25" />
+            android:progress="0"
+            android:max="21"/>
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
