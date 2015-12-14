@@ -1,6 +1,6 @@
 angular.module('eva').controller('ChallengesCtrl',
-    ['$scope', 'auth', '$http', '$state', 'NetworkingService', 'translation',
-        function ($scope, auth, $http, $state, netService, translation) {
+    ['$scope', 'auth', '$http', '$state', '$window', 'NetworkingService', 'translation',
+        function ($scope, auth, $http, $state, $window, netService, translation) {
             $scope.translation = translation;
             $scope.user = {
                 'firstname': 'voornaam',
@@ -24,6 +24,23 @@ angular.module('eva').controller('ChallengesCtrl',
 
             $scope.showAcceptedChallengeDetails = function () {
                 $scope.detailedChallenge = $scope.acceptedChallenge;
+            };
+
+            $scope.sharecomp = function(challenge, i){
+                if (i==3){
+                    FB.ui(
+                        {
+                            method: 'feed',
+                            name: 'I just unlocked the "' + challenge.title + '" achievement!',
+                            link: 'http://www.evavzw.be',
+                            picture: challenge.imageUrl,
+                            caption: 'Goto www.evavzw.be for more fun challenges!',
+                            description: challenge.description,
+                            message: ''
+                        }, function(response){
+                            $window.location.reload();
+                        });
+                }
             };
 
             $scope.detailedChallenge = {};

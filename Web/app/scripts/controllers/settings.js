@@ -117,6 +117,8 @@ angular.module('eva').controller('SettingsCtrl',
                 removeUnchangedProperties();
                 netService.put('/backend/api/users/update', $scope.userCleaned).then(function () {
                     $state.go('dashboard');
+                    $("#overviewButton").addClass("active");
+                    $("#settingsButton").removeClass("active");
                 });
             };
 

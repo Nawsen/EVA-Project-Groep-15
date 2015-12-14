@@ -55,10 +55,12 @@
 					<div class="modal-dialog" role="document">
 						<div class="modal-content">
 							<div class="modal-body">
+                                <a class="btnz share facebook" href="#" ng-click="sharecomp(detailedChallenge, 3)"><i class="fa fa-facebook"></i> Share</a>
+                                <br />
 								<div class="modalImage" style="text-align: center;" ng-style="{'background-image':'url(' + detailedChallenge.imageUrl + ')'}">
 									<h2 class="modalText" style="padding-top: 100px; color: #fff; text-shadow: 0px 0px 4px #000;">{{detailedChallenge.title}}</h2>
 								</div>
-								<p style="margin-top: 10px;">{{detailedChallenge.description}}</p>
+								<div style="margin-top: 10px;" ng-bind-html="detailedChallenge.description"></div>
 							</div>
 						</div>
 					</div>
