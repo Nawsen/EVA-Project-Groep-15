@@ -42,7 +42,7 @@ public class ChallengesRepository {
     }
 
     public void refreshCompletedChallenges(final Runnable callback) {
-        final ListEntry emptyEntry = new EmptyListEntry(MainMenuActivity.appContext, MainMenuActivity.appContext.getString(R.string.no_completed_challenges), android.R.drawable.ic_dialog_alert);
+        final ListEntry emptyEntry = new EmptyListEntry(context, context.getString(R.string.no_completed_challenges), android.R.drawable.ic_dialog_alert);
         completedChallenges.clear();
         Backend.getBackend(context).getCompletedChallenges(new Callback<List<Challenge>>() {
             @Override
@@ -82,6 +82,7 @@ public class ChallengesRepository {
 
     public void setOnCompletedChallengesChanged(Runnable callback) {
         onCompletedChallengesChanged = callback;
+        callback.run();
     }
 
     public void addCompletedChallenge(Challenge challenge) {

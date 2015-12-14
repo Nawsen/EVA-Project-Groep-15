@@ -16,19 +16,18 @@ import java.util.Date;
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.list.ChallengeListEntry;
 import hogent.group15.ui.controls.ListEntry;
+import hogent.group15.ui.util.ListEntryAdapter;
 
 /**
  * Created by Frederik on 10/11/2015.
  */
 @DatabaseTable(tableName = "Challenge")
-public class Challenge implements Serializable, ListEntry {
+public class Challenge implements Serializable, ListEntry<ChallengeListEntry> {
 
     @Override
-    public View retrieveView(LayoutInflater inflater, ViewGroup parent) {
-        ChallengeListEntry view = new ChallengeListEntry(inflater.getContext());
-        view.setShowAcceptChallengeButton(showAcceptChallengeButton);
-        view.updateContents(this);
-        return view;
+    public void bindToView(ListEntryAdapter.EntryViewHolder<ChallengeListEntry> holder) {
+        holder.getView().setShowAcceptChallengeButton(showAcceptChallengeButton);
+        holder.getView().updateContents(this);
     }
 
     public enum Difficulty {

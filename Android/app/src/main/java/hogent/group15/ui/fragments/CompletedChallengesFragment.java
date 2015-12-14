@@ -1,12 +1,14 @@
 package hogent.group15.ui.fragments;
 
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -21,7 +23,7 @@ import hogent.group15.ui.util.ListEntryAdapter;
  */
 public class CompletedChallengesFragment extends Fragment {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
 
     public CompletedChallengesFragment() {
         // Required empty public constructor
@@ -30,9 +32,12 @@ public class CompletedChallengesFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        listView = (ListView) this.getView().findViewById(R.id.completedChallengesListView);
-        final BaseAdapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
-        listView.setAdapter(adapter);
+        recyclerView = (RecyclerView) this.getView().findViewById(R.id.completedChallengesListView);
+        Configuration config = getActivity().getResources().getConfiguration();
+        LinearLayoutManager llm = llm = new GridLayoutManager(getContext(), config.smallestScreenWidthDp > 720 ? 2 : 1);
+        recyclerView.setLayoutManager(llm);
+        final RecyclerView.Adapter adapter = new ListEntryAdapter(getActivity(), ChallengesRepository.getInstance(getContext()).getCompletedChallenges());
+        recyclerView.setAdapter(adapter);
 
         Log.i("CompletedChallenges", "Starting refresh of completed challenges");
         ChallengesRepository.getInstance(getContext()).refreshCompletedChallenges(new Runnable() {

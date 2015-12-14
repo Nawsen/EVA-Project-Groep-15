@@ -11,18 +11,27 @@ angular.module('eva').controller('LoginCtrl',
                 password: ""
             };
             //check if user is already logged in
-            if (auth.isLoggedIn()) {
+            if (auth.isLoggedIn()){
                 $state.go('dashboard');
                 $scope.$emit('initSideBar');
             }
+            if (messages.hasOwnProperty("email") && messages.email != "") {
+                toasty.success({
+                    title: translation.getCurrentlySelected().register_successful,
+                    msg: translation.getCurrentlySelected().register_successful_message
+                });
+                delete messages["email"];
+            }
             $scope.login = function () {
                 auth.login($scope.user).error(function (error) {
+                    toasty.error({
+                        title: translation.getCurrentlySelected().login_error
+                    });
                     $scope.error = error;
                     angular.element(document.querySelector('#emailwarn')).text("Wrong email!");
                     angular.element(document.querySelector('#passwordwarn')).text("Wrong password!");
                 }).then(function () {
-                    angular.element(document.querySelector('#emailwarn')).text("");
-                    angular.element(document.querySelector('#passwordwarn')).text("");
+                    messages.loggedIn = true;
                     $state.go('dashboard');
                     $scope.$emit('initSideBar');
                 });
@@ -54,10 +63,15 @@ angular.module('eva').controller('LoginCtrl',
                     });
                 }, {'scope': 'email,public_profile,user_friends,user_about_me,user_location'});
 
+                Facebook.login(function(response) {
+                    $scope.checkFacebookStatus();
+                },{'scope': 'email,public_profile,user_friends'});
+                $messages.loggedIn = true;
                 $state.go('dashboard');
                 return false;
             }
             $scope.register = function () {
+                //TODO implement facebook api
                 $state.go('register');
                 return false;
             }

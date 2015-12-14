@@ -1,25 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-    android:layout_height="wrap_content" android:background="@drawable/photo_bg"
-    android:paddingLeft="8dp" android:paddingRight="8dp" android:paddingTop="0dp" android:paddingBottom="0dp">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/photo_bg"
+    android:paddingBottom="4dp"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="4dp">
 
     <ImageView
-        android:padding="5dp" android:id="@+id/challenge_image"
-        android:layout_width="match_parent" android:adjustViewBounds="true"
-        android:layout_height="wrap_content" android:scaleType="fitCenter" android:layout_gravity="center"/>
+        android:id="@+id/challenge_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:adjustViewBounds="true"
+        android:padding="5dp"
+        android:scaleType="fitXY" />
 
     <hogent.group15.ui.controls.EvaMuseo500TextView
-        android:layout_width="wrap_content" android:layout_height="wrap_content"
-        android:id="@+id/challenge_title" android:layout_marginTop="10dp" android:textStyle="bold"
-        android:textSize="@dimen/h2_font_size" android:text="Title" android:layout_centerVertical="true"
-        style="@style/textViewWithBlackShadow" android:layout_gravity="center"
-        android:gravity="center"/>
+        android:id="@+id/challenge_title"
+        style="@style/textViewWithBlackShadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Title"
+        android:textSize="@dimen/h2_font_size"
+        android:textStyle="bold" />
 
     <hogent.group15.ui.controls.EvaMuseo300TextView
+        android:id="@+id/challenge_score"
+        style="@style/textViewWithBlackShadow"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" android:text="@string/challenge_score_notification"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|right"
         android:layout_marginRight="10dp"
-        android:id="@+id/challenge_score" style="@style/textViewWithBlackShadow"
-        android:layout_gravity="top|right" android:textSize="18sp" android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:text="@string/challenge_score_notification"
+        android:textSize="18sp" />
 </FrameLayout>

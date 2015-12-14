@@ -2,8 +2,13 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('RegisterCtrl',
-    ['$scope', '$location', '$window', '$http', '$state', 'auth', 'messages', 'translation', 'toasty',
-        function ($scope, $location, $window, $http, $state, auth, messages, translation, toasty) {
+    ['$scope', '$location', '$http', '$state', 'auth', 'messages', 'translation', 'toasty',
+        function ($scope, $location, $http, $state, auth, messages, translation, toasty) {
+            $scope.translation = translation;
+            $scope.showHelpMail = false;
+            $scope.showHelpPassword = false;
+            $scope.showHelpRepeatPassword = false;
+            $scope.selectedTab = 'male';
             $scope.values = [
                 {
                     "val": "OMNIVORE",
@@ -90,8 +95,21 @@ angular.module('eva').controller('RegisterCtrl',
 
                 messages.email = userObj.email;
 
-                auth.register(userObj).error(function (error) {
-                    $scope.error = error;
+                auth.register(userObj).error(function (error, status) {
+                    if (status == 400) {
+                        toasty.error({
+                            title: translation.getCurrentlySelected().error,
+                            msg: translation.getCurrentlySelected().register_already_exists,
+                            timeout: 0
+                        });
+                    } else if (status == 500) {
+                        toasty.error({
+                            title: translation.getCurrentlySelected().error,
+                            msg: translation.getCurrentlySelected().internal_error,
+                            timeout: 0
+                        });
+                    }
+
                 }).then(function () {
                     $state.go('login');
                 });

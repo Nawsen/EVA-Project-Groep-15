@@ -1,7 +1,9 @@
 package hogent.group15.ui.fragments;
 
 import android.content.Context;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import java.util.List;
 
@@ -29,9 +31,22 @@ public class NextChallenge extends FrameLayout {
     public NextChallenge(Context context) {
         super(context);
         inflate(getContext(), R.layout.fragment_challenge_next, this);
-
         ButterKnife.bind(this);
         refreshChallenges();
+        updateLayout();
+    }
+
+    private void updateLayout() {
+        if(findViewById(R.id.fragment_large_land_container) == null) {
+            return;
+        }
+
+//        int width = firstChallenge.getLayoutParams().width;
+//        int height = firstChallenge.getLayoutParams().height;
+//        thirdChallenge.setLayoutParams(new RelativeLayout.LayoutParams(width, height));
+////        thirdChallenge.getLayoutParams().width = width;
+////        thirdChallenge.getLayoutParams().height = height;
+//        thirdChallenge.requestLayout();
     }
 
     public void refreshChallenges() {
