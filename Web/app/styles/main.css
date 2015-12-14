@@ -260,7 +260,36 @@ label.eva-input:hover {
 .menu{
     display: none;
 }
-
+@media (max-width: 1200px) {
+    #challenges {
+        display: block;
+    }
+    #challenges article {
+        max-width: calc(100% - 5px);
+        margin-right: 5px;
+    }
+    #achievements #achievement-box {
+        display: block;
+    }
+    #achievements #achievement-box .achievement {
+        max-width: calc(100% - 5px);
+        width: 100%;
+        margin-right: 5px;
+    }
+    #achievements #achievement-box .achievement .achievement-image h5 {
+        padding: 0px 0px 5px 10px;
+    }
+    #achievements #achievement-box .achievement .achievement-image p {
+        font-size: 12px;
+        padding: 5px;
+    }
+    .margin-left {
+        margin-left: 0px;
+    }
+    .bannertext {
+        margin: 3% 15px;
+    }
+}
 @media (max-width: 770px) {
     #challenges {
         display: block;
