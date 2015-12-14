@@ -62,7 +62,8 @@ angular.module('eva').factory('translation', function () {
         challenge_good_luck: "Good luck",
         challenge_accept_message: "You've accepted the challenge!",
         challenge_complete_title: "Congratulations!",
-        challenge_complete_message: "You completed the challenge!"
+        challenge_complete_message: "You completed the challenge!",
+        challenge_none_completed: "No completed challenges yet."
     };
     strings.dutch = {
         edit: "Pas aan",
@@ -123,7 +124,8 @@ angular.module('eva').factory('translation', function () {
         challenge_good_luck: "Succes",
         challenge_accept_message: "Je hebt de uitdaging aanvaard!",
         challenge_complete_title: "Gefeliciteerd!",
-        challenge_complete_message: "Je hebt de uitdaging voltooid!"
+        challenge_complete_message: "Je hebt de uitdaging voltooid!",
+        challenge_none_completed: "Je hebt nog geen uitdagingen voltooid."
     };
     strings.french = {
         edit: "Editer",
@@ -184,7 +186,8 @@ angular.module('eva').factory('translation', function () {
         challenge_good_luck: "Bonne chance",
         challenge_accept_message: "Vous avez accepté le défi!",
         challenge_complete_title: "Félicitations!",
-        challenge_complete_message: "Vous avez terminé le défi!"
+        challenge_complete_message: "Vous avez terminé le défi!",
+        challenge_none_completed: "Vous n'êtes pas encore terminé un défi."
     };
 
 
