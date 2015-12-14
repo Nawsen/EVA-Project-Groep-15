@@ -19,6 +19,16 @@ public class LoginResponse implements Serializable {
     int gender;
     String pictureUrl = "";
 
+    String fbAccessToken;
+
+    public String getFbAccessToken() {
+        return fbAccessToken;
+    }
+
+    public void setFbAccessToken(String fbAccessToken) {
+        this.fbAccessToken = fbAccessToken;
+    }
+
     private LoginResponseType type = LoginResponseType.REGULAR;
 
     public LoginResponse() {

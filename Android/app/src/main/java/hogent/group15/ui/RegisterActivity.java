@@ -21,9 +21,11 @@ import hogent.group15.service.LoginResponse;
 import hogent.group15.ui.fragments.RegisterMainFragment;
 import hogent.group15.ui.fragments.RegisterPasswordFragment;
 import hogent.group15.ui.util.ActionBarConfig;
+import retrofit.Callback;
 import retrofit.ResponseCallback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
+import retrofit.mime.TypedByteArray;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -39,6 +41,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Mode currentMode = Mode.MAIN;
 
     private boolean isFacebookRegister;
+
+    private LoginResponse fbLoginData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class RegisterActivity extends AppCompatActivity {
                 LoginResponse lr = (LoginResponse) getIntent().getSerializableExtra("facebookData");
                 Bundle b = new Bundle();
                 isFacebookRegister = true;
+                fbLoginData = lr;
                 b.putSerializable("facebookData", lr);
                 if (mainFragment != null)
                     mainFragment.setArguments(b);
@@ -101,35 +106,68 @@ public class RegisterActivity extends AppCompatActivity {
     public Button registerButton;
 
     @OnClick(R.id.register_submit)
-    public void onRegister(Button registerButton) {
-        if (currentMode == Mode.MAIN && mainFragment.validate()) {
-            if (passwordFragment == null) {
-                passwordFragment = new RegisterPasswordFragment();
-            }
-
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, passwordFragment)
-                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).commit();
-            registerButton.setText(R.string.register_register_button);
-            currentMode = Mode.PASSWORD;
-        } else if (isFacebookRegister) {
+    public void onRegister(final Button registerButton) {
+        if (isFacebookRegister) {
             User user = new User(mainFragment.email.getText().toString(), "", mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
             doRegister(user);
+
+        } else if (currentMode == Mode.MAIN && mainFragment.validate()) {
+            doPreRegister(mainFragment.email.getText().toString(), new ResponseCallback() {
+
+                @Override
+                public void failure(RetrofitError error) {
+                    if (error.getMessage() != null) {
+                        String body = new String(((TypedByteArray) error.getResponse().getBody()).getBytes());
+                        if (body.equalsIgnoreCase("used")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mainFragment.email.setError("This email is already in use!");
+                                }
+                            });
+                        } else {
+                            success(null);
+                        }
+                    }
+                }
+
+                @Override
+                public void success(Response response) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (passwordFragment == null) {
+                                passwordFragment = new RegisterPasswordFragment();
+                            }
+
+                            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, passwordFragment)
+                                    .setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).commit();
+                            registerButton.setText(R.string.register_register_button);
+                            currentMode = Mode.PASSWORD;
+                        }
+                    });
+                }
+            });
         } else if (currentMode == Mode.PASSWORD && passwordFragment.validate()) {
             User user = new User(mainFragment.email.getText().toString(), passwordFragment.getPassword(), mainFragment.firstName.getText().toString(), mainFragment.lastName.getText().toString(), mainFragment.getSelectedSex(), mainFragment.getSelectedGrade());
             doRegister(user);
         }
     }
 
-    private void doRegister(User user) {
-        Backend.getBackend(this).registerUser(user, new ResponseCallback() {
+    private void doPreRegister(String email, final ResponseCallback callback) {
+        User u = new User();
+        u.setEmail(email);
+        registerButton.setEnabled(false);
+        Backend.getBackend(this).registerUser(u, new ResponseCallback() {
             @Override
             public void success(Response response) {
-                if(isFacebookRegister) {
-                    LoginManager.getInstance().logOut();
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                } else {
-                    startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
-                }
+                callback.success(response);
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        registerButton.setEnabled(true);
+                    }
+                });
             }
 
             @Override
@@ -137,7 +175,47 @@ public class RegisterActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        registerButton.setEnabled(true);
+                    }
+                });
+                callback.failure(error);
+            }
+        });
+    }
+
+    private void doRegister(User user) {
+        registerButton.setEnabled(false);
+        Backend.getBackend(this).registerUser(user, new ResponseCallback() {
+            @Override
+            public void success(Response response) {
+                if (isFacebookRegister) {
+                    if (fbLoginData != null && fbLoginData.getFbAccessToken() != null) {
+                        Backend.getBackend(getApplicationContext()).loginUser(new User(String.valueOf(fbLoginData.getId()), fbLoginData.getFbAccessToken(), true),
+                                new Callback<LoginResponse>() {
+                                    @Override
+                                    public void success(LoginResponse loginResponse, Response response) {
+                                        startActivity(new Intent(getApplicationContext(), MainMenuActivity.class));
+                                    }
+
+                                    @Override
+                                    public void failure(RetrofitError error) {
+                                        Log.i("RETROFIT", "Retrofit failed to login!");
+                                    }
+                                });
+                    }
+                } else {
+                    startActivity(new Intent(getApplicationContext(), LoginActivity.class).putExtra("username", mainFragment.email.getText().toString()));
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
                         Toast.makeText(getApplicationContext(), R.string.network_error, Toast.LENGTH_LONG).show();
+                        registerButton.setEnabled(true);
                     }
                 });
             }
