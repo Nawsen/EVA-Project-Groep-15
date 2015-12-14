@@ -81,7 +81,9 @@ angular.module('eva').controller('SettingsCtrl',
                 netService.get('/backend/api/users/details').success(function (data) {
                     $scope.userOld = data;
                     $scope.userNew = data;
-                    if (data.facebookId != 0){
+                    console.log(data);
+                    $scope.facebook = false;
+                    if (data.facebook){
                         $scope.facebook = true;
                     }
                     for (var property in $scope.values) {
