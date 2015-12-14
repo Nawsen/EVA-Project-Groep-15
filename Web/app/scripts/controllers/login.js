@@ -69,7 +69,7 @@ angular.module('eva').controller('LoginCtrl',
                 messages.loggedIn = true;
                 $state.go('dashboard');
                 return false;
-            }
+            };
             $scope.register = function () {
                 //TODO implement facebook api
                 $state.go('register');

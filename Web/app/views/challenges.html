@@ -41,6 +41,14 @@
 						<p>{{challenge.title}}</p>
 					</div>
 				</article>
+                <div ng-show="challenges.length == 0" style="text-align: center;">
+
+                    {{translation.getCurrentlySelected().challenge_none_completed}}
+                    <br>
+
+                    <img src="../app/images/resources/sadsmiley.png" style="margin-top:20px;"/>
+
+                </div>
 			</div>
 			<div class="challenges">
 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

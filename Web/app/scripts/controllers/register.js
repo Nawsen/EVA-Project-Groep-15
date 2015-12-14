@@ -2,8 +2,8 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('RegisterCtrl',
-    ['$scope', '$location', '$http', '$state', 'auth', 'messages', 'translation', 'toasty',
-        function ($scope, $location, $http, $state, auth, messages, translation, toasty) {
+    ['$scope', '$location', '$http', '$state', 'auth', 'messages', 'translation', 'toasty', '$window',
+        function ($scope, $location, $http, $state, auth, messages, translation, toasty, $window) {
             $scope.translation = translation;
             $scope.showHelpMail = false;
             $scope.showHelpPassword = false;
