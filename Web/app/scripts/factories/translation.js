@@ -1,4 +1,4 @@
-angular.module('eva').factory('translation', function () {
+angular.module('eva').factory('translation', function (messages) {
     var strings = {};
 
 
@@ -15,6 +15,7 @@ angular.module('eva').factory('translation', function () {
         challenge_score_notification: "Difficulty: ",
         accept_challenge: "Accept this challenge!",
         complete_challenge: "I completed this challenge!",
+        cancel_challenge: "Cancel",
         choose_challenge: "Choose a challenge:",
         welcome_notification: "Welcome ",
         get_challenge: "Look at challenge",
@@ -63,6 +64,8 @@ angular.module('eva').factory('translation', function () {
         challenge_accept_message: "You've accepted the challenge!",
         challenge_complete_title: "Congratulations!",
         challenge_complete_message: "You completed the challenge!",
+        challenge_cancel_title: "To bad :(",
+        challenge_cancel_message: "We are sorry you canceled the challenge.",
         challenge_none_completed: "No completed challenges yet."
     };
     strings.dutch = {
@@ -77,6 +80,7 @@ angular.module('eva').factory('translation', function () {
         challenge_score_notification: "Moeilijkheid: ",
         accept_challenge: "Ga de uitdaging aan!",
         complete_challenge: "Ik heb de uitdaging voltooid!",
+        cancel_challenge: "Annuleer",
         choose_challenge: "Kies een uitdaging:",
         welcome_notification: "Welkom ",
         get_challenge: "Bekijk uitdaging",
@@ -125,6 +129,8 @@ angular.module('eva').factory('translation', function () {
         challenge_accept_message: "Je hebt de uitdaging aanvaard!",
         challenge_complete_title: "Gefeliciteerd!",
         challenge_complete_message: "Je hebt de uitdaging voltooid!",
+        challenge_cancel_title: "Jammer :(",
+        challenge_cancel_message: "We vinden het jammer dat je de uitdaging gestopt hebt.",
         challenge_none_completed: "Je hebt nog geen uitdagingen voltooid."
     };
     strings.french = {
@@ -139,6 +145,7 @@ angular.module('eva').factory('translation', function () {
         challenge_score_notification: "Difficulté: ",
         accept_challenge: "Fait le défi",
         complete_challenge: "Je complété le défi!",
+        cancel_challenge: "Annuler",
         choose_challenge: "Choisi un défi:",
         welcome_notification: "Bienvenu ",
         get_challenge: "Regarde au défi",
@@ -187,24 +194,27 @@ angular.module('eva').factory('translation', function () {
         challenge_accept_message: "Vous avez accepté le défi!",
         challenge_complete_title: "Félicitations!",
         challenge_complete_message: "Vous avez terminé le défi!",
+        challenge_cancel_title: "Regrettable :(",
+        challenge_cancel_message: "Désolé vous avez arrêté le défi.",
         challenge_none_completed: "Vous n'êtes pas encore terminé un défi."
     };
 
 
     strings.currentlySelected = strings.english;
+    messages.currentlySelected = "english";
     strings.getCurrentlySelected = function () {
         return strings.currentlySelected;
     };
     strings.selectEnglish = function () {
         strings.currentlySelected = strings.english;
-        console.log(strings.getCurrentlySelected());
-    };
+        messages.currentlySelected = "english";    };
     strings.selectDutch = function () {
         strings.currentlySelected = strings.dutch;
-        console.log(strings.getCurrentlySelected());
+        messages.currentlySelected = "dutch";
     };
     strings.selectFrench = function () {
         strings.currentlySelected = strings.french;
+        messages.currentlySelected = "french";
     };
 
 

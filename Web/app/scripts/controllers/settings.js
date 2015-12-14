@@ -2,8 +2,8 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('SettingsCtrl',
-    ['$scope', '$location', 'NetworkingService', 'translation', '$state', 'translation',
-        function ($scope, $location, netService, translation, $state, translation) {
+    ['$scope', '$location', 'NetworkingService', 'translation', '$state', 'translation', 'messages', 'grades',
+        function ($scope, $location, netService, translation, $state, translation, messages, grades) {
             $scope.translation = translation;
             $scope.showHelpMail = false;
             $scope.passwordFocused = false;
@@ -22,28 +22,11 @@ angular.module('eva').controller('SettingsCtrl',
                 }
             };
             $scope.showHelpRepeatPassword = false;
-            $scope.values = [
-                {
-                    "val": "OMNIVORE",
-                    "text": translation.getCurrentlySelected().grade_omnivore
-                },
-                {
-                    "val": "PESCETARIAR",
-                    "text": translation.getCurrentlySelected().grade_pescetariar
-                },
-                {
-                    "val": "PARTTIME_VEGETARIAN",
-                    "text": translation.getCurrentlySelected().grade_parttime_vegetarian
-                },
-                {
-                    "val": "VEGETARIAN",
-                    "text": translation.getCurrentlySelected().grade_vegetarian
-                },
-                {
-                    "val": "VEGAN",
-                    "text": translation.getCurrentlySelected().grade_vegan
-                }
-            ];
+
+            $scope.grades = grades;
+            $scope.values = grades.values;
+
+            $scope.options = {};
             $scope.userOld = {
                 email: "",
                 password: "",
@@ -63,6 +46,9 @@ angular.module('eva').controller('SettingsCtrl',
             $scope.userCleaned = {};
 
 
+            $scope.translate = function (name) {
+                return translation.getCurrentlySelected()["grade_" + name.toLowerCase()]
+            };
             /**
              * Niet noodzakelijk, heb ik gewoon geschreven voor cleanliness.
              */
@@ -78,6 +64,7 @@ angular.module('eva').controller('SettingsCtrl',
             }
 
             function loadUserData() {
+                console.log($scope.grades.getTranslation("OMNIVORE"));
                 netService.get('/backend/api/users/details').success(function (data) {
                     $scope.userOld = data;
                     $scope.userNew = data;
@@ -89,10 +76,22 @@ angular.module('eva').controller('SettingsCtrl',
                     for (var property in $scope.values) {
                         if ($scope.values.hasOwnProperty(property)) {
                             if ($scope.values[property].val == data.grade) {
+                                console.log($scope.values[property]);
                                 $scope.userOld.grade = $scope.values[property];
                                 $scope.userNew.grade = $scope.values[property];
+                                console.log($scope.userNew);
                             }
                         }
+                    }
+                    if (messages.currentlySelected == "english") {
+                        console.log('en');
+                        translation.selectEnglish();
+                    } else if (messages.currentlySelected == "dutch") {
+                        console.log('du');
+                        translation.selectDutch();
+                    } else if (messages.currentlySelected == "french") {
+                        console.log('fr');
+                        translation.selectFrench();
                     }
                 });
             }
@@ -125,6 +124,8 @@ angular.module('eva').controller('SettingsCtrl',
             $scope.sendData = function () {
                 $scope.userNew.grade = $scope.userNew.grade.val;
                 removeUnchangedProperties();
+                console.log("user cleaned:");
+                console.log($scope.userCleaned);
 
                 netService.put('/backend/api/users/update', $scope.userCleaned).then(function () {
                     $state.go('dashboard');

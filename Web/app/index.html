@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.min.css">
     <link rel="stylesheet" href="bower_components/angular-toasty/dist/angular-toasty.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <div id="fb-root"></div>
 </head>
 
 <body ng-app="eva">
@@ -39,6 +40,7 @@
                             <li><a id="completedButton" href="" ng-click="completed()">{{translation.getCurrentlySelected().challenges}}</a></li>
                             <li><a id="settingsButton" href="" ng-click="settings()">{{translation.getCurrentlySelected().settings}}</a></li>
                         </ul>
+                        <br />
                         <div class="col-lg-12 ">
                             <span class="col-lg-2 col-lg-offset-3">
                                 <img ng-click="translation.selectEnglish()" src="images/resources/gb.png" style="cursor:pointer">
@@ -52,7 +54,8 @@
                                 <img ng-click="translation.selectFrench()" src="images/resources/fr.png" style="cursor:pointer">
                             </span>
                         </div>
-
+                        <br />
+                        <center><div class="fb-like" data-href="https://www.facebook.com/evavzw/?fref=ts" data-width="10" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></center>
                     </nav>
 
                 </md-content>
@@ -74,6 +77,7 @@
 <script src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/angular-toasty/dist/angular-toasty.min.js"></script>
 <script src="bower_components/angular-facebook/lib/angular-facebook.js"></script>
+<script src="bower_components/angulike/angulike.js"></script>
 <script src="scripts/app.js"></script>
 <script src="scripts/controllers/index.js"></script>
 <script src="scripts/factories/challenges.js"></script>
@@ -81,6 +85,7 @@
 <script src="scripts/factories/messages.js"></script>
 <script src="scripts/factories/networkservice.js"></script>
 <script src="scripts/factories/translation.js"></script>
+<script src="scripts/factories/grades.js"></script>
 <script src="scripts/controllers/login.js"></script>
 <script src="scripts/controllers/dashboard.js"></script>
 <script src="scripts/controllers/register.js"></script>
