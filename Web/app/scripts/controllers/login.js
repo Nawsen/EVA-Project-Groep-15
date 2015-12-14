@@ -36,11 +36,9 @@ angular.module('eva').controller('LoginCtrl',
                     $('#menu').css('display', 'block');
                 });
 
-
                 $scope.email = "";
                 $scope.password = "";
                 return false;
-
             };
 
             $scope.facebooklogin = function () {
