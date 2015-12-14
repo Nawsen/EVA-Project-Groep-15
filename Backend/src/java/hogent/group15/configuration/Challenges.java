@@ -4,12 +4,14 @@ import hogent.group15.Achievement;
 import hogent.group15.AchievementGenerator;
 import hogent.group15.Challenge;
 import hogent.group15.ChallengeCache;
+import hogent.group15.CompletedChallenge;
 import hogent.group15.DailyChallenges;
 import hogent.group15.User;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.stream.Collectors;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -58,7 +60,13 @@ public class Challenges {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Challenge> getCompletedChallenges(@HeaderParam("email") String email) {
 	User user = em.find(User.class, email);
-	return user.getCompletedChallenges();
+	List<Challenge> challenges = new ArrayList<>();
+	
+	for (CompletedChallenge completed : user.getCompletedChallenges()) {
+	    challenges.add(completed.getChallenge());
+	}
+	
+	return challenges;
     }
 
     @Path("daily")
@@ -151,9 +159,8 @@ public class Challenges {
 	    return Response.notModified().build();
 	}
 
-	if (!user.getCompletedChallenges().contains(user.getCurrentChallenge())) {
-	    user.getCompletedChallenges().add(user.getCurrentChallenge());
-	    user.getCurrentChallenge().getUsers().add(user);
+	if (!user.getCompletedChallenges().stream().map(CompletedChallenge::getChallenge).anyMatch(c -> c.equals(user.getCurrentChallenge()))) {
+	    user.getCompletedChallenges().add(new CompletedChallenge(user.getCurrentChallenge()));
 	}
 	
 	user.setCurrentChallenge(null);

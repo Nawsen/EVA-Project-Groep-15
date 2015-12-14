@@ -21,7 +21,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -109,8 +108,8 @@ public class User implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private Challenge currentChallenge;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    private List<Challenge> completedChallenges;
+    @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    private List<CompletedChallenge> completedChallenges;
 
     @Lob
     private byte[] salt = new byte[32];
@@ -214,11 +213,11 @@ public class User implements Serializable {
 	this.currentChallenge = currentChallenge;
     }
 
-    public List<Challenge> getCompletedChallenges() {
+    public List<CompletedChallenge> getCompletedChallenges() {
 	return completedChallenges;
     }
 
-    public void setCompletedChallenges(List<Challenge> completedChallenges) {
+    public void setCompletedChallenges(List<CompletedChallenge> completedChallenges) {
 	this.completedChallenges = completedChallenges;
     }
 
