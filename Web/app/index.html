@@ -5,8 +5,8 @@
     <title>Eva vzw</title>
     <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/common.css">
+    <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="bower_components/bootstrap-social/bootstrap-social.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.min.css">
@@ -19,8 +19,8 @@
 
 <div ng-controller="IndexCtrl" layout="column" ng-cloak>
     <div id="wrapper">
-
-        <div id="nav" layout="row" flex ng-show="isLoggedIn()" style="width: 305px;">
+        <span id="menu" ng-click="mobile()" class="menu glyphicon glyphicon-align-justify"></span>
+        <div id="nav" layout="row" flex ng-show="isLoggedIn()">
             <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left"
                         md-is-locked-open="$mdMedia('gt-md')">
                 <md-content layout-padding>
@@ -41,6 +41,7 @@
                             <li><a id="settingsButton" href="" ng-click="settings()">{{translation.getCurrentlySelected().settings}}</a></li>
                         </ul>
                         <br />
+                        <center>
                         <div class="col-lg-12 ">
                             <span class="col-lg-2 col-lg-offset-3">
                                 <img ng-click="translation.selectEnglish()" src="images/resources/gb.png" style="cursor:pointer">
@@ -55,9 +56,9 @@
                             </span>
                         </div>
                         <br />
-                        <center><div class="fb-like" data-href="https://www.facebook.com/evavzw/?fref=ts" data-width="10" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></center>
-                    </nav>
+                        <div class="fb-like" data-href="https://www.facebook.com/evavzw/?fref=ts" data-width="10" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div></center>
 
+                    </nav>
                 </md-content>
             </md-sidenav>
         </div>

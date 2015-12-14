@@ -64,6 +64,11 @@ angular.module('eva').controller('SettingsCtrl',
             }
 
             function loadUserData() {
+                netService.get('/backend/api/users/details').success(function (data, status) {
+                    if (status == 200) {
+                        $("#innerbar").css("width", (data.completedCount * 100) / 21 + "%");
+                    }
+                });
                 console.log($scope.grades.getTranslation("OMNIVORE"));
                 netService.get('/backend/api/users/details').success(function (data) {
                     $scope.userOld = data;

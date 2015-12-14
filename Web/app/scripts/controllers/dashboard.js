@@ -74,7 +74,7 @@ app.controller('DashboardCtrl',
                     FB.ui(
                         {
                             method: 'feed',
-                            name: 'I just unlocked the "' + challenge.title + '" achievement!',
+                            name: 'I just unlocked the "' + challenge.name + '" achievement!',
                             link: 'http://www.evavzw.be',
                             picture: challenge.imageUrl,
                             caption: 'Goto www.evavzw.be for more fun challenges!',

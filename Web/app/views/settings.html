@@ -1,6 +1,19 @@
 <div id="wrapper" class="margin-left register-page">
     <div id="main">
-        <div class="col-lg-4 col-md-4 col-md-offset-4 col-lg-offset-4">
+        <!-- PROGRESSBAR -->
+        <div id="progressbar">
+            <div>
+                <h3>{{translation.getCurrentlySelected().progress}}</h3>
+
+                <div>
+                    <!-- Outer Progressbar-->
+                    <div id="innerbar">
+                        <!-- Inner Progressbar-->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bannertext">
             <h2>{{translation.getCurrentlySelected().settings}}</h2>
             <form class="form-group" name="settingsForm">
                 <div class="form-group">
