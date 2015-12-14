@@ -74,6 +74,7 @@ public class UserWriter implements MessageBodyWriter<User> {
 	    jsonCha.add("imageUrl", t.getImageUrl());
 	}
 
+	jsonCha.add("facebook", t.getFacebookId() != 0);
 	int i = t.getCompletedChallenges().size();
 	jsonCha.add("completedCount", i);
 
