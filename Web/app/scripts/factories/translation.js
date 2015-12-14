@@ -13,7 +13,8 @@ angular.module('eva').factory('translation', function () {
         challenges_completed:"Completed challenges",
         achievements_all: "All achievements",
         challenge_score_notification: "Difficulty: ",
-        accept_challenge: "Accept challenge",
+        accept_challenge: "Accept this challenge!",
+        complete_challenge: "I completed this challenge!",
         choose_challenge: "Choose a challenge:",
         welcome_notification: "Welcome ",
         get_challenge: "Look at challenge",
@@ -26,6 +27,7 @@ angular.module('eva').factory('translation', function () {
         login_button: "Login",
         login_or: "Or",
         login_successful: "Login successful",
+        login_error: "Something's wrong! Please correct you credentials.",
         register: "Register",
         register_personal_info_label: "Personal Info",
         register_first_name: "First Name",
@@ -50,13 +52,17 @@ angular.module('eva').factory('translation', function () {
         action_bar_search: "Search",
         action_bar_share: "Share",
         challenge: "Challenge",
-        current_challenge: "Current challenge",
+        current_challenge: "Your current challenge",
         logout: "Logout",
         grade_omnivore: "Omnivore",
         grade_pescetariar: "Pescetariar (no meat, fish ok)",
         grade_parttime_vegetarian: "Parttime vegetarian (at least 3 times per week vegetarian)",
         grade_vegetarian: "Vegetarian (no meat or fish)",
-        grade_vegan: "Vegan (no animal products)"
+        grade_vegan: "Vegan (no animal products)",
+        challenge_good_luck: "Good luck",
+        challenge_accept_message: "You've accepted the challenge!",
+        challenge_complete_title: "Congratulations!",
+        challenge_complete_message: "You completed the challenge!"
     };
     strings.dutch = {
         edit: "Pas aan",
@@ -68,7 +74,8 @@ angular.module('eva').factory('translation', function () {
         challenges_completed:"Voltooide uitdagingen",
         achievements_all: "Alle prestaties",
         challenge_score_notification: "Moeilijkheid: ",
-        accept_challenge: "Uitdaging aangaan",
+        accept_challenge: "Ga de uitdaging aan!",
+        complete_challenge: "Ik heb de uitdaging voltooid!",
         choose_challenge: "Kies een uitdaging:",
         welcome_notification: "Welkom ",
         get_challenge: "Bekijk uitdaging",
@@ -81,6 +88,7 @@ angular.module('eva').factory('translation', function () {
         login_button: "Aanmelden",
         login_or: "Of",
         login_successful: "Succesvol aangemeld",
+        login_error: "Er is iets mis! Vul uw gegevens opnieuw in alsjeblieft.",
         register: "Registreren",
         register_personal_info_label: "Persoonlijke gegevens",
         register_first_name: "Voornaam",
@@ -105,13 +113,17 @@ angular.module('eva').factory('translation', function () {
         action_bar_search: "Zoeken",
         action_bar_share: "Delen",
         challenge: "Uitdaging",
-        current_challenge: "Huidige uitdaging",
+        current_challenge: "Jouw huidige uitdaging",
         logout: "Afmelden",
         grade_omnivore: "Omnivoor",
         grade_pescetariar: "Pescotariër (geen vlees, wel vis)",
         grade_parttime_vegetarian: "Parttime-vegetariër (minstens 3 keer per week vegetarisch)",
         grade_vegetarian: "Vegetariër (geen vlees of vis)",
-        grade_vegan: "Veganist (geen dierlijke producten)"
+        grade_vegan: "Veganist (geen dierlijke producten)",
+        challenge_good_luck: "Succes",
+        challenge_accept_message: "Je hebt de uitdaging aanvaard!",
+        challenge_complete_title: "Gefeliciteerd!",
+        challenge_complete_message: "Je hebt de uitdaging voltooid!"
     };
     strings.french = {
         edit: "Editer",
@@ -124,6 +136,7 @@ angular.module('eva').factory('translation', function () {
         achievements_all: "Acquis",
         challenge_score_notification: "Difficulté: ",
         accept_challenge: "Fait le défi",
+        complete_challenge: "Je complété le défi!",
         choose_challenge: "Choisi un défi:",
         welcome_notification: "Bienvenu ",
         get_challenge: "Regarde au défi",
@@ -136,6 +149,7 @@ angular.module('eva').factory('translation', function () {
         login_button: "Se connecter",
         login_or: "Ou",
         login_successful: "Succès connecter",
+        login_error: "Quelque chose ne va! Entrez vos données s'il vous plaît.",
         register: "Se faire inscrire",
         register_personal_info_label: "Données personelles",
         register_first_name: "Prénom",
@@ -166,7 +180,11 @@ angular.module('eva').factory('translation', function () {
         grade_pescetariar: "Pescétarien (pas de viande, poisson est ok)",
         grade_parttime_vegetarian: "Végétarien à temps partiel (au moins 3 fois par semaine un repas végétarien)",
         grade_vegetarian: "Végétarien (pas de viande ou poisson)",
-        grade_vegan: "Végan (pas de produits animals)"
+        grade_vegan: "Végan (pas de produits animals)",
+        challenge_good_luck: "Bonne chance",
+        challenge_accept_message: "Vous avez accepté le défi!",
+        challenge_complete_title: "Félicitations!",
+        challenge_complete_message: "Vous avez terminé le défi!"
     };
 
 

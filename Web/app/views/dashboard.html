@@ -36,7 +36,7 @@
         <div class="banner">
             <h3 ng-hide="hasAcceptedChallenge" class="challenge-title">{{translation.getCurrentlySelected().choose_challenge}}</h3>
 
-            <h3 ng-show="hasAcceptedChallenge" class="challenge-title">Jouw actieve uitdaging</h3>
+            <h3 ng-show="hasAcceptedChallenge" class="challenge-title">{{translation.getCurrentlySelected().current_challenge}}</h3>
 
             <div ng-hide="hasAcceptedChallenge" id="challenges">
                 <article class="challenge box-border"
@@ -73,13 +73,15 @@
                             </div>
                             <div class="center-text modal-footer" ng-hide="hasAcceptedChallenge">
                                 <button type="button" class="btn btn-default eva-submit-wit"
-                                        ng-click="acceptChallenge()" data-dismiss="modal">Ga de uitdaging aan!
+                                        ng-click="acceptChallenge()" data-dismiss="modal">
+                                    {{translation.getCurrentlySelected().accept_challenge}}
                                 </button>
                             </div>
 
                             <div class="center-text modal-footer" ng-show="hasAcceptedChallenge">
                                 <button type="button" class="btn btn-default eva-submit-wit"
-                                        ng-click="completeChallenge()" data-dismiss="modal">Voltooi de uitdaging
+                                        ng-click="completeChallenge()" data-dismiss="modal">
+                                    {{translation.getCurrentlySelected().complete_challenge}}
                                 </button>
                             </div>
                         </div>

@@ -24,12 +24,12 @@ angular.module('eva').controller('LoginCtrl',
             }
             $scope.login = function () {
                 auth.login($scope.user).error(function (error) {
+                    toasty.error({
+                        title: translation.getCurrentlySelected().login_error
+                    });
                     $scope.error = error;
-                    angular.element(document.querySelector('#emailwarn')).text("Wrong email!");
-                    angular.element(document.querySelector('#passwordwarn')).text("Wrong password!");
                 }).then(function () {
-                    angular.element(document.querySelector('#emailwarn')).text("");
-                    angular.element(document.querySelector('#passwordwarn')).text("");
+                    messages.loggedIn = true;
                     $state.go('dashboard');
                     $scope.$emit('initSideBar');
                 });
