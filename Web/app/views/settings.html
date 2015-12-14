@@ -43,9 +43,15 @@
                     <input type="text" class="form-control eva-input"
                            placeholder="{{translation.getCurrentlySelected().register_name}}" ng-model="userNew.lastName"/>
                 </div>
+
                 <div class="form-group">
+                    <!--ng-options="{{translation.getCurrentlySelected()['grade_' + obj.val]}} for obj in values track by obj.val"
+                                            <option ng-repeat="value in values" ng-selected="true">{{translation.getCurrentlySelected()['grade_' + value.val.toLowerCase()]}}</option>
+                        <option ng-repeat="value in values" value="{{value}}" ng-selected="true">{{translation.getCurrentlySelected()['grade_' + value.val.toLowerCase()]}}</option>
+ng-options="obj.text for obj in values track by obj.val"
+                    -->
                     <select class="form-control eva-input" name="select" required ng-model="userNew.grade"
-                            ng-options="obj.text for obj in values track by obj.val">
+                            ng-options="grades.getTranslation(obj.val) for obj in values track by obj.val">
                     </select>
                 </div>
 

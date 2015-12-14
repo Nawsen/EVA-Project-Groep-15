@@ -1,4 +1,4 @@
-angular.module('eva').factory('translation', function () {
+angular.module('eva').factory('translation', function (messages) {
     var strings = {};
 
 
@@ -201,19 +201,20 @@ angular.module('eva').factory('translation', function () {
 
 
     strings.currentlySelected = strings.english;
+    messages.currentlySelected = "english";
     strings.getCurrentlySelected = function () {
         return strings.currentlySelected;
     };
     strings.selectEnglish = function () {
         strings.currentlySelected = strings.english;
-        console.log(strings.getCurrentlySelected());
-    };
+        messages.currentlySelected = "english";    };
     strings.selectDutch = function () {
         strings.currentlySelected = strings.dutch;
-        console.log(strings.getCurrentlySelected());
+        messages.currentlySelected = "dutch";
     };
     strings.selectFrench = function () {
         strings.currentlySelected = strings.french;
+        messages.currentlySelected = "french";
     };
 
 

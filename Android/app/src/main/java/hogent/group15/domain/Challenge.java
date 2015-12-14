@@ -73,6 +73,9 @@ public class Challenge implements Serializable, ListEntry<ChallengeListEntry> {
     @DatabaseField(columnName = "date", canBeNull = false, uniqueCombo = true)
     String date;
 
+    @DatabaseField(columnName = "token", canBeNull = false, uniqueCombo = true)
+    String jsonWebToken;
+
     private boolean showAcceptChallengeButton = true;
 
     public Challenge() {
@@ -84,6 +87,14 @@ public class Challenge implements Serializable, ListEntry<ChallengeListEntry> {
         this.title = title;
         this.detailedDescription = detailedDescription;
         this.difficulty = difficulty;
+    }
+
+    public String getJsonWebToken() {
+        return jsonWebToken;
+    }
+
+    public void setJsonWebToken(String jsonWebToken) {
+        this.jsonWebToken = jsonWebToken;
     }
 
     public String getDetailedDescription() {
