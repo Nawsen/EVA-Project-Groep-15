@@ -3,10 +3,12 @@ package hogent.group15.ui.fragments;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.test.UiThreadTest;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,14 +60,21 @@ public class AchievementsFragment extends Fragment {
         challengesLeftUninterpolated = challengesLeft.getText().toString();
         ChallengesRepository.getInstance(getContext()).setOnProgressUpdate(new Consumer<Integer>() {
             @Override
-            public void consume(Integer integer) {
+            public void consume(final Integer integer) {
                 if (progressBar != null) {
                     progressBar.setProgress(integer);
-                    if (integer < 21) {
-                        challengesLeft.setText(StringInterpolator.interpolate(challengesLeftUninterpolated, 21 - integer));
-                    } else {
-                        challengesLeft.setText(R.string.all_challenges_completed);
-                    }
+                    getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            if (integer < 21) {
+                                challengesLeft.setText(StringInterpolator.interpolate(challengesLeftUninterpolated, 21 - integer));
+                            } else {
+                                challengesLeft.setText(R.string.all_challenges_completed);
+                            }
+                        }
+                    });
+
                 }
             }
         });

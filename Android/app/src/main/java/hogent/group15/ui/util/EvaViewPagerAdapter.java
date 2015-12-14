@@ -36,9 +36,9 @@ public class EvaViewPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return ongoingChallengesFragment;
-            case 2:
-                return completedChallengesFragment;
             case 1:
+                return completedChallengesFragment;
+            case 2:
                 return achievementsFragment;
             default:
                 return null;
@@ -55,9 +55,9 @@ public class EvaViewPagerAdapter extends FragmentPagerAdapter {
         switch (position) {
             case 0:
                 return context.getString(R.string.ongoing_challenges);
-            case 2:
-                return context.getString(R.string.completed_challenges);
             case 1:
+                return context.getString(R.string.completed_challenges);
+            case 2:
                 return context.getString(R.string.achievements);
             default:
                 return "UNKNOWN";
