@@ -2,13 +2,16 @@
  * Created by wannes on 9/10/2015.
  */
 angular.module('eva').controller('RegisterCtrl',
-    ['$scope', '$location', '$http', '$state', 'auth', 'messages', 'translation', 'toasty', '$window',
-        function ($scope, $location, $http, $state, auth, messages, translation, toasty, $window) {
+    ['$scope', '$location', '$http', '$state', 'auth', 'messages', 'translation', 'toasty', '$window', 'grades',
+        function ($scope, $location, $http, $state, auth, messages, translation, toasty, $window, grades) {
+            $scope.grades = grades;
+            $scope.values = grades.values;
             $scope.translation = translation;
             $scope.showHelpMail = false;
             $scope.showHelpPassword = false;
             $scope.showHelpRepeatPassword = false;
             $scope.selectedTab = 'male';
+            /*
             $scope.values = [
                 {
                     "val": "OMNIVORE",
@@ -30,7 +33,7 @@ angular.module('eva').controller('RegisterCtrl',
                     "val": "VEGAN",
                     "text": translation.getCurrentlySelected().grade_vegan
                 }
-            ];
+            ];*/
             $scope.user = {
                 email: "",
                 password: "",
@@ -92,7 +95,7 @@ angular.module('eva').controller('RegisterCtrl',
                     gender: $scope.convertGender(),
                     grade: $scope.user.grade.val
                 };
-
+                console.log(userObj);
                 messages.email = userObj.email;
 
                 auth.register(userObj).error(function (error, status) {
