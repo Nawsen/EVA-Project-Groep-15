@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">EVA</string>
     <string name="challenge_score_notification">Difficulty: {{score}}</string>
-    <string name="accept_challenge">Accept challenge</string>
+    <string name="accept_challenge">Accept the challenge!</string>
     <string name="choose_challenge">Choose a challenge:</string>
     <string name="welcome_notification">Welcome {{username}}</string>
     <string name="get_challenge">Look at challenge</string>
@@ -68,4 +68,6 @@
     <string name="diffculty_hard">Hard</string>
     <string name="preference_file_key" translatable="false">eva</string>
     <string name="no_completed_achievements">You have not received any achievements!</string>
+    <string name="challenges_left">Only {{count}} challenges left!</string>
+    <string name="all_challenges_completed">You\'ve completed all challenges!</string>
 </resources>

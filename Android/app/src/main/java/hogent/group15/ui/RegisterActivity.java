@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_logout, R.id.item_share, R.id.item_search);
+        return ActionBarConfig.getInstance(this).onCreateOptionsMenu(menu, this, R.id.item_logout, R.id.item_share);
     }
 
     @Override

@@ -56,15 +56,20 @@ public class MainMenuActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        finish();
+    }
+
+    @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
 
         List<Fragment> currentFragments = getSupportFragmentManager().getFragments();
-        if(evaViewPagerAdapter.getAchievementsFragment().isAdded()) {
+        if (evaViewPagerAdapter.getAchievementsFragment().isAdded()) {
             getSupportFragmentManager().putFragment(outState, "achievements", evaViewPagerAdapter.getAchievementsFragment());
         }
 
-        if(evaViewPagerAdapter.getCompletedChallengesFragment().isAdded()) {
+        if (evaViewPagerAdapter.getCompletedChallengesFragment().isAdded()) {
             getSupportFragmentManager().putFragment(outState, "nextChallenges", evaViewPagerAdapter.getCompletedChallengesFragment());
         }
     }
