@@ -28,8 +28,6 @@ angular.module('eva').controller('LoginCtrl',
                         title: translation.getCurrentlySelected().login_error
                     });
                     $scope.error = error;
-                    angular.element(document.querySelector('#emailwarn')).text("Wrong email!");
-                    angular.element(document.querySelector('#passwordwarn')).text("Wrong password!");
                 }).then(function () {
                     messages.loggedIn = true;
                     $state.go('dashboard');

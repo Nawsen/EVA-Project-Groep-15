@@ -200,8 +200,11 @@ public class Backend {
         });
     }
 
-    public void getDetailedChallenge(final int challengeId, final Callback<Challenge> callback) {
+    public void getUserDetails(final Callback<User> callback) {
+        backendAPI.getUserDetails(callback);
+    }
 
+    public void getDetailedChallenge(final int challengeId, final Callback<Challenge> callback) {
         backendAPI.getDetailedChallenge(challengeId, callback);
     }
 

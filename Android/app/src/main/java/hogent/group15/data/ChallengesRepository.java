@@ -1,14 +1,17 @@
 package hogent.group15.data;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import hogent.group15.Consumer;
+import hogent.group15.domain.User;
 import hogent.group15.service.Backend;
 import hogent.group15.domain.Challenge;
+import hogent.group15.ui.LoginActivity;
 import hogent.group15.ui.MainMenuActivity;
 import hogent.group15.ui.R;
 import hogent.group15.ui.controls.ListEntry;
@@ -28,6 +31,8 @@ public class ChallengesRepository {
     private Challenge currentChallenge;
     private Context context;
 
+    private int completedChallengesCount;
+
     public static ChallengesRepository getInstance(Context context) {
         if (INSTANCE == null) {
             INSTANCE = new ChallengesRepository(context);
@@ -39,6 +44,51 @@ public class ChallengesRepository {
     private ChallengesRepository(Context context) {
         this.context = context;
         refreshCurrentChallenge();
+        updateCompletedCount(null);
+    }
+
+    public int getCompletedChallengesCount() {
+        return completedChallengesCount;
+    }
+
+    public void incrementCompletedChallenges() {
+        completedChallengesCount++;
+        if (onProgressUpdate != null) {
+            onProgressUpdate.consume(completedChallengesCount);
+        }
+    }
+
+    public void updateCompletedCount(final Callback<Integer> callback) {
+        Backend.getBackend(context).getUserDetails(new Callback<User>() {
+            @Override
+            public void success(User user, Response response) {
+                if(user == null) {
+                    Backend.getBackend(context).logoutUser();
+                    context.startActivity(new Intent(context, LoginActivity.class));
+                    return;
+                }
+                completedChallengesCount = user.getCompletedCount();
+                if (onProgressUpdate != null) {
+                    onProgressUpdate.consume(completedChallengesCount);
+                }
+
+                if (callback != null) {
+                    callback.success(completedChallengesCount, response);
+                }
+            }
+
+            @Override
+            public void failure(RetrofitError error) {
+                if (callback != null) {
+                    callback.failure(error);
+                }
+            }
+        });
+    }
+
+    private Consumer<Integer> onProgressUpdate;
+    public void setOnProgressUpdate(Consumer<Integer> onProgressUpdate) {
+        this.onProgressUpdate = onProgressUpdate;
     }
 
     public void refreshCompletedChallenges(final Runnable callback) {

@@ -44,4 +44,7 @@ public interface BackendAPI {
 
     @GET("/achievements")
     void getAchievements(Callback<List<Achievement>> onReceived);
+
+    @GET("/users/details")
+    void getUserDetails(Callback<User> callback);
 }
