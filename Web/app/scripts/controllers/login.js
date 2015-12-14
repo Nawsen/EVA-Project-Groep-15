@@ -3,15 +3,15 @@
  */
 var app = angular.module('eva');
 angular.module('eva').controller('LoginCtrl',
-    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook', 'translation',
-        function ($scope, $http, $location, $state, auth, messages, Facebook, translation) {
+    ['$scope', '$http', '$location', '$state','$window', 'auth', 'messages', 'Facebook', 'translation', 'toasty',
+        function ($scope, $http, $location, $state, $window, auth, messages, Facebook, translation, toasty) {
             $scope.translation = translation;
             $scope.user = {
                 email: messages.email,
                 password: ""
             };
             //check if user is already logged in
-            if (auth.isLoggedIn()){
+            if (auth.isLoggedIn()) {
                 $state.go('dashboard');
                 $scope.$emit('initSideBar');
             }
@@ -33,28 +33,31 @@ angular.module('eva').controller('LoginCtrl',
                 return false;
 
             }
-            $scope.checkFacebookStatus;
-            $scope.checkFacebookStatus = function () {
-                Facebook.getLoginStatus(function(response) {
-                    if(response.status === 'connected') {
-                        $scope.fbLogin();
-                    }
-                });
-            }
-            $scope.fbLogin = function() {
-                Facebook.api('/me?fields=first_name,last_name,email', function(response) {
-                   console.log(response);
-                });
-            };
+
             $scope.facebooklogin = function () {
-                Facebook.login(function(response) {
-                    $scope.checkFacebookStatus();
-                },{'scope': 'email,public_profile,user_friends'});
+                Facebook.login(function (response) {
+                    console.log(response);
+                    $scope.user.facebookId = response.authResponse.userID;
+                    $scope.user.accessToken = response.authResponse.accessToken;
+                    auth.login($scope.user).error(function (error) {
+                        toasty.error({
+                            title: 'Something went wrong!',
+                            msg: 'Please try again or notify an admin.'
+                        });
+                    }).then(function (data) {
+                        if ($window.localStorage['eva-fbreg']){
+                            $state.go('register');
+                        } else {
+                            $window.location.reload();
+                        }
+
+                    });
+                }, {'scope': 'email,public_profile,user_friends,user_about_me,user_location'});
+
                 $state.go('dashboard');
                 return false;
             }
             $scope.register = function () {
-                //TODO implement facebook api
                 $state.go('register');
                 return false;
             }

@@ -21,7 +21,7 @@ app.controller("IndexCtrl", ["$scope", "auth", 'NetworkingService', '$state', 't
                     }
                 });
             }
-        }
+        };
         $scope.logout = function () {
             auth.logOut();
             $state.go('login');
