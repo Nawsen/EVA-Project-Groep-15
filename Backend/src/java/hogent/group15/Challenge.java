@@ -45,9 +45,6 @@ public class Challenge implements Serializable {
     
     private String imageUrl;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    private List<User> users;
-
     @Enumerated(EnumType.ORDINAL)
     private Difficulty difficulty;
     
@@ -118,14 +115,6 @@ public class Challenge implements Serializable {
 
     public void setDifficulty(Difficulty difficulty) {
 	this.difficulty = difficulty;
-    }
-
-    public void setUsers(List<User> users) {
-	this.users = users;
-    }
-
-    public List<User> getUsers() {
-	return users;
     }
 
     @Transient
