@@ -3,8 +3,8 @@
  */
 var app = angular.module('eva');
 angular.module('eva').controller('LoginCtrl',
-    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook', 'translation',
-        function ($scope, $http, $location, $state, auth, messages, Facebook, translation) {
+    ['$scope', '$http', '$location', '$state', 'auth', 'messages','Facebook', 'translation', 'toasty',
+        function ($scope, $http, $location, $state, auth, messages, Facebook, translation, toasty) {
             $scope.translation = translation;
             $scope.user = {
                 email: messages.email,
@@ -14,6 +14,13 @@ angular.module('eva').controller('LoginCtrl',
             if (auth.isLoggedIn()){
                 $state.go('dashboard');
                 $scope.$emit('initSideBar');
+            }
+            if (messages.hasOwnProperty("email") && messages.email != "") {
+                toasty.success({
+                    title: translation.getCurrentlySelected().register_successful,
+                    msg: translation.getCurrentlySelected().register_successful_message
+                });
+                delete messages["email"];
             }
             $scope.login = function () {
                 auth.login($scope.user).error(function (error) {
@@ -50,6 +57,7 @@ angular.module('eva').controller('LoginCtrl',
                 Facebook.login(function(response) {
                     $scope.checkFacebookStatus();
                 },{'scope': 'email,public_profile,user_friends'});
+                $messages.loggedIn = true;
                 $state.go('dashboard');
                 return false;
             }
