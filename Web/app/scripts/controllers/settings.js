@@ -64,6 +64,11 @@ angular.module('eva').controller('SettingsCtrl',
             }
 
             function loadUserData() {
+                netService.get('/backend/api/users/details').success(function (data, status) {
+                    if (status == 200) {
+                        $("#innerbar").css("width", (data.completedCount * 100) / 21 + "%");
+                    }
+                });
                 netService.get('/backend/api/users/details').success(function (data) {
                     $scope.userOld = data;
                     $scope.userNew = data;

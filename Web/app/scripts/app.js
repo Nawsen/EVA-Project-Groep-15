@@ -1,7 +1,7 @@
 /**
  * Created by wannes on 9/10/2015.
  */
-var app = angular.module('eva', ['ui.router', 'angular-toasty', 'facebook']);
+var app = angular.module('eva', ['ui.router', 'angular-toasty', 'facebook','ngSanitize']);
 
 app.config(['$stateProvider', '$urlRouterProvider', '$httpProvider','toastyConfigProvider', 'FacebookProvider', function ($stateProvider, $urlRouterProvider, $httpProvider, toastyConfigProvider, FacebookProvider) {
     $httpProvider.defaults.useXDomain = true;

@@ -73,7 +73,7 @@
                                         style="padding-top: 100px; color: #fff; text-shadow: 0px 0px 4px #000;">
                                         {{detailedChallenge.title}}</h2>
                                 </div>
-                                <p style="margin-top: 10px;">{{detailedChallenge.description}}</p>
+                                <div style="margin-top: 10px;" ng-bind-html="detailedChallenge.description"></div>
                             </div>
                             <div class="center-text modal-footer" ng-hide="hasAcceptedChallenge">
                                 <button type="button" class="btn btn-default eva-submit-wit"
