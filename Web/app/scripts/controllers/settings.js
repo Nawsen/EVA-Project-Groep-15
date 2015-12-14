@@ -25,28 +25,7 @@ angular.module('eva').controller('SettingsCtrl',
 
             $scope.grades = grades;
             $scope.values = grades.values;
-            /*$scope.values = [
-                {
-                    "val": "OMNIVORE",
-                    "text":translation.getCurrentlySelected().grade_omnivore
-                },
-                {
-                    "val": "PESCETARIAR",
-                    "text": translation.getCurrentlySelected().grade_pescetariar
-                },
-                {
-                    "val": "PARTTIME_VEGETARIAN",
-                    "text": translation.getCurrentlySelected().grade_parttime_vegetarian
-                },
-                {
-                    "val": "VEGETARIAN",
-                    "text": translation.getCurrentlySelected().grade_vegetarian
-                },
-                {
-                    "val": "VEGAN",
-                    "text": translation.getCurrentlySelected().grade_vegan
-                }
-            ];*/
+
             $scope.options = {};
             $scope.userOld = {
                 email: "",
@@ -147,10 +126,10 @@ angular.module('eva').controller('SettingsCtrl',
                 removeUnchangedProperties();
                 console.log("user cleaned:");
                 console.log($scope.userCleaned);
-/*
+
                 netService.put('/backend/api/users/update', $scope.userCleaned).then(function () {
                     $state.go('dashboard');
-                });*/
+                });
             };
 
             loadUserData();
