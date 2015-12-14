@@ -66,7 +66,7 @@ angular.module('eva').controller('LoginCtrl',
                 Facebook.login(function(response) {
                     $scope.checkFacebookStatus();
                 },{'scope': 'email,public_profile,user_friends'});
-                $messages.loggedIn = true;
+                messages.loggedIn = true;
                 $state.go('dashboard');
                 return false;
             }
