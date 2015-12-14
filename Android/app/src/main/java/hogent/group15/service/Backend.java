@@ -61,6 +61,10 @@ public class Backend {
         WRONG_CREDENTIALS
     }
 
+    public String getToken() {
+        return jwtToken.getToken();
+    }
+
     public void loadImageInto(String uri, com.squareup.picasso.Callback callback, ImageView view) {
         loadImageInto(Uri.parse(uri), callback, view);
     }
@@ -92,7 +96,7 @@ public class Backend {
 
     private RestAdapter.Builder doConfig(RestAdapter.Builder adapter) {
         return adapter
-                .setEndpoint("http://bitcode.io:8080/backend/api/")
+                .setEndpoint("http://172.18.140.163:8080/backend/api/")
                 .setLogLevel(RestAdapter.LogLevel.FULL)
                 .setConverter(new GsonConverter(new GsonBuilder().registerTypeHierarchyAdapter(Gender.class, new Gender.GenderSerializer()).create()))
                 .setRequestInterceptor(new RequestInterceptor() {
@@ -176,7 +180,7 @@ public class Backend {
 
     public void getDailyChallenges(final Context context, final Callback<List<Challenge>> callback) {
         final Database database = Database.getInstance(context);
-        database.getDailyChallenges(new Consumer<List<Challenge>>() {
+        database.getDailyChallenges(context, new Consumer<List<Challenge>>() {
             @Override
             public void consume(List<Challenge> challenges) {
                 if (challenges != null && challenges.size() >= 3) {
@@ -187,7 +191,7 @@ public class Backend {
                 backendAPI.getDailyChallenges(new Callback<List<Challenge>>() {
                     @Override
                     public void success(List<Challenge> challenges, Response response) {
-                        database.saveChallenges(challenges);
+                        database.saveChallenges(context, challenges);
                         callback.success(challenges, response);
                     }
 
