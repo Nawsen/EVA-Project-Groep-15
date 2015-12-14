@@ -217,6 +217,7 @@ label.eva-input:hover {
 
 }
 .fb-like {
+    overflow: hidden;
     text-align: center;
     height: 20px;
     margin-top: 10px;
